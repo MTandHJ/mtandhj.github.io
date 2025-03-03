@@ -1,0 +1,45 @@
+<li id="search-click" class="menu-item" style="list-style: none;">
+    <a
+        class="menu-item-link"
+        href="javascript:void(0)"
+        style="
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 17px;
+            font-size: 14px;
+            color: #555;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            background-color: #f9f9f9;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        "
+        onmouseover="this.style.backgroundColor='#eaeaea'; this.style.color='#000';"
+        onmouseout="this.style.backgroundColor='#f9f9f9'; this.style.color='#555';"
+    >
+        Search &nbsp;&nbsp; <span style="color: #aaa; font-size: 12px;"> Ctrl+K</span>
+    </a>
+</li>
+
+<script>
+    // JavaScript 实现快捷键功能
+    document.addEventListener("keydown", function (event) {
+        // 检测是否按下 Ctrl + K（或 Command + K）
+        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+            event.preventDefault(); // 阻止浏览器默认的 Ctrl + K 行为
+            document.getElementById("search-click").click(); // 模拟点击事件
+        }
+    });
+</script>
+
+
+<div id="fastSearch">
+    <input id="searchInput">
+    <ul id="searchResults"></ul>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
+{{ $search := resources.Get "js/search.js" | minify | fingerprint }}
+<script type="text/javascript" src="{{ $search.RelPermalink }}"></script>

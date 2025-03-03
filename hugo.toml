@@ -1,0 +1,52 @@
+baseURL = 'https://mtandhj.github.io'
+title = "MTandHJ"
+languageCode = "en-us"
+defaultContentLanguage = "en-us"
+publishDir = "docs"
+
+[taxonomies]
+tag = "tags"
+
+
+[[menu.main]]
+identifier = "publication"
+name = "俺的论文"
+url = "/pubs"
+weight = 7
+
+[[menu.main]]
+identifier = "blog"
+name = "随笔"
+url = "/posts"
+weight = 10
+
+[[menu.main]]
+identifier = "tags"
+name = "Tags"
+url = "/tags"
+weight = 20
+
+[params]
+github = "https://www.github.com/MTandHJ"
+mail = "congxueric@gmail.com"
+site = "https://www.cnblogs.com/MTandHJ"
+logo = "/images/logo.png"
+fastSearch = true
+
+[markup]
+  [markup.tableOfContents]
+    endLevel = 2
+    startLevel = 2
+    ordered = true
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)'], ['$', '$']]
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]

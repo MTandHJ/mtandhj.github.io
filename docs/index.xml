@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MTandHJ</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on MTandHJ</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 26 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Test1</title>
+      <link>http://localhost:1313/posts/test1/</link>
+      <pubDate>Wed, 26 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/test1/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://arxiv.org/abs/2007.02693&#34;&gt;Navon A., Achituve I., Maron H., Chechik G. and Fetaya E. Auxiliary learning by implicit differentiation. ICLR, 2021.&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;概&#34;&gt;概&lt;/h2&gt;&#xA;&lt;p&gt;通过 implicit differentiation 优化一些敏感的参数.&lt;/p&gt;&#xA;$$&#xD;&#xA;1 + 2f(x)&#xD;&#xA;\phi \ell_{main}&#xD;&#xA;$$&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250303210913.png&#34; alt=&#34;20250303210913&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;auxilearn&#34;&gt;AuxiLearn&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;在实际的训练中, 我们常常会通过一些额外的任务来帮助更好的训练.&#xA;$$&#xD;&#xA;    \ell_{main}, \bm{x}&#xD;&#xA;    $$&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;其中 $\phi_k \ge 0$ 是第 $k$ 个额外任务 $\ell_k$ 的系数.&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;$$&#xD;&#xA;    w_{t+1} \leftarrow  \arg \min_{W} \mathcal{L}_T(W; \phi_t) \phi_{t+1}&#xD;&#xA;    $$&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;但是很显然, 如果利用梯度下降学习 $\phi_k$ 并通过 clip 保证 $\phi_k \ge 0$, 一定会导致 $\phi_k \equiv 0$ 这一平凡解.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Test2</title>
+      <link>http://localhost:1313/posts/test2/</link>
+      <pubDate>Wed, 26 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/test2/</guid>
+      <description>&lt;p&gt;[TOC]&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://arxiv.org/abs/1805.06085&#34;&gt;Choi J., Wang Z., Venkataramani S., Chuang P. I., Srinivasan V. and Gopalakrishnan K. PACT: Parameterized clipping activation for quantized neural networks. 2018.&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;概&#34;&gt;概&lt;/h2&gt;&#xA;&lt;p&gt;本文提出对网络中的激活值进行裁剪以实现更低量化.&lt;/p&gt;&#xA;&lt;h2 id=&#34;主要内容&#34;&gt;主要内容&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://img2023.cnblogs.com/blog/1603215/202501/1603215-20250103102259044-846633626.png&#34; alt=&#34;test&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://ww1.sinaimg.cn/large/null.jpg&#34; alt=&#34;test&#34;&gt;&#xA;&lt;img src=&#34;https://n.sinaimg.cn/news/1_img/upload/0680838e/213/w2048h1365/20250227/1c51-0c13ecbb53b1c8fb519101faec8ef47e.jpg&#34; alt=&#34;test&#34;&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;$$&#xD;&#xA;    y = PACT(x) = 0.5 (|x| - |x - \alpha| + \alpha)&#xD;&#xA;    =\left \{&#xD;&#xA;        \begin{array}{ll}&#xD;&#xA;            0, &amp; x \in (-\infty, 0), \\&#xD;&#xA;            x, &amp; x \in [0, \alpha), \\&#xD;&#xA;            \alpha, &amp; x \in [\alpha, +\infty).&#xD;&#xA;        \end{array}&#xD;&#xA;    \right .&#xD;&#xA;    $$&lt;/li&gt;&#xA;&lt;li&gt;&#xA;$$&#xD;&#xA;    \frac{\partial y_q}{\partial \alpha}&#xD;&#xA;    =\frac{\partial y_q}{\partial y}&#xD;&#xA;    \frac{\partial y}{\partial \alpha}&#xD;&#xA;    =\left \{&#xD;&#xA;        \begin{array}{ll}&#xD;&#xA;        0, &amp; x \in (-\infty, \alpha), \\&#xD;&#xA;        1, &amp; x \in [\alpha, +\infty].&#xD;&#xA;        \end{array}&#xD;&#xA;    \right.,&#xD;&#xA;    $$&lt;p&gt;&#xA;其中 $y_q = round(y \cdot \frac{2^k - 1}{\alpha}) \cdot \frac{\alpha}{2^k - 1}$.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

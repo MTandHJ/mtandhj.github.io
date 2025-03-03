@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docs on MTandHJ</title>
+    <link>http://localhost:1313/tags/docs/</link>
+    <description>Recent content in Docs on MTandHJ</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 06 Apr 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/docs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Auxiliary learning by implicit differentiation</title>
+      <link>http://localhost:1313/posts/test1/</link>
+      <pubDate>Sat, 06 Apr 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/test1/</guid>
+      <description>&lt;p&gt;[TOC]&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://arxiv.org/abs/2007.02693&#34;&gt;Navon A., Achituve I., Maron H., Chechik G. and Fetaya E. Auxiliary learning by implicit differentiation. ICLR, 2021.&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;概&#34;&gt;概&lt;/h2&gt;&#xA;&lt;p&gt;通过 implicit differentiation 优化一些敏感的参数.&lt;/p&gt;&#xA;&lt;h2 id=&#34;auxilearn&#34;&gt;AuxiLearn&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;在实际的训练中, 我们常常会通过一些额外的任务来帮助更好的训练:&#xA;$$&#xA;\ell_{main} + \sum_{k} \phi_k \ell_{k},&#xA;$$&#xA;其中 $\phi_k \ge 0$ 是第 $k$ 个额外任务 $\ell_k$ 的系数.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;比较常见的做法是通过 grid search 来选择合适 $\phi_k$. 当额外任务的数量有效的时候尚可, 但是始终缺乏扩展性. 一种理想的方式通过某种可学习的方式设定.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;但是很显然, 如果利用梯度下降学习 $\phi_k$ 并通过 clip 保证 $\phi_k \ge 0$, 一定会导致 $\phi_k \equiv 0$ 这一平凡解.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;问题设定&#34;&gt;问题设定&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;现在让我们来设定一个更加一般的问题:&#xA;$$&#xA;\mathcal{L}&lt;em&gt;T(W, \phi) = \ell&lt;/em&gt;{main}(W; \mathcal{D}&lt;em&gt;{train}) + h(W; \phi, \mathcal{D}&lt;/em&gt;{train}), \&#xA;\mathcal{L}&lt;em&gt;A(W) = \ell&lt;/em&gt;{main} (W; \mathcal{D}&lt;em&gt;{aux}).&#xA;$$&#xA;其中 $W \in \mathbb{R}^n$ 是模型中的基本参数, $\phi \in \mathbb{R}^m$ 是一些其它的超参数, 然后 $D&lt;/em&gt;{train}, D_{aux}$ 表示训练集和额外的集合 (比如验证集).&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
