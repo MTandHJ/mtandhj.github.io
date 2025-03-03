@@ -6,19 +6,29 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<title>Trick | MTandHJ</title>
-	<meta name="keywords" content="">
-	<meta name="description" content="">
+	<title>Test | MTandHJ</title>
+	<meta name="keywords" content="Doc, Trick, Git">
+	<meta name="description" content="
+廖雪峰Git教程
+初始化
+
+
+在你想要git的文件夹内 git bash here XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+接着注册
+git config --global user.name &#34;XXXXXX&#34;
+git config --global user.email &#34;XXX@&#43;&#43;&#43;.com&#34;
+
+">
 	<link rel="canonical"
-		href="http://localhost:1313/tags/trick/">
+		href="http://localhost:1313/posts/test/">
 
 
 
 	<link rel="stylesheet" href="/css/output.css" type="text/css" media="all" />
 	<link rel="stylesheet" href="/css/private.css" type="text/css" media="all" />
 
-	
-	<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/tags/trick/index.xml" title="MTandHJ" />
 	
 	<link
     rel="stylesheet"
@@ -138,24 +148,48 @@
 
 	<main class="content container max-w-prose mx-auto flex-1 py-5 px-4 md:px-0">
 
-<div class="flex flex-col gap-2 my-3 mb-10 ">
-  <h1 class="font-black text-3xl md:text-4xl">Trick</h1>
-  <p class="text-lg"></p>
+
+<div dir="" class="prose mx-auto break-normal px-5 mt-8 dark:prose-invert">
+    
+
+    <h1 class="text-2xl mb-0 md:text-3xl font-black ">Test</h1>
+    <time class="text-sm my-2 text-muted mb-5" datetime=" 2025-03-03T00:00:00Z">
+        March 3, 2025
+    </time>
+    <div class="mt-3"></div>
+    <div class="toc select-none p-3 bg-stone-100 text-black dark:bg-stone-900 dark:text-white rounded">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details cursor-pointer">Content</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e5%88%9d%e5%a7%8b%e5%8c%96" aria-label="初始化">初始化</a>
+                </li>
+            </ul>
+        </div>
+    </details>
 </div>
 
+    <blockquote>
+<p><a href="https://www.liaoxuefeng.com/wiki/896043488029600">廖雪峰Git教程</a></p></blockquote>
+<h2 id="初始化">初始化</h2>
+<ol>
+<li>
+<p>在你想要git的文件夹内 git bash here XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</p>
+</li>
+<li>
+<p>接着注册</p>
+<pre tabindex="0"><code>git config --global user.name &#34;XXXXXX&#34;
+git config --global user.email &#34;XXX@+++.com&#34;
+</code></pre></li>
+</ol>
 
-<div class="flex flex-col gap-6">
-  <article dir="" class="post-snippet flex flex-col [&:not(:last-child)]:border-b border-stone-400 pb-6">
+
+</div>
+<div class="mt-5 mb-3 px-5">
     
-    <time class="text-xs text-muted" datetime=" 2025-03-03T00:00:00Z">
-      March 3, 2025
-    </time>
-    <h2 class="font-semibold text-2xl my-1">
-      <a href="/posts/git/">Git</a>
-    </h2>
-    <p class="text-sm mb-3 text-stone-700 dark:text-white">  </p>
-    <div class="">
-      
 <ul class="flex items-center gap-2">
   <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
       href="http://localhost:1313/tags/doc/">Doc</a>
@@ -167,36 +201,26 @@
       href="http://localhost:1313/tags/git/">Git</a>
   </li>
 </ul>
-    </div>
-  </article>
-  
-  <article dir="" class="post-snippet flex flex-col [&:not(:last-child)]:border-b border-stone-400 pb-6">
+</div>
+
+<div class="post-comment">
     
-    <time class="text-xs text-muted" datetime=" 2025-03-03T00:00:00Z">
-      March 3, 2025
-    </time>
-    <h2 class="font-semibold text-2xl my-1">
-      <a href="/posts/test/">Test</a>
-    </h2>
-    <p class="text-sm mb-3 text-stone-700 dark:text-white">  </p>
-    <div class="">
-      
-<ul class="flex items-center gap-2">
-  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
-      href="http://localhost:1313/tags/doc/">Doc</a>
-  </li>
-  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
-      href="http://localhost:1313/tags/trick/">Trick</a>
-  </li>
-  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
-      href="http://localhost:1313/tags/git/">Git</a>
-  </li>
-</ul>
-    </div>
-  </article>
-  
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/@waline/client@v3/dist/waline.css"
+/>
+<div id="waline"></div>
+<script type="module">
+import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
 
-
+window.onload = () => {
+    init({
+        el: '#waline',
+        reaction: false,
+        serverURL: 'https://comment.mtandhj.com',
+    });
+}
+</script>
 </div>
 
 </main>

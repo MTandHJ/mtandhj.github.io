@@ -20,20 +20,11 @@
     <loc>http://localhost:1313/tags/</loc>
     <lastmod>2025-03-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/trick/</loc>
+    <loc>http://localhost:1313/posts/test/</loc>
     <lastmod>2025-03-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/front-matter/</loc>
-    <lastmod>2025-02-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/hugo/</loc>
-    <lastmod>2025-02-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/test1/</loc>
-    <lastmod>2025-02-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/test2/</loc>
-    <lastmod>2025-02-26T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/tags/trick/</loc>
+    <lastmod>2025-03-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/pubs/</loc>
   </url>

@@ -592,7 +592,7 @@ video {
 
 .prose{
   color: var(--tw-prose-body);
-  max-width: 65ch;
+  max-width: 85ch;
 }
 
 .prose :where(p):not(:where([class~="not-prose"],[class~="not-prose"] *)){
@@ -1196,7 +1196,7 @@ video {
 }
 
 .max-w-prose{
-  max-width: 65ch;
+  max-width: 85ch !important;
 }
 
 .flex-1{
