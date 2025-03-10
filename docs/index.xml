@@ -9,6 +9,13 @@
     <lastBuildDate>Mon, 10 Mar 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Neural Discrete Representation Learning</title>
+      <link>http://localhost:1313/posts/vqvae/</link>
+      <pubDate>Mon, 10 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/vqvae/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;a href=&#34;http://arxiv.org/abs/1711.00937&#34;&gt;van den Oord A., Vinyals O. and Kavukcuoglu K. Neural Discrete Representation Learning. NeurIPS, 2017.&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;预备工作&#34;&gt;预备工作&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;作者的目的是实现离散化的表示学习: 给定任意的模式, 编码成离散的表示.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;既然本文是居于 VAE (变分自编码) 的框架实现的, 我们得对变分自编码有一个初步的了解. VAE 主要包含三个模块:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Encoder $\phi$: 它讲输入 $x \in \mathbb{R}^D$ 映射到一个分布:&#xA;$$&#xD;&#xA;        q(z|x; \phi).&#xD;&#xA;        $$&#xA;比如当服从的高斯分布, 实质上 $\phi(x) \rightarrow (\mu, \sigma) \rightarrow \mathcal{N}(\mu, \sigma^2)$, 然后 $z$ 从该分布中采样即可;&lt;/li&gt;&#xA;&lt;li&gt;Decoder $\Phi$: 它将隐变量 $z$ 映射回 (通常来说) $x$ 的空间:&#xA;$$&#xD;&#xA;        p(x|z; \Phi);&#xD;&#xA;        $$&lt;/li&gt;&#xA;&lt;li&gt;还有一个先验分布 $p(z)$ 用于辅助训练.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;$$&#xD;&#xA;    \begin{align*}&#xD;&#xA;    \log p(x) &#xD;&#xA;    &amp;= \log \int p(x, z) \mathrm{d}z \\&#xD;&#xA;    &amp;= \log \int q(z|x; \phi) \cdot \frac{p(x, z)}{q(z|x; \phi)} \mathrm{d}z \\&#xD;&#xA;    &amp;= \log \int q(z|x; \phi) \cdot \frac{p(x| z; \Phi) p(z)}{q(z|x; \phi)} \mathrm{d}z \\&#xD;&#xA;    &amp;\ge \int q(z|x; \phi) \log \frac{p(x| z; \Phi) p(z)}{q(z|x; \phi)} \mathrm{d}z \\&#xD;&#xA;    &amp;= \int q(z|x; \phi) \log \frac{p(z)}{q(z|x; \phi)} \mathrm{d}z +&#xD;&#xA;    \int q(z|x; \phi) \log p(x|z; \Phi) \mathrm{d}z \\&#xD;&#xA;    &amp;= \underbrace{-\mathbf{KL}(q_{\phi}\| p(z)) +&#xD;&#xA;    \mathbb{E}_{z \sim q_{\phi}} \log p(x|z; \Phi)}_{\text{ELBO}}.&#xD;&#xA;    \end{align*}&#xD;&#xA;    $$&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;ELBO 包括一个和先验分布的 KL 散度 (这部分通常是增加隐变量的 diversity 的), 以及一个正常的交叉熵 (如果 $p_{\Phi}$ 也是一个高斯, 则通常称之为重构损失).&lt;/p&gt;</description>
+    </item>
+    <item>
       <title>Slide-test</title>
       <link>http://localhost:1313/slides/test/</link>
       <pubDate>Mon, 10 Mar 2025 00:00:00 +0000</pubDate>

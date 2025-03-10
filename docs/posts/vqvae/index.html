@@ -6,19 +6,17 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<title>Blogs | MTandHJ</title>
-	<meta name="keywords" content="">
-	<meta name="description" content=" Blogs - MTandHJ">
+	<title>Neural Discrete Representation Learning | MTandHJ</title>
+	<meta name="keywords" content="VAE, Vector Quantization, Seminal, Empirical, NeurIPS, 2017">
+	<meta name="description" content="VQ-VAE, 向量量化的开山之作">
 	<link rel="canonical"
-		href="http://localhost:1313/posts/">
+		href="http://localhost:1313/posts/vqvae/">
 
 
 
 	<link rel="stylesheet" href="/css/output.css" type="text/css" media="all" />
 	<link rel="stylesheet" href="/css/private.css" type="text/css" media="all" />
 
-	
-	<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/posts/index.xml" title="MTandHJ" />
 	
 	<link
     rel="stylesheet"
@@ -126,24 +124,124 @@
 
 	<main class="content container max-w-prose mx-auto flex-1 py-5 px-4 md:px-0">
 
-<div class="flex flex-col gap-2 my-3 mb-10 ">
-  <h1 class="font-black text-3xl md:text-4xl">Blogs</h1>
-  <p class="text-lg"></p>
+
+<div dir="" class="prose mx-auto break-normal px-5 mt-8 dark:prose-invert">
+    
+
+    <h1 class="text-2xl mb-0 md:text-3xl font-black ">Neural Discrete Representation Learning</h1>
+    <time class="text-sm my-2 text-muted mb-5" datetime=" 2025-03-10T00:00:00Z">
+        March 10, 2025
+    </time>
+    <div class="mt-3"></div>
+    <div class="toc select-none p-3 bg-stone-100 text-black dark:bg-stone-900 dark:text-white rounded">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details cursor-pointer">Content</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e9%a2%84%e5%a4%87%e5%b7%a5%e4%bd%9c" aria-label="预备工作">预备工作</a></li>
+                <li>
+                    <a href="#%e6%a0%b8%e5%bf%83%e6%80%9d%e6%83%b3" aria-label="核心思想">核心思想</a></li>
+                <li>
+                    <a href="#%e4%bb%a3%e7%a0%81" aria-label="代码">代码</a>
+                </li>
+            </ul>
+        </div>
+    </details>
 </div>
 
+    <blockquote>
+<p><a href="http://arxiv.org/abs/1711.00937">van den Oord A., Vinyals O. and Kavukcuoglu K. Neural Discrete Representation Learning. NeurIPS, 2017.</a></p></blockquote>
+<h2 id="预备工作">预备工作</h2>
+<ul>
+<li>
+<p>作者的目的是实现离散化的表示学习: 给定任意的模式, 编码成离散的表示.</p>
+</li>
+<li>
+<p>既然本文是居于 VAE (变分自编码) 的框架实现的, 我们得对变分自编码有一个初步的了解. VAE 主要包含三个模块:</p>
+<ol>
+<li>Encoder $\phi$: 它讲输入 $x \in \mathbb{R}^D$ 映射到一个分布:
+$$
+        q(z|x; \phi).
+        $$
+比如当服从的高斯分布, 实质上 $\phi(x) \rightarrow (\mu, \sigma) \rightarrow \mathcal{N}(\mu, \sigma^2)$, 然后 $z$ 从该分布中采样即可;</li>
+<li>Decoder $\Phi$: 它将隐变量 $z$ 映射回 (通常来说) $x$ 的空间:
+$$
+        p(x|z; \Phi);
+        $$</li>
+<li>还有一个先验分布 $p(z)$ 用于辅助训练.</li>
+</ol>
+</li>
+<li>
+$$
+    \begin{align*}
+    \log p(x) 
+    &= \log \int p(x, z) \mathrm{d}z \\
+    &= \log \int q(z|x; \phi) \cdot \frac{p(x, z)}{q(z|x; \phi)} \mathrm{d}z \\
+    &= \log \int q(z|x; \phi) \cdot \frac{p(x| z; \Phi) p(z)}{q(z|x; \phi)} \mathrm{d}z \\
+    &\ge \int q(z|x; \phi) \log \frac{p(x| z; \Phi) p(z)}{q(z|x; \phi)} \mathrm{d}z \\
+    &= \int q(z|x; \phi) \log \frac{p(z)}{q(z|x; \phi)} \mathrm{d}z +
+    \int q(z|x; \phi) \log p(x|z; \Phi) \mathrm{d}z \\
+    &= \underbrace{-\mathbf{KL}(q_{\phi}\| p(z)) +
+    \mathbb{E}_{z \sim q_{\phi}} \log p(x|z; \Phi)}_{\text{ELBO}}.
+    \end{align*}
+    $$</li>
+<li>
+<p>ELBO 包括一个和先验分布的 KL 散度 (这部分通常是增加隐变量的 diversity 的), 以及一个正常的交叉熵 (如果 $p_{\Phi}$ 也是一个高斯, 则通常称之为重构损失).</p>
+</li>
+</ul>
+<h2 id="核心思想">核心思想</h2>
+<p><img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250310215306.png" alt="20250310215306"></p>
+<ul>
+<li>
+<p>VQ-VAE 的希望 $z$ 不再局限于连续的向量, 而是离散的值, 做法其实极为简单:</p>
+<ol>
+<li>预设一个 codebook $E \in \mathbb{R}^{K \times d}$;</li>
+<li>给定一个输入 $x$, 其对应的离散值为
+$$
+        x \rightarrow \phi(x) \rightarrow \text{argmin}_{k} \|\phi(x) - e_k\|,
+        $$
+其中 $e_k$ 表示 codebook $E$ 中 $k$-th 行.</li>
+<li>接下来, decoder 部分的输入将是 $e_{k^*}$ 而不再是 $z$ 了.</li>
+</ol>
+</li>
+<li>
+$$
+    q(z = e_{k^*}|x; \phi) =
+    \left \{
+    \begin{array}{ll}
+    1 & k^* = \text{argmin}_{k} \|\phi(x) - e_k\|, \\
+    0 & otherwise.
+    \end{array}
+    \right .
+    $$</li>
+<li>
+<p>但是这里其实有一个大问题, $\phi$ 的训练梯度来源:</p>
+<ol>
+<li>KL 散度, 但是上述的概率实际上的 &lsquo;固定&rsquo; 的, 没法提供额外的信息;</li>
+<li>交叉熵, 由于我们用 $e_{k^*}$ 替代了, 导致梯度没法直接计算.</li>
+</ol>
+</li>
+<li>
+$$
+    L = \log p(x|z_q; \Phi) + 
+    \| \text{sg} (\phi(x)) - e_{k^*}\|_2^2 +
+    \beta \cdot \| \phi(x) - \text{sg} (e_{k^*})\|_2^2.
+    $$<p>
+这里 $\text{sg}(\cdot)$ 表示 stop-gradient 操作, $\beta$ 是超参数 (默认为 0.25).</p>
+</li>
+</ul>
+<p><strong>注</strong>: straight-through estimator (STE):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>z_q <span style="color:#f92672">=</span> z <span style="color:#f92672">+</span> (z_q <span style="color:#f92672">-</span> z)<span style="color:#f92672">.</span>detach()
+</span></span></code></pre></div><h2 id="代码">代码</h2>
+<p>[<a href="https://github.com/MishaLaskin/vqvae">PyTorch</a>]</p>
 
-<div class="flex flex-col gap-6">
-  <article dir="" class="post-snippet flex flex-col [&:not(:last-child)]:border-b border-stone-400 pb-6">
+
+</div>
+<div class="mt-5 mb-3 px-5">
     
-    <time class="text-xs text-muted" datetime=" 2025-03-10T00:00:00Z">
-      March 10, 2025
-    </time>
-    <h2 class="font-semibold text-2xl my-1">
-      <a href="/posts/vqvae/">Neural Discrete Representation Learning</a>
-    </h2>
-    <p class="text-sm mb-3 text-stone-700 dark:text-white"> VQ-VAE, 向量量化的开山之作 </p>
-    <div class="">
-      
 <ul class="flex items-center gap-2">
   <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
       href="http://localhost:1313/tags/vae/">VAE</a>
@@ -164,36 +262,26 @@
       href="http://localhost:1313/tags/2017/">2017</a>
   </li>
 </ul>
-    </div>
-  </article>
-  
-  <article dir="" class="post-snippet flex flex-col [&:not(:last-child)]:border-b border-stone-400 pb-6">
+</div>
+
+<div class="post-comment">
     
-    <time class="text-xs text-muted" datetime=" 2025-03-03T00:00:00Z">
-      March 3, 2025
-    </time>
-    <h2 class="font-semibold text-2xl my-1">
-      <a href="/posts/git/">Git</a>
-    </h2>
-    <p class="text-sm mb-3 text-stone-700 dark:text-white">  </p>
-    <div class="">
-      
-<ul class="flex items-center gap-2">
-  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
-      href="http://localhost:1313/tags/doc/">Doc</a>
-  </li>
-  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
-      href="http://localhost:1313/tags/trick/">Trick</a>
-  </li>
-  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
-      href="http://localhost:1313/tags/git/">Git</a>
-  </li>
-</ul>
-    </div>
-  </article>
-  
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/@waline/client@v3/dist/waline.css"
+/>
+<div id="waline"></div>
+<script type="module">
+import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
 
-
+window.onload = () => {
+    init({
+        el: '#waline',
+        reaction: false,
+        serverURL: 'https://comment.mtandhj.com',
+    });
+}
+</script>
 </div>
 
 </main>

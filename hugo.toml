@@ -6,7 +6,6 @@ publishDir = "docs"
 
 [taxonomies]
 tag = "tags"
-category = "categories"
 
 [[menu.main]]
 identifier = "publication"
