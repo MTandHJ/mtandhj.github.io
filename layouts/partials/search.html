@@ -1,3 +1,5 @@
+<!-- 搜索按钮只在主页显示 -->
+{{ if .IsHome }}
 <li id="search-click" class="menu-item" style="list-style: none;">
     <a
         class="menu-item-link"
@@ -22,7 +24,12 @@
         Search &nbsp;&nbsp; <span style="color: #aaa; font-size: 12px;"> Ctrl+K</span>
     </a>
 </li>
-
+{{ else }}
+<!-- 在非主页保留搜索功能但隐藏按钮 -->
+<li id="search-click" class="menu-item" style="display: none;">
+    <a class="menu-item-link" href="javascript:void(0)">Search</a>
+</li>
+{{ end }}
 
 <script>
     // JavaScript 实现快捷键功能
@@ -34,6 +41,7 @@
         }
     });
 </script>
+
 
 <div id="fastSearch">
     <input id="searchInput">

@@ -149,22 +149,23 @@ function executeSearch(term) {
   let results = fuse.search(term); // the actual query being run using fuse.js
   let searchItems = ''; // our results bucket
  
-  if (results.length === 0) { // no results based on what was typed into the input box
+  if (results.length === 0) {
     resultsAvailable = false;
     searchItems = '<li class="noSearchResult">无结果</li>';
-  } else { // build our html
+  } else {
     permalinkList = []
     searchItemCount = 0
     for (let item in results) {
       if (permalinkList.includes(results[item].item.permalink)) {
         continue;
       }
-      // 去重
       permalinkList.push(results[item].item.permalink);
       searchItemCount += 1;
- 
+
       title = results[item].item.title;
-      content = results[item].item.content.slice(0, 50);
+      const isSlide = results[item].item.permalink.includes('/slides/');
+      content = '';  // 默认为空
+
       for (const match of results[item].matches) {
         if (match.key == 'title') {
           startIndex = match.indices[0][0];
@@ -174,23 +175,36 @@ function executeSearch(term) {
         } else if (match.key == 'content') {
           startIndex = match.indices[0][0];
           endIndex = match.indices[0][1] + 1;
-          highText = '<span class="search-highlight">' + match.value.slice(startIndex, endIndex) + '</span>';
-          content = match.value.slice(Math.max(0, startIndex - 30), startIndex) + highText + match.value.slice(endIndex, endIndex + 30);
+          // 对于幻灯片，只显示匹配的部分，不显示上下文
+          if (isSlide) {
+            content = '<span class="search-highlight">' + match.value.slice(startIndex, endIndex) + '</span>';
+          } else {
+            // 对于博客文章，显示带上下文的匹配内容
+            content = match.value.slice(Math.max(0, startIndex - 30), startIndex) + 
+                     '<span class="search-highlight">' + match.value.slice(startIndex, endIndex) + '</span>' + 
+                     match.value.slice(endIndex, endIndex + 30);
+          }
         }
       }
-      searchItems = searchItems + '<li><a href="' + results[item].item.permalink + '">' + '<span class="title">' + title + '</span><br /> <span class="sc">'+ content +'</span></a></li>';
-      // only show first 5 results
+
+      // 构建搜索结果项
+      const resultItem = '<li><a href="' + results[item].item.permalink + '">' + 
+                        '<span class="title">' + title + '</span>' +
+                        (content ? '<br /> <span class="sc">'+ content +'</span>' : '') +
+                        '</a></li>';
+      
+      searchItems += resultItem;
       if (searchItemCount >= 5) {
         break;
       }
     }
     resultsAvailable = true;
   }
- 
+
   document.getElementById("searchResults").setAttribute("style", "display: block;");
   document.getElementById("searchResults").innerHTML = searchItems;
   if (results.length > 0) {
-    first = list.firstChild.firstElementChild; // first result container — used for checking against keyboard up/down location
-    last = list.lastChild.firstElementChild; // last result container — used for checking against keyboard up/down location
+    first = list.firstChild.firstElementChild;
+    last = list.lastChild.firstElementChild;
   }
 }
