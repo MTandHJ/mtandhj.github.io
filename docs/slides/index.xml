@@ -13,7 +13,7 @@
       <link>http://localhost:1313/slides/test/</link>
       <pubDate>Mon, 10 Mar 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/slides/test/</guid>
-      <description>&lt;section data-markdown&gt;&#xD;&#xA;  # 第一页&#xD;&#xA;&lt;p&gt;这是第一页的内容看看看看看阿卡看看看看看看看看看看看看看看看看看看看看看看看&lt;/p&gt;&#xA;&lt;/section&gt;&#xD;&#xA;&lt;section data-markdown&gt;&#xD;&#xA;  &lt;textarea data-template&gt;&#xD;&#xA;  ### dier&#xD;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;为什么没有 bullet&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;ddd&#xA;$$&#xD;&#xA;    x + 1&#xD;&#xA;    $$&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;5ddd&#xA;&lt;/textarea&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/section&gt;</description>
+      <description>&lt;section data-markdown&gt;&#xD;&#xA;  # 第一页&#xD;&#xA;&lt;p&gt;这是第一页的内容看看看看看阿卡看看看看看看看看看看看看看看看看看看看看看看看&lt;/p&gt;&#xA;&lt;/section&gt;&#xD;&#xA;&lt;section data-markdown&gt;&#xD;&#xA;  &lt;textarea data-template&gt;&#xD;&#xA;  ### dier&#xD;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;为什么没有 bullet&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;ddd&#xA;$$&#xD;&#xA;    x + 1&#xD;&#xA;    $$&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;5ddd&#xA;&lt;/textarea&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/section&gt;&#xD;&#xA;&lt;section data-markdown&gt;&#xD;&#xA;  &lt;textarea data-template&gt;&#xD;&#xA;  ### 333&#xD;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;为什么没有 bullet&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;ddd&#xA;$$&#xD;&#xA;    x + 1&#xD;&#xA;    $$&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;5ddd&#xA;&lt;/textarea&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/section&gt;</description>
     </item>
   </channel>
 </rss>
