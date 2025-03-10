@@ -1,0 +1,366 @@
+{{ partial "header.html" . }}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css">
+
+<style>
+  .reveal.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    background-color: white;
+  }
+  .reveal:not(.fullscreen) {
+    width: 100%;
+    height: 600px;
+    margin: 2rem 0;
+    position: relative;
+  }
+  
+  #fullscreen-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #laser-btn {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    width: 32px;
+    height: 32px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 1001;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #laser-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  #laser-btn.active {
+    background-color: rgba(255, 0, 0, 0.6);
+  }
+
+  .laser-pointer {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    display: none;
+    box-shadow: 0 0 4px 2px rgba(255, 0, 0, 0.5);
+  }
+
+  .cursor-hidden {
+    cursor: none !important;
+  }
+  
+  .cursor-hidden * {
+    cursor: none !important;
+  }
+
+  .reveal .slides section:not(:first-child) {
+    top: 0 !important;
+    transform: none !important;
+  }
+
+ /* 只取消非首页的垂直居中 */
+ .reveal .slides section:not(:first-child) {
+    top: 0 !important;
+    transform: none !important;
+  }
+
+  /* 首页保持 Reveal.js 默认的垂直居中 */
+  .reveal .slides section:first-child h1,
+  .reveal .slides section:first-child h2,
+  .reveal .slides section:first-child h3 {
+    text-align: center;
+  }
+
+  /* 其他页面的标题固定在左上角 */
+  .reveal .slides section:not(:first-child) h1,
+  .reveal .slides section:not(:first-child) h2,
+  .reveal .slides section:not(:first-child) h3 {
+    position: absolute;
+    top: 0px;
+    left: -20px;
+    margin: 0;
+  }
+
+  /* 为不同级别的标题设置不同的字体大小 */
+  .reveal .slides section:not(:first-child) h1 { font-size: 55px; }
+  .reveal .slides section:not(:first-child) h2 { font-size: 55px; }
+  .reveal .slides section:not(:first-child) h3 { font-size: 45px; }
+
+  /* 其他页面的主要内容区域添加上边距 */
+  .reveal .slides section:not(:first-child) > *:not(h1):not(h2):not(h3) {
+    margin-top: 100px;
+  }
+
+  /* 保持内容左对齐 */
+  .reveal .slides section:not(:first-child) {
+    text-align: left;
+  }
+
+  /* 列表项左对齐 */
+  .reveal .slides section ul,
+  .reveal .slides section ol {
+    display: block;
+    text-align: left;
+  }
+
+  /* 代码块左对齐 */
+  .reveal .slides section pre {
+    width: auto;
+    text-align: left;
+  }
+
+  /* 普通段落左对齐 */
+  .reveal .slides section p {
+    text-align: left;
+  }
+
+  body.is-fullscreen header,
+  body.is-fullscreen footer,
+  body.is-fullscreen main > *:not(.reveal),
+  body.is-fullscreen #fullscreen-btn {
+    display: none;
+  }
+</style>
+
+<div class="reveal">
+  <button id="fullscreen-btn" title="全屏显示 (ESC退出)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+    </svg>
+  </button>
+  <div class="slides">
+    {{ .Content }}
+  </div>
+</div>
+
+<button id="laser-btn" title="激光笔">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
+    <circle cx="12" cy="12" r="3"/>
+    <path d="M12 5v2m0 10v2M5 12h2m10 0h2"/>
+  </svg>
+</button>
+<div class="laser-pointer"></div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/highlight/monokai.css">
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+<!-- 添加 Markdown 插件 -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/markdown/markdown.js"></script>
+<!-- 添加语法高亮插件 -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/highlight/highlight.js"></script>
+<!-- 添加 Notes 插件 -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/notes/notes.js"></script>
+<!-- 添加 Math 插件 -->
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/math/math.js"></script>
+
+<script>
+    // 初始化 Reveal.js
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      navigationMode: 'linear',
+      transition: 'slide',
+      controls: true,
+      progress: true,
+      margin: 0.1,
+      minScale: 0.2,
+      maxScale: 2.0,
+      viewDistance: 3,
+      // 添加插件支持
+      plugins: [ 
+        RevealMarkdown,
+        RevealHighlight,
+        RevealNotes,
+        RevealMath
+      ],
+      // Markdown 配置
+      markdown: {
+        smartypants: true,
+        gfm: true
+      },
+      mouseWheel: true,  // 启用鼠标滚轮切换
+      click: false,        // 禁用鼠标点击切换
+    });
+  
+    // 获取所有需要的元素
+    const revealElement = document.querySelector('.reveal');
+    const fullscreenBtn = document.getElementById('fullscreen-btn');
+    const laserBtn = document.getElementById('laser-btn');
+    const laserPointer = document.querySelector('.laser-pointer');
+    let isFullscreen = false;
+    let isLaserActive = false;
+  
+    // 清理激光笔状态的函数
+    function cleanupLaserPointer() {
+      isLaserActive = false;
+      isFullscreen = false;
+      document.body.classList.remove('is-fullscreen');
+      document.body.classList.remove('cursor-hidden');
+      revealElement.classList.remove('fullscreen');
+      laserBtn.classList.remove('active');
+      laserBtn.style.display = 'none';
+      requestAnimationFrame(() => {
+        laserPointer.style.display = 'none';
+        laserPointer.style.left = '-9999px';
+        laserPointer.style.top = '-9999px';
+      });
+    }
+  
+    // 全屏按钮点击事件
+    fullscreenBtn.addEventListener('click', function() {
+      isFullscreen = !isFullscreen;
+      document.body.classList.toggle('is-fullscreen', isFullscreen);
+      revealElement.classList.toggle('fullscreen', isFullscreen);
+      
+      if (isFullscreen) {
+        document.documentElement.requestFullscreen();
+        laserBtn.style.display = 'flex';
+        Reveal.layout();
+      } else {
+        cleanupLaserPointer();
+      }
+    });
+  
+    // 监听全屏状态变化
+    document.addEventListener('fullscreenchange', function() {
+      if (!document.fullscreenElement) {
+        cleanupLaserPointer();
+        Reveal.layout();
+      }
+    });
+  
+    // 激光笔按钮点击事件
+    laserBtn.addEventListener('click', function() {
+      isLaserActive = !isLaserActive;
+      this.classList.toggle('active');
+      if (!isLaserActive) {
+        laserPointer.style.display = 'none';
+        document.body.classList.remove('cursor-hidden');
+      } else {
+        document.body.classList.add('cursor-hidden');
+      }
+    });
+  
+    // 鼠标移动事件
+    document.addEventListener('mousemove', function(e) {
+      if (isFullscreen && isLaserActive) {
+        const revealRect = revealElement.getBoundingClientRect();
+        const isInsideReveal = (
+          e.clientX >= revealRect.left &&
+          e.clientX <= revealRect.right &&
+          e.clientY >= revealRect.top &&
+          e.clientY <= revealRect.bottom
+        );
+  
+        if (isInsideReveal) {
+          requestAnimationFrame(() => {
+            laserPointer.style.display = 'block';
+            laserPointer.style.left = (e.clientX - 4) + 'px';
+            laserPointer.style.top = (e.clientY - 4) + 'px';
+          });
+        } else {
+          laserPointer.style.display = 'none';
+        }
+      }
+    });
+  
+    // 鼠标离开窗口事件
+    document.addEventListener('mouseleave', function() {
+      if (isLaserActive) {
+        laserPointer.style.display = 'none';
+      }
+    });
+  
+    // 鼠标进入窗口事件
+    document.addEventListener('mouseenter', function() {
+      if (isLaserActive && isFullscreen) {
+        const revealRect = revealElement.getBoundingClientRect();
+        const e = event;
+        const isInsideReveal = (
+          e.clientX >= revealRect.left &&
+          e.clientX <= revealRect.right &&
+          e.clientY >= revealRect.top &&
+          e.clientY <= revealRect.bottom
+        );
+  
+        if (isInsideReveal) {
+          laserPointer.style.display = 'block';
+        }
+      }
+    });
+  
+    // 窗口大小改变事件
+    window.addEventListener('resize', function() {
+      if (!isFullscreen) {
+        cleanupLaserPointer();
+      }
+    });
+  
+    // ESC 键处理
+     document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        cleanupLaserPointer();
+      }
+      
+      // Alt 键切换激光笔
+      if (e.key === 'Alt' && isFullscreen) {
+        e.preventDefault(); // 防止触发浏览器默认行为
+        isLaserActive = !isLaserActive;
+        laserBtn.classList.toggle('active');
+        
+        if (!isLaserActive) {
+          laserPointer.style.display = 'none';
+          document.body.classList.remove('cursor-hidden');
+        } else {
+          document.body.classList.add('cursor-hidden');
+        }
+      }
+    });
+
+    // 添加 Alt 键释放处理
+    document.addEventListener('keyup', function(e) {
+      if (e.key === 'Alt') {
+        e.preventDefault(); // 防止触发浏览器默认行为
+      }
+    });
+
+    // 更新激光笔按钮的提示文字
+    document.querySelector('#laser-btn').title = '激光笔 (Alt键切换)';
+    
+</script>
+
+{{ partial "footer.html" . }}

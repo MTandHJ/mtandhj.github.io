@@ -6,7 +6,7 @@ publishDir = "docs"
 
 [taxonomies]
 tag = "tags"
-
+category = "categories"
 
 [[menu.main]]
 identifier = "publication"
@@ -26,12 +26,21 @@ name = "Tags"
 url = "/tags"
 weight = 20
 
+[[menu.main]]
+identifier = "slides"
+name = "Slides"
+url = "/slides"
+weight = 30
+
 [params]
 github = "https://www.github.com/MTandHJ"
 mail = "congxueric@gmail.com"
 site = "https://www.cnblogs.com/MTandHJ"
 logo = "/images/logo.png"
 fastSearch = true
+[params.taxonomies]
+  includeNewer = true
+  postSections = ["posts", "slides"]  # 添加 slides 到内容区域
 
 [markup]
   [markup.tableOfContents]
@@ -50,3 +59,10 @@ fastSearch = true
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML"]
+  term = ["HTML"]
+
+# 添加 slides 内容类型的配置
+[permalinks]
+  slides = "/slides/:filename/"
