@@ -10,11 +10,20 @@
     color: black; /* 将公式颜色改为蓝色 */
 }
 
-a:hover {
-    color: #e65100; /* 悬停时颜色加深 */
-    text-decoration: underline; /* 增强用户交互感 */
+/* 覆盖Tailwind的链接颜色变量 */
+:root {
+    --tw-prose-links: inherit !important;
+  }
+  
+/* 确保暗色模式下的链接颜色也被覆盖 */
+.dark {
+    --tw-prose-invert-links: inherit !important;
 }
 
+/* 全局链接悬浮样式 */
+a:hover {
+    color: #c0c0c0 !important; /* 银灰色 */
+}
 
 /* Search */
 #fastSearch {
