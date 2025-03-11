@@ -77,7 +77,7 @@ pinned: false
 
 - 因此, 我们可以把这些当成'文本'然后像一般的 NLP 那样进行 next-token predication:
     $$
-    p(s|c) = \prod_{i} p(s_i | s_{<i}, c),
+    p(s|c) = \prod_{i} p(s_i | s_{< i}, c),
     $$
     这里 $c$ 是一些条件 (可以是文本, 也可以是图像).
 
