@@ -25,12 +25,11 @@ document.addEventListener("click", event => {
 });
  
 document.addEventListener('keydown', function(event) {
- 
   // CMD-/ to show / hide Search
   if (event.metaKey && event.which === 191) {
-      showSearchInput()
+    showSearchInput();
   }
- 
+
   // Allow ESC (27) to close search box
   if (event.keyCode == 27) {
     if (searchVisible) {
@@ -39,24 +38,39 @@ document.addEventListener('keydown', function(event) {
       searchVisible = false;
     }
   }
- 
+
   // DOWN (40) arrow
   if (event.keyCode == 40) {
     if (searchVisible && resultsAvailable) {
-      event.preventDefault(); // stop window from scrolling
-      if ( document.activeElement == maininput) { first.focus(); } // if the currently focused element is the main input --> focus the first <li>
-      else if ( document.activeElement == last ) { last.focus(); } // if we're at the bottom, stay there
-      else { document.activeElement.parentElement.nextSibling.firstElementChild.focus(); } // otherwise select the next search result
+      event.preventDefault();
+      // 获取所有搜索结果链接
+      const links = Array.from(document.querySelectorAll('#searchResults li a'));
+      const currentIndex = links.indexOf(document.activeElement);
+      
+      if (currentIndex === -1) {
+        // 如果当前不在任何结果上（比如在搜索框），选择第一个
+        links[0]?.focus();
+      } else if (currentIndex < links.length - 1) {
+        // 移动到下一个结果
+        links[currentIndex + 1].focus();
+      }
     }
   }
- 
+
   // UP (38) arrow
   if (event.keyCode == 38) {
     if (searchVisible && resultsAvailable) {
-      event.preventDefault(); // stop window from scrolling
-      if ( document.activeElement == maininput) { maininput.focus(); } // If we're in the input box, do nothing
-      else if ( document.activeElement == first) { maininput.focus(); } // If we're at the first item, go to input box
-      else { document.activeElement.parentElement.previousSibling.firstElementChild.focus(); } // Otherwise, select the search result above the current active one
+      event.preventDefault();
+      const links = Array.from(document.querySelectorAll('#searchResults li a'));
+      const currentIndex = links.indexOf(document.activeElement);
+
+      if (currentIndex === 0) {
+        // 如果在第一个结果，返回搜索框
+        maininput.focus();
+      } else if (currentIndex > 0) {
+        // 移动到上一个结果
+        links[currentIndex - 1].focus();
+      }
     }
   }
 });
@@ -146,9 +160,9 @@ function executeSearch(term) {
     document.getElementById("searchResults").setAttribute("style", "");
     return;
   }
-  let results = fuse.search(term); // the actual query being run using fuse.js
-  let searchItems = ''; // our results bucket
- 
+  let results = fuse.search(term);
+  let searchItems = '';
+
   if (results.length === 0) {
     resultsAvailable = false;
     searchItems = '<li class="noSearchResult">无结果</li>';
@@ -164,31 +178,59 @@ function executeSearch(term) {
 
       title = results[item].item.title;
       const isSlide = results[item].item.permalink.includes('/slides/');
-      content = '';  // 默认为空
+      content = '';
 
       for (const match of results[item].matches) {
         if (match.key == 'title') {
-          startIndex = match.indices[0][0];
-          endIndex = match.indices[0][1] + 1;
-          highText = '<span class="search-highlight">' + match.value.slice(startIndex, endIndex) + '</span>';
-          title = match.value.slice(0, startIndex) + highText + match.value.slice(endIndex);
-        } else if (match.key == 'content') {
-          startIndex = match.indices[0][0];
-          endIndex = match.indices[0][1] + 1;
-          // 对于幻灯片，只显示匹配的部分，不显示上下文
-          if (isSlide) {
-            content = '<span class="search-highlight">' + match.value.slice(startIndex, endIndex) + '</span>';
+          // 先尝试查找完全匹配
+          const exactMatches = [...match.value.matchAll(new RegExp(term, 'gi'))];
+          if (exactMatches.length > 0) {
+            // 找到完全匹配，使用完全匹配的部分
+            let lastIndex = 0;
+            let newTitle = '';
+            for (const exactMatch of exactMatches) {
+              newTitle += match.value.slice(lastIndex, exactMatch.index) +
+                         '<span class="search-highlight">' + exactMatch[0] + '</span>';
+              lastIndex = exactMatch.index + exactMatch[0].length;
+            }
+            newTitle += match.value.slice(lastIndex);
+            title = newTitle;
           } else {
-            // 对于博客文章，显示带上下文的匹配内容
-            content = match.value.slice(Math.max(0, startIndex - 30), startIndex) + 
-                     '<span class="search-highlight">' + match.value.slice(startIndex, endIndex) + '</span>' + 
-                     match.value.slice(endIndex, endIndex + 30);
+            // 没有完全匹配，使用 Fuse.js 的匹配结果
+            startIndex = match.indices[0][0];
+            endIndex = match.indices[0][1] + 1;
+            highText = '<span class="search-highlight">' + match.value.slice(startIndex, endIndex) + '</span>';
+            title = match.value.slice(0, startIndex) + highText + match.value.slice(endIndex);
+          }
+        } else if (match.key == 'content') {
+          // 对内容也应用相同的逻辑
+          const exactMatches = [...match.value.matchAll(new RegExp(term, 'gi'))];
+          if (exactMatches.length > 0) {
+            // 使用第一个完全匹配的结果及其上下文
+            const exactMatch = exactMatches[0];
+            const start = Math.max(0, exactMatch.index - 30);
+            const end = Math.min(match.value.length, exactMatch.index + exactMatch[0].length + 30);
+            content = (start > 0 ? '...' : '') +
+                     match.value.slice(start, exactMatch.index) +
+                     '<span class="search-highlight">' + exactMatch[0] + '</span>' +
+                     match.value.slice(exactMatch.index + exactMatch[0].length, end) +
+                     (end < match.value.length ? '...' : '');
+          } else {
+            // 没有完全匹配，使用 Fuse.js 的匹配结果
+            startIndex = match.indices[0][0];
+            endIndex = match.indices[0][1] + 1;
+            if (isSlide) {
+              content = '<span class="search-highlight">' + match.value.slice(startIndex, endIndex) + '</span>';
+            } else {
+              content = match.value.slice(Math.max(0, startIndex - 30), startIndex) + 
+                       '<span class="search-highlight">' + match.value.slice(startIndex, endIndex) + '</span>' + 
+                       match.value.slice(endIndex, endIndex + 30);
+            }
           }
         }
       }
 
-      // 构建搜索结果项
-      const resultItem = '<li><a href="' + results[item].item.permalink + '">' + 
+      const resultItem = '<li><a href="' + results[item].item.permalink + '" tabindex="0" class="search-result-item">' + 
                         '<span class="title">' + title + '</span>' +
                         (content ? '<br /> <span class="sc">'+ content +'</span>' : '') +
                         '</a></li>';

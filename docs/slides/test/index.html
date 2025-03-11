@@ -117,9 +117,6 @@ $$
     
 
 
-<li id="search-click" class="menu-item" style="display: none;">
-    <a class="menu-item-link" href="javascript:void(0)">Search</a>
-</li>
 
 
 <script>
@@ -568,6 +565,26 @@ $$
     document.querySelector('#laser-btn').title = '激光笔 (Alt键切换)';
     
 </script>
+
+<div class="post-comment">
+    
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/@waline/client@v3/dist/waline.css"
+/>
+<div id="waline"></div>
+<script type="module">
+import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+window.onload = () => {
+    init({
+        el: '#waline',
+        reaction: false,
+        serverURL: 'https://comment.mtandhj.com',
+    });
+}
+</script>
+</div>
 
 </main>
 

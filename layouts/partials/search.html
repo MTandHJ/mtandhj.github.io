@@ -1,48 +1,20 @@
-<!-- 搜索按钮只在主页显示 -->
-{{ if .IsHome }}
-<li id="search-click" class="menu-item" style="list-style: none;">
-    <a
-        class="menu-item-link"
-        href="javascript:void(0)"
-        style="
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 17px;
-            font-size: 14px;
-            color: #555;
-            border: 1px solid #ccc;
-            border-radius: 25px;
-            background-color: #f9f9f9;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        "
-        onmouseover="this.style.backgroundColor='#eaeaea'; this.style.color='#000';"
-        onmouseout="this.style.backgroundColor='#f9f9f9'; this.style.color='#555';"
-    >
-        Search &nbsp;&nbsp; <span style="color: #aaa; font-size: 12px;"> Ctrl+K</span>
-    </a>
-</li>
-{{ else }}
-<!-- 在非主页保留搜索功能但隐藏按钮 -->
+
+<!-- 保持隐藏的搜索触发器在所有页面都存在 -->
 <li id="search-click" class="menu-item" style="display: none;">
     <a class="menu-item-link" href="javascript:void(0)">Search</a>
 </li>
-{{ end }}
 
 <script>
-    // JavaScript 实现快捷键功能
+    // 快捷键功能
     document.addEventListener("keydown", function (event) {
-        // 检测是否按下 Ctrl + K（或 Command + K）
         if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
-            event.preventDefault(); // 阻止浏览器默认的 Ctrl + K 行为
-            document.getElementById("search-click").click(); // 模拟点击事件
+            event.preventDefault();
+            document.getElementById("search-click").click();
         }
     });
 </script>
 
-
+<!-- 搜索框和结果 -->
 <div id="fastSearch">
     <input id="searchInput">
     <ul id="searchResults"></ul>

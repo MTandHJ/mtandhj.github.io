@@ -80,39 +80,16 @@
     </div>
     
 
-<li id="search-click" class="menu-item" style="list-style: none;">
-    <a
-        class="menu-item-link"
-        href="javascript:void(0)"
-        style="
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 6px 17px;
-            font-size: 14px;
-            color: #555;
-            border: 1px solid #ccc;
-            border-radius: 25px;
-            background-color: #f9f9f9;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        "
-        onmouseover="this.style.backgroundColor='#eaeaea'; this.style.color='#000';"
-        onmouseout="this.style.backgroundColor='#f9f9f9'; this.style.color='#555';"
-    >
-        Search &nbsp;&nbsp; <span style="color: #aaa; font-size: 12px;"> Ctrl+K</span>
-    </a>
+<li id="search-click" class="menu-item" style="display: none;">
+    <a class="menu-item-link" href="javascript:void(0)">Search</a>
 </li>
-
 
 <script>
     
     document.addEventListener("keydown", function (event) {
-        
         if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
-            event.preventDefault(); 
-            document.getElementById("search-click").click(); 
+            event.preventDefault();
+            document.getElementById("search-click").click();
         }
     });
 </script>
@@ -125,7 +102,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
 
-<script type="text/javascript" src="/js/search.min.e371370da1ed03facf5eba277e3c7bc88e8e388756743e8a88cff51279a6a4f9.js"></script>
+<script type="text/javascript" src="/js/search.min.243d998bd0c610c96bcfbb6d9059a4586cb855efea68a7db9409441ebaf81161.js"></script>
     <button aria-label="theme-toggle" id="toggle-theme">
       <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
     >
