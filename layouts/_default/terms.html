@@ -18,10 +18,129 @@
     {{- $count := .Count }}
     {{- with site.GetPage (printf "/%s/%s" $type $name) }}
     <li>
-        <a class="flex items-center px-3 py-2 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  " href="{{ .Permalink }}">{{ .Name }} <sup><strong><sup class="mr-1">{{ $count }}</sup></strong></sup> </a>
+        <a class="flex items-center px-3 py-2 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800 tag-link" 
+           href="#"
+           onclick="return toggleTag('{{ $name }}')"
+           data-tag="{{ $name }}">
+            {{ .Name }} <sup><strong><sup class="mr-1">{{ $count }}</sup></strong></sup>
+        </a>
     </li>
     {{- end }}
     {{- end }}
 </ul>
+
+
+<div id="filtered-posts" class="mt-8 hidden">
+    <div class="flex flex-col gap-6">
+    {{- range site.RegularPages }}
+        <article class="post-item hidden post-snippet flex flex-col [&:not(:last-child)]:border-b border-stone-400 pb-6" 
+                data-tags="{{ range .Params.tags }}{{ . }}|{{ end }}"
+                dir="{{.Params.Direction}}">
+            {{ if .Params.Cover }}
+            <img src="{{ .Params.Cover }}" class="w-full h-64 object-cover rounded-md my-3" alt="{{.Title}}" loading="lazy">
+            {{ end }}
+            <time class="text-xs text-muted" datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+                {{ .Date.Format "January 2, 2006" }}
+            </time>
+            <h2 class="font-semibold text-2xl my-1">
+                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </h2>
+            {{ if .Description }}
+            <p class="text-sm mb-3 text-stone-700 dark:text-white">{{ .Description }}</p>
+            {{ end }}
+            <div class="">
+                {{ partial "tags.html" . }}
+            </div>
+        </article>
+    {{- end }}
+    </div>
+</div>
+
+
+
+<script>
+const activeTags = new Set();
+
+function toggleTag(tag) {
+    const tagLink = document.querySelector(`[data-tag="${tag}"]`);
+    
+    if (activeTags.has(tag)) {
+        // 取消选中标签
+        activeTags.delete(tag);
+        // 恢复原始样式
+        tagLink.style.backgroundColor = '';
+        tagLink.classList.remove('bg-blue-600');
+        tagLink.classList.add('bg-stone-800');
+        tagLink.classList.add('text-white');
+    } else {
+        // 选中标签
+        activeTags.add(tag);
+        // 设置选中样式
+        tagLink.style.backgroundColor = '#2563eb';
+        tagLink.classList.remove('bg-stone-800');
+        tagLink.classList.add('bg-blue-600');
+        tagLink.classList.add('text-white');
+    }
+    
+    // 更新文章显示
+    updatePosts();
+    
+    // 调试信息
+    console.log('Toggled tag:', tag);
+    console.log('Active tags:', Array.from(activeTags));
+    return false;
+}
+
+function updatePosts() {
+    const filteredPosts = document.getElementById('filtered-posts');
+    const posts = document.querySelectorAll('.post-item');
+    let hasVisiblePosts = false;
+
+    // 如果没有选中的标签，隐藏所有文章
+    if (activeTags.size === 0) {
+        posts.forEach(post => post.classList.add('hidden'));
+        filteredPosts.classList.add('hidden');
+        return;
+    }
+
+    posts.forEach(post => {
+        const postTagsStr = post.getAttribute('data-tags');
+        
+        if (!postTagsStr) {
+            post.classList.add('hidden');
+            return;
+        }
+
+        // 处理标签，移除空格并转换为小写以确保匹配
+        const postTags = new Set(
+            postTagsStr.split('|')
+                .filter(t => t)
+                .map(t => t.trim().toLowerCase())
+        );
+
+        // 检查文章是否包含所有选中的标签（不区分大小写）
+        const hasAllTags = Array.from(activeTags).every(tag => 
+            postTags.has(tag.trim().toLowerCase())
+        );
+        
+        if (hasAllTags) {
+            post.classList.remove('hidden');
+            hasVisiblePosts = true;
+        } else {
+            post.classList.add('hidden');
+        }
+    });
+    
+    // 显示或隐藏文章列表区域
+    filteredPosts.classList.toggle('hidden', !hasVisiblePosts);
+}
+
+// 初始化
+document.addEventListener('DOMContentLoaded', () => {
+    // 确保所有文章初始状态为隐藏
+    const posts = document.querySelectorAll('.post-item');
+    posts.forEach(post => post.classList.add('hidden'));
+});
+</script>
 
 {{ partial "footer.html" . }}

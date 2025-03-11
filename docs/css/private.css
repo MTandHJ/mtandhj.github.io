@@ -1,3 +1,5 @@
+
+
 /* 左上角的 logo */
 .logo {
   margin-right: 2rem; /* 设置右侧外边距为 2rem */
@@ -88,22 +90,4 @@ a:hover {
 :root { /* waline */
   --waline-theme-color: #4b3425 !important;
   --waline-active-color: #9c8877 !important;
-}
-
-#searchResults .search-result-item {
-  display: block;
-  padding: 8px 15px;
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.2s ease;
-}
-
-#searchResults .search-result-item:focus {
-  outline: none;
-  background-color: rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0 0 0 2px #4b3425;
-}
-
-#searchResults .search-result-item:hover {
-  background-color: rgba(0, 0, 0, 0.05);
 }
