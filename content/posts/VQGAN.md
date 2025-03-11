@@ -16,7 +16,16 @@ tags:
 pinned: false
 ---
 
-> [Esser P., Rombach R. and Ommer B. Taming Transformers for High-Resolution Image Synthesis. CVPR, 2021.](https://arxiv.org/abs/2012.09841)
+<ol class="reference">
+  <li>
+    Esser P., Rombach R. and Ommer B.
+    <u>Taming Transformers for High-Resolution Image Synthesis.</u>
+    <i>CVPR</i>, 2021.
+    <a href="https://arxiv.org/abs/2012.09841" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
+    <a href="https://compvis.github.io/taming-transformers/" style="color: #007acc; font-weight: bold; text-decoration: none;">[Code]</a>
+  </li>
+  <!-- 添加更多文献条目 -->
+</ol>
 
 
 ## 预备知识
@@ -82,8 +91,3 @@ pinned: false
     这里 $c$ 是一些条件 (可以是文本, 也可以是图像).
 
 - 由 Transformer 预测出来的 tokens 收集起来经过 decoder $G$ 就可以得到'操作'过后的图像了. 当然了, Transformer 需要其它的方式训练. 现在这种方式已经被广泛应用于图像生成了 (如, Diffusion). 不过 Diffusion 里面采用 VQGAN 的流程主要是由于它的高效性.
-
-
-## 代码
-
-[[official-code](https://compvis.github.io/taming-transformers/)]

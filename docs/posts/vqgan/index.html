@@ -144,18 +144,25 @@
                 <li>
                     <a href="#part1-%e7%a6%bb%e6%95%a3%e7%bc%96%e7%a0%81" aria-label="Part1: 离散编码">Part1: 离散编码</a></li>
                 <li>
-                    <a href="#part2-transformer-%e7%94%9f%e6%88%90" aria-label="Part2: Transformer 生成">Part2: Transformer 生成</a></li></ul>
+                    <a href="#part2-transformer-%e7%94%9f%e6%88%90" aria-label="Part2: Transformer 生成">Part2: Transformer 生成</a>
                 </li>
-                <li>
-                    <a href="#%e4%bb%a3%e7%a0%81" aria-label="代码">代码</a>
-                </li>
+            </ul>
+            </li>
             </ul>
         </div>
     </details>
 </div>
 
-    <blockquote>
-<p><a href="https://arxiv.org/abs/2012.09841">Esser P., Rombach R. and Ommer B. Taming Transformers for High-Resolution Image Synthesis. CVPR, 2021.</a></p></blockquote>
+    <ol class="reference">
+  <li>
+    Esser P., Rombach R. and Ommer B.
+    <u>Taming Transformers for High-Resolution Image Synthesis.</u>
+    <i>CVPR</i>, 2021.
+    <a href="https://arxiv.org/abs/2012.09841" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
+    <a href="https://compvis.github.io/taming-transformers/" style="color: #007acc; font-weight: bold; text-decoration: none;">[Code]</a>
+  </li>
+  <!-- 添加更多文献条目 -->
+</ol>
 <h2 id="预备知识">预备知识</h2>
 <ul>
 <li>在学习 VQGAN 之前, 请务必先了解 <a href="https://www.mtandhj.com/posts/vqvae/">VQ-VAE</a>.</li>
@@ -219,8 +226,6 @@ $$
 <p>由 Transformer 预测出来的 tokens 收集起来经过 decoder $G$ 就可以得到&rsquo;操作&rsquo;过后的图像了. 当然了, Transformer 需要其它的方式训练. 现在这种方式已经被广泛应用于图像生成了 (如, Diffusion). 不过 Diffusion 里面采用 VQGAN 的流程主要是由于它的高效性.</p>
 </li>
 </ul>
-<h2 id="代码">代码</h2>
-<p>[<a href="https://compvis.github.io/taming-transformers/">official-code</a>]</p>
 
 
 </div>

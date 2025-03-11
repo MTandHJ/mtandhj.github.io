@@ -15,6 +15,21 @@ a:hover {
     color: #c0c0c0 !important; /* 银灰色 */
 }
 
+ol.reference {
+    list-style: none; /* 移除默认样式 */
+    padding-left: 0; /* 移除默认左边距 */
+}
+
+ol.reference li {
+    counter-increment: list-counter; /* 创建一个计数器 */
+    margin-left: 5px; /* 可选：设置左边距 */
+}
+ol.reference li::before {
+    content: "[" counter(list-counter) "] "; /* 在每个列表项前添加带括号的序号 */
+    font-weight: bold;
+    margin-right: 5px;
+}
+
 /* Search */
 #fastSearch {
     display: none;

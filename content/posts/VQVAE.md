@@ -16,7 +16,17 @@ pinned: false
 ---
 
 
-> [van den Oord A., Vinyals O. and Kavukcuoglu K. Neural Discrete Representation Learning. NeurIPS, 2017.](http://arxiv.org/abs/1711.00937)
+<ol class="reference">
+  <li>
+    van den Oord A., Vinyals O. and Kavukcuoglu K.
+    <u>Neural Discrete Representation Learning.</u>
+    <i>NeurIPS</i>, 2017.
+    <a href="http://arxiv.org/abs/1711.00937" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
+    <a href="https://github.com/MishaLaskin/vqvae" style="color: #007acc; font-weight: bold; text-decoration: none;">[Code]</a>
+  </li>
+  <!-- 添加更多文献条目 -->
+</ol>
+
 
 ## 预备知识
 
@@ -92,7 +102,3 @@ pinned: false
 ```python
 z_q = z + (z_q - z).detach()
 ```
-
-## 代码
-
-[[PyTorch](https://github.com/MishaLaskin/vqvae)]

@@ -140,17 +140,23 @@
                 <li>
                     <a href="#%e9%a2%84%e5%a4%87%e7%9f%a5%e8%af%86" aria-label="预备知识">预备知识</a></li>
                 <li>
-                    <a href="#%e6%a0%b8%e5%bf%83%e6%80%9d%e6%83%b3" aria-label="核心思想">核心思想</a></li>
-                <li>
-                    <a href="#%e4%bb%a3%e7%a0%81" aria-label="代码">代码</a>
+                    <a href="#%e6%a0%b8%e5%bf%83%e6%80%9d%e6%83%b3" aria-label="核心思想">核心思想</a>
                 </li>
             </ul>
         </div>
     </details>
 </div>
 
-    <blockquote>
-<p><a href="http://arxiv.org/abs/1711.00937">van den Oord A., Vinyals O. and Kavukcuoglu K. Neural Discrete Representation Learning. NeurIPS, 2017.</a></p></blockquote>
+    <ol class="reference">
+  <li>
+    van den Oord A., Vinyals O. and Kavukcuoglu K.
+    <u>Neural Discrete Representation Learning.</u>
+    <i>NeurIPS</i>, 2017.
+    <a href="http://arxiv.org/abs/1711.00937" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
+    <a href="https://github.com/MishaLaskin/vqvae" style="color: #007acc; font-weight: bold; text-decoration: none;">[Code]</a>
+  </li>
+  <!-- 添加更多文献条目 -->
+</ol>
 <h2 id="预备知识">预备知识</h2>
 <ul>
 <li>
@@ -232,9 +238,7 @@ $$
 </ul>
 <p><strong>注</strong>: straight-through estimator (STE):</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>z_q <span style="color:#f92672">=</span> z <span style="color:#f92672">+</span> (z_q <span style="color:#f92672">-</span> z)<span style="color:#f92672">.</span>detach()
-</span></span></code></pre></div><h2 id="代码">代码</h2>
-<p>[<a href="https://github.com/MishaLaskin/vqvae">PyTorch</a>]</p>
-
+</span></span></code></pre></div>
 
 </div>
 <div class="mt-5 mb-3 px-5">
