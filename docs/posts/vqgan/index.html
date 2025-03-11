@@ -6,11 +6,11 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<title>Vector Quantization | MTandHJ</title>
-	<meta name="keywords" content="">
-	<meta name="description" content="">
+	<title>Taming Transformers for High-Resolution Image Synthesis | MTandHJ</title>
+	<meta name="keywords" content="Note, GAN, Vector Quantization, Image Synthesis, Seminal, Empirical, CVPR, 2021">
+	<meta name="description" content="VQGAN, 自回归式的图片生成">
 	<link rel="canonical"
-		href="http://localhost:1313/tags/vector-quantization/">
+		href="http://localhost:1313/posts/vqgan/">
 
 
 
@@ -121,24 +121,111 @@
 
 	<main class="content container max-w-prose mx-auto flex-1 py-5 px-4 md:px-0">
 
-<div class="flex flex-col gap-2 my-3 mb-10 ">
-  <h1 class="font-black text-3xl md:text-4xl">Vector Quantization</h1>
-  <p class="text-lg"></p>
+
+<div dir="" class="prose mx-auto break-normal px-5 mt-8 dark:prose-invert">
+    
+
+    <h1 class="text-2xl mb-0 md:text-3xl font-black ">Taming Transformers for High-Resolution Image Synthesis</h1>
+    <time class="text-sm my-2 text-muted mb-5" datetime=" 2025-03-11T00:00:00Z">
+        March 11, 2025
+    </time>
+    <div class="mt-3"></div>
+    <div class="toc select-none p-3 bg-stone-100 text-black dark:bg-stone-900 dark:text-white rounded">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details cursor-pointer">Content</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e9%a2%84%e5%a4%87%e7%9f%a5%e8%af%86" aria-label="预备知识">预备知识</a></li>
+                <li>
+                    <a href="#%e6%a0%b8%e5%bf%83%e6%80%9d%e6%83%b3" aria-label="核心思想">核心思想</a><ul>
+                <li>
+                    <a href="#part1-%e7%a6%bb%e6%95%a3%e7%bc%96%e7%a0%81" aria-label="Part1: 离散编码">Part1: 离散编码</a></li>
+                <li>
+                    <a href="#part2-transformer-%e7%94%9f%e6%88%90" aria-label="Part2: Transformer 生成">Part2: Transformer 生成</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%bb%a3%e7%a0%81" aria-label="代码">代码</a>
+                </li>
+            </ul>
+        </div>
+    </details>
 </div>
 
+    <blockquote>
+<p><a href="https://arxiv.org/abs/2012.09841">Esser P., Rombach R. and Ommer B. Taming Transformers for High-Resolution Image Synthesis. CVPR, 2021.</a></p></blockquote>
+<h2 id="预备知识">预备知识</h2>
+<ul>
+<li>在学习 VQGAN 之前, 请务必先了解 <a href="https://www.mtandhj.com/posts/vqvae/">VQ-VAE</a>.</li>
+</ul>
+<h2 id="核心思想">核心思想</h2>
+<p><img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250311144000.png" alt="20250311144000"></p>
+<ul>
+<li>Transformer 已经在 NLP 领域取得了巨大的进展, 本文想要开发其在图像生成领域的能力.</li>
+</ul>
+<h3 id="part1-离散编码">Part1: 离散编码</h3>
+<ul>
+<li>
+<p>既然 Transformer 的成功依赖离散的 token, 那么通过它来生成图片很重要的一个点是如何将图片离散化? 于是乎, 作者引入了 VQGAN 来得到图片的离散编码.</p>
+</li>
+<li>
+$$
+    \hat{z} = E(x) \in \mathbb{R}^{h \times w \times n_z}.
+    $$</li>
+<li>
+$$
+    z_{\mathbf{q}} = \mathbf{q}(\hat{z}) := \bigg(\text{argmin}_{z_k \in \mathcal{Z}} \|\hat{z}_{ij} - z_k\| \bigg)_{ij},
+    $$<p>
+这里 $\mathcal{Z} = \{z_k\}_{k=1}^K \subset \mathbb{R}^{n_z}$, 俗称 codebook.</p>
+</li>
+<li>
+$$
+    \hat{x} = G(z_{\mathbf{q}}).
+    $$</li>
+<li>
+$$
+    \mathcal{L} = \mathcal{L}_{VQ} + \lambda \mathcal{L}_{GAN}, \\
+    \mathcal{L}_{VQ} = \underbrace{\|x - \hat{x}\|^2}_{\mathcal{L}_{rec}} + \|\text{sg}(E(x)) - z_{\mathbf{q}} \|^2 + \|\text{sg}(z_{\mathbf{q}}) - E(x) \|^2, \\
+    \mathcal{L}_{GAN} = \log D(x) + \log (1 - D(\hat{x})).
+    $$$$
+    \lambda = \frac{\nabla_{G_L} [\mathcal{L}_{rec}]}{\nabla_{G_L} \mathcal{L}_{GAN} + \delta},
+    $$<p>
+这里 $\delta = 1e-6$ 是一个小量防止数值不稳定.</p>
+</li>
+<li>
+<p>特别地, 文中有一句话:</p>
+</li>
+</ul>
+<blockquote>
+<p>To do so, we propose VQGAN, a variant of the original VQVAE, and use a discriminator and perceptual loss to keep good perceptual quality at increased compression rate.</p></blockquote>
+<ul>
+<li>因此, 实际使用的时候, $\mathcal{L}_{VQ}$ 中的 $\mathcal{L}_{rec}$ 应当替换为 <a href="https://zhuanlan.zhihu.com/p/92102879">perceptual loss</a>.</li>
+</ul>
+<h3 id="part2-transformer-生成">Part2: Transformer 生成</h3>
+<ul>
+<li>
+$$
+    s \in \{0, \ldots, |\mathcal{Z}| - 1\}^{h \times w}, \quad s_{ij} = k \text{ such that } (z_{\mathbf{q}})_{ij} = z_k.
+    $$</li>
+<li>
+$$
+    p(s|c) = \prod_{i} p(s_i | s_{<i}, c),
+    $$<p>
+这里 $c$ 是一些条件 (可以是文本, 也可以是图像).</p>
+</li>
+<li>
+<p>由 Transformer 预测出来的 tokens 收集起来经过 decoder $G$ 就可以得到&rsquo;操作&rsquo;过后的图像了. 当然了, Transformer 需要其它的方式训练. 现在这种方式已经被广泛应用于图像生成了 (如, Diffusion). 不过 Diffusion 里面采用 VQGAN 的流程主要是由于它的高效性.</p>
+</li>
+</ul>
+<h2 id="代码">代码</h2>
+<p>[<a href="https://compvis.github.io/taming-transformers/">official-code</a>]</p>
 
-<div class="flex flex-col gap-6">
-  <article dir="" class="post-snippet flex flex-col [&:not(:last-child)]:border-b border-stone-400 pb-6">
+
+</div>
+<div class="mt-5 mb-3 px-5">
     
-    <time class="text-xs text-muted" datetime=" 2025-03-11T00:00:00Z">
-      March 11, 2025
-    </time>
-    <h2 class="font-semibold text-2xl my-1">
-      <a href="/posts/vqgan/">Taming Transformers for High-Resolution Image Synthesis</a>
-    </h2>
-    <p class="text-sm mb-3 text-stone-700 dark:text-white"> VQGAN, 自回归式的图片生成 </p>
-    <div class="">
-      
 <ul class="flex items-center gap-2">
   <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
       href="http://localhost:1313/tags/note/">Note</a>
@@ -165,48 +252,26 @@
       href="http://localhost:1313/tags/2021/">2021</a>
   </li>
 </ul>
-    </div>
-  </article>
-  
-  <article dir="" class="post-snippet flex flex-col [&:not(:last-child)]:border-b border-stone-400 pb-6">
+</div>
+
+<div class="post-comment">
     
-    <time class="text-xs text-muted" datetime=" 2025-03-10T00:00:00Z">
-      March 10, 2025
-    </time>
-    <h2 class="font-semibold text-2xl my-1">
-      <a href="/posts/vqvae/">Neural Discrete Representation Learning</a>
-    </h2>
-    <p class="text-sm mb-3 text-stone-700 dark:text-white"> VQ-VAE, 向量量化的开山之作 </p>
-    <div class="">
-      
-<ul class="flex items-center gap-2">
-  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
-      href="http://localhost:1313/tags/note/">Note</a>
-  </li>
-  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
-      href="http://localhost:1313/tags/vae/">VAE</a>
-  </li>
-  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
-      href="http://localhost:1313/tags/vector-quantization/">Vector Quantization</a>
-  </li>
-  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
-      href="http://localhost:1313/tags/seminal/">Seminal</a>
-  </li>
-  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
-      href="http://localhost:1313/tags/empirical/">Empirical</a>
-  </li>
-  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
-      href="http://localhost:1313/tags/neurips/">NeurIPS</a>
-  </li>
-  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
-      href="http://localhost:1313/tags/2017/">2017</a>
-  </li>
-</ul>
-    </div>
-  </article>
-  
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/@waline/client@v3/dist/waline.css"
+/>
+<div id="waline"></div>
+<script type="module">
+import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
 
-
+window.onload = () => {
+    init({
+        el: '#waline',
+        reaction: false,
+        serverURL: 'https://comment.mtandhj.com',
+    });
+}
+</script>
 </div>
 
 </main>

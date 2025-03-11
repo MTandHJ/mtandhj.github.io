@@ -1,4 +1,4 @@
 ---
-title: SLIDE
+title: SLIDES
 description: ""
 ---
