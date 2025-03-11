@@ -18,7 +18,7 @@ pinned: false
 
 > [van den Oord A., Vinyals O. and Kavukcuoglu K. Neural Discrete Representation Learning. NeurIPS, 2017.](http://arxiv.org/abs/1711.00937)
 
-## 预备工作
+## 预备知识
 
 - 作者的目的是实现离散化的表示学习: 给定任意的模式, 编码成离散的表示.
 
