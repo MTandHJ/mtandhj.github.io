@@ -5,21 +5,11 @@
   margin-right: 2rem; /* 设置右侧外边距为 2rem */
 }
 
-
-.katex {
-    color: black; /* 将公式颜色改为蓝色 */
-}
-
 /* 覆盖Tailwind的链接颜色变量 */
 :root {
     --tw-prose-links: inherit !important;
   }
   
-/* 确保暗色模式下的链接颜色也被覆盖 */
-.dark {
-    --tw-prose-invert-links: inherit !important;
-}
-
 /* 全局链接悬浮样式 */
 a:hover {
     color: #c0c0c0 !important; /* 银灰色 */

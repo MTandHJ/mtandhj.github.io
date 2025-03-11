@@ -5,6 +5,7 @@ title: "Neural Discrete Representation Learning"
 description: "VQ-VAE, 向量量化的开山之作"
 author: MTandHJ
 tags:
+  - Note
   - VAE
   - Vector Quantization
   - Seminal

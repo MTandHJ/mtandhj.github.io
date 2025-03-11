@@ -4,6 +4,7 @@ draft: false
 title: "Slide-test"
 author: MTandHJ
 tags:
+  - Slide
   - Test
 ---
 
