@@ -143,7 +143,7 @@ pre {
   /* 2 */
   font-variation-settings: normal;
   /* 3 */
-  font-size: 1em;
+  font-size: 1.1em;
   /* 4 */
 }
 
@@ -590,9 +590,14 @@ video {
   }
 }
 
+/* 下面两个直接影响正文的宽度 */
 .prose{
   color: var(--tw-prose-body);
-  max-width: 85ch;
+  max-width: 95ch;
+}
+
+.max-w-prose{
+  max-width: 95ch !important;
 }
 
 .prose :where(p):not(:where([class~="not-prose"],[class~="not-prose"] *)){
@@ -726,7 +731,7 @@ video {
 .prose :where(h1):not(:where([class~="not-prose"],[class~="not-prose"] *)){
   color: var(--tw-prose-headings);
   font-weight: 800;
-  font-size: 2.25em;
+  font-size: 2.35em;
   margin-top: 0;
   margin-bottom: 0.8888889em;
   line-height: 1.1111111;
@@ -982,7 +987,7 @@ video {
   --tw-prose-invert-pre-bg: rgb(0 0 0 / 50%);
   --tw-prose-invert-th-borders: #4b5563;
   --tw-prose-invert-td-borders: #374151;
-  font-size: 1rem;
+  font-size: 1.07rem;
   line-height: 1.75;
 }
 
@@ -1195,10 +1200,6 @@ video {
   width: 100%;
 }
 
-.max-w-prose{
-  max-width: 85ch !important;
-}
-
 .flex-1{
   flex: 1 1 0%;
 }
@@ -1395,17 +1396,17 @@ video {
 }
 
 .text-sm{
-  font-size: 0.875rem;
+  font-size: 0.975rem;
   line-height: 1.25rem;
 }
 
 .text-xl{
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   line-height: 1.75rem;
 }
 
 .text-xs{
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   line-height: 1rem;
 }
 
@@ -1529,7 +1530,7 @@ pre {
   }
 
   .md\:text-2xl{
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     line-height: 2rem;
   }
 

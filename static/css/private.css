@@ -18,6 +18,9 @@ a:hover {
 ol.reference {
     list-style: none; /* 移除默认样式 */
     padding-left: 0; /* 移除默认左边距 */
+    text-align: justify; 
+    word-wrap: break-word; 
+    white-space: normal;
 }
 
 ol.reference li {

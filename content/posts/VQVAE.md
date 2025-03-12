@@ -16,35 +16,28 @@ pinned: false
 ---
 
 
-<ol class="reference">
-  <li>
-    van den Oord A., Vinyals O. and Kavukcuoglu K.
-    <u>Neural Discrete Representation Learning.</u>
-    <i>NeurIPS</i>, 2017.
-    <a href="http://arxiv.org/abs/1711.00937" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
-    <a href="https://github.com/MishaLaskin/vqvae" style="color: #007acc; font-weight: bold; text-decoration: none;">[Code]</a>
-  </li>
-  <!-- 添加更多文献条目 -->
-</ol>
-
-
 ## 预备知识
 
 - 作者的目的是实现离散化的表示学习: 给定任意的模式, 编码成离散的表示.
 
 - 既然本文是居于 VAE (变分自编码) 的框架实现的, 我们得对变分自编码有一个初步的了解. VAE 主要包含三个模块:
     1. Encoder $\phi$: 它讲输入 $x \in \mathbb{R}^D$ 映射到一个分布:
+
         $$
         q(z|x; \phi).
         $$
+
         比如当服从的高斯分布, 实质上 $\phi(x) \rightarrow (\mu, \sigma) \rightarrow \mathcal{N}(\mu, \sigma^2)$, 然后 $z$ 从该分布中采样即可;
     2. Decoder $\Phi$: 它将隐变量 $z$ 映射回 (通常来说) $x$ 的空间:
+
         $$
         p(x|z; \Phi);
         $$
+
     3. 还有一个先验分布 $p(z)$ 用于辅助训练.
 
 - VAE 的训练目标是极大似然的一个下界:
+
     $$
     \begin{align*}
     \log p(x) 
@@ -68,13 +61,16 @@ pinned: false
 - VQ-VAE 的希望 $z$ 不再局限于连续的向量, 而是离散的值, 做法其实极为简单:
     1. 预设一个 codebook $E \in \mathbb{R}^{K \times d}$;
     2. 给定一个输入 $x$, 其对应的离散值为
+
         $$
         x \rightarrow \phi(x) \rightarrow \text{argmin}_{k} \|\phi(x) - e_k\|,
         $$
+
         其中 $e_k$ 表示 codebook $E$ 中 $k$-th 行.
     3. 接下来, decoder 部分的输入将是 $e_{k^*}$ 而不再是 $z$ 了.
 
 - 容易发现, 这其实相当于我们的后验分布为:
+
     $$
     q(z = e_{k^*}|x; \phi) =
     \left \{
@@ -90,11 +86,13 @@ pinned: false
     2. 交叉熵, 由于我们用 $e_{k^*}$ 替代了, 导致梯度没法直接计算.
 
 - 对于第二点, 作者建议采取 straight-through estimator, 另外设计了另外两个损失用于训练 $\phi$ 以及 codebook $E$:
+
     $$
     L = \log p(x|z_q; \Phi) + 
     \| \text{sg} (\phi(x)) - e_{k^*}\|_2^2 +
     \beta \cdot \| \phi(x) - \text{sg} (e_{k^*})\|_2^2.
     $$
+
     这里 $\text{sg}(\cdot)$ 表示 stop-gradient 操作, $\beta$ 是超参数 (默认为 0.25).
 
 **注**: straight-through estimator (STE):
@@ -102,3 +100,17 @@ pinned: false
 ```python
 z_q = z + (z_q - z).detach()
 ```
+
+## 参考文献
+
+<ol class="reference">
+  <li>
+    van den Oord A., Vinyals O. and Kavukcuoglu K.
+    <u>Neural Discrete Representation Learning.</u>
+    <i>NeurIPS</i>, 2017.
+    <a href="http://arxiv.org/abs/1711.00937" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
+    <a href="https://github.com/MishaLaskin/vqvae" style="color: #007acc; font-weight: bold; text-decoration: none;">[Code]</a>
+  </li>
+  <!-- 添加更多文献条目 -->
+</ol>
+

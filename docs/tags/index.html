@@ -93,7 +93,7 @@
 
 
 <div id="fastSearch">
-    <input id="searchInput">
+    <input id="searchInput" autocomplete="off">
     <ul id="searchResults"></ul>
 </div>
 
@@ -144,6 +144,30 @@
     <li>
         <a class="flex items-center px-3 py-2 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800 tag-link" 
            href="#"
+           onclick="return toggleTag('2023')"
+           data-tag="2023">
+            2023 <sup><strong><sup class="mr-1">1</sup></strong></sup>
+        </a>
+    </li>
+    <li>
+        <a class="flex items-center px-3 py-2 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800 tag-link" 
+           href="#"
+           onclick="return toggleTag('arxiv')"
+           data-tag="arxiv">
+            arXiv <sup><strong><sup class="mr-1">1</sup></strong></sup>
+        </a>
+    </li>
+    <li>
+        <a class="flex items-center px-3 py-2 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800 tag-link" 
+           href="#"
+           onclick="return toggleTag('codebook collapse')"
+           data-tag="codebook collapse">
+            Codebook Collapse <sup><strong><sup class="mr-1">1</sup></strong></sup>
+        </a>
+    </li>
+    <li>
+        <a class="flex items-center px-3 py-2 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800 tag-link" 
+           href="#"
            onclick="return toggleTag('cvpr')"
            data-tag="cvpr">
             CVPR <sup><strong><sup class="mr-1">1</sup></strong></sup>
@@ -162,7 +186,7 @@
            href="#"
            onclick="return toggleTag('empirical')"
            data-tag="empirical">
-            Empirical <sup><strong><sup class="mr-1">2</sup></strong></sup>
+            Empirical <sup><strong><sup class="mr-1">3</sup></strong></sup>
         </a>
     </li>
     <li>
@@ -202,7 +226,7 @@
            href="#"
            onclick="return toggleTag('note')"
            data-tag="note">
-            Note <sup><strong><sup class="mr-1">2</sup></strong></sup>
+            Note <sup><strong><sup class="mr-1">3</sup></strong></sup>
         </a>
     </li>
     <li>
@@ -250,7 +274,7 @@
            href="#"
            onclick="return toggleTag('vector quantization')"
            data-tag="vector quantization">
-            Vector Quantization <sup><strong><sup class="mr-1">2</sup></strong></sup>
+            Vector Quantization <sup><strong><sup class="mr-1">3</sup></strong></sup>
         </a>
     </li>
 </ul>
@@ -258,6 +282,43 @@
 
 <div id="filtered-posts" class="mt-8 hidden">
     <div class="flex flex-col gap-6">
+        <article class="post-item hidden post-snippet flex flex-col [&:not(:last-child)]:border-b border-stone-400 pb-6" 
+                data-tags="Note|Vector Quantization|Codebook Collapse|Empirical|arXiv|2023|"
+                dir="">
+            
+            <time class="text-xs text-muted" datetime="2025-03-12T00:00:00Z">
+                March 12, 2025
+            </time>
+            <h2 class="font-semibold text-2xl my-1">
+                <a href="/posts/fsq/">Finite Scalar Quantization: VQ-VAE Made Simple</a>
+            </h2>
+            
+            <p class="text-sm mb-3 text-stone-700 dark:text-white">FSQ, 标量量化</p>
+            
+            <div class="">
+                
+<ul class="flex items-center gap-2">
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/note/">Note</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/vector-quantization/">Vector Quantization</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/codebook-collapse/">Codebook Collapse</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/empirical/">Empirical</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/arxiv/">ArXiv</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/2023/">2023</a>
+  </li>
+</ul>
+            </div>
+        </article>
         <article class="post-item hidden post-snippet flex flex-col [&:not(:last-child)]:border-b border-stone-400 pb-6" 
                 data-tags="Note|GAN|Vector Quantization|Image Synthesis|Seminal|Empirical|CVPR|2021|"
                 dir="">
