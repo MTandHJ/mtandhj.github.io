@@ -64,14 +64,14 @@
 
   .laser-pointer {
     position: fixed;
-    width: 8px;
-    height: 8px;
+    width: 0.6rem;
+    height: 0.6rem;
     background-color: red;
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
     display: none;
-    box-shadow: 0 0 4px 2px rgba(255, 0, 0, 0.5);
+    box-shadow: 0 0 0.25rem 0.15rem rgba(255, 0, 0, 0.5);
   }
 
   .cursor-hidden {
@@ -90,6 +90,7 @@
  /* 只取消非首页的垂直居中 */
  .reveal .slides section:not(:first-child) {
     top: 0 !important;
+    bottom: 0 !important;
     transform: none !important;
   }
 
@@ -98,6 +99,7 @@
   .reveal .slides section:first-child h2,
   .reveal .slides section:first-child h3 {
     text-align: center;
+    text-transform: capitalize;
   }
 
   /* 其他页面的标题固定在左上角 */
@@ -105,9 +107,8 @@
   .reveal .slides section:not(:first-child) h2,
   .reveal .slides section:not(:first-child) h3 {
     position: absolute;
-    top: 0px;
-    left: -20px;
-    margin: 0;
+    top: 0;
+    left: -4rem;
   }
 
   /* 为不同级别的标题设置不同的字体大小 */
@@ -115,9 +116,13 @@
   .reveal .slides section:not(:first-child) h2 { font-size: 55px; }
   .reveal .slides section:not(:first-child) h3 { font-size: 45px; }
 
+  .reveal .slides section:not(:first-child) {
+    padding-top: 1.7em; /* 为整个 section 添加上内边距，防止内容与标题重叠 */
+  }
   /* 其他页面的主要内容区域添加上边距 */
   .reveal .slides section:not(:first-child) > *:not(h1):not(h2):not(h3) {
-    margin-top: 100px;
+    margin-top: 1em;
+    font-size: 0.8em;
   }
 
   /* 保持内容左对齐 */
@@ -141,6 +146,42 @@
   /* 普通段落左对齐 */
   .reveal .slides section p {
     text-align: left;
+  }
+  .reveal .slides section ul > li {
+      font-size: 1em !important; /* 设置一级列表项的字体大小 */
+  }
+  .reveal .slides section ul ul > li {
+      font-size: 0.8em !important; /* 设置二级列表项的字体大小 */
+  }
+  .reveal .slides section ul ul ul > li {
+      font-size: 0.7em !important; /* 设置三级列表项的字体大小 */
+  }
+
+  /* Slide 的设置 */
+  .reveal .slides .slide-cols{
+      display: flex;
+  }
+  .reveal .slides .slide-col-half{
+      flex: 1;
+  }
+  .reveal .slides .slide-col-4{
+      flex: 4;
+  }
+  .reveal .slides .slide-col-6{
+      flex: 6;
+  }
+
+  .reveal .slides .slide-img{
+      text-align: center; 
+      padding: 0;
+      display: block;
+  }
+  .reveal .slides .slide-ref{
+      position: absolute; 
+      bottom: 0; left: 0; 
+      font-size: 0.5em !important;
+      text-align: left; 
+      width: 100%;
   }
 
   body.is-fullscreen header,

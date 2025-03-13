@@ -184,6 +184,14 @@
     <li>
         <a class="flex items-center px-3 py-2 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800 tag-link" 
            href="#"
+           onclick="return toggleTag('ema')"
+           data-tag="ema">
+            EMA <sup><strong><sup class="mr-1">1</sup></strong></sup>
+        </a>
+    </li>
+    <li>
+        <a class="flex items-center px-3 py-2 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800 tag-link" 
+           href="#"
            onclick="return toggleTag('empirical')"
            data-tag="empirical">
             Empirical <sup><strong><sup class="mr-1">3</sup></strong></sup>
@@ -216,6 +224,14 @@
     <li>
         <a class="flex items-center px-3 py-2 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800 tag-link" 
            href="#"
+           onclick="return toggleTag('low-bit')"
+           data-tag="low-bit">
+            Low-Bit <sup><strong><sup class="mr-1">1</sup></strong></sup>
+        </a>
+    </li>
+    <li>
+        <a class="flex items-center px-3 py-2 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800 tag-link" 
+           href="#"
            onclick="return toggleTag('neurips')"
            data-tag="neurips">
             NeurIPS <sup><strong><sup class="mr-1">1</sup></strong></sup>
@@ -232,6 +248,14 @@
     <li>
         <a class="flex items-center px-3 py-2 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800 tag-link" 
            href="#"
+           onclick="return toggleTag('optimizer')"
+           data-tag="optimizer">
+            Optimizer <sup><strong><sup class="mr-1">1</sup></strong></sup>
+        </a>
+    </li>
+    <li>
+        <a class="flex items-center px-3 py-2 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800 tag-link" 
+           href="#"
            onclick="return toggleTag('seminal')"
            data-tag="seminal">
             Seminal <sup><strong><sup class="mr-1">2</sup></strong></sup>
@@ -243,14 +267,6 @@
            onclick="return toggleTag('slide')"
            data-tag="slide">
             Slide <sup><strong><sup class="mr-1">1</sup></strong></sup>
-        </a>
-    </li>
-    <li>
-        <a class="flex items-center px-3 py-2 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800 tag-link" 
-           href="#"
-           onclick="return toggleTag('test')"
-           data-tag="test">
-            Test <sup><strong><sup class="mr-1">1</sup></strong></sup>
         </a>
     </li>
     <li>
@@ -403,14 +419,14 @@
             </div>
         </article>
         <article class="post-item hidden post-snippet flex flex-col [&:not(:last-child)]:border-b border-stone-400 pb-6" 
-                data-tags="Slide|Test|"
+                data-tags="Slide|Optimizer|Low-Bit|EMA|"
                 dir="">
             
             <time class="text-xs text-muted" datetime="2025-03-10T00:00:00Z">
                 March 10, 2025
             </time>
             <h2 class="font-semibold text-2xl my-1">
-                <a href="/slides/test/">Slide-test</a>
+                <a href="/slides/solo/">SOLO</a>
             </h2>
             
             <div class="">
@@ -420,7 +436,13 @@
       href="http://localhost:1313/tags/slide/">Slide</a>
   </li>
   <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
-      href="http://localhost:1313/tags/test/">Test</a>
+      href="http://localhost:1313/tags/optimizer/">Optimizer</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/low-bit/">Low-Bit</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/ema/">EMA</a>
   </li>
 </ul>
             </div>
