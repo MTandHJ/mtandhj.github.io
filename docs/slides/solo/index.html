@@ -15,7 +15,7 @@
 
 &lt;h3 id=&#34;background&#34;&gt;Background&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;模型大小飞速增加 v.s. 硬件价格居高不下&lt;/li&gt;
+&lt;li&gt;模型大小飞速增加 vs. 硬件价格居高不下&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&#34;slide-img&#34;&gt;
   &lt;img src=&#34;https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312203012.png&#34; alt=&#34;Image&#34; style=&#34;max-width: 65%; height: auto; margin: 0 auto;&#34;&gt;
@@ -336,6 +336,9 @@ $$
       text-align: left; 
       width: 100%;
   }
+  .reveal .slide-number {
+    font-size: 2rem !important;  
+  }
 
   body.is-fullscreen header,
   body.is-fullscreen footer,
@@ -359,7 +362,7 @@ $$
 <textarea data-template>
 <h3 id="background">Background</h3>
 <ul>
-<li>模型大小飞速增加 v.s. 硬件价格居高不下</li>
+<li>模型大小飞速增加 vs. 硬件价格居高不下</li>
 </ul>
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312203012.png" alt="Image" style="max-width: 65%; height: auto; margin: 0 auto;">
@@ -583,19 +586,58 @@ $$<ul>
 <section data-markdown>
 <textarea data-template>
 <h3 id="quantization-for-signed-ema-update">Quantization for Signed EMA Update</h3>
-<ul>
-<li>
-<p>Easy to implement</p>
-</li>
-<li>
-<p>State Decay Alignment</p>
-</li>
-</ul>
+<p><strong>X</strong> Singal Swamping</p>
+<p><strong>✓</strong> Sign representation</p>
+<p><strong>✓</strong> Descent direction</p>
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250313115306.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314115701.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
 </div>
 </textarea>
 </section>
+<section data-markdown>
+<textarea data-template>
+<h3 id="theoretical-analysis">Theoretical Analysis</h3>
+<div class="slide-cols">
+<div class="slide-col-6">
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314115959.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
+</div>
+</div>
+<div class="slide-col-4">
+<p>-&gt; <span style="color: red">Low bitwidth</span> or <span style="color: red">$\beta \uparrow$ </span></p>
+<p>-&gt; Quantization errors <span style="color: red">$\uparrow$</span></p>
+<p>-&gt; gradient variance <span style="color: red"> $\uparrow$ </span></p>
+<p>-&gt; <span style="color: red"> bad </span> convergence</p>
+</div>
+</div>
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+<h3 id="momentum-adjustment">Momentum Adjustment</h3>
+<ul>
+<li>方差控制, 给定 $b$ bitwidth 要求选择 $\beta'$ 满足:</li>
+</ul>
+$$
+  \frac{\beta'}{1 - \beta'} r_{\text{median}}(b')
+  \le \frac{\beta}{1 - \beta} r_{\text{median}}(b).
+$$<ul>
+<li>查表:</li>
+</ul>
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314121510.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
+</div>
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+<h3 id="experiments">Experiments</h3>
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314205532.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
+</div>
+</textarea>
+</section>
+
   </div>
 </div>
 

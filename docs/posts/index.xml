@@ -6,8 +6,15 @@
     <description>Recent content in Blogs on MTandHJ</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 12 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 13 Mar 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>中研春招聘小记</title>
+      <link>http://localhost:1313/posts/%E4%B8%AD%E7%A0%94%E6%98%A525%E6%8B%9B%E8%81%98/</link>
+      <pubDate>Thu, 13 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/%E4%B8%AD%E7%A0%94%E6%98%A525%E6%8B%9B%E8%81%98/</guid>
+      <description>&lt;h2 id=&#34;招聘布局&#34;&gt;招聘布局&lt;/h2&gt;&#xA;&lt;p&gt;此次招聘位于交大学术活动中心二楼的一角, 并不显眼, 外头也缺少足够的引导标志. 约莫着有三四十家高校和事业单位分列五排, 蓝白的布告栏竖在一张张桌子之后, 颇有严正以待的架势. 进门开始是东北大学的场地, 紧接着是荆楚学院、江西铜业技术研究院、某某集团. 较为心仪的嘉兴大学坐落在第三排的中部, 围满了一批批人. 其对面是第四排的丽水学院, 而第四排的尾部是南京理工大学. 转过去, 赫然便是湖南大学四个大字, 穿行而过是成都大学、中国警察学院、扬州大学以及坐落在角落的之江实验室.&lt;/p&gt;&#xA;&lt;h2 id=&#34;聊天过程&#34;&gt;聊天过程&lt;/h2&gt;&#xA;&lt;p&gt;称之为聊天过程而非是面试是因为一来本次主题是双选会, 二来本身也不指望能够凭借这场招聘会找到心仪的工作, 更多的是摸摸清楚自己到底几斤几两.&lt;/p&gt;&#xA;&lt;h3 id=&#34;江西铜业技术研究院&#34;&gt;江西铜业技术研究院&lt;/h3&gt;&#xA;&lt;p&gt;我上来盯着这家单位的布告栏看, 想看看这类研究院具体有个什么要求. 不过面前的小哥倒是很热情地邀请我坐下来聊一聊, 不过得知我对此并无兴趣之后我们就分道扬镳了.&lt;/p&gt;&#xA;&lt;h3 id=&#34;某医科单位&#34;&gt;某医科单位&lt;/h3&gt;&#xA;&lt;p&gt;很抱歉忘记具体的名字了, 负责招聘的人也是非常热情. 但是我说我的方向和医学可能八竿子打不着. 虽然上面也明确需要人工智能方面的人才, 但是大抵是需要医学图像的? 招聘人员拿着我的简历, 跳过了前面部分, 竟然直接跳到了&amp;quot;技能和语言&amp;quot;一栏, 说着 Python, PyTorch 和我们的需求挺符合的. 我感到奇怪, 我觉得这些是无关紧要的东西, 不过想来也能理解, 来招聘的多是为整个单位招人.&lt;/p&gt;&#xA;&lt;h3 id=&#34;南阳理工学院&#34;&gt;南阳理工学院&lt;/h3&gt;&#xA;&lt;p&gt;这个主要是跟在师妹边上旁听的, 只能说是大开眼界: 据招聘人来说, 他们学院可以非常痛快地给安家费, 然后每个月到手能到 13K (副教授待遇), 而且科研横向不收取管理费! 另外, 需要说明的是, 这 13K 如果后期考核不通过会降到 11K (但是招聘说这句话的时候明显咯噔了一些, 大概率存在猫腻).&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;优点:&lt;/strong&gt; 没有非升即走, 博士毕业点击就送, 安家费给的痛快, 考核要求很低&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;缺点:&lt;/strong&gt; 这类学院我个人都对他们是否能够长期维持存在疑问, 另外过于痛快总让我感觉其中有猫腻&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;丽水学院&#34;&gt;丽水学院&lt;/h3&gt;&#xA;&lt;p&gt;丽水学院的招聘老师人挺好, 也没啥架子. 比较有趣的是, 丽水学院里面设立了一个 &amp;ldquo;数学与计算机学院&amp;rdquo;, 我当时的第一个感觉就是这玩意儿可真有意思. 由于对地域不太感兴趣, 仅探听到了大约年薪十几万这个普遍的待遇条件.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Finite Scalar Quantization: VQ-VAE Made Simple</title>
       <link>http://localhost:1313/posts/fsq/</link>

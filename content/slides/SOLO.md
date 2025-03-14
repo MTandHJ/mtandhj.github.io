@@ -3,7 +3,7 @@ date: "2025-03-10"
 draft: false
 title: "SOLO"
 author: MTandHJ
-draft: true
+draft: false
 tags:
   - Slide
   - Optimizer
@@ -20,7 +20,7 @@ tags:
 
 ### Background
 
-- 模型大小飞速增加 v.s. 硬件价格居高不下
+- 模型大小飞速增加 vs. 硬件价格居高不下
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312203012.png" alt="Image" style="max-width: 65%; height: auto; margin: 0 auto;">
@@ -294,13 +294,82 @@ $$
 
 ### Quantization for Signed EMA Update
 
-- Easy to implement
+**X** Singal Swamping
 
-- State Decay Alignment
+**✓** Sign representation
+
+**✓** Descent direction
 
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250313115306.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314115701.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
 </div>
 
 </textarea>
 </section>
+
+<section data-markdown>
+<textarea data-template>
+
+### Theoretical Analysis
+
+<div class="slide-cols">
+
+<div class="slide-col-6">
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314115959.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
+</div>
+</div>
+
+<div class="slide-col-4">
+
+-> <span style="color: red">Low bitwidth</span> or <span style="color: red">$\beta \uparrow$ </span>
+
+-> Quantization errors <span style="color: red">$\uparrow$</span>
+
+-> gradient variance <span style="color: red"> $\uparrow$ </span>
+
+-> <span style="color: red"> bad </span> convergence
+
+</div>
+
+</div>
+
+
+</textarea>
+</section>
+
+
+<section data-markdown>
+<textarea data-template>
+
+### Momentum Adjustment
+
+- 方差控制, 给定 $b$ bitwidth 要求选择 $\beta'$ 满足:
+
+$$
+  \frac{\beta'}{1 - \beta'} r_{\text{median}}(b')
+  \le \frac{\beta}{1 - \beta} r_{\text{median}}(b).
+$$
+
+- 查表:
+
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314121510.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
+</div>
+
+</textarea>
+</section>
+
+
+<section data-markdown>
+<textarea data-template>
+
+### Experiments
+
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314205532.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
+</div>
+
+</textarea>
+</section>
+
