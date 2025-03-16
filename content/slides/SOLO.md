@@ -1,9 +1,8 @@
 ---
 date: "2025-03-10"
-draft: false
+draft: true
 title: "SOLO"
 author: MTandHJ
-draft: false
 tags:
   - Slide
   - Optimizer
