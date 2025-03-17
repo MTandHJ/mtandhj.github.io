@@ -94,6 +94,9 @@
     transform: none !important;
   }
 
+  .reveal .slides section:first-child {
+    text-align: right;
+  }
   /* 首页保持 Reveal.js 默认的垂直居中 */
   .reveal .slides section:first-child h1,
   .reveal .slides section:first-child h2,
@@ -184,8 +187,19 @@
       width: 100%;
   }
   .reveal .slide-number {
-    font-size: 2rem !important; /* 改变字号 */
+    font-size: 1.5rem !important; /* 改变字号 */
+    right: 2.2em !important;
+    bottom: 1.1em !important;
+    background: none !important;
+    color: gray !important;
   }
+  .reveal .navigate-left {
+      right: 6em !important;
+  }
+  .reveal .navigate-right {
+      right: 1em !important;
+  }
+
 
   body.is-fullscreen header,
   body.is-fullscreen footer,

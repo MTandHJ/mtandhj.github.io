@@ -6,8 +6,22 @@
     <description>Recent content in Blogs on MTandHJ</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 13 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 16 Mar 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Autoregressive Image Generation using Residual Quantization</title>
+      <link>http://localhost:1313/posts/rqvae/</link>
+      <pubDate>Sun, 16 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/rqvae/</guid>
+      <description>&lt;h2 id=&#34;预备知识&#34;&gt;预备知识&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;请务必了解 &lt;a href=&#34;https://www.mtandhj.com/posts/vqvae/&#34;&gt;VQ-VAE&lt;/a&gt;.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;核心思想&#34;&gt;核心思想&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250316155423.png&#34; alt=&#34;20250316155423&#34;&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;RQ-VAE 自称也是为了解决所谓的 &lt;a href=&#34;https://www.mtandhj.com/posts/fsq/#%e9%a2%84%e5%a4%87%e7%9f%a5%e8%af%86&#34;&gt;codebook collapse&lt;/a&gt; 问题, 即当 codebook size 逐渐增加的时候, 或有越来越多的向量变得&amp;quot;冗余&amp;quot;.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;另一方面, 如果我们减少 codebook size, 很容易相当在向量量化的过程会造成非常大的信息损耗. 于是, 本文提出了 RQ-VAE, 本质上是一个向量逐步地匹配 $D$ 个向量, 而非 one-to-one 的模式.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;RQ-VAE 的过程可以如此形式化:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;给定图片输入 $\mathbf{X} \in \mathbb{R}^{H_o \times W_o \times 3}$;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;经过 Encoder $E$ 得到&lt;/p&gt;&#xA;$$&#xD;&#xA;        \mathbf{Z} = E(\mathbf{X}) \in \mathbb{R}^{&#xD;&#xA;            \underbrace{H_o / f}_{=: H} \times &#xD;&#xA;            \underbrace{W_o / f}_{=: W} \times &#xD;&#xA;            n_z&#xD;&#xA;        };&#xD;&#xA;        $$&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;给定 codebook $\mathcal{C} = \{\mathbf{e}_k\}_{k \in [K]}$, 进行向量量化:&lt;/p&gt;&#xA;$$&#xD;&#xA;        Q(\mathbf{z} \in \mathbb{R}^{n_z}; \mathcal{C})&#xD;&#xA;        = \text{argmin}_{k \in [K]} \|\mathbf{z} - \mathbf{e}_k \|_2^2,&#xD;&#xA;        $$&lt;p&gt;对于 $\mathbf{Z}$ 来说, 可以得到如下的 codes:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Recommender Systems with Generative Retrieval</title>
+      <link>http://localhost:1313/posts/tiger/</link>
+      <pubDate>Sun, 16 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/tiger/</guid>
+      <description>&lt;h2 id=&#34;预备知识&#34;&gt;预备知识&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;请了解 &lt;a href=&#34;https://www.mtandhj.com/posts/rqvae/&#34;&gt;RQ-VAE&lt;/a&gt;.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;核心思想&#34;&gt;核心思想&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250316175829.png&#34; alt=&#34;20250316175829&#34;&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;目前主流的推荐系统的一个痛点是将 item 表示为一个 embedding, 这就导致对于冷启动的场景并不友好 (既然我们没法再立即获得高效的新来的 item 的表示). 此外, 现阶段的推荐系统大多采用 matching 的架构 (在 item 数量较多的时候可能会慢一些), 本文探索一种生成式的检索方式.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;本文所提出的 Tiger 依然 RQ-VAE, 对 item 的文本 embedding 首先进行编码, 得到的编码作为 item 的 &amp;lsquo;ID&amp;rsquo;, 后面的模型只需要在此基础上进行预测即可.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250316175859.png&#34; alt=&#34;20250316175859&#34;&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;如上图所示, 文本的 embedding 经过 RQ-VAE (codebook 不共享) 得到 semantic codes. 比如 codebook 的size 为 8, 则理论上可以表示 $8^K$ 个 items (这里 $K$ 表示残差量化的次数).&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;在第一阶段训练完毕之后, 我们就可以用得到的编码作为每个 item 的 &amp;lsquo;ID&amp;rsquo;, 然后就可以训练一个模型来进行生成式推荐, 这里文中给了一个例子:&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250316180725.png&#34; alt=&#34;20250316180725&#34;&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;对于一个新来的 item, 只需要 -&amp;gt; Tiger 编码 -&amp;gt; 就可以用于预测了.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;注:&lt;/strong&gt; 这里省略了避免 ID 碰撞的细节.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>中研春招聘小记</title>
       <link>http://localhost:1313/posts/%E4%B8%AD%E7%A0%94%E6%98%A525%E6%8B%9B%E8%81%98/</link>
