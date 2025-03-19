@@ -1,6 +1,6 @@
 ---
-date: "2025-03-10"
-draft: true
+date: "2025-03-19"
+draft: false
 title: "SOLO"
 author: MTandHJ
 tags:
@@ -372,3 +372,70 @@ $$
 </textarea>
 </section>
 
+<section data-markdown>
+<textarea data-template>
+
+### Experiments
+
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250319170048.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
+</div>
+
+</textarea>
+</section>
+
+
+<section data-markdown>
+<textarea data-template>
+
+### Loss
+
+- 损失正常收敛
+
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250319170139.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
+</div>
+
+</textarea>
+</section>
+
+
+<section data-markdown>
+<textarea data-template>
+
+### 2nd State Distribution
+
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250319170316.png" alt="Image" style="max-width: 55%; height: auto;margin: 0 auto;">
+</div>
+
+</textarea>
+</section>
+
+
+<section data-markdown>
+<textarea data-template>
+
+### Quantile $x_p$
+
+- 基本上 $p \in [0.05, 0.3]$ 都有不错的性能
+
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250319170604.png" alt="Image" style="max-width: 55%; height: auto;margin: 0 auto;">
+</div>
+
+</textarea>
+</section>
+
+
+<section data-markdown>
+<textarea data-template>
+
+### 未完待续
+
+- 2nd State 量化的消融实验 (Stochastic rounding、Block Size)
+
+- 扩展到其它的优化器上
+
+</textarea>
+</section>

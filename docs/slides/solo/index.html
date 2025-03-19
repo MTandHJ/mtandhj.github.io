@@ -247,6 +247,9 @@ $$
     transform: none !important;
   }
 
+  .reveal .slides section:first-child {
+    text-align: right;
+  }
    
   .reveal .slides section:first-child h1,
   .reveal .slides section:first-child h2,
@@ -337,8 +340,19 @@ $$
       width: 100%;
   }
   .reveal .slide-number {
-    font-size: 2rem !important;  
+    font-size: 1.5rem !important;  
+    right: 2.2em !important;
+    bottom: 1.1em !important;
+    background: none !important;
+    color: gray !important;
   }
+  .reveal .navigate-left {
+      right: 6em !important;
+  }
+  .reveal .navigate-right {
+      right: 1em !important;
+  }
+
 
   body.is-fullscreen header,
   body.is-fullscreen footer,
@@ -637,7 +651,57 @@ $$<ul>
 </div>
 </textarea>
 </section>
-
+<section data-markdown>
+<textarea data-template>
+<h3 id="experiments-1">Experiments</h3>
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250319170048.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
+</div>
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+<h3 id="loss">Loss</h3>
+<ul>
+<li>损失正常收敛</li>
+</ul>
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250319170139.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
+</div>
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+<h3 id="2nd-state-distribution">2nd State Distribution</h3>
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250319170316.png" alt="Image" style="max-width: 55%; height: auto;margin: 0 auto;">
+</div>
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+<h3 id="quantile">Quantile $x_p$</h3>
+<ul>
+<li>基本上 $p \in [0.05, 0.3]$ 都有不错的性能</li>
+</ul>
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250319170604.png" alt="Image" style="max-width: 55%; height: auto;margin: 0 auto;">
+</div>
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+<h3 id="未完待续">未完待续</h3>
+<ul>
+<li>
+<p>2nd State 量化的消融实验 (Stochastic rounding、Block Size)</p>
+</li>
+<li>
+<p>扩展到其它的优化器上</p>
+</li>
+</ul>
+</textarea>
+</section>
   </div>
 </div>
 

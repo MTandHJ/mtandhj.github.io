@@ -200,6 +200,14 @@
     <li>
         <a class="flex items-center px-3 py-2 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800 tag-link" 
            href="#"
+           onclick="return toggleTag('ema')"
+           data-tag="ema">
+            EMA <sup><strong><sup class="mr-1">1</sup></strong></sup>
+        </a>
+    </li>
+    <li>
+        <a class="flex items-center px-3 py-2 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800 tag-link" 
+           href="#"
            onclick="return toggleTag('empirical')"
            data-tag="empirical">
             Empirical <sup><strong><sup class="mr-1">5</sup></strong></sup>
@@ -232,6 +240,14 @@
     <li>
         <a class="flex items-center px-3 py-2 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800 tag-link" 
            href="#"
+           onclick="return toggleTag('low-bit')"
+           data-tag="low-bit">
+            Low-Bit <sup><strong><sup class="mr-1">1</sup></strong></sup>
+        </a>
+    </li>
+    <li>
+        <a class="flex items-center px-3 py-2 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800 tag-link" 
+           href="#"
            onclick="return toggleTag('neurips')"
            data-tag="neurips">
             NeurIPS <sup><strong><sup class="mr-1">2</sup></strong></sup>
@@ -248,9 +264,9 @@
     <li>
         <a class="flex items-center px-3 py-2 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800 tag-link" 
            href="#"
-           onclick="return toggleTag('profile')"
-           data-tag="profile">
-            Profile <sup><strong><sup class="mr-1">1</sup></strong></sup>
+           onclick="return toggleTag('optimizer')"
+           data-tag="optimizer">
+            Optimizer <sup><strong><sup class="mr-1">1</sup></strong></sup>
         </a>
     </li>
     <li>
@@ -314,29 +330,6 @@
 
 <div id="filtered-posts" class="mt-8 hidden">
     <div class="flex flex-col gap-6">
-        <article class="post-item hidden post-snippet flex flex-col [&:not(:last-child)]:border-b border-stone-400 pb-6" 
-                data-tags="Slide|Profile|"
-                dir="">
-            
-            <time class="text-xs text-muted" datetime="2025-03-17T00:00:00Z">
-                March 17, 2025
-            </time>
-            <h2 class="font-semibold text-2xl my-1">
-                <a href="/slides/profile/">个人介绍</a>
-            </h2>
-            
-            <div class="">
-                
-<ul class="flex items-center gap-2">
-  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
-      href="http://localhost:1313/tags/slide/">Slide</a>
-  </li>
-  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
-      href="http://localhost:1313/tags/profile/">Profile</a>
-  </li>
-</ul>
-            </div>
-        </article>
         <article class="post-item hidden post-snippet flex flex-col [&:not(:last-child)]:border-b border-stone-400 pb-6" 
                 data-tags="Note|VAE|Residual|Vector Quantization|Empirical|CVPR|2022|"
                 dir="">
@@ -561,6 +554,35 @@
   </li>
   <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
       href="http://localhost:1313/tags/2017/">2017</a>
+  </li>
+</ul>
+            </div>
+        </article>
+        <article class="post-item hidden post-snippet flex flex-col [&:not(:last-child)]:border-b border-stone-400 pb-6" 
+                data-tags="Slide|Optimizer|Low-Bit|EMA|"
+                dir="">
+            
+            <time class="text-xs text-muted" datetime="2025-03-10T00:00:00Z">
+                March 10, 2025
+            </time>
+            <h2 class="font-semibold text-2xl my-1">
+                <a href="/slides/solo/">SOLO</a>
+            </h2>
+            
+            <div class="">
+                
+<ul class="flex items-center gap-2">
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/slide/">Slide</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/optimizer/">Optimizer</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/low-bit/">Low-Bit</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/ema/">EMA</a>
   </li>
 </ul>
             </div>
