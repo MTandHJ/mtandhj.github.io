@@ -6,27 +6,21 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<title>SOLO | MTandHJ</title>
-	<meta name="keywords" content="Slide, Optimizer, Low-Bit, EMA">
+	<title>Vector Quantization | MTandHJ</title>
+	<meta name="keywords" content="Slide, Vector Quantization">
 	<meta name="description" content="
-## Pushing the Limits of Low-Bit Optimizers with a Focus on EMA Dynamics
+## Vector Quantization
+
 
 
 
 &lt;h3 id=&#34;background&#34;&gt;Background&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;模型大小飞速增加 vs. 硬件价格居高不下&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;表征学习&lt;/strong&gt;一直是深度学习的重点&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&#34;slide-img&#34;&gt;
-  &lt;img src=&#34;https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312203012.png&#34; alt=&#34;Image&#34; style=&#34;max-width: 65%; height: auto; margin: 0 auto;&#34;&gt;
-&lt;/div&gt;
-&lt;ul&gt;
-&lt;li&gt;解决方案:
-&lt;ul&gt;
-&lt;li&gt;MoE, LoRA; ZeRO, FDSP;&lt;/li&gt;
-&lt;li&gt;Network Quantization; &lt;span style=&#34;color: red;&#34;&gt;Lightweight Optimizers&lt;/span&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+  &lt;img src=&#34;https://miro.medium.com/v2/resize:fit:4416/format:webp/1*bvMhd_xpVxfJYoKXYp5hug.png&#34; alt=&#34;Image&#34; style=&#34;max-width: 80%; height: auto;margin: 0 auto;&#34;&gt;
+
 
 
 
@@ -34,15 +28,28 @@
 &lt;h3 id=&#34;background-1&#34;&gt;Background&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;Optimizer States (2x model size):&lt;/p&gt;
-$$
-  m_{t&#43;1} \leftarrow \beta_1 \cdot m_t &#43; (1 - \beta_1) \cdot g, \\
-  v_{t&#43;1} \leftarrow \beta_2 \cdot v_t &#43; (1 - \beta_2) \cdot g^2.
-  $$&lt;/li&gt;
+&lt;p&gt;Encoder $\phi: X \rightarrow \bm{z} \in \textcolor{red}{\mathbb{R}^{d}}$ (连续空间)&lt;/p&gt;
+&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;DeepSeek-v3 训练框架: $g \overset{\text{BF16}}{\rightarrow} m, v \overset{\text{FP32}}{\rightarrow} \theta$&lt;/p&gt;">
+&lt;p&gt;向量量化: $X \rightarrow \bm{c} \in \mathcal{C} = \{\bm{c}_k\}_{k=1}^K$ (离散空间)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span style=&#34;color: blue&#34;&gt;✓&lt;/span&gt; 离散化表示更符合人类语言和符号特性, 或许更利于生成任务&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: blue&#34;&gt;✓&lt;/span&gt; 更强的可解释性和控制性&lt;/p&gt;
+&lt;p&gt;&lt;span style=&#34;color: blue&#34;&gt;✓&lt;/span&gt; 更好的可检索性
+
+
+
+
+&lt;h3 id=&#34;vae&#34;&gt;VAE&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Encoder $\phi$: 它将输入 $X \in \mathbb{R}^{H \times W \times 3}$ 映射到一个分布:&lt;/p&gt;
+$$
+    \bm{z} \sim q(\bm{z}|X; \phi).
+    $$&lt;p&gt;e.g., 高斯分布: $\phi(\bm{x}) \rightarrow (\bm{\mu}, \Sigma) \rightarrow \mathcal{N}(\bm{\mu}, \Sigma)$.&lt;/p&gt;">
 	<link rel="canonical"
-		href="http://localhost:1313/slides/solo/">
+		href="http://localhost:1313/slides/vq/">
 
 
 
@@ -370,338 +377,295 @@ $$
   </button>
   <div class="slides">
     <section data-markdown>
-## Pushing the Limits of Low-Bit Optimizers with a Focus on EMA Dynamics
+## Vector Quantization
 </section>
+<!-- --------------------------------------------------------- -->
 <section data-markdown>
 <textarea data-template>
 <h3 id="background">Background</h3>
 <ul>
-<li>模型大小飞速增加 vs. 硬件价格居高不下</li>
+<li><strong>表征学习</strong>一直是深度学习的重点</li>
 </ul>
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312203012.png" alt="Image" style="max-width: 65%; height: auto; margin: 0 auto;">
+  <img src="https://miro.medium.com/v2/resize:fit:4416/format:webp/1*bvMhd_xpVxfJYoKXYp5hug.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
 </div>
-<ul>
-<li>解决方案:
-<ul>
-<li>MoE, LoRA; ZeRO, FDSP;</li>
-<li>Network Quantization; <span style="color: red;">Lightweight Optimizers</span></li>
-</ul>
-</li>
-</ul>
 </textarea>
 </section>
+<!-- --------------------------------------------------------- -->
 <section data-markdown>
 <textarea data-template>
 <h3 id="background-1">Background</h3>
 <ul>
 <li>
-<p>Optimizer States (2x model size):</p>
-$$
-  m_{t+1} \leftarrow \beta_1 \cdot m_t + (1 - \beta_1) \cdot g, \\
-  v_{t+1} \leftarrow \beta_2 \cdot v_t + (1 - \beta_2) \cdot g^2.
-  $$</li>
+<p>Encoder $\phi: X \rightarrow \bm{z} \in \textcolor{red}{\mathbb{R}^{d}}$ (连续空间)</p>
+</li>
 <li>
-<p>DeepSeek-v3 训练框架: $g \overset{\text{BF16}}{\rightarrow} m, v \overset{\text{FP32}}{\rightarrow} \theta$</p>
+<p>向量量化: $X \rightarrow \bm{c} \in \mathcal{C} = \{\bm{c}_k\}_{k=1}^K$ (离散空间)</p>
 </li>
 </ul>
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312204230.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
+<p><span style="color: blue">✓</span> 离散化表示更符合人类语言和符号特性, 或许更利于生成任务</p>
+<p><span style="color: blue">✓</span> 更强的可解释性和控制性</p>
+<p><span style="color: blue">✓</span> 更好的可检索性</p>
 </textarea>
 </section>
+<!-- --------------------------------------------------------- -->
 <section data-markdown>
 <textarea data-template>
-<h3 id="quantization-and-dequantization">Quantization and Dequantization</h3>
-<ul>
+<h3 id="vae">VAE</h3>
+<ol>
 <li>
-<p>Quantization:</p>
+<p>Encoder $\phi$: 它将输入 $X \in \mathbb{R}^{H \times W \times 3}$ 映射到一个分布:</p>
 $$
-  q = Q(x) := \mathop{\text{argmin}} \limits_{k=0}^{2^b - 1} \big|\frac{x}{\Delta} - \iota_k \big|.
-  $$</li>
-</ul>
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312205652.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
-<ul>
-<li>
-<p>Dequantization:</p>
-$$
-  \tilde{x} = Q^{\dagger}(q) := \iota_{q} \cdot \Delta.
-  $$<p>
-</textarea></p>
+    \bm{z} \sim q(\bm{z}|X; \phi).
+    $$<p>e.g., 高斯分布: $\phi(\bm{x}) \rightarrow (\bm{\mu}, \Sigma) \rightarrow \mathcal{N}(\bm{\mu}, \Sigma)$.</p>
 </li>
-</ul>
-</section>
-<section data-markdown>
-<textarea data-template>
-<h3 id="stateful-optimizers-with-low-bit-states"><u>S</u>tateful <u>O</u>ptimizers with <u>LO</u>w-Bit States</h3>
-<ul>
-<li>Low-Bitwidth EMA update:</li>
-</ul>
+<li>
+<p>Decoder $\Phi$: 它将隐变量 $\bm{z}$ 映射回 (通常来说) $X$ 的空间:</p>
 $$
-\begin{array}{rl}
-  \text{Dequantization:  }  & \tilde{x}_t = Q^{\dagger}(q_t) = \iota_{q_t} \cdot \Delta_t, \\
-  \text{EMA update:  } & \hat{x}_{t+1} \leftarrow \beta \cdot \tilde{x}_t + (1 - \beta) \cdot z_{t + 1}, \\
-  \text{Quantization:  } & q_{t+1} = Q(\hat{x}_{t+1}).
-\end{array}
-$$<div class="slide-ref">
+    p(X|\bm{z}; \Phi);
+    $$</li>
+<li>
+<p>还有一个先验分布 $p(\bm{z})$ 用于辅助训练.</p>
+</li>
+</ol>
+<div class="slide-ref">
     <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">Dettmers T., et al. 8-bit Optimizers via Block-wise Quantization. ICLR, 2022.</p>
-    <p style="margin: 2px 0;">Li B., et al. Memory Efficient Optimizers with 4-bit States. NeurIPS, 2023.</p>
+    <p style="margin: 2px 0;">van den Oord A., et al., Neural Discrete Representation Learning. NeurIPS, 2017.</p>
 </div>
 </textarea>
 </section>
+<!-- --------------------------------------------------------- -->
 <section data-markdown>
 <textarea data-template>
-<h3 id="quantization-for-unsigned-ema-update">Quantization for Unsigned EMA Update</h3>
+<h3 id="vae-1">VAE</h3>
 <ul>
-<li><em>Signal Swamping</em></li>
+<li>
+<p>训练目标:</p>
+$$
+    \begin{align*}
+    -\log p(X) 
+    \le \underbrace{\mathbf{KL}(q_{\phi}\| p(\bm{z})) +
+    \mathbb{E}_{\bm{z} \sim q_{\phi}} -\log p(X|\bm{z}; \Phi)}_{\text{negative ELBO}}.
+    \end{align*}
+    $$</li>
+<li>
+<p>最小化 KL 散度促进 $q_{\phi}$ 的散度</p>
+</li>
+<li>
+<p>$-\log p(X|\bm{z}; \Phi)$ 在高斯分布的假设下退化为重构损失:</p>
+$$
+    \mathcal{L}_{rec} = \| \Phi(\bm{z}) - X\|_2^2
+    $$</li>
 </ul>
-<div style="text-align: center; margin-top: 50px; margin-bottom: -80px; padding: 0">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312211840.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
+</textarea>
+</section>
+<!-- --------------------------------------------------------- -->
+<section data-markdown>
+<textarea data-template>
+<h3 id="vq-vae">VQ-VAE</h3>
+<ul>
+<li>VQ-VAE $\bm{z}$ 通过可训练的 Codebook 来解决实现离散化:</li>
+</ul>
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250310215306.png" alt="Image" style="max-width: 100%; height: auto;margin: 0 auto;">
+</div>
+<ul>
+<li>
+<p>$X \in \mathbb{R}^{H \times W \times 3} \overset{\phi}{\rightarrow} Z \in \mathbb{R}^{H' \times W' \times d} \overset{\varphi}{\rightarrow} \hat{Z} \in \mathcal{C}^{H' \times W' \times d} \rightarrow$</p>
+</li>
+<li>
+<p>$\varphi(\bm{z}) = \text{argmin}_{\bm{c} \in \mathcal{C}} \|\bm{c} - \bm{z}\|$.</p>
+</li>
+</ul>
+</textarea>
+</section>
+<!-- --------------------------------------------------------- -->
+<section data-markdown>
+<textarea data-template>
+<h3 id="vq-vae-1">VQ-VAE</h3>
+<ul>
+<li>
+<p>$Z \rightarrow \hat{Z}$ 是离散的, 无法传递梯度.</p>
+</li>
+<li>
+<p><strong>STE</strong> (straight-through estimator):</p>
+$$
+    \tilde{Z} \leftarrow Z + \text{sg}\big((\hat{Z} - Z)\big), \\
+    \mathrm{d}\tilde{Z} = \mathrm{d} Z + 0.
+    $$</li>
+<li>
+<p>训练目标:</p>
+$$
+    \mathcal{L} = \mathcal{L}_{rec} + 
+    \underbrace{
+        \| \text{sg} (Z) - \hat{Z}\|_2^2 +
+        \beta \cdot \| Z - \text{sg} (\hat{Z})\|_2^2.
+    }_{\mathcal{L}_{commit}}
+    $$</li>
+</ul>
+</textarea>
+</section>
+<!-- --------------------------------------------------------- -->
+<section data-markdown>
+<textarea data-template>
+<h3 id="vq-gan">VQ-GAN</h3>
+<ul>
+<li>图片 Token 化 + Next-token prediction $p(s_i | s_{< i}, \textcolor{red}{condition})$</li>
+</ul>
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250311144000.png" alt="Image" style="max-width: 100%; height: auto;margin: 0 auto;">
 </div>
 <div class="slide-ref">
-  <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-  <p style="margin: 2px 0;">Higham N. J. The Accuracy of Floating Point Summation. SIAM Journal on Scientific Computing, 1993.</p>
+    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
+    <p style="margin: 2px 0;">Esser P., et al. Taming Transformers for High-Resolution Image Synthesis. CVPR, 2021.</p>
 </div>
 </textarea>
 </section>
+<!-- --------------------------------------------------------- -->
 <section data-markdown>
 <textarea data-template>
-<h3 id="signal-swamping">Signal Swamping</h3>
+<h3 id="codebook-collapse">Codebook Collapse</h3>
 <ul>
-<li>总结</li>
+<li>
+<p>离散化操作终究是带来了训练困难:</p>
+<ol>
+<li>Codebook 中部分向量过于接近而造成的冗余</li>
+<li>Codebook 中部分向量由于训练始终匹配不到 $Z$ 导致的冗余</li>
+</ol>
+</li>
+<li>
+<p>一些方案:</p>
+<ol>
+<li>对于 codebook 采用 K-means ++ 初始化 [1];</li>
+<li>对于训练不充分的向量重新初始化 [2];</li>
+<li>用 Gumbel-softmax 替代 STE [3]</li>
+</ol>
+</li>
 </ul>
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312212039.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
+<div class="slide-ref">
+    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
+    <p style="margin: 2px 0;">[1] Lancucki A., et al. Robust Training of Vector Quantized Bottleneck Models. 2020.</p>
+    <p style="margin: 2px 0;">[2] Dhariwai P., et al. Jukebox: A Generative Model for Music. 2020.</p>
+    <p style="margin: 2px 0;">[3] Takida Y., et al. SQ-VAE: Variational Bayes on Discrete Representation with Self-annealed Stochastic Quantization. ICML, 2022.</p>
 </div>
 </textarea>
 </section>
+<!-- --------------------------------------------------------- -->
 <section data-markdown>
 <textarea data-template>
-<h3 id="case-study">Case Study</h3>
-<div class="slide-cols">
-<div class="slide-col-6">
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312212821.png" alt="Image" style="max-width: 90%; height: auto;margin: 0 auto;">
-</div>
-</div>
-<div class="slide-col-4">
+<h3 id="residual-quantization-rq-vae">Residual Quantization (RQ-VAE)</h3>
 <ul>
 <li>
-<p>满足一定情况:</p>
-<ul>
-<li>Linear 下全部不更新</li>
-<li>DE 下部分更新</li>
-</ul>
+<p>Collapse 问题通常是当 codebook size 增大的时候发生</p>
 </li>
 <li>
-<p>$\beta \ge \cdots$ 条件很容易满足</p>
-</li>
-</ul>
-</div>
-</div>
-</textarea>
-</section>
-<section data-markdown>
-<textarea data-template>
-<h3 id="case-study-1">Case Study</h3>
-<div class="slide-cols">
-<div class="slide-col-4">
-<ul>
-<li>
-<p>$X \in \mathbb{R}^{1000}$</p>
+<p>减小 size $\rightarrow$ 更差的表达能力 <strong>vs.</strong> 增大 size $\rightarrow$ Collpase</p>
 </li>
 <li>
-<p>$Z \sim \mathcal{U}[0, 1]$</p>
-</li>
-<li>
-<p>理想的值: 0.5</p>
-</li>
-</ul>
-</div>
-<div class="slide-col-6">
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312213810.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
-</div>
-</div>
-</textarea>
-</section>
-<section data-markdown>
-<textarea data-template>
-<h3 id="stochastic-rounding">Stochastic Rounding</h3>
-<ul>
-<li>
-<p>假设 $\iota_{k-1} \le x / \Delta \le \iota_k$:</p>
+<p>RQ-VAE:</p>
 $$
-  Q_{sr}(x) :=
-  \left \{
-      \begin{array}{ll}
-          k-1 & w.p. \quad \frac{\iota_k - x / \Delta}{ \iota_k - \iota_{k-1}}, \\
-          k & w.p. \quad \frac{x / \Delta - \iota_{k-1}}{ \iota_k - \iota_{k-1}}.
-      \end{array}
-  \right .
-  $$</li>
+    Z 
+    \overset{\varphi}{\rightarrow} \textcolor{red}{\hat{Z}_1}
+    \overset{Z - \hat{Z}_1}{\rightarrow} R_1
+    \overset{\varphi}{\rightarrow} \textcolor{red}{\hat{Z}_2}
+    \overset{R_1 - \hat{Z}_2}{\rightarrow} R_2
+    \rightarrow \cdots
+    $$</li>
 <li>
-<p>High variance:</p>
+<p>$\hat{Z} = \sum_{n}^N \hat{Z}_n$, 离散化表示 $(k_1, k_2, \ldots, k_N)$</p>
 </li>
 </ul>
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250313112908.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
+<div class="slide-ref">
+    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
+    <p style="margin: 2px 0;">Lee D., et al. Autoregressive Image Generation using Residual Quantization. CVPR, 2022.</p>
 </div>
 </textarea>
 </section>
+<!-- --------------------------------------------------------- -->
 <section data-markdown>
 <textarea data-template>
-<h3 id="logarithmic-quantization">Logarithmic Quantization</h3>
+<h3 id="tiger">TIGER</h3>
+<ul>
+<li>
+<p>传统推荐 (matching):</p>
 $$
-\begin{array}{ll}
-Q(x) 
-&=\text{Clip}(\lfloor \log_{\alpha} \frac{x}{\Delta} + \xi \rceil; 0, 2^b - 1) \\
-&\approx \mathop{argmin} \limits_{k=0}^{2^b - 1} \big|\frac{x}{\Delta} \cdot \alpha^\xi - \iota_k \big|,
-\end{array}
-$$<ul>
-<li>3bit quantization anchors:</li>
-</ul>
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250313113440.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
-</textarea>
-</section>
-<section data-markdown>
-<textarea data-template>
-<h3 id="logarithmic-quantization-1">Logarithmic Quantization</h3>
-<ul>
-<li>2-bit quantization illustration</li>
-</ul>
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250313113535.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
-</textarea>
-</section>
-<section data-markdown>
-<textarea data-template>
-<h3 id="logarithmic-quantization-2">Logarithmic Quantization</h3>
-<ul>
+    \bm{e}_u^T \bm{e}_v, \quad v \in \mathcal{V}.
+    $$</li>
 <li>
-<p>Easy to implement</p>
-</li>
-<li>
-<p>State Decay Alignment</p>
+<p>检索式推荐:</p>
 </li>
 </ul>
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250313115306.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250316175859.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
+</div>
+<div class="slide-ref">
+    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
+    <p style="margin: 2px 0;">Rajput S., et al. Recommender Systems with Generative Retrieval. NeurIPS, 2023.</p>
 </div>
 </textarea>
 </section>
+<!-- --------------------------------------------------------- -->
 <section data-markdown>
 <textarea data-template>
-<h3 id="quantization-for-signed-ema-update">Quantization for Signed EMA Update</h3>
-<p><strong>X</strong> Singal Swamping</p>
-<p><strong>✓</strong> Sign representation</p>
-<p><strong>✓</strong> Descent direction</p>
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314115701.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
-</textarea>
-</section>
-<section data-markdown>
-<textarea data-template>
-<h3 id="theoretical-analysis">Theoretical Analysis</h3>
-<div class="slide-cols">
-<div class="slide-col-6">
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314115959.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
-</div>
-</div>
-<div class="slide-col-4">
-<p>-&gt; <span style="color: red">Low bitwidth</span> or <span style="color: red">$\beta \uparrow$ </span></p>
-<p>-&gt; Quantization errors <span style="color: red">$\uparrow$</span></p>
-<p>-&gt; gradient variance <span style="color: red"> $\uparrow$ </span></p>
-<p>-&gt; <span style="color: red"> bad </span> convergence</p>
-</div>
-</div>
-</textarea>
-</section>
-<section data-markdown>
-<textarea data-template>
-<h3 id="momentum-adjustment">Momentum Adjustment</h3>
+<h3 id="tiger-1">TIGER</h3>
 <ul>
-<li>方差控制, 给定 $b$ bitwidth 要求选择 $\beta'$ 满足:</li>
+<li>检索式推荐:</li>
 </ul>
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250316180725.png" alt="Image" style="max-width: 100%; height: auto;margin: 0 auto;">
+</div>
+</textarea>
+</section>
+<!-- --------------------------------------------------------- -->
+<section data-markdown>
+<textarea data-template>
+<h3 id="fixed-codebook">Fixed Codebook</h3>
+<ul>
+<li>
+<p>固定 Codebook 为 (size: $|\mathcal{C}| = (2 \lfloor L / 2 \rfloor + 1)^d$):</p>
 $$
-  \frac{\beta'}{1 - \beta'} r_{\text{median}}(b')
-  \le \frac{\beta}{1 - \beta} r_{\text{median}}(b).
-$$<ul>
-<li>查表:</li>
+    \mathcal{C} = \{-\lfloor L / 2 \rfloor, -\lfloor L / 2 \rfloor + 1, \ldots, 0, \ldots \lfloor L / 2 \rfloor - 1, \lfloor L / 2 \rfloor\}^{d}.
+    $$</li>
+<li>
+<p>比如 $L = 3, d=3$:</p>
+$$
+    \mathcal{C} = \{
+        (-1, -1, -1),
+        (-1, -1, 0),
+        \ldots,
+        (1, 1, 1)
+    \}.
+    $$</li>
+<li>
+<p>量化:</p>
+$$
+    \bm{\hat{z}} = \varphi \big(\tanh(\bm{z}) \big) = 
+    \textcolor{red}{\text{round}} \big(
+        \textcolor{blue}{\tanh} (\bm{z})
+    \big).
+    $$</li>
 </ul>
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314121510.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
+<div class="slide-ref">
+    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
+    <p style="margin: 2px 0;">Mentzer F., et al. Finite Scalar Quantization: VQ-VAE Made Simple. 2023.</p>
 </div>
 </textarea>
 </section>
+<!-- --------------------------------------------------------- -->
 <section data-markdown>
 <textarea data-template>
-<h3 id="experiments">Experiments</h3>
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314205532.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
-</div>
-</textarea>
-</section>
-<section data-markdown>
-<textarea data-template>
-<h3 id="experiments-1">Experiments</h3>
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250319170048.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
-</div>
-</textarea>
-</section>
-<section data-markdown>
-<textarea data-template>
-<h3 id="loss">Loss</h3>
-<ul>
-<li>损失正常收敛</li>
-</ul>
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250319170139.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
-</div>
-</textarea>
-</section>
-<section data-markdown>
-<textarea data-template>
-<h3 id="2nd-state-distribution">2nd State Distribution</h3>
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250319170316.png" alt="Image" style="max-width: 55%; height: auto;margin: 0 auto;">
-</div>
-</textarea>
-</section>
-<section data-markdown>
-<textarea data-template>
-<h3 id="quantile">Quantile $x_p$</h3>
-<ul>
-<li>基本上 $p \in [0.05, 0.3]$ 都有不错的性能</li>
-</ul>
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250319170604.png" alt="Image" style="max-width: 55%; height: auto;margin: 0 auto;">
-</div>
-</textarea>
-</section>
-<section data-markdown>
-<textarea data-template>
-<h3 id="未完待续">未完待续</h3>
+<h3 id="总结">总结</h3>
 <ul>
 <li>
-<p>2nd State 量化的消融实验 (Stochastic rounding、Block Size)</p>
+<p>向量量化提供了一种 token 化的方式</p>
 </li>
 <li>
-<p>扩展到其它的优化器上</p>
+<p>Codebook 的设定和学习仍存在问题</p>
 </li>
 </ul>
 </textarea>
 </section>
+
   </div>
 </div>
 

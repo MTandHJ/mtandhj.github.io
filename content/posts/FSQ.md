@@ -45,7 +45,7 @@ pinned: false
 - 本文的不同之处在于, codebook 相当于是预设的好, 无需训练, 其形式为:
 
     $$
-    \mathcal{C} = \{-\lfloor L / 2 \rfloor, -\lfloor L / 2 \rfloor + 1, \ldots, 0, \lfloor L / 2 \rfloor - 1, \lfloor L / 2 \rfloor\}^{d},
+    \mathcal{C} = \{-\lfloor L / 2 \rfloor, -\lfloor L / 2 \rfloor + 1, \ldots, 0, \ldots \lfloor L / 2 \rfloor - 1, \lfloor L / 2 \rfloor\}^{d},
     $$
 
     这里 $L$ 是一个超参数, 他直接决定了 CodeBook 的大小:

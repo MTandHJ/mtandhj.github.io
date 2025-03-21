@@ -158,7 +158,7 @@
 <p>既然本文是居于 VAE (变分自编码) 的框架实现的, 我们得对变分自编码有一个初步的了解. VAE 主要包含三个模块:</p>
 <ol>
 <li>
-<p>Encoder $\phi$: 它讲输入 $x \in \mathbb{R}^D$ 映射到一个分布:</p>
+<p>Encoder $\phi$: 它将输入 $x \in \mathbb{R}^D$ 映射到一个分布:</p>
 $$
         q(z|x; \phi).
         $$<p>比如当服从的高斯分布, 实质上 $\phi(x) \rightarrow (\mu, \sigma) \rightarrow \mathcal{N}(\mu, \sigma^2)$, 然后 $z$ 从该分布中采样即可;</p>
