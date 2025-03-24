@@ -15,7 +15,7 @@ description: ""
 
 <div style="border: 2px solid #E0E0E0; padding: 15px; margin-bottom: 15px; border-radius: 5px; background-color: #FFFFFF; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: justify; word-wrap: break-word; white-space: normal;">
   <p>
-  <strong>Cong Xu</strong>, Yunhang He, Jun Wang*, Wei Zhang*.
+  <strong>Cong Xu</strong>, Zhangchi Zhu, Mo Yu, Jun Wang*, Jianyong Wang, Wei Zhang*.
   <u>Are LLM-based Recommenders Already the Best? Simple Scaled Cross-entropy Unleashes the Potential of Traditional Sequential Recommenders.</u>
   2024.
   &nbsp;&nbsp;
