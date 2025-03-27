@@ -7,6 +7,7 @@ author: MTandHJ
 tags:
   - Note
   - Sequential Recommendation
+  - Generative
   - Vector Quantization
   - Seminal
   - Empirical

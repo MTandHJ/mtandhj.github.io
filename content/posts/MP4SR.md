@@ -108,7 +108,7 @@ pinned: false
   <li>
     Zhang L., Zhou X., Zeng Z., and Shen Z.
     <u>Multimodal Pre-training for Sequential Recommendation via Contrastive Learning</u>
-    <i>ICLR</i>, 2025.
+    <i>TORS</i>, 2024.
     <a href="https://dl.acm.org/doi/10.1145/3682075" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
     <a href="" style="color: #007acc; font-weight: bold; text-decoration: none;">[Code]</a>
   </li>
