@@ -19,7 +19,7 @@ pinned: false
 
 - $\mathbf{x}_t \in \mathbb{R}^d$, 输入;
 - $\mathbf{k}_t \in \mathbb{R}^d$, 根据输入得到的用于更新的向量;
-- $\mathbf{M}_t \in \mathbb{R}^{n \times d}$, memory matrix;
+- $\mathbf{M}_t \in \mathbb{R}^{N \times d}$, memory matrix;
 
 ## 核心思想
 
