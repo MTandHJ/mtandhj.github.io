@@ -23,7 +23,7 @@ pinned: false
 
 ## 核心思想
 
-- 我们希望维护一个 memory matrix $\mathbf{M}_t$ 以保存**最新最有用**的信息.
+- 我们希望维护一个 memory matrix $\mathbf{M}_t$ 以保存**最新最有用**的信息 (least recently used access (LRUA)).
 
 - **Read:** 负责从 $\mathbf{M}_t$ 中读取信息, 给定 key $\mathbf{k}_t$, 通过 cosine similarity 来计算两两相似度:
 
