@@ -57,7 +57,7 @@ description: ""
   <p>
   <strong>Cong Xu</strong>, Xiang Li, Min Yang*.
   <u>An Orthogonal Classifier for Improving the Adversarial Robustness of Neural Networks.</u>
-  <i>Information Science</i>, 2022.
+  <i>Information Sciences</i>, 2022.
   &nbsp;&nbsp;
   <a href="https://arxiv.org/pdf/2105.09109" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
   </p>
