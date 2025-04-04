@@ -538,7 +538,24 @@
     // ESC 键处理
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
-        cleanupLaserPointer();
+        // 区分演示者视图和其他视图的处理
+        if (isInPresenterView()) {
+          // 在演示者视图中，ESC 键只退出全屏，不关闭激光笔
+          if (isFullscreen || document.fullscreenElement) {
+            if (document.fullscreenElement) {
+              document.exitFullscreen();
+            }
+            isFullscreen = false;
+            document.body.classList.remove('is-fullscreen');
+            revealElement.classList.remove('fullscreen');
+            // 不关闭激光笔，但需要保证激光笔按钮始终可见
+            laserBtn.style.display = 'flex';
+            Reveal.layout();
+          }
+        } else {
+          // 在其他视图中，ESC 键行为不变
+          cleanupLaserPointer();
+        }
       }
       
       // Alt 键切换激光笔（在所有视图中都有效）
