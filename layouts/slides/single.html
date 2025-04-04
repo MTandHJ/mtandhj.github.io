@@ -228,6 +228,8 @@
 </button>
 <div class="laser-pointer"></div>
 
+<!-- 添加存储中，用于存储激光笔位置的输入框 -->
+<input type="hidden" id="laser-position" value="">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css">
@@ -257,19 +259,17 @@
       maxScale: 2.0,
       viewDistance: 3,
       overview: false,
-      // 添加插件支持
       plugins: [ 
         RevealMarkdown,
         RevealHighlight,
         RevealNotes,
       ],
-      // Markdown 配置
       markdown: {
         smartypants: true,
         gfm: true
       },
-      mouseWheel: true,  // 启用鼠标滚轮切换
-      click: false,        // 禁用鼠标点击切换
+      mouseWheel: true,
+      click: false,
     });
   
     // 获取所有需要的元素
@@ -277,18 +277,95 @@
     const fullscreenBtn = document.getElementById('fullscreen-btn');
     const laserBtn = document.getElementById('laser-btn');
     const laserPointer = document.querySelector('.laser-pointer');
+    const laserPositionInput = document.getElementById('laser-position');
+    
     let isFullscreen = false;
     let isLaserActive = false;
-  
+    
+    // 检测是否在演示者视图中
+    function isInPresenterView() {
+      // 检查URL中是否有speaker或notes参数
+      return window.location.search.includes('receiver');
+    }
+    
+    // 检测是否在展示视图中
+    function isInPresentationView() {
+      return !isInPresenterView() && window.opener;
+    }
+    
+    // 检测是否在主视图
+    function isInMainView() {
+      return !isInPresenterView() && !window.opener;
+    }
+    
+    // 定义一个简单粗暴的本地存储键，用于在演示者视图和展示视图之间通信
+    const LASER_KEY = 'reveal_laser_pointer_position';
+    const LASER_ACTIVE_KEY = 'reveal_laser_active_state';
+    
+    // 更新激光笔位置的函数
+    function updateLaserPosition(x, y, isVisible) {
+      const positionData = {
+        x: x,
+        y: y,
+        isVisible: isVisible,
+        timestamp: Date.now()
+      };
+      
+      // 存储到localStorage
+      localStorage.setItem(LASER_KEY, JSON.stringify(positionData));
+      
+      // 触发一个存储事件（这在同一个窗口中不会自动触发）
+      if (isInPresenterView()) {
+        const event = new Event('storage');
+        event.key = LASER_KEY;
+        event.newValue = JSON.stringify(positionData);
+        window.dispatchEvent(event);
+      }
+    }
+    
+    // 同步激光笔状态（激活/非激活）
+    function syncLaserActiveState(isActive) {
+      // 存储激光笔激活状态
+      localStorage.setItem(LASER_ACTIVE_KEY, isActive ? 'true' : 'false');
+      
+      // 手动触发一个存储事件，这样同一窗口也能接收
+      if (isInPresenterView()) {
+        const event = new Event('storage');
+        event.key = LASER_ACTIVE_KEY;
+        event.newValue = isActive ? 'true' : 'false';
+        window.dispatchEvent(event);
+      }
+    }
+    
+    // 激活或禁用激光笔的函数
+    function toggleLaser(activate) {
+      isLaserActive = activate;
+      
+      if (isLaserActive) {
+        document.body.classList.add('cursor-hidden');
+        laserBtn.classList.add('active');
+      } else {
+        document.body.classList.remove('cursor-hidden');
+        laserPointer.style.display = 'none';
+        // 确保激光笔完全不可见
+        laserPointer.style.left = '-9999px';
+        laserPointer.style.top = '-9999px';
+        laserBtn.classList.remove('active');
+        updateLaserPosition(0, 0, false);
+      }
+      
+      // 同步激光笔激活状态到其他视图
+      syncLaserActiveState(isLaserActive);
+    }
+    
     // 清理激光笔状态的函数
     function cleanupLaserPointer() {
-      isLaserActive = false;
+      toggleLaser(false);
       isFullscreen = false;
       document.body.classList.remove('is-fullscreen');
-      document.body.classList.remove('cursor-hidden');
       revealElement.classList.remove('fullscreen');
-      laserBtn.classList.remove('active');
       laserBtn.style.display = 'none';
+      // 确保激光笔完全隐藏
       requestAnimationFrame(() => {
         laserPointer.style.display = 'none';
         laserPointer.style.left = '-9999px';
@@ -321,19 +398,62 @@
   
     // 激光笔按钮点击事件
     laserBtn.addEventListener('click', function() {
-      isLaserActive = !isLaserActive;
-      this.classList.toggle('active');
-      if (!isLaserActive) {
-        laserPointer.style.display = 'none';
-        document.body.classList.remove('cursor-hidden');
-      } else {
-        document.body.classList.add('cursor-hidden');
+      toggleLaser(!isLaserActive);
+    });
+    
+    // 检测演示者视图的激光笔位置并同步
+    window.addEventListener('storage', function(e) {
+      // 处理激光笔位置同步
+      if (e.key === LASER_KEY && (isInMainView() || isInPresentationView())) {
+        try {
+          const data = JSON.parse(e.newValue);
+          
+          // 计算当前窗口中的激光笔位置
+          const revealRect = revealElement.getBoundingClientRect();
+          
+          if (data.isVisible) {
+            // 使用相对位置计算激光笔位置
+            const absX = data.x * revealRect.width + revealRect.left;
+            const absY = data.y * revealRect.height + revealRect.top;
+            
+            // 更新激光笔位置
+            requestAnimationFrame(() => {
+              laserPointer.style.display = 'block';
+              laserPointer.style.left = (absX - 4) + 'px';
+              laserPointer.style.top = (absY - 4) + 'px';
+            });
+          } else {
+            // 隐藏激光笔
+            laserPointer.style.display = 'none';
+          }
+        } catch (err) {
+          console.error('解析激光笔数据失败', err);
+        }
+      }
+      
+      // 处理激光笔激活状态同步
+      if (e.key === LASER_ACTIVE_KEY && (isInMainView() || isInPresentationView())) {
+        const isActive = e.newValue === 'true';
+        console.log('接收到激光笔状态同步:', isActive);
+        
+        // 只更新UI状态，不再触发事件，避免循环
+        isLaserActive = isActive;
+        
+        if (isActive) {
+          laserBtn.classList.add('active');
+          document.body.classList.add('cursor-hidden');
+        } else {
+          laserBtn.classList.remove('active');
+          document.body.classList.remove('cursor-hidden');
+          laserPointer.style.display = 'none';
+        }
       }
     });
   
     // 鼠标移动事件
     document.addEventListener('mousemove', function(e) {
-      if (isFullscreen && isLaserActive) {
+      // 只有当激光笔激活时才处理
+      if (isLaserActive) {
         const revealRect = revealElement.getBoundingClientRect();
         const isInsideReveal = (
           e.clientX >= revealRect.left &&
@@ -343,13 +463,28 @@
         );
   
         if (isInsideReveal) {
+          // 计算相对位置
+          const relX = (e.clientX - revealRect.left) / revealRect.width;
+          const relY = (e.clientY - revealRect.top) / revealRect.height;
+          
+          // 在本窗口中显示激光笔
           requestAnimationFrame(() => {
             laserPointer.style.display = 'block';
             laserPointer.style.left = (e.clientX - 4) + 'px';
             laserPointer.style.top = (e.clientY - 4) + 'px';
           });
+          
+          // 将位置信息同步到其他窗口
+          if (isInPresenterView()) {
+            updateLaserPosition(relX, relY, true);
+          }
         } else {
           laserPointer.style.display = 'none';
+          
+          // 通知其他窗口隐藏激光笔
+          if (isInPresenterView()) {
+            updateLaserPosition(0, 0, false);
+          }
         }
       }
     });
@@ -358,14 +493,18 @@
     document.addEventListener('mouseleave', function() {
       if (isLaserActive) {
         laserPointer.style.display = 'none';
+        
+        // 通知其他窗口隐藏激光笔
+        if (isInPresenterView()) {
+          updateLaserPosition(0, 0, false);
+        }
       }
     });
   
     // 鼠标进入窗口事件
-    document.addEventListener('mouseenter', function() {
-      if (isLaserActive && isFullscreen) {
+    document.addEventListener('mouseenter', function(e) {
+      if (isLaserActive) {
         const revealRect = revealElement.getBoundingClientRect();
-        const e = event;
         const isInsideReveal = (
           e.clientX >= revealRect.left &&
           e.clientX <= revealRect.right &&
@@ -373,40 +512,30 @@
           e.clientY <= revealRect.bottom
         );
   
-        if (isInsideReveal) {
-          laserPointer.style.display = 'block';
+        if (isInsideReveal && isInPresenterView()) {
+          // 计算相对位置
+          const relX = (e.clientX - revealRect.left) / revealRect.width;
+          const relY = (e.clientY - revealRect.top) / revealRect.height;
+          
+          // 更新激光笔位置
+          updateLaserPosition(relX, relY, true);
         }
-      }
-    });
-  
-    // 窗口大小改变事件
-    window.addEventListener('resize', function() {
-      if (!isFullscreen) {
-        cleanupLaserPointer();
       }
     });
   
     // ESC 键处理
-     document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         cleanupLaserPointer();
       }
       
-      // Alt 键切换激光笔
-      if (e.key === 'Alt' && isFullscreen) {
+      // Alt 键切换激光笔（在所有视图中都有效）
+      if (e.key === 'Alt') {
         e.preventDefault(); // 防止触发浏览器默认行为
-        isLaserActive = !isLaserActive;
-        laserBtn.classList.toggle('active');
-        
-        if (!isLaserActive) {
-          laserPointer.style.display = 'none';
-          document.body.classList.remove('cursor-hidden');
-        } else {
-          document.body.classList.add('cursor-hidden');
-        }
+        toggleLaser(!isLaserActive);
       }
     });
-
+    
     // 添加 Alt 键释放处理
     document.addEventListener('keyup', function(e) {
       if (e.key === 'Alt') {
@@ -414,9 +543,69 @@
       }
     });
 
+    // 在页面加载时检查激光笔按钮显示状态
+    window.addEventListener('load', function() {
+      // 如果是演示者视图，始终显示激光笔按钮
+      if (isInPresenterView()) {
+        console.log('当前是演示者视图，始终显示激光笔按钮');
+        laserBtn.style.display = 'flex';
+      }
+      
+      // 如果是展示视图或主视图，检查是否有激光笔位置信息
+      if (isInPresentationView() || isInMainView()) {
+        console.log('当前是展示视图或主视图，准备接收激光笔位置');
+        
+        // 检查激光笔激活状态
+        const laserActiveState = localStorage.getItem(LASER_ACTIVE_KEY);
+        if (laserActiveState === 'true') {
+          console.log('检测到激光笔处于激活状态');
+          isLaserActive = true;
+          laserBtn.classList.add('active');
+          document.body.classList.add('cursor-hidden');
+        }
+        
+        // 立即检查是否有存储的激光笔位置
+        const storedPosition = localStorage.getItem(LASER_KEY);
+        if (storedPosition) {
+          try {
+            const data = JSON.parse(storedPosition);
+            // 如果数据不是太旧（10秒内），则应用它
+            if (Date.now() - data.timestamp < 10000 && data.isVisible) {
+              const revealRect = revealElement.getBoundingClientRect();
+              const absX = data.x * revealRect.width + revealRect.left;
+              const absY = data.y * revealRect.height + revealRect.top;
+              
+              requestAnimationFrame(() => {
+                laserPointer.style.display = 'block';
+                laserPointer.style.left = (absX - 4) + 'px';
+                laserPointer.style.top = (absY - 4) + 'px';
+              });
+            }
+          } catch (err) {
+            console.error('解析存储的激光笔位置失败', err);
+          }
+        }
+      }
+    });
+
+    // 检测演示窗口的关闭，以便更新状态
+    window.addEventListener('beforeunload', function() {
+      // 如果是演示者视图，通知其他视图不再自动全屏
+      if (isInPresenterView()) {
+        localStorage.removeItem('reveal_auto_fullscreen');
+        localStorage.removeItem('reveal_auto_fullscreen_timestamp');
+      }
+    });
+
     // 更新激光笔按钮的提示文字
     document.querySelector('#laser-btn').title = '激光笔 (Alt键切换)';
-    
+
+    // 窗口大小改变事件 - 恢复此事件处理以便在调整大小时正确处理激光笔
+    window.addEventListener('resize', function() {
+      if (!isFullscreen) {
+        cleanupLaserPointer();
+      }
+    });
 </script>
 
 <div class="post-comment">
