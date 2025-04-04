@@ -346,12 +346,9 @@
         laserBtn.classList.add('active');
       } else {
         document.body.classList.remove('cursor-hidden');
-        laserPointer.style.display = 'none';
-        // 确保激光笔完全不可见
-        laserPointer.style.left = '-9999px';
-        laserPointer.style.top = '-9999px';
+        // 使用hideLaser辅助函数确保激光笔完全隐藏
+        hideLaser();
         laserBtn.classList.remove('active');
-        updateLaserPosition(0, 0, false);
       }
       
       // 同步激光笔激活状态到其他视图
@@ -365,12 +362,8 @@
       document.body.classList.remove('is-fullscreen');
       revealElement.classList.remove('fullscreen');
       laserBtn.style.display = 'none';
-      // 确保激光笔完全隐藏
-      requestAnimationFrame(() => {
-        laserPointer.style.display = 'none';
-        laserPointer.style.left = '-9999px';
-        laserPointer.style.top = '-9999px';
-      });
+      // 使用hideLaser辅助函数确保激光笔完全隐藏
+      hideLaser();
     }
   
     // 全屏按钮点击事件
@@ -411,7 +404,7 @@
           // 计算当前窗口中的激光笔位置
           const revealRect = revealElement.getBoundingClientRect();
           
-          if (data.isVisible) {
+          if (data.isVisible && isLaserActive) {
             // 使用相对位置计算激光笔位置
             const absX = data.x * revealRect.width + revealRect.left;
             const absY = data.y * revealRect.height + revealRect.top;
@@ -424,10 +417,20 @@
             });
           } else {
             // 隐藏激光笔
-            laserPointer.style.display = 'none';
+            requestAnimationFrame(() => {
+              laserPointer.style.display = 'none';
+              laserPointer.style.left = '-9999px';
+              laserPointer.style.top = '-9999px';
+            });
           }
         } catch (err) {
           console.error('解析激光笔数据失败', err);
+          // 出错时也确保激光笔隐藏
+          requestAnimationFrame(() => {
+            laserPointer.style.display = 'none';
+            laserPointer.style.left = '-9999px';
+            laserPointer.style.top = '-9999px';
+          });
         }
       }
       
@@ -445,7 +448,8 @@
         } else {
           laserBtn.classList.remove('active');
           document.body.classList.remove('cursor-hidden');
-          laserPointer.style.display = 'none';
+          // 使用hideLaser辅助函数确保激光笔完全隐藏
+          hideLaser();
         }
       }
     });
@@ -479,25 +483,33 @@
             updateLaserPosition(relX, relY, true);
           }
         } else {
-          laserPointer.style.display = 'none';
+          // 确保激光笔完全隐藏
+          requestAnimationFrame(() => {
+            laserPointer.style.display = 'none';
+            laserPointer.style.left = '-9999px';
+            laserPointer.style.top = '-9999px';
+          });
           
           // 通知其他窗口隐藏激光笔
           if (isInPresenterView()) {
             updateLaserPosition(0, 0, false);
           }
         }
+      } else {
+        // 如果激光笔未激活，确保它被隐藏
+        requestAnimationFrame(() => {
+          laserPointer.style.display = 'none';
+          laserPointer.style.left = '-9999px';
+          laserPointer.style.top = '-9999px';
+        });
       }
     });
   
     // 鼠标离开窗口事件
     document.addEventListener('mouseleave', function() {
       if (isLaserActive) {
-        laserPointer.style.display = 'none';
-        
-        // 通知其他窗口隐藏激光笔
-        if (isInPresenterView()) {
-          updateLaserPosition(0, 0, false);
-        }
+        // 使用hideLaser辅助函数确保激光笔完全隐藏
+        hideLaser();
       }
     });
   
@@ -562,6 +574,13 @@
           isLaserActive = true;
           laserBtn.classList.add('active');
           document.body.classList.add('cursor-hidden');
+        } else {
+          // 如果激光笔未激活，确保它被隐藏
+          requestAnimationFrame(() => {
+            laserPointer.style.display = 'none';
+            laserPointer.style.left = '-9999px';
+            laserPointer.style.top = '-9999px';
+          });
         }
         
         // 立即检查是否有存储的激光笔位置
@@ -569,8 +588,8 @@
         if (storedPosition) {
           try {
             const data = JSON.parse(storedPosition);
-            // 如果数据不是太旧（10秒内），则应用它
-            if (Date.now() - data.timestamp < 10000 && data.isVisible) {
+            // 如果数据不是太旧（10秒内），并且激光笔当前处于激活状态，则应用它
+            if (Date.now() - data.timestamp < 10000 && data.isVisible && isLaserActive) {
               const revealRect = revealElement.getBoundingClientRect();
               const absX = data.x * revealRect.width + revealRect.left;
               const absY = data.y * revealRect.height + revealRect.top;
@@ -580,9 +599,22 @@
                 laserPointer.style.left = (absX - 4) + 'px';
                 laserPointer.style.top = (absY - 4) + 'px';
               });
+            } else {
+              // 数据过期或激光笔未激活，确保激光笔隐藏
+              requestAnimationFrame(() => {
+                laserPointer.style.display = 'none';
+                laserPointer.style.left = '-9999px';
+                laserPointer.style.top = '-9999px';
+              });
             }
           } catch (err) {
             console.error('解析存储的激光笔位置失败', err);
+            // 解析失败时隐藏激光笔
+            requestAnimationFrame(() => {
+              laserPointer.style.display = 'none';
+              laserPointer.style.left = '-9999px';
+              laserPointer.style.top = '-9999px';
+            });
           }
         }
       }
@@ -604,6 +636,33 @@
     window.addEventListener('resize', function() {
       if (!isFullscreen) {
         cleanupLaserPointer();
+      }
+    });
+
+    // 为主动隐藏激光笔添加一个帮助函数
+    function hideLaser() {
+      requestAnimationFrame(() => {
+        laserPointer.style.display = 'none';
+        laserPointer.style.left = '-9999px';
+        laserPointer.style.top = '-9999px';
+      });
+      
+      if (isInPresenterView()) {
+        updateLaserPosition(0, 0, false);
+      }
+    }
+    
+    // 确保在窗口失去焦点时隐藏激光笔
+    window.addEventListener('blur', function() {
+      if (isLaserActive) {
+        hideLaser();
+      }
+    });
+    
+    // 确保在页面可见性改变时处理激光笔
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden && isLaserActive) {
+        hideLaser();
       }
     });
 </script>
