@@ -548,8 +548,8 @@
             isFullscreen = false;
             document.body.classList.remove('is-fullscreen');
             revealElement.classList.remove('fullscreen');
-            // 不关闭激光笔，但需要保证激光笔按钮始终可见
-            laserBtn.style.display = 'flex';
+            // 不关闭激光笔，但在演讲者模式下按钮保持隐藏
+            laserBtn.style.display = 'none';
             Reveal.layout();
           }
         } else {
@@ -574,10 +574,11 @@
 
     // 在页面加载时检查激光笔按钮显示状态
     window.addEventListener('load', function() {
-      // 如果是演示者视图，始终显示激光笔按钮
+      // 如果是演示者视图，不显示激光笔按钮和全屏按钮
       if (isInPresenterView()) {
-        console.log('当前是演示者视图，始终显示激光笔按钮');
-        laserBtn.style.display = 'flex';
+        console.log('当前是演示者视图，隐藏激光笔按钮和全屏按钮');
+        laserBtn.style.display = 'none';
+        fullscreenBtn.style.display = 'none';
       }
       
       // 如果是展示视图或主视图，检查是否有激光笔位置信息
