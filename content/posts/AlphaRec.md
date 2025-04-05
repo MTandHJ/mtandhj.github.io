@@ -135,6 +135,9 @@ pinned: false
 
 - 参考作者的代码, 自己实现了 [AlphaRec](https://github.com/MTandHJ/RecBoard/tree/master/AlphaRec), 在 Movies 进行了一下测试.
 
+
+### Movies
+
 ```yaml
 # AlphaRec
 root: ../../data
@@ -177,15 +180,166 @@ monitors: [LOSS, Recall@1, Recall@10, Recall@20, HitRate@10, HitRate@20, NDCG@10
 which4best: NDCG@20
 ```
 
+### Beauty
 
-| Method             | R@1    | R@10   | R@20   | HR@10  | HR@20  | N@10   | N@20   |
-| ------------------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
-| LightGCN           | 0.0134 | 0.0655 | 0.0995 | 0.3746 | 0.4931 | 0.0784 | 0.0899 |
-| LightGCN + InfoNCE | 0.0180 | 0.0742 | 0.1084 | 0.4110 | 0.5191 | 0.0930 | 0.1037 |
-| AlphaRec           | 0.0193 | 0.0834 | 0.1210 | 0.4404 | 0.5541 | 0.1015 | 0.1135 |
-| AlphaRec-TE        | 0.0177 | 0.0730 | 0.1069 | 0.4072 | 0.5140 | 0.0916 | 0.1023 |
 
-AlphaRec-TE: Trainble Embeddings
+```yaml
+# LightGCN
+
+root: ../../data
+dataset: Amazon2014Beauty_550811_ROU
+tasktag: Matching
+
+embedding_dim: 64
+num_layers: 3
+
+epochs: 1000
+batch_size: 2048
+optimizer: adam
+lr: 1.e-3
+weight_decay: 1.e-3
+
+monitors: [LOSS, Recall@1, Recall@10, Recall@20, NDCG@10, NDCG@20]
+which4best: NDCG@20
+```
+
+```yaml
+# LightGCN + InfoNCE
+
+root: ../../data
+dataset: Amazon2014Beauty_550811_ROU
+tasktag: Matching
+
+embedding_dim: 64
+num_layers: 3
+num_negs: 256
+tau: 0.15
+
+epochs: 500
+batch_size: 2048
+optimizer: adam
+lr: 5.e-4
+weight_decay: 1.e-2
+
+monitors: [LOSS, Recall@1, Recall@10, Recall@20, NDCG@10, NDCG@20]
+which4best: NDCG@20
+```
+
+```yaml
+root: ../../data
+dataset: Amazon2014Beauty_550811_ROU
+tasktag: Matching
+
+embedding_dim: 64
+num_layers: 3
+tfile: llama2_7b_title.pkl # llama2_13b_title.pkl
+
+epochs: 500
+batch_size: 2048
+optimizer: adam
+lr: 5.e-4
+weight_decay: 0.
+
+tau: 0.15
+num_negs: 256
+projector: mlp
+
+monitors: [LOSS, Recall@1, Recall@10, Recall@20, NDCG@10, NDCG@20]
+which4best: NDCG@20
+```
+
+
+| Method                | R@1    | R@10   | R@20   | N@10   | N@20   |
+| --------------------- | ------ | ------ | ------ | ------ | ------ |
+| LightGCN              | 0.0079 | 0.0538 | 0.0836 | 0.0282 | 0.0361 |
+| LightGCN+InfoNCE      | 0.0098 | 0.0544 | 0.0829 | 0.0296 | 0.0371 |
+| AlphaRec (Llama2-7B)  | 0.0104 | 0.0618 | 0.0925 | 0.0330 | 0.0412 |
+| AlphaRec (Llama2-13B) | 0.0107 | 0.0608 | 0.0921 | 0.0329 | 0.0412 |
+| AlphaRec (MiniLM-L12-v2) | 0.0100 | 0.0608 | 0.0930 | 0.0322 | 0.0407 |
+
+
+### Baby
+
+```yaml
+# LightGCN
+root: ../../data
+dataset: Amazon2014Baby_550811_RAU
+tasktag: Matching
+
+embedding_dim: 64
+# num_layers: 3
+# num_negs: 256
+# tau: 0.25
+
+epochs: 100
+batch_size: 2048
+optimizer: adam
+lr: 1.e-3
+weight_decay: 5.e-3
+
+monitors: [LOSS, Recall@1, Recall@10, Recall@20, NDCG@10, NDCG@20]
+which4best: NDCG@20
+```
+
+
+```yaml
+# LightGCN + InfoNCE
+root: ../../data
+dataset: Amazon2014Baby_550811_RAU
+tasktag: Matching
+
+embedding_dim: 64
+num_layers: 3
+num_negs: 256
+tau: 0.25
+
+epochs: 500
+batch_size: 2048
+optimizer: adam
+lr: 1.e-3
+weight_decay: 1.e-3
+
+monitors: [LOSS, Recall@1, Recall@10, Recall@20, NDCG@10, NDCG@20]
+which4best: NDCG@20
+```
+
+```yaml
+# AlphaRec
+root: ../../data
+dataset: Amazon2014Baby_550811_RAU
+tasktag: Matching
+
+embedding_dim: 64
+num_layers: 3
+tfile: llama2_7b_title.pkl
+
+epochs: 500
+batch_size: 2048
+optimizer: adam
+lr: 5.e-4
+weight_decay: 0.
+
+tau: 0.25
+num_negs: 256
+projector: mlp
+
+monitors: [LOSS, Recall@1, Recall@10, Recall@20, NDCG@10, NDCG@20]
+which4best: NDCG@20
+```
+
+
+| Method                | R@1    | R@10   | R@20   | N@10   | N@20   |
+| --------------------- | ------ | ------ | ------ | ------ | ------ |
+| LightGCN              | 0.0037 | 0.0212 | 0.0357 | 0.0113 | 0.0151 |
+| LightGCN+InfoNCE      | 0.0036 | 0.0206 | 0.0344 | 0.0111 | 0.0147 |
+| AlphaRec (Llama2-7B)  | 0.0039 | 0.0243 | 0.0399 | 0.0128 | 0.0169 |
+| AlphaRec (Llama2-13B)  | 0.0037 | 0.0242 | 0.0399 | 0.0126 | 0.0167 |
+| AlphaRec (MiniLM-L12-v2) | 0.0031 | 0.0229 | 0.0385 | 0.0117 | 0.0158 |
+
+
+- 从自己处理的数据集来看, LLM 并没有比传统的 BERT 好上太多.
+
+- 不过 Next-token embedding 的能力还是比较令人惊讶的, 这方面的原因可能可以通过 [这篇文章](https://www.mtandhj.com/posts/knowledgestorageandextraction/) 解释.
 
 
 ## 参考文献

@@ -155,8 +155,84 @@ $$
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/highlight/monokai.css">
+
+
+<script>
+  var printPdfMode = window.location.search.match(/print-pdf/gi);
+  
+  
+  var link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = printPdfMode ? 
+    'https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/css/print/pdf.css' : 
+    'https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/css/print/paper.css';
+  document.getElementsByTagName('head')[0].appendChild(link);
+  
+  
+  if (printPdfMode) {
+    document.addEventListener('DOMContentLoaded', function() {
+      
+      var style = document.createElement('style');
+      style.textContent = `
+        /* PDF打印模式自定义样式 */
+        .reveal .slides section {
+          height: auto !important;
+          min-height: 700px !important;
+          page-break-inside: avoid !important;
+        }
+        
+        .reveal .slides section:not(:first-child) h1,
+        .reveal .slides section:not(:first-child) h2,
+        .reveal .slides section:not(:first-child) h3 {
+          position: absolute !important;
+          top: 0 !important;
+          left: -4rem !important;
+        }
+        
+        .reveal .slides section:not(:first-child) {
+          padding-top: 1.7em !important;
+          top: 0 !important;
+          bottom: 0 !important;
+          transform: none !important;
+        }
+        
+        /* 确保PDF中所有文本元素样式保持一致 */
+        .reveal .slides section ul > li,
+        .reveal .slides section ol > li,
+        .reveal .slides section p {
+          font-size: 24px !important;
+        }
+        
+        .reveal .slides section ul ul > li {
+          font-size: 20px !important;
+        }
+        
+        .reveal .slides section ul ul ul > li {
+          font-size: 18px !important;
+        }
+        
+        /* 调整PDF导出时代码块的样式 */
+        .reveal .slides section pre {
+          font-size: 16px !important;
+          max-height: none !important;
+          overflow: visible !important;
+        }
+        
+        /* 隐藏不需要在PDF中显示的元素 */
+        #fullscreen-btn, #laser-btn, .laser-pointer,
+        .reveal .controls, .reveal .progress, .reveal .slide-number {
+          display: none !important;
+        }
+      `;
+      document.head.appendChild(style);
+    });
+  }
+</script>
 
 <style>
+   
   .reveal.fullscreen {
     position: fixed;
     top: 0;
@@ -705,7 +781,7 @@ $$<ul>
   </div>
 </div>
 
-<button id="laser-btn" title="激光笔">
+<button id="laser-btn" title="激光笔 (Alt键切换)">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
     <circle cx="12" cy="12" r="3"/>
     <path d="M12 5v2m0 10v2M5 12h2m10 0h2"/>
@@ -714,11 +790,7 @@ $$<ul>
 <div class="laser-pointer"></div>
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/highlight/monokai.css">
-
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+<input type="hidden" id="laser-position" value="">
 
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
 
@@ -742,19 +814,17 @@ $$<ul>
       maxScale: 2.0,
       viewDistance: 3,
       overview: false,
-      
       plugins: [ 
         RevealMarkdown,
         RevealHighlight,
         RevealNotes,
       ],
-      
       markdown: {
         smartypants: true,
         gfm: true
       },
-      mouseWheel: true,  
-      click: false,        
+      mouseWheel: true,
+      click: false,
     });
   
     
@@ -762,23 +832,93 @@ $$<ul>
     const fullscreenBtn = document.getElementById('fullscreen-btn');
     const laserBtn = document.getElementById('laser-btn');
     const laserPointer = document.querySelector('.laser-pointer');
+    const laserPositionInput = document.getElementById('laser-position');
+    
     let isFullscreen = false;
     let isLaserActive = false;
-  
+    
+    
+    function isInPresenterView() {
+      
+      return window.location.search.includes('receiver');
+    }
+    
+    
+    function isInPresentationView() {
+      return !isInPresenterView() && window.opener;
+    }
+    
+    
+    function isInMainView() {
+      return !isInPresenterView() && !window.opener;
+    }
+    
+    
+    const LASER_KEY = 'reveal_laser_pointer_position';
+    const LASER_ACTIVE_KEY = 'reveal_laser_active_state';
+    
+    
+    function updateLaserPosition(x, y, isVisible) {
+      const positionData = {
+        x: x,
+        y: y,
+        isVisible: isVisible,
+        timestamp: Date.now()
+      };
+      
+      
+      localStorage.setItem(LASER_KEY, JSON.stringify(positionData));
+      
+      
+      if (isInPresenterView()) {
+        const event = new Event('storage');
+        event.key = LASER_KEY;
+        event.newValue = JSON.stringify(positionData);
+        window.dispatchEvent(event);
+      }
+    }
+    
+    
+    function syncLaserActiveState(isActive) {
+      
+      localStorage.setItem(LASER_ACTIVE_KEY, isActive ? 'true' : 'false');
+      
+      
+      if (isInPresenterView()) {
+        const event = new Event('storage');
+        event.key = LASER_ACTIVE_KEY;
+        event.newValue = isActive ? 'true' : 'false';
+        window.dispatchEvent(event);
+      }
+    }
+    
+    
+    function toggleLaser(activate) {
+      isLaserActive = activate;
+      
+      if (isLaserActive) {
+        document.body.classList.add('cursor-hidden');
+        laserBtn.classList.add('active');
+      } else {
+        document.body.classList.remove('cursor-hidden');
+        
+        hideLaser();
+        laserBtn.classList.remove('active');
+      }
+      
+      
+      syncLaserActiveState(isLaserActive);
+    }
+    
     
     function cleanupLaserPointer() {
-      isLaserActive = false;
+      toggleLaser(false);
       isFullscreen = false;
       document.body.classList.remove('is-fullscreen');
-      document.body.classList.remove('cursor-hidden');
       revealElement.classList.remove('fullscreen');
-      laserBtn.classList.remove('active');
       laserBtn.style.display = 'none';
-      requestAnimationFrame(() => {
-        laserPointer.style.display = 'none';
-        laserPointer.style.left = '-9999px';
-        laserPointer.style.top = '-9999px';
-      });
+      
+      hideLaser();
     }
   
     
@@ -806,19 +946,73 @@ $$<ul>
   
     
     laserBtn.addEventListener('click', function() {
-      isLaserActive = !isLaserActive;
-      this.classList.toggle('active');
-      if (!isLaserActive) {
-        laserPointer.style.display = 'none';
-        document.body.classList.remove('cursor-hidden');
-      } else {
-        document.body.classList.add('cursor-hidden');
+      toggleLaser(!isLaserActive);
+    });
+    
+    
+    window.addEventListener('storage', function(e) {
+      
+      if (e.key === LASER_KEY && (isInMainView() || isInPresentationView())) {
+        try {
+          const data = JSON.parse(e.newValue);
+          
+          
+          const revealRect = revealElement.getBoundingClientRect();
+          
+          if (data.isVisible && isLaserActive) {
+            
+            const absX = data.x * revealRect.width + revealRect.left;
+            const absY = data.y * revealRect.height + revealRect.top;
+            
+            
+            requestAnimationFrame(() => {
+              laserPointer.style.display = 'block';
+              laserPointer.style.left = (absX - 4) + 'px';
+              laserPointer.style.top = (absY - 4) + 'px';
+            });
+          } else {
+            
+            requestAnimationFrame(() => {
+              laserPointer.style.display = 'none';
+              laserPointer.style.left = '-9999px';
+              laserPointer.style.top = '-9999px';
+            });
+          }
+        } catch (err) {
+          console.error('解析激光笔数据失败', err);
+          
+          requestAnimationFrame(() => {
+            laserPointer.style.display = 'none';
+            laserPointer.style.left = '-9999px';
+            laserPointer.style.top = '-9999px';
+          });
+        }
+      }
+      
+      
+      if (e.key === LASER_ACTIVE_KEY && (isInMainView() || isInPresentationView())) {
+        const isActive = e.newValue === 'true';
+        console.log('接收到激光笔状态同步:', isActive);
+        
+        
+        isLaserActive = isActive;
+        
+        if (isActive) {
+          laserBtn.classList.add('active');
+          document.body.classList.add('cursor-hidden');
+        } else {
+          laserBtn.classList.remove('active');
+          document.body.classList.remove('cursor-hidden');
+          
+          hideLaser();
+        }
       }
     });
   
     
     document.addEventListener('mousemove', function(e) {
-      if (isFullscreen && isLaserActive) {
+      
+      if (isLaserActive) {
         const revealRect = revealElement.getBoundingClientRect();
         const isInsideReveal = (
           e.clientX >= revealRect.left &&
@@ -828,29 +1022,56 @@ $$<ul>
         );
   
         if (isInsideReveal) {
+          
+          const relX = (e.clientX - revealRect.left) / revealRect.width;
+          const relY = (e.clientY - revealRect.top) / revealRect.height;
+          
+          
           requestAnimationFrame(() => {
             laserPointer.style.display = 'block';
             laserPointer.style.left = (e.clientX - 4) + 'px';
             laserPointer.style.top = (e.clientY - 4) + 'px';
           });
+          
+          
+          if (isInPresenterView()) {
+            updateLaserPosition(relX, relY, true);
+          }
         } else {
-          laserPointer.style.display = 'none';
+          
+          requestAnimationFrame(() => {
+            laserPointer.style.display = 'none';
+            laserPointer.style.left = '-9999px';
+            laserPointer.style.top = '-9999px';
+          });
+          
+          
+          if (isInPresenterView()) {
+            updateLaserPosition(0, 0, false);
+          }
         }
+      } else {
+        
+        requestAnimationFrame(() => {
+          laserPointer.style.display = 'none';
+          laserPointer.style.left = '-9999px';
+          laserPointer.style.top = '-9999px';
+        });
       }
     });
   
     
     document.addEventListener('mouseleave', function() {
       if (isLaserActive) {
-        laserPointer.style.display = 'none';
+        
+        hideLaser();
       }
     });
   
     
-    document.addEventListener('mouseenter', function() {
-      if (isLaserActive && isFullscreen) {
+    document.addEventListener('mouseenter', function(e) {
+      if (isLaserActive) {
         const revealRect = revealElement.getBoundingClientRect();
-        const e = event;
         const isInsideReveal = (
           e.clientX >= revealRect.left &&
           e.clientX <= revealRect.right &&
@@ -858,40 +1079,47 @@ $$<ul>
           e.clientY <= revealRect.bottom
         );
   
-        if (isInsideReveal) {
-          laserPointer.style.display = 'block';
+        if (isInsideReveal && isInPresenterView()) {
+          
+          const relX = (e.clientX - revealRect.left) / revealRect.width;
+          const relY = (e.clientY - revealRect.top) / revealRect.height;
+          
+          
+          updateLaserPosition(relX, relY, true);
         }
       }
     });
   
     
-    window.addEventListener('resize', function() {
-      if (!isFullscreen) {
-        cleanupLaserPointer();
-      }
-    });
-  
-    
-     document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
-        cleanupLaserPointer();
-      }
-      
-      
-      if (e.key === 'Alt' && isFullscreen) {
-        e.preventDefault(); 
-        isLaserActive = !isLaserActive;
-        laserBtn.classList.toggle('active');
         
-        if (!isLaserActive) {
-          laserPointer.style.display = 'none';
-          document.body.classList.remove('cursor-hidden');
+        if (isInPresenterView()) {
+          
+          if (isFullscreen || document.fullscreenElement) {
+            if (document.fullscreenElement) {
+              document.exitFullscreen();
+            }
+            isFullscreen = false;
+            document.body.classList.remove('is-fullscreen');
+            revealElement.classList.remove('fullscreen');
+            
+            laserBtn.style.display = 'none';
+            Reveal.layout();
+          }
         } else {
-          document.body.classList.add('cursor-hidden');
+          
+          cleanupLaserPointer();
         }
       }
+      
+      
+      if (e.key === 'Alt') {
+        e.preventDefault(); 
+        toggleLaser(!isLaserActive);
+      }
     });
-
+    
     
     document.addEventListener('keyup', function(e) {
       if (e.key === 'Alt') {
@@ -900,8 +1128,116 @@ $$<ul>
     });
 
     
-    document.querySelector('#laser-btn').title = '激光笔 (Alt键切换)';
+    window.addEventListener('load', function() {
+      
+      if (isInPresenterView()) {
+        console.log('当前是演示者视图，隐藏激光笔按钮和全屏按钮');
+        laserBtn.style.display = 'none';
+        fullscreenBtn.style.display = 'none';
+      }
+      
+      
+      if (isInPresentationView() || isInMainView()) {
+        console.log('当前是展示视图或主视图，准备接收激光笔位置');
+        
+        
+        const laserActiveState = localStorage.getItem(LASER_ACTIVE_KEY);
+        if (laserActiveState === 'true') {
+          console.log('检测到激光笔处于激活状态');
+          isLaserActive = true;
+          laserBtn.classList.add('active');
+          document.body.classList.add('cursor-hidden');
+        } else {
+          
+          requestAnimationFrame(() => {
+            laserPointer.style.display = 'none';
+            laserPointer.style.left = '-9999px';
+            laserPointer.style.top = '-9999px';
+          });
+        }
+        
+        
+        const storedPosition = localStorage.getItem(LASER_KEY);
+        if (storedPosition) {
+          try {
+            const data = JSON.parse(storedPosition);
+            
+            if (Date.now() - data.timestamp < 10000 && data.isVisible && isLaserActive) {
+              const revealRect = revealElement.getBoundingClientRect();
+              const absX = data.x * revealRect.width + revealRect.left;
+              const absY = data.y * revealRect.height + revealRect.top;
+              
+              requestAnimationFrame(() => {
+                laserPointer.style.display = 'block';
+                laserPointer.style.left = (absX - 4) + 'px';
+                laserPointer.style.top = (absY - 4) + 'px';
+              });
+            } else {
+              
+              requestAnimationFrame(() => {
+                laserPointer.style.display = 'none';
+                laserPointer.style.left = '-9999px';
+                laserPointer.style.top = '-9999px';
+              });
+            }
+          } catch (err) {
+            console.error('解析存储的激光笔位置失败', err);
+            
+            requestAnimationFrame(() => {
+              laserPointer.style.display = 'none';
+              laserPointer.style.left = '-9999px';
+              laserPointer.style.top = '-9999px';
+            });
+          }
+        }
+      }
+    });
+
     
+    window.addEventListener('beforeunload', function() {
+      
+      if (isInPresenterView()) {
+        localStorage.removeItem('reveal_auto_fullscreen');
+        localStorage.removeItem('reveal_auto_fullscreen_timestamp');
+      }
+    });
+
+    
+    document.querySelector('#laser-btn').title = '激光笔 (Alt键切换)';
+
+    
+    window.addEventListener('resize', function() {
+      if (!isFullscreen) {
+        cleanupLaserPointer();
+      }
+    });
+
+    
+    function hideLaser() {
+      requestAnimationFrame(() => {
+        laserPointer.style.display = 'none';
+        laserPointer.style.left = '-9999px';
+        laserPointer.style.top = '-9999px';
+      });
+      
+      if (isInPresenterView()) {
+        updateLaserPosition(0, 0, false);
+      }
+    }
+    
+    
+    window.addEventListener('blur', function() {
+      if (isLaserActive) {
+        hideLaser();
+      }
+    });
+    
+    
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden && isLaserActive) {
+        hideLaser();
+      }
+    });
 </script>
 
 <div class="post-comment">

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<head>
+
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<title>A Self-Attentive Model for Knowledge Tracing | MTandHJ</title>
+	<meta name="keywords" content="Note, Knowledge Tracing, Attention, Empirical, EDM, 2019">
+	<meta name="description" content="SAKT, 自注意力知识追踪">
+	<link rel="canonical"
+		href="https://www.mtandhj.com/posts/sakt/">
+
+
+
+	<link rel="stylesheet" href="/css/output.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="/css/private.css" type="text/css" media="all" />
+
+	
+	<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" 
+    integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww" 
+    crossorigin="anonymous"
+/>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd" crossorigin="anonymous"></script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+    onload="
+    window.addEventListener('DOMContentLoaded', function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true}, // 块级公式
+                {left: '$', right: '$', display: false},  // 行内公式
+                {left: '\\[', right: '\\]', display: true}, // 支持 \[ \] 块级公式
+                {left: '\\(', right: '\\)', display: false} // 支持 \( \) 行内公式
+            ]
+        });
+    });
+"></script>
+</head>
+
+<body class="bg-stone-50 font-custom flex flex-col justify-between min-h-screen dark:bg-stone-800 dark:text-white">
+
+	<header
+  class="site-header w-full bg-stone-100 dark:bg-stone-900 dark:text-white border-stone-400 border-b px-3 lg:px-3"
+  style="padding-top: 7px; padding-bottom: 7px;">
+  <nav class="site-nav flex items-center justify-between gap-3 container mx-auto " >
+    <div class="flex items-center  flex-wrap">
+      <a class="logo text-2xl md:text-3xl font-black" href="https://www.mtandhj.com/">
+        <img src="/images/logo.png" alt="MTandHJ" 
+        class="w-[35px] h-[35px] md:w-[38px] md:h-[38px] lg:w-[40px] lg:h-[40px]"
+        style="border-radius:50%; border:2px solid #DCD9D6;">
+      </a>
+      <ul class="main-menu flex items-center gap-3 mr-5">
+        
+        <li>
+          <a class=" text-lg" href="/pubs">俺的论文</a>
+        </li>
+        
+        <li>
+          <a class=" text-lg" href="/posts">随笔</a>
+        </li>
+        
+        <li>
+          <a class=" text-lg" href="/tags">Tags</a>
+        </li>
+        
+        <li>
+          <a class=" text-lg" href="/slides">Slides</a>
+        </li>
+        
+      </ul>
+    </div>
+    
+
+<li id="search-click" class="menu-item" style="display: none;">
+    <a class="menu-item-link" href="javascript:void(0)">Search</a>
+</li>
+
+<script>
+    
+    document.addEventListener("keydown", function (event) {
+        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+            event.preventDefault();
+            document.getElementById("search-click").click();
+        }
+    });
+</script>
+
+
+<div id="fastSearch">
+    <input id="searchInput" autocomplete="off">
+    <ul id="searchResults"></ul>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
+
+<script type="text/javascript" src="/js/search.min.243d998bd0c610c96bcfbb6d9059a4586cb855efea68a7db9409441ebaf81161.js"></script>
+    <button aria-label="theme-toggle" id="toggle-theme">
+      <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+    >
+    <path
+    class="fill-stone-800"
+        d="M12 10.999c1.437.438 2.562 1.564 2.999 3.001.44-1.437 1.565-2.562 3.001-3-1.436-.439-2.561-1.563-3.001-3-.437 1.436-1.562 2.561-2.999 2.999zm8.001.001c.958.293 1.707 1.042 2 2.001.291-.959 1.042-1.709 1.999-2.001-.957-.292-1.707-1.042-2-2-.293.958-1.042 1.708-1.999 2zm-1-9c-.437 1.437-1.563 2.562-2.998 3.001 1.438.44 2.561 1.564 3.001 3.002.437-1.438 1.563-2.563 2.996-3.002-1.433-.437-2.559-1.564-2.999-3.001zm-7.001 22c-6.617 0-12-5.383-12-12s5.383-12 12-12c1.894 0 3.63.497 5.37 1.179-2.948.504-9.37 3.266-9.37 10.821 0 7.454 5.917 10.208 9.37 10.821-1.5.846-3.476 1.179-5.37 1.179z">
+    </path>
+</svg>
+      <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+   >
+    <path
+    class="fill-white"
+        d="M4.069 13h-4.069v-2h4.069c-.041.328-.069.661-.069 1s.028.672.069 1zm3.034-7.312l-2.881-2.881-1.414 1.414 2.881 2.881c.411-.529.885-1.003 1.414-1.414zm11.209 1.414l2.881-2.881-1.414-1.414-2.881 2.881c.528.411 1.002.886 1.414 1.414zm-6.312-3.102c.339 0 .672.028 1 .069v-4.069h-2v4.069c.328-.041.661-.069 1-.069zm0 16c-.339 0-.672-.028-1-.069v4.069h2v-4.069c-.328.041-.661.069-1 .069zm7.931-9c.041.328.069.661.069 1s-.028.672-.069 1h4.069v-2h-4.069zm-3.033 7.312l2.88 2.88 1.415-1.414-2.88-2.88c-.412.528-.886 1.002-1.415 1.414zm-11.21-1.415l-2.88 2.88 1.414 1.414 2.88-2.88c-.528-.411-1.003-.885-1.414-1.414zm2.312-4.897c0 2.206 1.794 4 4 4s4-1.794 4-4-1.794-4-4-4-4 1.794-4 4zm10 0c0 3.314-2.686 6-6 6s-6-2.686-6-6 2.686-6 6-6 6 2.686 6 6z">
+    </path>
+</svg>
+    </button>
+  </nav>
+</header>
+
+	<main class="content container max-w-prose mx-auto flex-1 py-5 px-4 md:px-0">
+
+
+<div dir="" class="prose mx-auto break-normal px-5 mt-8 dark:prose-invert">
+    
+
+    <h1 class="text-2xl mb-0 md:text-3xl font-black ">A Self-Attentive Model for Knowledge Tracing</h1>
+    <time class="text-sm my-2 text-muted mb-5" datetime=" 2025-04-01T00:00:00Z">
+        April 1, 2025
+    </time>
+    <div class="mt-3"></div>
+    <div class="toc select-none p-3 bg-stone-100 text-black dark:bg-stone-900 dark:text-white rounded">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details cursor-pointer">Content</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e9%a2%84%e5%a4%87%e7%9f%a5%e8%af%86" aria-label="预备知识">预备知识</a></li>
+                <li>
+                    <a href="#%e6%a0%b8%e5%bf%83%e6%80%9d%e6%83%b3" aria-label="核心思想">核心思想</a></li>
+                <li>
+                    <a href="#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae" aria-label="参考文献">参考文献</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+    <h2 id="预备知识">预备知识</h2>
+<ul>
+<li>
+<p>请先了解 <a href="https://www.mtandhj.com/posts/dkt/">DKT</a>.</p>
+</li>
+<li>
+<p>$e \in [E] = \{0, 1, 2, \ldots, E - 1\}$, 习题的序号;</p>
+</li>
+<li>
+<p>$r \in \{0, 1\}$, 习题 $e$ 某个学生做对与否.</p>
+</li>
+</ul>
+<h2 id="核心思想">核心思想</h2>
+<p><img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250401140515.png" alt="20250401140515"></p>
+<ul>
+<li>
+<p>本文几乎就是 GPT (decoder-only) 的 transformer 在 DKT 上的应用: SAKT 希望根据学生的交互序列 $\{(e_1, r_1), \ldots, (e_t, r_t)\}$ 预测下一题 $e_{t+1}$ 的做对做错的情况.</p>
+</li>
+<li>
+<p>由上述描述可知, 与一般的 Transformer 稍有不同, SAKT 在推理过程中需要同时 &ldquo;见到&rdquo; <strong>交互序列</strong> 以及需要被预测的<strong>新的题目</strong>.</p>
+</li>
+<li>
+<p>对于学生的交互序列 $\{(e_1, r_1), \ldots, (e_t, r_t)\}$, 首先得到输入的 token:</p>
+$$
+    y_i = e_i + r_i \cdot E =
+    \left \{
+        \begin{array}{ll}
+        e_i, & \text{if } r_i = 0, \\
+        e_i + E, & \text{otherwise}.
+        \end{array}
+    \right .
+    $$<p>即, 对于每个题, 我们需要训练两个独立的 token 以分别对应做对做错. 然后通过 embedding table $\mathbf{M} \in \mathbb{R}^{2E \times d}$ 得到交互序列的向量表示:</p>
+$$
+    \mathbf{\hat{M}} \in \mathbb{R}^{n \times d}.
+    $$<p>这里 $n$ 是序列长度, 短补零长截断.</p>
+</li>
+<li>
+<p>对于学生的做题序列 $\{e_2, \ldots, e_{t+1}\}$, 通过 embedding table $\mathbf{E} \in \mathbb{R}^{E \times d}$ 得到</p>
+$$
+    \mathbf{\hat{E}} \in \mathbb{R}^{n \times d}.
+    $$</li>
+<li>
+<p>两个序列同时喂入 Transformer, 前者用于生成 Key, Value, 后者用于生成 Query:</p>
+$$
+    \mathbf{Q} = \mathbf{\hat{E}} \mathbf{W}^Q,
+    \mathbf{K} = \mathbf{\hat{M}} \mathbf{W}^K,
+    \mathbf{V} = \mathbf{\hat{M}} \mathbf{W}^V,
+    $$<p>其余的和传统的 causal transformer 类似. 注意到, 因为 causal attention 的缘故, 我们能够保证, 在预测 $e_{t+1}$ 的对错时仅依赖 $e_{< t+1}, r_{< t + 1}$ 的信息.</p>
+</li>
+<li>
+<p>通过 transformer 得到的第 $i$-th 位置的特征 $\bm{f}_i$ 用于预测 $i+1$ 位置:</p>
+$$
+    p_i = \text{Sigmoid}(\mathbf{F}_i \mathbf{w} + \mathbf{b}).
+    $$<p>并通过 BCE 进行训练.</p>
+</li>
+</ul>
+<h2 id="参考文献">参考文献</h2>
+<ol class="reference">
+  <li>
+    Pandey S., and Karypis G.
+    <u>A Self-Attentive Model for Knowledge Tracing.</u>
+    <i>EDM</i>, 2019.
+    <a href="https://arxiv.org/abs/1907.06837" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
+    <a href="https://github.com/arshadshk/SAKT-pytorch" style="color: #007acc; font-weight: bold; text-decoration: none;">[Code]</a>
+  </li>
+  <!-- 添加更多文献条目 -->
+</ol>
+
+
+</div>
+<div class="mt-5 mb-3 px-5">
+    
+<ul class="flex items-center gap-2">
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="https://www.mtandhj.com/tags/note/">Note</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="https://www.mtandhj.com/tags/knowledge-tracing/">Knowledge Tracing</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="https://www.mtandhj.com/tags/attention/">Attention</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="https://www.mtandhj.com/tags/empirical/">Empirical</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="https://www.mtandhj.com/tags/edm/">EDM</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="https://www.mtandhj.com/tags/2019/">2019</a>
+  </li>
+</ul>
+</div>
+
+<div class="post-comment">
+    
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/@waline/client@v3/dist/waline.css"
+/>
+<div id="waline"></div>
+<script type="module">
+import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+window.onload = () => {
+    init({
+        el: '#waline',
+        reaction: false,
+        serverURL: 'https://comment.mtandhj.com',
+    });
+}
+</script>
+</div>
+
+</main>
+
+<script src="/js/main.js"></script>
+
+<footer class="bg-stone-100 dark:bg-stone-900 dark:text-white border-t border-stone-400 w-full p-4 text-center font-bold">
+  <div class="container mx-auto flex items-center justify-between">
+    <p> MTandHJ &copy; 2025 </p>
+  </div>
+</footer>
+
+</body>
+
+</html>

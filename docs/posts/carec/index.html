@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<head>
+
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<title>Collaborative Alignment for Recommendation | MTandHJ</title>
+	<meta name="keywords" content="Note, Collaborative Filtering, Universal Embedding, Empirical, CIKM, 2024">
+	<meta name="description" content="CARec, ID-Textual 特征对齐">
+	<link rel="canonical"
+		href="https://www.mtandhj.com/posts/carec/">
+
+
+
+	<link rel="stylesheet" href="/css/output.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="/css/private.css" type="text/css" media="all" />
+
+	
+	<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" 
+    integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww" 
+    crossorigin="anonymous"
+/>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd" crossorigin="anonymous"></script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+    onload="
+    window.addEventListener('DOMContentLoaded', function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true}, // 块级公式
+                {left: '$', right: '$', display: false},  // 行内公式
+                {left: '\\[', right: '\\]', display: true}, // 支持 \[ \] 块级公式
+                {left: '\\(', right: '\\)', display: false} // 支持 \( \) 行内公式
+            ]
+        });
+    });
+"></script>
+</head>
+
+<body class="bg-stone-50 font-custom flex flex-col justify-between min-h-screen dark:bg-stone-800 dark:text-white">
+
+	<header
+  class="site-header w-full bg-stone-100 dark:bg-stone-900 dark:text-white border-stone-400 border-b px-3 lg:px-3"
+  style="padding-top: 7px; padding-bottom: 7px;">
+  <nav class="site-nav flex items-center justify-between gap-3 container mx-auto " >
+    <div class="flex items-center  flex-wrap">
+      <a class="logo text-2xl md:text-3xl font-black" href="https://www.mtandhj.com/">
+        <img src="/images/logo.png" alt="MTandHJ" 
+        class="w-[35px] h-[35px] md:w-[38px] md:h-[38px] lg:w-[40px] lg:h-[40px]"
+        style="border-radius:50%; border:2px solid #DCD9D6;">
+      </a>
+      <ul class="main-menu flex items-center gap-3 mr-5">
+        
+        <li>
+          <a class=" text-lg" href="/pubs">俺的论文</a>
+        </li>
+        
+        <li>
+          <a class=" text-lg" href="/posts">随笔</a>
+        </li>
+        
+        <li>
+          <a class=" text-lg" href="/tags">Tags</a>
+        </li>
+        
+        <li>
+          <a class=" text-lg" href="/slides">Slides</a>
+        </li>
+        
+      </ul>
+    </div>
+    
+
+<li id="search-click" class="menu-item" style="display: none;">
+    <a class="menu-item-link" href="javascript:void(0)">Search</a>
+</li>
+
+<script>
+    
+    document.addEventListener("keydown", function (event) {
+        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+            event.preventDefault();
+            document.getElementById("search-click").click();
+        }
+    });
+</script>
+
+
+<div id="fastSearch">
+    <input id="searchInput" autocomplete="off">
+    <ul id="searchResults"></ul>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
+
+<script type="text/javascript" src="/js/search.min.243d998bd0c610c96bcfbb6d9059a4586cb855efea68a7db9409441ebaf81161.js"></script>
+    <button aria-label="theme-toggle" id="toggle-theme">
+      <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+    >
+    <path
+    class="fill-stone-800"
+        d="M12 10.999c1.437.438 2.562 1.564 2.999 3.001.44-1.437 1.565-2.562 3.001-3-1.436-.439-2.561-1.563-3.001-3-.437 1.436-1.562 2.561-2.999 2.999zm8.001.001c.958.293 1.707 1.042 2 2.001.291-.959 1.042-1.709 1.999-2.001-.957-.292-1.707-1.042-2-2-.293.958-1.042 1.708-1.999 2zm-1-9c-.437 1.437-1.563 2.562-2.998 3.001 1.438.44 2.561 1.564 3.001 3.002.437-1.438 1.563-2.563 2.996-3.002-1.433-.437-2.559-1.564-2.999-3.001zm-7.001 22c-6.617 0-12-5.383-12-12s5.383-12 12-12c1.894 0 3.63.497 5.37 1.179-2.948.504-9.37 3.266-9.37 10.821 0 7.454 5.917 10.208 9.37 10.821-1.5.846-3.476 1.179-5.37 1.179z">
+    </path>
+</svg>
+      <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+   >
+    <path
+    class="fill-white"
+        d="M4.069 13h-4.069v-2h4.069c-.041.328-.069.661-.069 1s.028.672.069 1zm3.034-7.312l-2.881-2.881-1.414 1.414 2.881 2.881c.411-.529.885-1.003 1.414-1.414zm11.209 1.414l2.881-2.881-1.414-1.414-2.881 2.881c.528.411 1.002.886 1.414 1.414zm-6.312-3.102c.339 0 .672.028 1 .069v-4.069h-2v4.069c.328-.041.661-.069 1-.069zm0 16c-.339 0-.672-.028-1-.069v4.069h2v-4.069c-.328.041-.661.069-1 .069zm7.931-9c.041.328.069.661.069 1s-.028.672-.069 1h4.069v-2h-4.069zm-3.033 7.312l2.88 2.88 1.415-1.414-2.88-2.88c-.412.528-.886 1.002-1.415 1.414zm-11.21-1.415l-2.88 2.88 1.414 1.414 2.88-2.88c-.528-.411-1.003-.885-1.414-1.414zm2.312-4.897c0 2.206 1.794 4 4 4s4-1.794 4-4-1.794-4-4-4-4 1.794-4 4zm10 0c0 3.314-2.686 6-6 6s-6-2.686-6-6 2.686-6 6-6 6 2.686 6 6z">
+    </path>
+</svg>
+    </button>
+  </nav>
+</header>
+
+	<main class="content container max-w-prose mx-auto flex-1 py-5 px-4 md:px-0">
+
+
+<div dir="" class="prose mx-auto break-normal px-5 mt-8 dark:prose-invert">
+    
+
+    <h1 class="text-2xl mb-0 md:text-3xl font-black ">Collaborative Alignment for Recommendation</h1>
+    <time class="text-sm my-2 text-muted mb-5" datetime=" 2025-03-25T00:00:00Z">
+        March 25, 2025
+    </time>
+    <div class="mt-3"></div>
+    <div class="toc select-none p-3 bg-stone-100 text-black dark:bg-stone-900 dark:text-white rounded">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details cursor-pointer">Content</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e9%a2%84%e5%a4%87%e7%9f%a5%e8%af%86" aria-label="预备知识">预备知识</a></li>
+                <li>
+                    <a href="#%e6%a0%b8%e5%bf%83%e6%80%9d%e6%83%b3" aria-label="核心思想">核心思想</a></li>
+                <li>
+                    <a href="#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae" aria-label="参考文献">参考文献</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+    <h2 id="预备知识">预备知识</h2>
+<ul>
+<li>$\mathcal{U} = \{u_1, u_2, \ldots, u_{|\mathcal{U}|}\}$, users;</li>
+<li>$\mathcal{I} = \{i_1, i_2, \ldots, i_{|\mathcal{I}|}\}$, items;</li>
+<li>$\mathbf{R} \in \{0, 1\}^{|\mathcal{U}| \times |\mathcal{I}|}$, interaction matrix;</li>
+<li>$\mathcal{G}(\mathcal{U}, \mathcal{I}, \mathcal{E})$, 对应的图.</li>
+</ul>
+<h2 id="核心思想">核心思想</h2>
+<p><img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250325154434.png" alt="20250325154434"></p>
+<ul>
+<li>
+<p>以前的方法大多为:</p>
+<ol>
+<li>纯的 ID-based 的方法, 即  user/item 均用可训练的 embeddings 表示;</li>
+<li>纯的语义表示, 即 user/item 均用文本或者其它模态信息编码得到的编码;</li>
+<li>二者混合.</li>
+</ol>
+</li>
+<li>
+<p>本文属于第三种, 特别之处在于 user embeddings 随机初始化 $\mathbf{h}_u^{(0)}$, item 的 embeddings 用语义表示 $\mathbf{h}_i^{(0)}$ (通过训练好的语言模型得到).</p>
+</li>
+<li>
+<p><strong>Semantic Aligning Phase:</strong> 这一阶段是为了训练 user embedddings, 使其和 item 的编码得到的语义特征对齐:</p>
+<ol>
+<li>
+<p>首先经过 LightGCN:</p>
+$$
+        \mathbf{h}_u, \mathbf{h}_i = \text{Aggregator}
+        \big(
+            \mathcal{G}(\mathcal{U}, \mathcal{I}, \mathcal{E}),
+            \mathbf{h}_u^{(0)}, \mathbf{h}_i^{(0)}
+        \big).
+        $$</li>
+<li>
+<p>通过类似 DirectAU 的方式对齐 $\mathbf{h}_u \rightarrow \mathbf{h}_i$:</p>
+$$
+        l_{align}^{\mathcal{U}} = \frac{1}{|\mathcal{E}|} 
+        \sum_{(u, i) \in \mathcal{E}} \| \mathbf{h}_u - \text{freeze}(\mathbf{h}_i) \|^2, \\
+        l_{uniform}^{\mathcal{U}}
+        \log \frac{1}{|\mathcal{U}|^2}
+        \sum_{u \in \mathcal{U}} \sum_{u^* \in \mathcal{U}} e^{-2 \| \mathbf{h}_u - \mathbf{h}_{u^*} \|}.
+        $$</li>
+</ol>
+<p>第二个损失是促进均匀分布的.</p>
+</li>
+<li>
+<p><strong>Collaborative Refining Phase:</strong> 在上一阶段训练完毕之后, 在进行一个协同微调 (作者是这么认为的) 的过程:</p>
+<ol>
+<li>
+<p>通过一个<strong>可训练的</strong> MLP 得到</p>
+$$
+        \mathbf{\tilde{h}}_i^{(0)} = \text{MLP}(\mathbf{h}_i^{(0)}).
+        $$<p>后续的过程是一样的.</p>
+</li>
+<li>
+<p>然后通过如下的 alignment loss 来令 $\mathbf{\tilde{h}}_i \rightarrow \mathbf{h}_u$:</p>
+$$
+        l_{align}^I = \frac{1}{|\mathcal{E}|}
+        \sum_{(u, i) \in \mathcal{E}} \| \text{freeze}(\mathbf{h}_u) - \mathbf{\tilde{h}}_i \|^2, \\
+        l_{uniform}^{\mathcal{I}}
+        \log \frac{1}{|\mathcal{I}|^2}
+        \sum_{i \in \mathcal{I}} \sum_{i^* \in \mathcal{I}} e^{-2 \| \mathbf{\tilde{h}}_i - \mathbf{\tilde{h}}_{i^*}\|}.
+        $$</li>
+</ol>
+</li>
+</ul>
+<p><strong>注:</strong> 容易发现, 这个阶段新引入的 MLP 是不会改变 $\mathbf{\tilde{h}}_i$ 的 embedding size 的, 所以在实际中, embedding size 必须和 text encoder 的 embedding size 保持一致. 这不是一个好的设计.</p>
+<ul>
+<li>Inference 的时候, 利用内积即可, 特别的是, 作者认为冷启动场景下不需要经过 MLP, 直接用 textual embedding 就可以了.</li>
+</ul>
+<h2 id="参考文献">参考文献</h2>
+<ol class="reference">
+  <li>
+    Wang C., Yang L., Liu Z., Liu X., Liang Y., and Yu P. S.
+    <u>Collaborative Alignment for Recommendation.</u>
+    <i>ICDE</i>, 2024.
+    <a href="https://dl.acm.org/doi/10.1145/3627673.3679535" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
+    <a href="https://github.com/ChenMetanoia/CARec" style="color: #007acc; font-weight: bold; text-decoration: none;">[Code]</a>
+  </li>
+  <!-- 添加更多文献条目 -->
+</ol>
+
+</div>
+<div class="mt-5 mb-3 px-5">
+    
+<ul class="flex items-center gap-2">
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="https://www.mtandhj.com/tags/note/">Note</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="https://www.mtandhj.com/tags/collaborative-filtering/">Collaborative Filtering</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="https://www.mtandhj.com/tags/universal-embedding/">Universal Embedding</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="https://www.mtandhj.com/tags/empirical/">Empirical</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="https://www.mtandhj.com/tags/cikm/">CIKM</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="https://www.mtandhj.com/tags/2024/">2024</a>
+  </li>
+</ul>
+</div>
+
+<div class="post-comment">
+    
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/@waline/client@v3/dist/waline.css"
+/>
+<div id="waline"></div>
+<script type="module">
+import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+window.onload = () => {
+    init({
+        el: '#waline',
+        reaction: false,
+        serverURL: 'https://comment.mtandhj.com',
+    });
+}
+</script>
+</div>
+
+</main>
+
+<script src="/js/main.js"></script>
+
+<footer class="bg-stone-100 dark:bg-stone-900 dark:text-white border-t border-stone-400 w-full p-4 text-center font-bold">
+  <div class="container mx-auto flex items-center justify-between">
+    <p> MTandHJ &copy; 2025 </p>
+  </div>
+</footer>
+
+</body>
+
+</html>
