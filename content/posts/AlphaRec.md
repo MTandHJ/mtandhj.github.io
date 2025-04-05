@@ -1,6 +1,6 @@
 ---
-date: "2025-03-23"
-draft: true
+date: "2025-04-05"
+draft: false
 title: "Language Representations Can be What Recommenders Need: Findings and Potentials"
 description: "Next-token embedding 之于协同过滤"
 author: MTandHJ
