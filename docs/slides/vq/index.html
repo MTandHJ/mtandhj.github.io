@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh" dir="ltr">
 
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
 
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -49,7 +49,7 @@ $$
     \bm{z} \sim q(\bm{z}|X; \phi).
     $$&lt;p&gt;e.g., 高斯分布: $\phi(\bm{x}) \rightarrow (\bm{\mu}, \Sigma) \rightarrow \mathcal{N}(\bm{\mu}, \Sigma)$.&lt;/p&gt;">
 	<link rel="canonical"
-		href="https://www.mtandhj.com/slides/vq/">
+		href="http://localhost:1313/slides/vq/">
 
 
 
@@ -89,7 +89,7 @@ $$
   style="padding-top: 7px; padding-bottom: 7px;">
   <nav class="site-nav flex items-center justify-between gap-3 container mx-auto " >
     <div class="flex items-center  flex-wrap">
-      <a class="logo text-2xl md:text-3xl font-black" href="https://www.mtandhj.com/">
+      <a class="logo text-2xl md:text-3xl font-black" href="http://localhost:1313/">
         <img src="/images/logo.png" alt="MTandHJ" 
         class="w-[35px] h-[35px] md:w-[38px] md:h-[38px] lg:w-[40px] lg:h-[40px]"
         style="border-radius:50%; border:2px solid #DCD9D6;">
@@ -164,71 +164,7 @@ $$
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/highlight/monokai.css">
 
-
-<script>
-  var link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.type = 'text/css';
-  link.href = window.location.search.match(/print-pdf/gi) ? 
-    'https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/css/print/pdf.css' : 
-    'https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/css/print/paper.css';
-  document.getElementsByTagName('head')[0].appendChild(link);
-</script>
-
 <style>
-   
-  @media print {
-    .reveal .slides section {
-      height: auto !important;
-      min-height: 700px;
-    }
-    
-    .reveal .slides section:not(:first-child) h1,
-    .reveal .slides section:not(:first-child) h2,
-    .reveal .slides section:not(:first-child) h3 {
-      position: absolute !important;
-      top: 0 !important;
-      left: -4rem !important;
-    }
-    
-    .reveal .slides section:not(:first-child) {
-      padding-top: 1.7em !important;
-    }
-    
-     
-    .reveal .slides section {
-      page-break-inside: avoid !important;
-    }
-    
-     
-    .reveal .slides section ul > li,
-    .reveal .slides section ol > li,
-    .reveal .slides section p {
-      font-size: 24px !important;
-    }
-    
-    .reveal .slides section ul ul > li {
-      font-size: 20px !important;
-    }
-    
-    .reveal .slides section ul ul ul > li {
-      font-size: 18px !important;
-    }
-    
-     
-    .reveal .slides section pre {
-      font-size: 16px !important;
-      max-height: none !important;
-      overflow: visible !important;
-    }
-    
-     
-    .reveal.fullscreen, #fullscreen-btn, #laser-btn, .laser-pointer,
-    .reveal .controls, .reveal .progress, .reveal .slide-number {
-      display: none !important;
-    }
-  }
-
   .reveal.fullscreen {
     position: fixed;
     top: 0;

@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<title>Language Representations Can be What Recommenders Need: Findings and Potentials | MTandHJ</title>
+	<meta name="keywords" content="Note, Collaborative Filtering, LLM, Universal Embedding, Empirical, ICLR, 2025">
+	<meta name="description" content="Next-token embedding 之于协同过滤">
+	<link rel="canonical"
+		href="http://localhost:1313/posts/alpharec/">
+
+
+
+	<link rel="stylesheet" href="/css/output.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="/css/private.css" type="text/css" media="all" />
+
+	
+	<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" 
+    integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww" 
+    crossorigin="anonymous"
+/>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd" crossorigin="anonymous"></script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+    onload="
+    window.addEventListener('DOMContentLoaded', function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true}, // 块级公式
+                {left: '$', right: '$', display: false},  // 行内公式
+                {left: '\\[', right: '\\]', display: true}, // 支持 \[ \] 块级公式
+                {left: '\\(', right: '\\)', display: false} // 支持 \( \) 行内公式
+            ]
+        });
+    });
+"></script>
+</head>
+
+<body class="bg-stone-50 font-custom flex flex-col justify-between min-h-screen dark:bg-stone-800 dark:text-white">
+
+	<header
+  class="site-header w-full bg-stone-100 dark:bg-stone-900 dark:text-white border-stone-400 border-b px-3 lg:px-3"
+  style="padding-top: 7px; padding-bottom: 7px;">
+  <nav class="site-nav flex items-center justify-between gap-3 container mx-auto " >
+    <div class="flex items-center  flex-wrap">
+      <a class="logo text-2xl md:text-3xl font-black" href="http://localhost:1313/">
+        <img src="/images/logo.png" alt="MTandHJ" 
+        class="w-[35px] h-[35px] md:w-[38px] md:h-[38px] lg:w-[40px] lg:h-[40px]"
+        style="border-radius:50%; border:2px solid #DCD9D6;">
+      </a>
+      <ul class="main-menu flex items-center gap-3 mr-5">
+        
+        <li>
+          <a class=" text-lg" href="/pubs">俺的论文</a>
+        </li>
+        
+        <li>
+          <a class=" text-lg" href="/posts">随笔</a>
+        </li>
+        
+        <li>
+          <a class=" text-lg" href="/tags">Tags</a>
+        </li>
+        
+        <li>
+          <a class=" text-lg" href="/slides">Slides</a>
+        </li>
+        
+      </ul>
+    </div>
+    
+
+<li id="search-click" class="menu-item" style="display: none;">
+    <a class="menu-item-link" href="javascript:void(0)">Search</a>
+</li>
+
+<script>
+    
+    document.addEventListener("keydown", function (event) {
+        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+            event.preventDefault();
+            document.getElementById("search-click").click();
+        }
+    });
+</script>
+
+
+<div id="fastSearch">
+    <input id="searchInput" autocomplete="off">
+    <ul id="searchResults"></ul>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
+
+<script type="text/javascript" src="/js/search.min.243d998bd0c610c96bcfbb6d9059a4586cb855efea68a7db9409441ebaf81161.js"></script>
+    <button aria-label="theme-toggle" id="toggle-theme">
+      <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+    >
+    <path
+    class="fill-stone-800"
+        d="M12 10.999c1.437.438 2.562 1.564 2.999 3.001.44-1.437 1.565-2.562 3.001-3-1.436-.439-2.561-1.563-3.001-3-.437 1.436-1.562 2.561-2.999 2.999zm8.001.001c.958.293 1.707 1.042 2 2.001.291-.959 1.042-1.709 1.999-2.001-.957-.292-1.707-1.042-2-2-.293.958-1.042 1.708-1.999 2zm-1-9c-.437 1.437-1.563 2.562-2.998 3.001 1.438.44 2.561 1.564 3.001 3.002.437-1.438 1.563-2.563 2.996-3.002-1.433-.437-2.559-1.564-2.999-3.001zm-7.001 22c-6.617 0-12-5.383-12-12s5.383-12 12-12c1.894 0 3.63.497 5.37 1.179-2.948.504-9.37 3.266-9.37 10.821 0 7.454 5.917 10.208 9.37 10.821-1.5.846-3.476 1.179-5.37 1.179z">
+    </path>
+</svg>
+      <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+   >
+    <path
+    class="fill-white"
+        d="M4.069 13h-4.069v-2h4.069c-.041.328-.069.661-.069 1s.028.672.069 1zm3.034-7.312l-2.881-2.881-1.414 1.414 2.881 2.881c.411-.529.885-1.003 1.414-1.414zm11.209 1.414l2.881-2.881-1.414-1.414-2.881 2.881c.528.411 1.002.886 1.414 1.414zm-6.312-3.102c.339 0 .672.028 1 .069v-4.069h-2v4.069c.328-.041.661-.069 1-.069zm0 16c-.339 0-.672-.028-1-.069v4.069h2v-4.069c-.328.041-.661.069-1 .069zm7.931-9c.041.328.069.661.069 1s-.028.672-.069 1h4.069v-2h-4.069zm-3.033 7.312l2.88 2.88 1.415-1.414-2.88-2.88c-.412.528-.886 1.002-1.415 1.414zm-11.21-1.415l-2.88 2.88 1.414 1.414 2.88-2.88c-.528-.411-1.003-.885-1.414-1.414zm2.312-4.897c0 2.206 1.794 4 4 4s4-1.794 4-4-1.794-4-4-4-4 1.794-4 4zm10 0c0 3.314-2.686 6-6 6s-6-2.686-6-6 2.686-6 6-6 6 2.686 6 6z">
+    </path>
+</svg>
+    </button>
+  </nav>
+</header>
+
+	<main class="content container max-w-prose mx-auto flex-1 py-5 px-4 md:px-0">
+
+
+<div dir="" class="prose mx-auto break-normal px-5 mt-8 dark:prose-invert">
+    
+
+    <h1 class="text-2xl mb-0 md:text-3xl font-black ">Language Representations Can be What Recommenders Need: Findings and Potentials</h1>
+    <time class="text-sm my-2 text-muted mb-5" datetime=" 2025-04-05T00:00:00Z">
+        April 5, 2025
+    </time>
+    <div class="mt-3"></div>
+    <div class="toc select-none p-3 bg-stone-100 text-black dark:bg-stone-900 dark:text-white rounded">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details cursor-pointer">Content</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e6%a0%b8%e5%bf%83%e6%80%9d%e6%83%b3" aria-label="核心思想">核心思想</a><ul>
+                <li>
+                    <a href="#linear" aria-label="Linear">Linear</a></li>
+                <li>
+                    <a href="#alpharec" aria-label="AlphaRec">AlphaRec</a></li>
+                <li>
+                    <a href="#%e5%85%b6%e5%ae%83%e6%bd%9c%e5%8a%9b" aria-label="其它潜力">其它潜力</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%b8%aa%e4%ba%ba%e6%b5%8b%e8%af%95" aria-label="个人测试">个人测试</a><ul>
+                <li>
+                    <a href="#movies" aria-label="Movies">Movies</a></li>
+                <li>
+                    <a href="#beauty" aria-label="Beauty">Beauty</a></li>
+                <li>
+                    <a href="#baby" aria-label="Baby">Baby</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae" aria-label="参考文献">参考文献</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+    <h2 id="核心思想">核心思想</h2>
+<p><img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250323131310.png" alt="20250323131310"></p>
+<h3 id="linear">Linear</h3>
+<ul>
+<li>
+<p>本文探索 LLM embeddings 的潜力, 方法极为简单:</p>
+<ol>
+<li>将 title 的 embeddings 作为对应 item 的表示 (记为 $\bm{z}_i$), 其过程如下 (注意到, 实际上, 是将 decoder-only 的 next-token embedding 作为 item 的表示, 而不是平均之类的方式):</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># model_path = &#34;meta-llama/Meta-Llama-3-8B&#34;</span>
+</span></span><span style="display:flex;"><span>model_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;meta-llama/Llama-2-7b-hf&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># model_path = &#34;meta-llama/Llama-2-13b-hf&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tokenizer <span style="color:#f92672">=</span> AutoTokenizer<span style="color:#f92672">.</span>from_pretrained(model_path, device_map <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;auto&#39;</span>)
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> AutoModelForCausalLM<span style="color:#f92672">.</span>from_pretrained(model_path, device_map <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;auto&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>tokenizer<span style="color:#f92672">.</span>padding_side <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;left&#34;</span>
+</span></span><span style="display:flex;"><span>tokenizer<span style="color:#f92672">.</span>pad_token <span style="color:#f92672">=</span> tokenizer<span style="color:#f92672">.</span>eos_token
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>item_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#39;raw_data/items_filtered.csv&#39;</span>, index_col<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>item_df<span style="color:#f92672">.</span>rename(columns<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;title&#39;</span>: <span style="color:#e6db74">&#39;item_name&#39;</span>}, inplace<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>batch_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">64</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> tqdm(range(<span style="color:#ae81ff">0</span>, len(item_df), batch_size)):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># print(i)</span>
+</span></span><span style="display:flex;"><span>    item_names <span style="color:#f92672">=</span> item_df[<span style="color:#e6db74">&#39;item_name&#39;</span>][i:i<span style="color:#f92672">+</span>batch_size]
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 生成输出</span>
+</span></span><span style="display:flex;"><span>    inputs <span style="color:#f92672">=</span> tokenizer(item_names<span style="color:#f92672">.</span>tolist(), return_tensors<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;pt&#34;</span>, padding<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, truncation<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">128</span>)<span style="color:#f92672">.</span>to(model<span style="color:#f92672">.</span>device)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> torch<span style="color:#f92672">.</span>no_grad():
+</span></span><span style="display:flex;"><span>        output <span style="color:#f92672">=</span> model(<span style="color:#f92672">**</span>inputs, output_hidden_states<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>    seq_embeds <span style="color:#f92672">=</span> output<span style="color:#f92672">.</span>hidden_states[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][:, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, :]<span style="color:#f92672">.</span>detach()<span style="color:#f92672">.</span>cpu()<span style="color:#f92672">.</span>numpy()
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># break</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> i <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        item_llama_embeds <span style="color:#f92672">=</span> seq_embeds
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        item_llama_embeds <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>concatenate((item_llama_embeds, seq_embeds), axis<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>)
+</span></span></code></pre></div><ol start="2">
+<li>
+<p>然后 user 表示为其所交互过的商品的平均:</p>
+$$
+        \bm{z}_u = \frac{1}{|\mathcal{N}_u|} \sum_{i \in \mathcal{N}_u} \bm{z}_i.
+        $$</li>
+<li>
+<p>然后通过共享的 projector 得到:</p>
+$$
+        \bm{e}_u = \mathbf{W} \bm{z}_u, \quad 
+        \bm{e}_i = \mathbf{W} \bm{z}_i.
+        $$</li>
+<li>
+<p>score 以 cosine similarity 来计算:</p>
+$$
+        s_{ui} = \frac{\bm{e}_u^T \bm{e}_i}{\|\bm{e}_u\| \| \bm{e}_i\|}.
+        $$</li>
+<li>
+<p>通过 InfoNCE 进行训练 (温度参数 $\tau \approx 0.15$), 注意, $\bm{z}$ 是固定的.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>下面是 linear projector 下的结果:</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250323132631.png" alt="20250323132631"></p>
+<ul>
+<li>有一些很有趣的点:
+<ol>
+<li>BERT, RoBERTa 等传统的 encoder 模型反而会取得很差的效果, 这个和之前的一些经验是相符的;</li>
+<li>随着 LLM 的能力的增强, 效果也越来越好了, 很容易就能够超过 ID-based 的方法.</li>
+</ol>
+</li>
+</ul>
+<h3 id="alpharec">AlphaRec</h3>
+<ul>
+<li>
+<p>AlphaRec 的做法:</p>
+<ol>
+<li>linear projector 进行了一点点修改</li>
+</ol>
+$$
+    \bm{e} = \mathbf{W}_2 \text{LeakyReLU}
+    \big(
+        \mathbf{W}_1 \bm{z}
+    \big).
+    $$<ol start="2">
+<li>加上 LightGCN:</li>
+</ol>
+$$
+    \mathbf{F} = \sum_{l=0}^{L+1} \mathbf{\tilde{A}}^l \mathbf{E},
+    $$<p>这里 $\mathbf{E}$ 是所有的 $\bm{e}_u, \bm{e}_i$, $\mathbf{\tilde{A}}$ 是对应的 (对称) normalized 邻接矩阵.</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250323133416.png" alt="20250323133416"></p>
+<ul>
+<li>如上图所示, AlphaRec 如此简单的方法就能够取得非常惊人的效果 (而且效率很高).</li>
+</ul>
+<h3 id="其它潜力">其它潜力</h3>
+<ul>
+<li>
+<p>可以作为初始化而加速和提高传统模型</p>
+</li>
+<li>
+<p>非常强的 zero-shot 能力, 甚至能够媲美传统模型 full-training 的效果</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250323133753.png" alt="20250323133753"></p>
+<ul>
+<li>
+<p>intention-aware, 用户可以输入自己的意图, 同样通过 LLM 得到 embedding, 加权平均得到 user 的表示:</p>
+$$
+    \bm{\tilde{e}}_u = (1 - \alpha) \bm{e}_u + \alpha \bm{e}_u^{Intention}.
+    $$</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250323133719.png" alt="20250323133719"></p>
+<h2 id="个人测试">个人测试</h2>
+<ul>
+<li>参考作者的代码, 自己实现了 <a href="https://github.com/MTandHJ/RecBoard/tree/master/AlphaRec">AlphaRec</a>, 在 Movies 进行了一下测试.</li>
+</ul>
+<h3 id="movies">Movies</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># AlphaRec</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">root</span>: <span style="color:#ae81ff">../../data</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">dataset</span>: <span style="color:#ae81ff">AmazonMovies_Alpha</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tasktag</span>: <span style="color:#ae81ff">Matching</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">embedding_dim</span>: <span style="color:#ae81ff">64</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">num_layers</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">epochs</span>: <span style="color:#ae81ff">500</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">batch_size</span>: <span style="color:#ae81ff">4096</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">optimizer</span>: <span style="color:#ae81ff">adam</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">lr</span>: <span style="color:#ae81ff">5.e-4</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">weight_decay</span>: <span style="color:#ae81ff">1.e-6</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tau</span>: <span style="color:#ae81ff">0.15</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">num_negs</span>: <span style="color:#ae81ff">256</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">projector</span>: <span style="color:#ae81ff">mlp</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">monitors</span>: [<span style="color:#ae81ff">LOSS, Recall@1, Recall@10, Recall@20, HitRate@10, HitRate@20, NDCG@10, NDCG@20]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">which4best</span>: <span style="color:#ae81ff">Recall@20</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># LightGCN</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">root</span>: <span style="color:#ae81ff">../../data</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">dataset</span>: <span style="color:#ae81ff">AmazonMovies_Alpha</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tasktag</span>: <span style="color:#ae81ff">Matching</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">embedding_dim</span>: <span style="color:#ae81ff">64</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">num_layers</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">epochs</span>: <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">batch_size</span>: <span style="color:#ae81ff">2048</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">optimizer</span>: <span style="color:#ae81ff">adam</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">lr</span>: <span style="color:#ae81ff">1.e-3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">weight_decay</span>: <span style="color:#ae81ff">1.e-3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">monitors</span>: [<span style="color:#ae81ff">LOSS, Recall@1, Recall@10, Recall@20, HitRate@10, HitRate@20, NDCG@10, NDCG@20]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">which4best</span>: <span style="color:#ae81ff">NDCG@20</span>
+</span></span></code></pre></div><h3 id="beauty">Beauty</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># LightGCN</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">root</span>: <span style="color:#ae81ff">../../data</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">dataset</span>: <span style="color:#ae81ff">Amazon2014Beauty_550811_ROU</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tasktag</span>: <span style="color:#ae81ff">Matching</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">embedding_dim</span>: <span style="color:#ae81ff">64</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">num_layers</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">epochs</span>: <span style="color:#ae81ff">1000</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">batch_size</span>: <span style="color:#ae81ff">2048</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">optimizer</span>: <span style="color:#ae81ff">adam</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">lr</span>: <span style="color:#ae81ff">1.e-3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">weight_decay</span>: <span style="color:#ae81ff">1.e-3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">monitors</span>: [<span style="color:#ae81ff">LOSS, Recall@1, Recall@10, Recall@20, NDCG@10, NDCG@20]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">which4best</span>: <span style="color:#ae81ff">NDCG@20</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># LightGCN + InfoNCE</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">root</span>: <span style="color:#ae81ff">../../data</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">dataset</span>: <span style="color:#ae81ff">Amazon2014Beauty_550811_ROU</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tasktag</span>: <span style="color:#ae81ff">Matching</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">embedding_dim</span>: <span style="color:#ae81ff">64</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">num_layers</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">num_negs</span>: <span style="color:#ae81ff">256</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tau</span>: <span style="color:#ae81ff">0.15</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">epochs</span>: <span style="color:#ae81ff">500</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">batch_size</span>: <span style="color:#ae81ff">2048</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">optimizer</span>: <span style="color:#ae81ff">adam</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">lr</span>: <span style="color:#ae81ff">5.e-4</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">weight_decay</span>: <span style="color:#ae81ff">1.e-2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">monitors</span>: [<span style="color:#ae81ff">LOSS, Recall@1, Recall@10, Recall@20, NDCG@10, NDCG@20]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">which4best</span>: <span style="color:#ae81ff">NDCG@20</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">root</span>: <span style="color:#ae81ff">../../data</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">dataset</span>: <span style="color:#ae81ff">Amazon2014Beauty_550811_ROU</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tasktag</span>: <span style="color:#ae81ff">Matching</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">embedding_dim</span>: <span style="color:#ae81ff">64</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">num_layers</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tfile</span>: <span style="color:#ae81ff">llama2_7b_title.pkl</span> <span style="color:#75715e"># llama2_13b_title.pkl</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">epochs</span>: <span style="color:#ae81ff">500</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">batch_size</span>: <span style="color:#ae81ff">2048</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">optimizer</span>: <span style="color:#ae81ff">adam</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">lr</span>: <span style="color:#ae81ff">5.e-4</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">weight_decay</span>: <span style="color:#ae81ff">0</span><span style="color:#ae81ff">.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tau</span>: <span style="color:#ae81ff">0.15</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">num_negs</span>: <span style="color:#ae81ff">256</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">projector</span>: <span style="color:#ae81ff">mlp</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">monitors</span>: [<span style="color:#ae81ff">LOSS, Recall@1, Recall@10, Recall@20, NDCG@10, NDCG@20]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">which4best</span>: <span style="color:#ae81ff">NDCG@20</span>
+</span></span></code></pre></div><table>
+  <thead>
+      <tr>
+          <th>Method</th>
+          <th>R@1</th>
+          <th>R@10</th>
+          <th>R@20</th>
+          <th>N@10</th>
+          <th>N@20</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>LightGCN</td>
+          <td>0.0079</td>
+          <td>0.0538</td>
+          <td>0.0836</td>
+          <td>0.0282</td>
+          <td>0.0361</td>
+      </tr>
+      <tr>
+          <td>LightGCN+InfoNCE</td>
+          <td>0.0098</td>
+          <td>0.0544</td>
+          <td>0.0829</td>
+          <td>0.0296</td>
+          <td>0.0371</td>
+      </tr>
+      <tr>
+          <td>AlphaRec (Llama2-7B)</td>
+          <td>0.0104</td>
+          <td>0.0618</td>
+          <td>0.0925</td>
+          <td>0.0330</td>
+          <td>0.0412</td>
+      </tr>
+      <tr>
+          <td>AlphaRec (Llama2-13B)</td>
+          <td>0.0107</td>
+          <td>0.0608</td>
+          <td>0.0921</td>
+          <td>0.0329</td>
+          <td>0.0412</td>
+      </tr>
+      <tr>
+          <td>AlphaRec (MiniLM-L12-v2)</td>
+          <td>0.0100</td>
+          <td>0.0608</td>
+          <td>0.0930</td>
+          <td>0.0322</td>
+          <td>0.0407</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="baby">Baby</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># LightGCN</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">root</span>: <span style="color:#ae81ff">../../data</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">dataset</span>: <span style="color:#ae81ff">Amazon2014Baby_550811_RAU</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tasktag</span>: <span style="color:#ae81ff">Matching</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">embedding_dim</span>: <span style="color:#ae81ff">64</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># num_layers: 3</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># num_negs: 256</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># tau: 0.25</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">epochs</span>: <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">batch_size</span>: <span style="color:#ae81ff">2048</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">optimizer</span>: <span style="color:#ae81ff">adam</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">lr</span>: <span style="color:#ae81ff">1.e-3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">weight_decay</span>: <span style="color:#ae81ff">5.e-3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">monitors</span>: [<span style="color:#ae81ff">LOSS, Recall@1, Recall@10, Recall@20, NDCG@10, NDCG@20]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">which4best</span>: <span style="color:#ae81ff">NDCG@20</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># LightGCN + InfoNCE</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">root</span>: <span style="color:#ae81ff">../../data</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">dataset</span>: <span style="color:#ae81ff">Amazon2014Baby_550811_RAU</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tasktag</span>: <span style="color:#ae81ff">Matching</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">embedding_dim</span>: <span style="color:#ae81ff">64</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">num_layers</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">num_negs</span>: <span style="color:#ae81ff">256</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tau</span>: <span style="color:#ae81ff">0.25</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">epochs</span>: <span style="color:#ae81ff">500</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">batch_size</span>: <span style="color:#ae81ff">2048</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">optimizer</span>: <span style="color:#ae81ff">adam</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">lr</span>: <span style="color:#ae81ff">1.e-3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">weight_decay</span>: <span style="color:#ae81ff">1.e-3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">monitors</span>: [<span style="color:#ae81ff">LOSS, Recall@1, Recall@10, Recall@20, NDCG@10, NDCG@20]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">which4best</span>: <span style="color:#ae81ff">NDCG@20</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># AlphaRec</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">root</span>: <span style="color:#ae81ff">../../data</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">dataset</span>: <span style="color:#ae81ff">Amazon2014Baby_550811_RAU</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tasktag</span>: <span style="color:#ae81ff">Matching</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">embedding_dim</span>: <span style="color:#ae81ff">64</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">num_layers</span>: <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tfile</span>: <span style="color:#ae81ff">llama2_7b_title.pkl</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">epochs</span>: <span style="color:#ae81ff">500</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">batch_size</span>: <span style="color:#ae81ff">2048</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">optimizer</span>: <span style="color:#ae81ff">adam</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">lr</span>: <span style="color:#ae81ff">5.e-4</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">weight_decay</span>: <span style="color:#ae81ff">0</span><span style="color:#ae81ff">.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">tau</span>: <span style="color:#ae81ff">0.25</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">num_negs</span>: <span style="color:#ae81ff">256</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">projector</span>: <span style="color:#ae81ff">mlp</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">monitors</span>: [<span style="color:#ae81ff">LOSS, Recall@1, Recall@10, Recall@20, NDCG@10, NDCG@20]</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">which4best</span>: <span style="color:#ae81ff">NDCG@20</span>
+</span></span></code></pre></div><table>
+  <thead>
+      <tr>
+          <th>Method</th>
+          <th>R@1</th>
+          <th>R@10</th>
+          <th>R@20</th>
+          <th>N@10</th>
+          <th>N@20</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>LightGCN</td>
+          <td>0.0037</td>
+          <td>0.0212</td>
+          <td>0.0357</td>
+          <td>0.0113</td>
+          <td>0.0151</td>
+      </tr>
+      <tr>
+          <td>LightGCN+InfoNCE</td>
+          <td>0.0036</td>
+          <td>0.0206</td>
+          <td>0.0344</td>
+          <td>0.0111</td>
+          <td>0.0147</td>
+      </tr>
+      <tr>
+          <td>AlphaRec (Llama2-7B)</td>
+          <td>0.0039</td>
+          <td>0.0243</td>
+          <td>0.0399</td>
+          <td>0.0128</td>
+          <td>0.0169</td>
+      </tr>
+      <tr>
+          <td>AlphaRec (Llama2-13B)</td>
+          <td>0.0037</td>
+          <td>0.0242</td>
+          <td>0.0399</td>
+          <td>0.0126</td>
+          <td>0.0167</td>
+      </tr>
+      <tr>
+          <td>AlphaRec (MiniLM-L12-v2)</td>
+          <td>0.0031</td>
+          <td>0.0229</td>
+          <td>0.0385</td>
+          <td>0.0117</td>
+          <td>0.0158</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>
+<p>从自己处理的数据集来看, LLM 并没有比传统的 BERT 好上太多.</p>
+</li>
+<li>
+<p>不过 Next-token embedding 的能力还是比较令人惊讶的, 这方面的原因可能可以通过 <a href="https://www.mtandhj.com/posts/knowledgestorageandextraction/">这篇文章</a> 解释.</p>
+</li>
+</ul>
+<h2 id="参考文献">参考文献</h2>
+<ol class="reference">
+  <li>
+    Sheng L., Zhang A., Zhang Y., Chen Y., Wang X., and Chua T.
+    <u>Language Representations Can be What Recommenders Need: Findings and Potentials</u>
+    <i>ICLR</i>, 2025.
+    <a href="http://arxiv.org/abs/2407.05441" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
+    <a href="https://github.com/LehengTHU/AlphaRec" style="color: #007acc; font-weight: bold; text-decoration: none;">[Code]</a>
+  </li>
+  <!-- 添加更多文献条目 -->
+</ol>
+
+</div>
+<div class="mt-5 mb-3 px-5">
+    
+<ul class="flex items-center gap-2">
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/note/">Note</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/collaborative-filtering/">Collaborative Filtering</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/llm/">LLM</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/universal-embedding/">Universal Embedding</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/empirical/">Empirical</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/iclr/">ICLR</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/2025/">2025</a>
+  </li>
+</ul>
+</div>
+
+<div class="post-comment">
+    
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/@waline/client@v3/dist/waline.css"
+/>
+<div id="waline"></div>
+<script type="module">
+import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+window.onload = () => {
+    init({
+        el: '#waline',
+        reaction: false,
+        serverURL: 'https://comment.mtandhj.com',
+    });
+}
+</script>
+</div>
+
+</main>
+
+<script src="/js/main.js"></script>
+
+<footer class="bg-stone-100 dark:bg-stone-900 dark:text-white border-t border-stone-400 w-full p-4 text-center font-bold">
+  <div class="container mx-auto flex items-center justify-between">
+    <p> MTandHJ &copy; 2025 </p>
+  </div>
+</footer>
+
+</body>
+
+</html>

@@ -157,82 +157,7 @@ $$
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/highlight/monokai.css">
 
-
-<script>
-  var printPdfMode = window.location.search.match(/print-pdf/gi);
-  
-  
-  var link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.type = 'text/css';
-  link.href = printPdfMode ? 
-    'https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/css/print/pdf.css' : 
-    'https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/css/print/paper.css';
-  document.getElementsByTagName('head')[0].appendChild(link);
-  
-  
-  if (printPdfMode) {
-    document.addEventListener('DOMContentLoaded', function() {
-      
-      var style = document.createElement('style');
-      style.textContent = `
-        /* PDF打印模式自定义样式 */
-        .reveal .slides section {
-          height: auto !important;
-          min-height: 700px !important;
-          page-break-inside: avoid !important;
-        }
-        
-        .reveal .slides section:not(:first-child) h1,
-        .reveal .slides section:not(:first-child) h2,
-        .reveal .slides section:not(:first-child) h3 {
-          position: absolute !important;
-          top: 0 !important;
-          left: -4rem !important;
-        }
-        
-        .reveal .slides section:not(:first-child) {
-          padding-top: 1.7em !important;
-          top: 0 !important;
-          bottom: 0 !important;
-          transform: none !important;
-        }
-        
-        /* 确保PDF中所有文本元素样式保持一致 */
-        .reveal .slides section ul > li,
-        .reveal .slides section ol > li,
-        .reveal .slides section p {
-          font-size: 24px !important;
-        }
-        
-        .reveal .slides section ul ul > li {
-          font-size: 20px !important;
-        }
-        
-        .reveal .slides section ul ul ul > li {
-          font-size: 18px !important;
-        }
-        
-        /* 调整PDF导出时代码块的样式 */
-        .reveal .slides section pre {
-          font-size: 16px !important;
-          max-height: none !important;
-          overflow: visible !important;
-        }
-        
-        /* 隐藏不需要在PDF中显示的元素 */
-        #fullscreen-btn, #laser-btn, .laser-pointer,
-        .reveal .controls, .reveal .progress, .reveal .slide-number {
-          display: none !important;
-        }
-      `;
-      document.head.appendChild(style);
-    });
-  }
-</script>
-
 <style>
-   
   .reveal.fullscreen {
     position: fixed;
     top: 0;
@@ -539,7 +464,7 @@ $$<div class="slide-ref">
 </div>
 <div class="slide-ref">
   <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-  <p style="margin: 2px 0;">Higham N. J. The Accuracy of Floating Point Summation. SIAM Journal on Scientific Computing, 1993.</p>
+  <p style="margin: 2px 0;">Higham N. J. The Accuracy of Floating Point Summation. SIAM Journal on Scientific Computing. 1993.</p>
 </div>
 </textarea>
 </section>
@@ -723,7 +648,7 @@ $$<ul>
 <textarea data-template>
 <h3 id="experiments">Experiments</h3>
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314205532.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250407195719.png" alt="Image" style="max-width: 100%; height: auto;margin: 0 auto;">
 </div>
 </textarea>
 </section>
@@ -731,7 +656,7 @@ $$<ul>
 <textarea data-template>
 <h3 id="experiments-1">Experiments</h3>
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250319170048.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250407195839.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
 </div>
 </textarea>
 </section>
@@ -748,14 +673,6 @@ $$<ul>
 </section>
 <section data-markdown>
 <textarea data-template>
-<h3 id="2nd-state-distribution">2nd State Distribution</h3>
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250319170316.png" alt="Image" style="max-width: 55%; height: auto;margin: 0 auto;">
-</div>
-</textarea>
-</section>
-<section data-markdown>
-<textarea data-template>
 <h3 id="quantile">Quantile $x_p$</h3>
 <ul>
 <li>基本上 $p \in [0.05, 0.3]$ 都有不错的性能</li>
@@ -767,17 +684,43 @@ $$<ul>
 </section>
 <section data-markdown>
 <textarea data-template>
-<h3 id="未完待续">未完待续</h3>
+<h3 id="beta-block-size">Beta, Block size</h3>
 <ul>
-<li>
-<p>2nd State 量化的消融实验 (Stochastic rounding、Block Size)</p>
-</li>
-<li>
-<p>扩展到其它的优化器上</p>
-</li>
+<li>损失正常收敛</li>
 </ul>
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250407200935.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
+</div>
 </textarea>
 </section>
+<section data-markdown>
+<textarea data-template>
+<h3 id="2nd-state-distribution">2nd State Distribution</h3>
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250407201114.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
+</div>
+</textarea>
+</section>
+<section data-markdown>
+<textarea data-template>
+<h3 id="adabelief">AdaBelief</h3>
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250407202155.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
+</div>
+</textarea>
+</section>
+<section>
+<div style="
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40%;
+  font-size: 10rem;
+">
+  Thanks!
+</div>
+</section>
+
   </div>
 </div>
 
