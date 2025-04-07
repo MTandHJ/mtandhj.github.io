@@ -117,7 +117,7 @@ $$
 
 <div class="slide-ref">
   <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-  <p style="margin: 2px 0;">Higham N. J. The Accuracy of Floating Point Summation. SIAM Journal on Scientific Computing, 1993.</p>
+  <p style="margin: 2px 0;">Higham N. J. The Accuracy of Floating Point Summation. SIAM Journal on Scientific Computing. 1993.</p>
 </div>
 
 </textarea>
@@ -366,8 +366,10 @@ $$
 ### Experiments
 
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314205532.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250407195719.png" alt="Image" style="max-width: 100%; height: auto;margin: 0 auto;">
 </div>
+
+
 
 </textarea>
 </section>
@@ -378,7 +380,7 @@ $$
 ### Experiments
 
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250319170048.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250407195839.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
 </div>
 
 </textarea>
@@ -403,19 +405,6 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### 2nd State Distribution
-
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250319170316.png" alt="Image" style="max-width: 55%; height: auto;margin: 0 auto;">
-</div>
-
-</textarea>
-</section>
-
-
-<section data-markdown>
-<textarea data-template>
-
 ### Quantile $x_p$
 
 - 基本上 $p \in [0.05, 0.3]$ 都有不错的性能
@@ -431,11 +420,54 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### 未完待续
+### Beta, Block size
 
-- 2nd State 量化的消融实验 (Stochastic rounding、Block Size)
+- 损失正常收敛
 
-- 扩展到其它的优化器上
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250407200935.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
+</div>
 
 </textarea>
+</section>
+
+
+
+<section data-markdown>
+<textarea data-template>
+
+### 2nd State Distribution
+
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250407201114.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
+</div>
+
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+
+### AdaBelief
+
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250407202155.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
+</div>
+
+</textarea>
+</section>
+
+<section>
+
+
+<div style="
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40%;
+  font-size: 10rem;
+">
+  Thanks!
+</div>
+
 </section>
