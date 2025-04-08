@@ -6,24 +6,33 @@ var first = list.firstChild; // first child of search list
 var last = list.lastChild; // last child of search list
 var maininput = document.getElementById('searchInput'); // input box for search
 var resultsAvailable = false; // Did we get any search results?
- 
+
+// 常量定义
+const CONSTANTS = {
+  MAX_RESULTS: 5,
+  CONTEXT_LENGTH: 50,
+  SHORT_WORD_LENGTH: 2,
+  SEARCH_THRESHOLD: 0.4
+};
+
 // ==========================================
 // The main keyboard event listener running the show
 //
 document.addEventListener("click", event => {
-  var cDom = document.getElementById("fastSearch");
-  var sDom = document.getElementById('search-click');
-  var tDom = event.target;
-  if (sDom == tDom || sDom.contains(tDom)) {
+  const searchContainer = document.getElementById("fastSearch");
+  const searchButton = document.getElementById('search-click');
+  const target = event.target;
+
+  if (searchButton === target || searchButton.contains(target)) {
     showSearchInput();
-  } else if (cDom == tDom || cDom.contains(tDom)) {
-    // ...
+  } else if (searchContainer === target || searchContainer.contains(target)) {
+    // 点击搜索容器内部，不做处理
   } else if (searchVisible) {
-    cDom.style.display = "none"
+    searchContainer.style.display = "none";
     searchVisible = false;
   }
 });
- 
+
 document.addEventListener('keydown', function(event) {
   // CMD-/ to show / hide Search
   if (event.metaKey && event.which === 191) {
@@ -31,58 +40,50 @@ document.addEventListener('keydown', function(event) {
   }
 
   // Allow ESC (27) to close search box
-  if (event.keyCode == 27) {
-    if (searchVisible) {
-      document.getElementById("fastSearch").style.display = "none";
-      document.activeElement.blur();
-      searchVisible = false;
-    }
+  if (event.keyCode === 27 && searchVisible) {
+    document.getElementById("fastSearch").style.display = "none";
+    document.activeElement.blur();
+    searchVisible = false;
   }
 
   // DOWN (40) arrow
-  if (event.keyCode == 40) {
-    if (searchVisible && resultsAvailable) {
+  if (searchVisible && resultsAvailable) {
+    const links = Array.from(document.querySelectorAll('#searchResults li a'));
+    const currentIndex = links.indexOf(document.activeElement);
+    
+    if (event.keyCode === 40) {
       event.preventDefault();
-      // 获取所有搜索结果链接
-      const links = Array.from(document.querySelectorAll('#searchResults li a'));
-      const currentIndex = links.indexOf(document.activeElement);
-      
       if (currentIndex === -1) {
-        // 如果当前不在任何结果上（比如在搜索框），选择第一个
         links[0]?.focus();
       } else if (currentIndex < links.length - 1) {
-        // 移动到下一个结果
         links[currentIndex + 1].focus();
       }
     }
   }
 
   // UP (38) arrow
-  if (event.keyCode == 38) {
-    if (searchVisible && resultsAvailable) {
-      event.preventDefault();
-      const links = Array.from(document.querySelectorAll('#searchResults li a'));
-      const currentIndex = links.indexOf(document.activeElement);
+  if (searchVisible && resultsAvailable) {
+    const links = Array.from(document.querySelectorAll('#searchResults li a'));
+    const currentIndex = links.indexOf(document.activeElement);
 
+    if (event.keyCode === 38) {
+      event.preventDefault();
       if (currentIndex === 0) {
-        // 如果在第一个结果，返回搜索框
         maininput.focus();
       } else if (currentIndex > 0) {
-        // 移动到上一个结果
         links[currentIndex - 1].focus();
       }
     }
   }
 });
- 
- 
+
 // ==========================================
 // execute search as each character is typed
 //
 document.getElementById("searchInput").onkeyup = function(e) {
   executeSearch(this.value);
 }
- 
+
 function showSearchInput() {
   // Load json search index if first time invoking search
   // Means we don't load json unless searches are going to happen; keep user payload small unless needed
@@ -103,148 +104,249 @@ function showSearchInput() {
     searchVisible = false; // search not visible
   }
 }
- 
- 
+
 // ==========================================
 // fetch some json without jquery
 //
 function fetchJSONFile(path, callback) {
-  var httpRequest = new XMLHttpRequest();
+  const httpRequest = new XMLHttpRequest();
   httpRequest.onreadystatechange = function() {
-    if (httpRequest.readyState === 4) {
-      if (httpRequest.status === 200) {
-        var data = JSON.parse(httpRequest.responseText);
+    if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+      try {
+        const data = JSON.parse(httpRequest.responseText);
           if (callback) callback(data);
+      } catch (e) {
+        console.error('Error parsing JSON:', e);
       }
     }
   };
   httpRequest.open('GET', path);
   httpRequest.send();
 }
- 
- 
+
 // ==========================================
 // load our search index, only executed once
 // on first call of search box (CMD-/)
 //
 function loadSearch() {
-  fetchJSONFile('/index.json', function(data){
- 
-    var options = { // fuse.js options; check fuse.js website for details
+  fetchJSONFile('/index.json', function(data) {
+    const options = {
       includeMatches: true,
       shouldSort: true,
       ignoreLocation: true,
+      threshold: CONSTANTS.SEARCH_THRESHOLD,
+      minMatchCharLength: 1,
       keys: [
         {
           name: 'title',
-          weight: 1,
+          weight: 1
         },
         {
           name: 'content',
-          weight: 0.6,
-        },
+          weight: 0.6
+        }
       ],
+      useExtendedSearch: true,  // 启用扩展搜索
+      findAllMatches: true,     // 查找所有匹配
+      distance: 200,            // 增加距离参数
     };
-    fuse = new Fuse(data, options); // build the index from the json file
+    fuse = new Fuse(data, options);
   });
 }
- 
- 
+
+// ==========================================
+// 检查字符串是否包含中文
+function containsChinese(str) {
+  return /[\u4e00-\u9fa5]/.test(str);
+}
+
+// ==========================================
+// 转义正则表达式中的特殊字符
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// ==========================================
+// 清理文本内容，移除数学公式和特殊字符
+function cleanText(text) {
+  if (!text) return '';
+  
+  return text
+    // 移除数学公式
+    .replace(/\$\$[\s\S]*?\$\$/g, '')
+    .replace(/\$.*?\$/g, '')
+    .replace(/\\\[[\s\S]*?\\\]/g, '')
+    .replace(/\\\(.*?\\\)/g, '')
+    // 移除HTML标签和Markdown格式
+    .replace(/<img[^>]*>/g, '')
+    .replace(/<[^>]*>/g, '')
+    .replace(/!\[.*?\]\(.*?\)/g, '')
+    .replace(/\[.*?\]\(.*?\)/g, '')
+    // 移除LaTeX命令和特殊字符
+    .replace(/\\[a-zA-Z]+\{.*?\}/g, '')
+    .replace(/[_^\\{}]/g, '')
+    // 清理空白字符
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+// ==========================================
+// 处理搜索结果高亮
+function highlightText(text, term) {
+  if (!text || !term) return text;
+  
+  const searchTerm = term.toLowerCase();
+  
+  // 对于中文和短词采用简单匹配
+  if (searchTerm.length <= CONSTANTS.SHORT_WORD_LENGTH || containsChinese(searchTerm)) {
+    const regex = new RegExp(escapeRegExp(searchTerm), 'gi');
+    return text.replace(regex, match => `<span class="search-highlight">${match}</span>`);
+  }
+  
+  // 对于其他情况，处理连字符匹配
+  const searchTerms = [
+    escapeRegExp(searchTerm),
+    escapeRegExp(searchTerm) + '-\\w+',
+    '\\w+-' + escapeRegExp(searchTerm)
+  ];
+  
+  const regex = new RegExp(searchTerms.join('|'), 'gi');
+  return text.replace(regex, match => `<span class="search-highlight">${match}</span>`);
+}
+
+// ==========================================
+// 截取搜索结果上下文
+function extractContext(text, term) {
+  if (!text || !term) return '';
+  
+  const searchTerm = term.toLowerCase();
+  const textLower = text.toLowerCase();
+  const termIndex = textLower.indexOf(searchTerm);
+  
+  if (termIndex === -1) {
+    return text.slice(0, 100) + ' ...';
+  }
+  
+  const startPos = Math.max(0, termIndex - CONSTANTS.CONTEXT_LENGTH);
+  const endPos = Math.min(text.length, termIndex + searchTerm.length + CONSTANTS.CONTEXT_LENGTH);
+  
+  return (startPos > 0 ? '... ' : '') +
+         text.slice(startPos, endPos).trim() +
+         (endPos < text.length ? ' ...' : '');
+}
+
 // ==========================================
 // using the index we loaded on CMD-/, run
 // a search query (for "term") every time a letter is typed
 // in the search box
 //
 function executeSearch(term) {
-  if (term.length == 0) {
+  if (!term) {
     document.getElementById("searchResults").setAttribute("style", "");
     return;
   }
-  let results = fuse.search(term);
+
+  const searchTerm = term.toLowerCase();
+  const results = fuse.search(searchTerm);
   let searchItems = '';
 
   if (results.length === 0) {
     resultsAvailable = false;
     searchItems = '<li class="noSearchResult">无结果</li>';
   } else {
-    permalinkList = []
-    searchItemCount = 0
-    for (let item in results) {
-      if (permalinkList.includes(results[item].item.permalink)) {
-        continue;
+    resultsAvailable = true;
+    const processedLinks = new Set();
+    let itemCount = 0;
+
+    // 过滤和排序结果
+    const filteredResults = results.filter(result => {
+      // 检查是否包含搜索词
+      const title = cleanText(result.item.title).toLowerCase();
+      const content = result.item.content ? cleanText(result.item.content).toLowerCase() : '';
+      
+      // 对于中文和短词采用更宽松的匹配策略
+      if (searchTerm.length <= CONSTANTS.SHORT_WORD_LENGTH || containsChinese(searchTerm)) {
+        // 对于中文和短词，只要包含就算匹配
+        return title.includes(searchTerm) || content.includes(searchTerm);
+      } else {
+        // 对于其他情况，检查完全匹配或带连字符的匹配
+        return title.includes(searchTerm) || 
+               content.includes(searchTerm) ||
+               title.includes(searchTerm + '-') ||
+               content.includes(searchTerm + '-') ||
+               title.includes('-' + searchTerm) ||
+               content.includes('-' + searchTerm);
       }
-      permalinkList.push(results[item].item.permalink);
-      searchItemCount += 1;
+    });
 
-      title = results[item].item.title;
-      const isSlide = results[item].item.permalink.includes('/slides/');
-      content = '';
+    // 对过滤后的结果进行排序
+    const sortedResults = filteredResults.sort((a, b) => {
+      const aTitle = cleanText(a.item.title).toLowerCase();
+      const bTitle = cleanText(b.item.title).toLowerCase();
+      
+      // 对于中文和短词采用简单的包含判断
+      if (searchTerm.length <= CONSTANTS.SHORT_WORD_LENGTH || containsChinese(searchTerm)) {
+        const aTitleMatch = aTitle.includes(searchTerm);
+        const bTitleMatch = bTitle.includes(searchTerm);
+        
+        if (aTitleMatch !== bTitleMatch) {
+          return aTitleMatch ? -1 : 1;
+        }
+      } else {
+        // 标题中的完全匹配优先
+        const aTitleExact = aTitle.includes(searchTerm);
+        const bTitleExact = bTitle.includes(searchTerm);
+        
+        if (aTitleExact !== bTitleExact) {
+          return aTitleExact ? -1 : 1;
+        }
+        
+        // 其次是标题中的连字符匹配
+        const aTitleHyphen = aTitle.includes(searchTerm + '-') || aTitle.includes('-' + searchTerm);
+        const bTitleHyphen = bTitle.includes(searchTerm + '-') || bTitle.includes('-' + searchTerm);
+        
+        if (aTitleHyphen !== bTitleHyphen) {
+          return aTitleHyphen ? -1 : 1;
+        }
+      }
+      
+      return 0;
+    });
 
-      for (const match of results[item].matches) {
-        if (match.key == 'title') {
-          // 先尝试查找完全匹配
-          const exactMatches = [...match.value.matchAll(new RegExp(term, 'gi'))];
-          if (exactMatches.length > 0) {
-            // 找到完全匹配，使用完全匹配的部分
-            let lastIndex = 0;
-            let newTitle = '';
-            for (const exactMatch of exactMatches) {
-              newTitle += match.value.slice(lastIndex, exactMatch.index) +
-                         '<span class="search-highlight">' + exactMatch[0] + '</span>';
-              lastIndex = exactMatch.index + exactMatch[0].length;
-            }
-            newTitle += match.value.slice(lastIndex);
-            title = newTitle;
-          } else {
-            // 没有完全匹配，使用 Fuse.js 的匹配结果
-            startIndex = match.indices[0][0];
-            endIndex = match.indices[0][1] + 1;
-            highText = '<span class="search-highlight">' + match.value.slice(startIndex, endIndex) + '</span>';
-            title = match.value.slice(0, startIndex) + highText + match.value.slice(endIndex);
-          }
-        } else if (match.key == 'content') {
-          // 对内容也应用相同的逻辑
-          const exactMatches = [...match.value.matchAll(new RegExp(term, 'gi'))];
-          if (exactMatches.length > 0) {
-            // 使用第一个完全匹配的结果及其上下文
-            const exactMatch = exactMatches[0];
-            const start = Math.max(0, exactMatch.index - 30);
-            const end = Math.min(match.value.length, exactMatch.index + exactMatch[0].length + 30);
-            content = (start > 0 ? '...' : '') +
-                     match.value.slice(start, exactMatch.index) +
-                     '<span class="search-highlight">' + exactMatch[0] + '</span>' +
-                     match.value.slice(exactMatch.index + exactMatch[0].length, end) +
-                     (end < match.value.length ? '...' : '');
-          } else {
-            // 没有完全匹配，使用 Fuse.js 的匹配结果
-            startIndex = match.indices[0][0];
-            endIndex = match.indices[0][1] + 1;
-            if (isSlide) {
-              content = '<span class="search-highlight">' + match.value.slice(startIndex, endIndex) + '</span>';
-            } else {
-              content = match.value.slice(Math.max(0, startIndex - 30), startIndex) + 
-                       '<span class="search-highlight">' + match.value.slice(startIndex, endIndex) + '</span>' + 
-                       match.value.slice(endIndex, endIndex + 30);
-            }
-          }
+    // 构建搜索结果
+    for (const result of sortedResults) {
+      if (itemCount >= CONSTANTS.MAX_RESULTS) break;
+      
+      const permalink = result.item.permalink;
+      if (processedLinks.has(permalink)) continue;
+      
+      processedLinks.add(permalink);
+      itemCount++;
+
+      let title = cleanText(result.item.title);
+      let content = '';
+
+      // 处理匹配项
+      for (const match of result.matches) {
+        if (match.key === 'title') {
+          title = highlightText(title, term);
+        } else if (match.key === 'content') {
+          const cleanContent = cleanText(match.value);
+          content = extractContext(cleanContent, term);
+          content = highlightText(content, term);
         }
       }
 
-      const resultItem = '<li><a href="' + results[item].item.permalink + '" tabindex="0" class="search-result-item">' + 
-                        '<span class="title">' + title + '</span>' +
-                        (content ? '<br /> <span class="sc">'+ content +'</span>' : '') +
-                        '</a></li>';
-      
-      searchItems += resultItem;
-      if (searchItemCount >= 5) {
-        break;
-      }
+      searchItems += `<li><a href="${permalink}" tabindex="0" class="search-result-item">` +
+                    `<span class="title">${title}</span>` +
+                    (content ? `<br /><span class="sc">${content}</span>` : '') +
+                    `</a></li>`;
     }
-    resultsAvailable = true;
   }
 
   document.getElementById("searchResults").setAttribute("style", "display: block;");
   document.getElementById("searchResults").innerHTML = searchItems;
+
   if (results.length > 0) {
     first = list.firstChild.firstElementChild;
     last = list.lastChild.firstElementChild;
