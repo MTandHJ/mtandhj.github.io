@@ -2,16 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/tags/2024/</loc>
+    <lastmod>2025-04-15T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/tags/2025/</loc>
-    <lastmod>2025-04-05T00:00:00+00:00</lastmod>
+    <lastmod>2025-04-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2025-04-05T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/collaborative-filtering/</loc>
-    <lastmod>2025-04-05T00:00:00+00:00</lastmod>
+    <lastmod>2025-04-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/empirical/</loc>
+    <lastmod>2025-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/end-to-end/</loc>
+    <lastmod>2025-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/generative/</loc>
+    <lastmod>2025-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2025-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/multimodal-recommendation/</loc>
+    <lastmod>2025-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/note/</loc>
+    <lastmod>2025-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/onerec/</loc>
+    <lastmod>2025-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/qarm/</loc>
+    <lastmod>2025-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2025-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/vector-quantization/</loc>
+    <lastmod>2025-04-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/collaborative-filtering/</loc>
     <lastmod>2025-04-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/iclr/</loc>
@@ -21,15 +51,6 @@
     <lastmod>2025-04-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/llm/</loc>
-    <lastmod>2025-04-05T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2025-04-05T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/note/</loc>
-    <lastmod>2025-04-05T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2025-04-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/universal-embedding/</loc>
@@ -46,9 +67,6 @@
   </url><url>
     <loc>http://localhost:1313/posts/rearec/</loc>
     <lastmod>2025-04-03T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/2024/</loc>
-    <lastmod>2025-04-02T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/icml/</loc>
     <lastmod>2025-04-02T00:00:00+00:00</lastmod>
@@ -107,9 +125,6 @@
     <loc>http://localhost:1313/posts/dkt/</loc>
     <lastmod>2025-03-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/generative/</loc>
-    <lastmod>2025-03-27T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/tags/lstm/</loc>
     <lastmod>2025-03-27T00:00:00+00:00</lastmod>
   </url><url>
@@ -120,9 +135,6 @@
     <lastmod>2025-03-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/liger/</loc>
-    <lastmod>2025-03-27T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/vector-quantization/</loc>
     <lastmod>2025-03-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/cikm/</loc>
@@ -144,6 +156,9 @@
     <lastmod>2025-03-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/slides/</loc>
+    <lastmod>2025-03-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/slides/test/</loc>
     <lastmod>2025-03-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/slides/vq/</loc>

@@ -6,47 +6,33 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<title>Slide-test | MTandHJ</title>
-	<meta name="keywords" content="Slide, Test">
+	<title>Test | MTandHJ</title>
+	<meta name="keywords" content="Slide, Vector Quantization">
 	<meta name="description" content="
-  # 第一页
-这是第一页的内容看看看看看阿卡看看看看看看看看看看看看看看看看看看看看看看看
-
-
-  
-  ### dier
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;为什么没有 bullet&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;ddd
-$$
-    x &#43; 1
-    $$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
+## Vector Quantization
 
 
 
 
-
-  
-  ### 333
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;为什么没有 bullet&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;ddd
-$$
-    x &#43; 1
-    $$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
+&lt;h3 id=&#34;test&#34;&gt;Test&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; numpy &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; np
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; torch
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pandas &lt;span style=&#34;color:#66d9ef&#34;&gt;as&lt;/span&gt; pd
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 
 
 
+
+&lt;h3 id=&#34;更多代码示例&#34;&gt;更多代码示例&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;vector_quantization&lt;/span&gt;(x, codebook):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# 计算输入向量与码本中每个向量的距离&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    distances &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sum((x[:, np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;newaxis, :] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; codebook[np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;newaxis, :, :]) &lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, axis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# 找出最近的码字索引&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    indices &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;argmin(distances, axis&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# 量化结果&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    quantized &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; codebook[indices]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; quantized, indices
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 ">
 	<link rel="canonical"
 		href="http://localhost:1313/slides/test/">
@@ -138,7 +124,7 @@ $$
 
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
 
-<script type="text/javascript" src="/js/search.min.243d998bd0c610c96bcfbb6d9059a4586cb855efea68a7db9409441ebaf81161.js"></script>
+<script type="text/javascript" src="/js/search.min.11e5cbc2fba0bf4758d71a4907b06761ce901a1d490f1abec12c37da88a5e70d.js"></script>
     <button aria-label="theme-toggle" id="toggle-theme">
       <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
     >
@@ -162,6 +148,7 @@ $$
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/highlight/monokai.css">
 
 <style>
   .reveal.fullscreen {
@@ -224,14 +211,14 @@ $$
 
   .laser-pointer {
     position: fixed;
-    width: 8px;
-    height: 8px;
+    width: 0.6rem;
+    height: 0.6rem;
     background-color: red;
     border-radius: 50%;
     pointer-events: none;
     z-index: 9999;
     display: none;
-    box-shadow: 0 0 4px 2px rgba(255, 0, 0, 0.5);
+    box-shadow: 0 0 0.25rem 0.15rem rgba(255, 0, 0, 0.5);
   }
 
   .cursor-hidden {
@@ -250,14 +237,19 @@ $$
   
  .reveal .slides section:not(:first-child) {
     top: 0 !important;
+    bottom: 0 !important;
     transform: none !important;
   }
 
+  .reveal .slides section:first-child {
+    text-align: right;
+  }
    
   .reveal .slides section:first-child h1,
   .reveal .slides section:first-child h2,
   .reveal .slides section:first-child h3 {
     text-align: center;
+    text-transform: capitalize;
   }
 
    
@@ -265,9 +257,8 @@ $$
   .reveal .slides section:not(:first-child) h2,
   .reveal .slides section:not(:first-child) h3 {
     position: absolute;
-    top: 0px;
-    left: -20px;
-    margin: 0;
+    top: 0;
+    left: -4rem;
   }
 
    
@@ -275,9 +266,13 @@ $$
   .reveal .slides section:not(:first-child) h2 { font-size: 55px; }
   .reveal .slides section:not(:first-child) h3 { font-size: 45px; }
 
+  .reveal .slides section:not(:first-child) {
+    padding-top: 1.7em;  
+  }
    
   .reveal .slides section:not(:first-child) > *:not(h1):not(h2):not(h3) {
-    margin-top: 100px;
+    margin-top: 1em;
+    font-size: 0.8em;
   }
 
    
@@ -302,6 +297,56 @@ $$
   .reveal .slides section p {
     text-align: left;
   }
+  .reveal .slides section ul > li {
+      font-size: 1em !important;  
+  }
+  .reveal .slides section ul ul > li {
+      font-size: 0.8em !important;  
+  }
+  .reveal .slides section ul ul ul > li {
+      font-size: 0.7em !important;  
+  }
+
+   
+  .reveal .slides .slide-cols{
+      display: flex;
+  }
+  .reveal .slides .slide-col-half{
+      flex: 1;
+  }
+  .reveal .slides .slide-col-4{
+      flex: 4;
+  }
+  .reveal .slides .slide-col-6{
+      flex: 6;
+  }
+
+  .reveal .slides .slide-img{
+      text-align: center; 
+      padding: 0;
+      display: block;
+  }
+  .reveal .slides .slide-ref{
+      position: absolute; 
+      bottom: 0; left: 0; 
+      font-size: 0.5em !important;
+      text-align: left; 
+      width: 100%;
+  }
+  .reveal .slide-number {
+    font-size: 1.5rem !important;  
+    right: 2.2em !important;
+    bottom: 1.1em !important;
+    background: none !important;
+    color: gray !important;
+  }
+  .reveal .navigate-left {
+      right: 6em !important;
+  }
+  .reveal .navigate-right {
+      right: 1em !important;
+  }
+
 
   body.is-fullscreen header,
   body.is-fullscreen footer,
@@ -319,52 +364,36 @@ $$
   </button>
   <div class="slides">
     <section data-markdown>
-  # 第一页
-<p>这是第一页的内容看看看看看阿卡看看看看看看看看看看看看看看看看看看看看看看看</p>
+## Vector Quantization
 </section>
+<!-- --------------------------------------------------------- -->
 <section data-markdown>
-  <textarea data-template>
-  ### dier
-<ul>
-<li>
-<p>为什么没有 bullet</p>
-<ul>
-<li>ddd
-$$
-    x + 1
-    $$</li>
-</ul>
-</li>
-<li>
-<p>5ddd
-</textarea></p>
-</li>
-</ul>
+<textarea data-template>
+<h3 id="test">Test</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> torch
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span></code></pre></div></textarea>
 </section>
+<!-- --------------------------------------------------------- -->
 <section data-markdown>
-  <textarea data-template>
-  ### 333
-<ul>
-<li>
-<p>为什么没有 bullet</p>
-<ul>
-<li>ddd
-$$
-    x + 1
-    $$</li>
-</ul>
-</li>
-<li>
-<p>5ddd
-</textarea></p>
-</li>
-</ul>
+<textarea data-template>
+<h3 id="更多代码示例">更多代码示例</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">vector_quantization</span>(x, codebook):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 计算输入向量与码本中每个向量的距离</span>
+</span></span><span style="display:flex;"><span>    distances <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>sum((x[:, np<span style="color:#f92672">.</span>newaxis, :] <span style="color:#f92672">-</span> codebook[np<span style="color:#f92672">.</span>newaxis, :, :]) <span style="color:#f92672">**</span> <span style="color:#ae81ff">2</span>, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 找出最近的码字索引</span>
+</span></span><span style="display:flex;"><span>    indices <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>argmin(distances, axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 量化结果</span>
+</span></span><span style="display:flex;"><span>    quantized <span style="color:#f92672">=</span> codebook[indices]
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> quantized, indices
+</span></span></code></pre></div></textarea>
 </section>
 
   </div>
 </div>
 
-<button id="laser-btn" title="激光笔">
+<button id="laser-btn" title="激光笔 (Alt键切换)">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
     <circle cx="12" cy="12" r="3"/>
     <path d="M12 5v2m0 10v2M5 12h2m10 0h2"/>
@@ -373,11 +402,7 @@ $$
 <div class="laser-pointer"></div>
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/highlight/monokai.css">
-
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
+<input type="hidden" id="laser-position" value="">
 
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
 
@@ -386,8 +411,6 @@ $$
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/highlight/highlight.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/notes/notes.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/math/math.js"></script>
 
 <script>
     
@@ -403,20 +426,17 @@ $$
       maxScale: 2.0,
       viewDistance: 3,
       overview: false,
-      
       plugins: [ 
         RevealMarkdown,
         RevealHighlight,
         RevealNotes,
-        RevealMath
       ],
-      
       markdown: {
         smartypants: true,
         gfm: true
       },
-      mouseWheel: true,  
-      click: false,        
+      mouseWheel: true,
+      click: false,
     });
   
     
@@ -424,23 +444,93 @@ $$
     const fullscreenBtn = document.getElementById('fullscreen-btn');
     const laserBtn = document.getElementById('laser-btn');
     const laserPointer = document.querySelector('.laser-pointer');
+    const laserPositionInput = document.getElementById('laser-position');
+    
     let isFullscreen = false;
     let isLaserActive = false;
-  
+    
+    
+    function isInPresenterView() {
+      
+      return window.location.search.includes('receiver');
+    }
+    
+    
+    function isInPresentationView() {
+      return !isInPresenterView() && window.opener;
+    }
+    
+    
+    function isInMainView() {
+      return !isInPresenterView() && !window.opener;
+    }
+    
+    
+    const LASER_KEY = 'reveal_laser_pointer_position';
+    const LASER_ACTIVE_KEY = 'reveal_laser_active_state';
+    
+    
+    function updateLaserPosition(x, y, isVisible) {
+      const positionData = {
+        x: x,
+        y: y,
+        isVisible: isVisible,
+        timestamp: Date.now()
+      };
+      
+      
+      localStorage.setItem(LASER_KEY, JSON.stringify(positionData));
+      
+      
+      if (isInPresenterView()) {
+        const event = new Event('storage');
+        event.key = LASER_KEY;
+        event.newValue = JSON.stringify(positionData);
+        window.dispatchEvent(event);
+      }
+    }
+    
+    
+    function syncLaserActiveState(isActive) {
+      
+      localStorage.setItem(LASER_ACTIVE_KEY, isActive ? 'true' : 'false');
+      
+      
+      if (isInPresenterView()) {
+        const event = new Event('storage');
+        event.key = LASER_ACTIVE_KEY;
+        event.newValue = isActive ? 'true' : 'false';
+        window.dispatchEvent(event);
+      }
+    }
+    
+    
+    function toggleLaser(activate) {
+      isLaserActive = activate;
+      
+      if (isLaserActive) {
+        document.body.classList.add('cursor-hidden');
+        laserBtn.classList.add('active');
+      } else {
+        document.body.classList.remove('cursor-hidden');
+        
+        hideLaser();
+        laserBtn.classList.remove('active');
+      }
+      
+      
+      syncLaserActiveState(isLaserActive);
+    }
+    
     
     function cleanupLaserPointer() {
-      isLaserActive = false;
+      toggleLaser(false);
       isFullscreen = false;
       document.body.classList.remove('is-fullscreen');
-      document.body.classList.remove('cursor-hidden');
       revealElement.classList.remove('fullscreen');
-      laserBtn.classList.remove('active');
       laserBtn.style.display = 'none';
-      requestAnimationFrame(() => {
-        laserPointer.style.display = 'none';
-        laserPointer.style.left = '-9999px';
-        laserPointer.style.top = '-9999px';
-      });
+      
+      hideLaser();
     }
   
     
@@ -468,19 +558,73 @@ $$
   
     
     laserBtn.addEventListener('click', function() {
-      isLaserActive = !isLaserActive;
-      this.classList.toggle('active');
-      if (!isLaserActive) {
-        laserPointer.style.display = 'none';
-        document.body.classList.remove('cursor-hidden');
-      } else {
-        document.body.classList.add('cursor-hidden');
+      toggleLaser(!isLaserActive);
+    });
+    
+    
+    window.addEventListener('storage', function(e) {
+      
+      if (e.key === LASER_KEY && (isInMainView() || isInPresentationView())) {
+        try {
+          const data = JSON.parse(e.newValue);
+          
+          
+          const revealRect = revealElement.getBoundingClientRect();
+          
+          if (data.isVisible && isLaserActive) {
+            
+            const absX = data.x * revealRect.width + revealRect.left;
+            const absY = data.y * revealRect.height + revealRect.top;
+            
+            
+            requestAnimationFrame(() => {
+              laserPointer.style.display = 'block';
+              laserPointer.style.left = (absX - 4) + 'px';
+              laserPointer.style.top = (absY - 4) + 'px';
+            });
+          } else {
+            
+            requestAnimationFrame(() => {
+              laserPointer.style.display = 'none';
+              laserPointer.style.left = '-9999px';
+              laserPointer.style.top = '-9999px';
+            });
+          }
+        } catch (err) {
+          console.error('解析激光笔数据失败', err);
+          
+          requestAnimationFrame(() => {
+            laserPointer.style.display = 'none';
+            laserPointer.style.left = '-9999px';
+            laserPointer.style.top = '-9999px';
+          });
+        }
+      }
+      
+      
+      if (e.key === LASER_ACTIVE_KEY && (isInMainView() || isInPresentationView())) {
+        const isActive = e.newValue === 'true';
+        console.log('接收到激光笔状态同步:', isActive);
+        
+        
+        isLaserActive = isActive;
+        
+        if (isActive) {
+          laserBtn.classList.add('active');
+          document.body.classList.add('cursor-hidden');
+        } else {
+          laserBtn.classList.remove('active');
+          document.body.classList.remove('cursor-hidden');
+          
+          hideLaser();
+        }
       }
     });
   
     
     document.addEventListener('mousemove', function(e) {
-      if (isFullscreen && isLaserActive) {
+      
+      if (isLaserActive) {
         const revealRect = revealElement.getBoundingClientRect();
         const isInsideReveal = (
           e.clientX >= revealRect.left &&
@@ -490,29 +634,56 @@ $$
         );
   
         if (isInsideReveal) {
+          
+          const relX = (e.clientX - revealRect.left) / revealRect.width;
+          const relY = (e.clientY - revealRect.top) / revealRect.height;
+          
+          
           requestAnimationFrame(() => {
             laserPointer.style.display = 'block';
             laserPointer.style.left = (e.clientX - 4) + 'px';
             laserPointer.style.top = (e.clientY - 4) + 'px';
           });
+          
+          
+          if (isInPresenterView()) {
+            updateLaserPosition(relX, relY, true);
+          }
         } else {
-          laserPointer.style.display = 'none';
+          
+          requestAnimationFrame(() => {
+            laserPointer.style.display = 'none';
+            laserPointer.style.left = '-9999px';
+            laserPointer.style.top = '-9999px';
+          });
+          
+          
+          if (isInPresenterView()) {
+            updateLaserPosition(0, 0, false);
+          }
         }
+      } else {
+        
+        requestAnimationFrame(() => {
+          laserPointer.style.display = 'none';
+          laserPointer.style.left = '-9999px';
+          laserPointer.style.top = '-9999px';
+        });
       }
     });
   
     
     document.addEventListener('mouseleave', function() {
       if (isLaserActive) {
-        laserPointer.style.display = 'none';
+        
+        hideLaser();
       }
     });
   
     
-    document.addEventListener('mouseenter', function() {
-      if (isLaserActive && isFullscreen) {
+    document.addEventListener('mouseenter', function(e) {
+      if (isLaserActive) {
         const revealRect = revealElement.getBoundingClientRect();
-        const e = event;
         const isInsideReveal = (
           e.clientX >= revealRect.left &&
           e.clientX <= revealRect.right &&
@@ -520,40 +691,47 @@ $$
           e.clientY <= revealRect.bottom
         );
   
-        if (isInsideReveal) {
-          laserPointer.style.display = 'block';
+        if (isInsideReveal && isInPresenterView()) {
+          
+          const relX = (e.clientX - revealRect.left) / revealRect.width;
+          const relY = (e.clientY - revealRect.top) / revealRect.height;
+          
+          
+          updateLaserPosition(relX, relY, true);
         }
       }
     });
   
     
-    window.addEventListener('resize', function() {
-      if (!isFullscreen) {
-        cleanupLaserPointer();
-      }
-    });
-  
-    
-     document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
-        cleanupLaserPointer();
-      }
-      
-      
-      if (e.key === 'Alt' && isFullscreen) {
-        e.preventDefault(); 
-        isLaserActive = !isLaserActive;
-        laserBtn.classList.toggle('active');
         
-        if (!isLaserActive) {
-          laserPointer.style.display = 'none';
-          document.body.classList.remove('cursor-hidden');
+        if (isInPresenterView()) {
+          
+          if (isFullscreen || document.fullscreenElement) {
+            if (document.fullscreenElement) {
+              document.exitFullscreen();
+            }
+            isFullscreen = false;
+            document.body.classList.remove('is-fullscreen');
+            revealElement.classList.remove('fullscreen');
+            
+            laserBtn.style.display = 'none';
+            Reveal.layout();
+          }
         } else {
-          document.body.classList.add('cursor-hidden');
+          
+          cleanupLaserPointer();
         }
       }
+      
+      
+      if (e.key === 'Alt') {
+        e.preventDefault(); 
+        toggleLaser(!isLaserActive);
+      }
     });
-
+    
     
     document.addEventListener('keyup', function(e) {
       if (e.key === 'Alt') {
@@ -562,8 +740,116 @@ $$
     });
 
     
-    document.querySelector('#laser-btn').title = '激光笔 (Alt键切换)';
+    window.addEventListener('load', function() {
+      
+      if (isInPresenterView()) {
+        console.log('当前是演示者视图，隐藏激光笔按钮和全屏按钮');
+        laserBtn.style.display = 'none';
+        fullscreenBtn.style.display = 'none';
+      }
+      
+      
+      if (isInPresentationView() || isInMainView()) {
+        console.log('当前是展示视图或主视图，准备接收激光笔位置');
+        
+        
+        const laserActiveState = localStorage.getItem(LASER_ACTIVE_KEY);
+        if (laserActiveState === 'true') {
+          console.log('检测到激光笔处于激活状态');
+          isLaserActive = true;
+          laserBtn.classList.add('active');
+          document.body.classList.add('cursor-hidden');
+        } else {
+          
+          requestAnimationFrame(() => {
+            laserPointer.style.display = 'none';
+            laserPointer.style.left = '-9999px';
+            laserPointer.style.top = '-9999px';
+          });
+        }
+        
+        
+        const storedPosition = localStorage.getItem(LASER_KEY);
+        if (storedPosition) {
+          try {
+            const data = JSON.parse(storedPosition);
+            
+            if (Date.now() - data.timestamp < 10000 && data.isVisible && isLaserActive) {
+              const revealRect = revealElement.getBoundingClientRect();
+              const absX = data.x * revealRect.width + revealRect.left;
+              const absY = data.y * revealRect.height + revealRect.top;
+              
+              requestAnimationFrame(() => {
+                laserPointer.style.display = 'block';
+                laserPointer.style.left = (absX - 4) + 'px';
+                laserPointer.style.top = (absY - 4) + 'px';
+              });
+            } else {
+              
+              requestAnimationFrame(() => {
+                laserPointer.style.display = 'none';
+                laserPointer.style.left = '-9999px';
+                laserPointer.style.top = '-9999px';
+              });
+            }
+          } catch (err) {
+            console.error('解析存储的激光笔位置失败', err);
+            
+            requestAnimationFrame(() => {
+              laserPointer.style.display = 'none';
+              laserPointer.style.left = '-9999px';
+              laserPointer.style.top = '-9999px';
+            });
+          }
+        }
+      }
+    });
+
     
+    window.addEventListener('beforeunload', function() {
+      
+      if (isInPresenterView()) {
+        localStorage.removeItem('reveal_auto_fullscreen');
+        localStorage.removeItem('reveal_auto_fullscreen_timestamp');
+      }
+    });
+
+    
+    document.querySelector('#laser-btn').title = '激光笔 (Alt键切换)';
+
+    
+    window.addEventListener('resize', function() {
+      if (!isFullscreen) {
+        cleanupLaserPointer();
+      }
+    });
+
+    
+    function hideLaser() {
+      requestAnimationFrame(() => {
+        laserPointer.style.display = 'none';
+        laserPointer.style.left = '-9999px';
+        laserPointer.style.top = '-9999px';
+      });
+      
+      if (isInPresenterView()) {
+        updateLaserPosition(0, 0, false);
+      }
+    }
+    
+    
+    window.addEventListener('blur', function() {
+      if (isLaserActive) {
+        hideLaser();
+      }
+    });
+    
+    
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden && isLaserActive) {
+        hideLaser();
+      }
+    });
 </script>
 
 <div class="post-comment">

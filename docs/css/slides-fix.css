@@ -1,0 +1,55 @@
+/* 专门修复幻灯片中代码显示问题的CSS */
+
+/* 修复span元素的display:flex问题 */
+.reveal pre code span,
+.reveal pre span,
+.reveal code span {
+    display: inline !important;
+}
+
+/* 确保代码中的关键词正确显示 */
+.reveal pre .hljs-keyword,
+.reveal code .hljs-keyword {
+    color: #f92672 !important;
+    display: inline !important;
+}
+
+/* 修复代码块中其他颜色和对齐问题 */
+.reveal pre,
+.reveal code {
+    text-align: left !important;
+    white-space: pre !important;
+}
+
+/* 确保import关键词正确显示 */
+.reveal pre code span[style*="color:#f92672"],
+.reveal code span[style*="color:#f92672"] {
+    color: #f92672 !important;
+    display: inline !important;
+}
+
+/* 调整代码块的字体大小和行间距 */
+.reveal pre,
+.reveal code {
+    font-size: 0.8em !important;
+    line-height: 1.3 !important;
+}
+
+/* 确保预格式化代码块的样式一致 */
+.reveal pre {
+    box-sizing: border-box;
+    margin: 0.5em 0;
+    width: 100%;
+    padding: 0.6em;
+    overflow: auto;
+    max-height: none;
+    word-wrap: normal;
+}
+
+/* 代码块内部字体和颜色 */
+.reveal pre code {
+    font-family: 'Fira Code', monospace, Consolas, 'Courier New';
+    background-color: #272822;
+    color: #f8f8f2;
+    padding: 0;
+} 

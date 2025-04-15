@@ -148,8 +148,6 @@ $$
 
 <div class="slide-cols">
 
-
-
 <div class="slide-col-6">
 
 <div class="slide-img">

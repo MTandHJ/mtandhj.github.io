@@ -6,8 +6,22 @@
     <description>Recent content on MTandHJ</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 05 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 15 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OneRec: Unifying Retrieve and Rank with Generative Recommender and Preference Alignment</title>
+      <link>http://localhost:1313/posts/onerec/</link>
+      <pubDate>Tue, 15 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/onerec/</guid>
+      <description>&lt;h2 id=&#34;预备知识&#34;&gt;预备知识&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;请了解 &lt;a href=&#34;https://www.mtandhj.com/posts/qarm/&#34;&gt;QARM&lt;/a&gt;.&lt;/li&gt;&#xA;&lt;li&gt;$\mathcal{H}_u = \{v_1^h, v_2^h, \ldots, v_n^h\}$, user historical behavior sequence, 在快手的场景下, $v$ 表示一个视频.&lt;/li&gt;&#xA;&lt;li&gt;$\mathcal{S} = \{v_1, v_2, \ldots, v_m\}$, 推荐的一串视频流.&lt;/li&gt;&#xA;&lt;li&gt;session watch time (&lt;strong&gt;swt&lt;/strong&gt;), view probability (&lt;strong&gt;vtr&lt;/strong&gt;), follow probability (&lt;strong&gt;wtr&lt;/strong&gt;), like probability (&lt;strong&gt;ltr&lt;/strong&gt;).&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;核心思想&#34;&gt;核心思想&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250415142401.png&#34; alt=&#34;20250415142401&#34;&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;我们知道, 在工业界推荐系统有着一套复杂的流程: 粗排-精排. 这一套流程被广泛应用有着不同的原因:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;庞大的商品数量: 由于精排通常是 pair-wise 的比较 (因为需要利用交叉特征), 所以必须通过一步步粗排来减少候选商品的数量以保证有限的开销;&lt;/li&gt;&#xA;&lt;li&gt;多样化的推荐策略: 在工业场景中, 推荐的目标远非&amp;quot;精度&amp;quot;, 实际上还要考虑比如多样性等指标以保证用户的留存以及各种品类的商品具有最低限度的曝光度, 此外, 还需要考虑比如广告的因素.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;然而, 由于生成式推荐的发展, 第一个问题其实已经可以迎刃而解了, 这促使我们探索端到端推荐的可能性.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250415143509.png&#34; alt=&#34;20250415143509&#34;&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;OneRec 的基本流程如下:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;对每个 video $v_i$, 通过 &lt;a href=&#34;https://www.mtandhj.com/posts/qarm/&#34;&gt;QARM&lt;/a&gt; 中的操作得到其所对应的多模态 embedding $\bm{e} \in \mathbb{R}^d$;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;$\mathbf{e}_i$ 通过类似 &lt;a href=&#34;https://www.mtandhj.com/posts/qarm/&#34;&gt;QARM&lt;/a&gt; 的 fixed RQ-VAE 进行残差量化, 得到其离散化表示&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>QARM: Quantitative Alignment Multi-Modal Recommendation at Kuaishou</title>
+      <link>http://localhost:1313/posts/qarm/</link>
+      <pubDate>Tue, 15 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/qarm/</guid>
+      <description>&lt;h2 id=&#34;预备知识&#34;&gt;预备知识&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;请了解 &lt;a href=&#34;https://www.mtandhj.com/posts/rqvae/&#34;&gt;RQ-VAE&lt;/a&gt;.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;核心思想&#34;&gt;核心思想&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250415120028.png&#34; alt=&#34;20250415120028&#34;&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;我们知道, 多模态推荐主要涉及:&lt;/p&gt;&#xA;$$&#xD;&#xA;    \text{text/image} \longrightarrow \text{Encoder} \longrightarrow \text{Embedding} \longrightarrow \text{Recommender}&#xD;&#xA;    $$&lt;p&gt;的过程, 且通常 $\text{Encoder}$ 是通过 CV, NLP 任务预训练好后固定下来的.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;作者认为这种方式缺少了推荐任务的约束, 且通常用作 ID embedding 的补充而不是替代. 于是本文就希望:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;通过推荐任务微调 Encoder;&lt;/li&gt;&#xA;&lt;li&gt;通过向量量化来替代 ID.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;item-alignment-of-qarm&#34;&gt;Item Alignment of QARM&lt;/h3&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;QARM 首先通过 Item-Item 的匹配任务来约束 Encoder, 即 Item 和它在推荐上&amp;rsquo;相似&amp;rsquo;的 Item 靠近, &amp;lsquo;不相似&amp;rsquo;的远离. 这里的相似 Item 通过如下的两种方式得到:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;通过过往的 &lt;strong&gt;User2Item&lt;/strong&gt; 检索模型: 为每个用户所 positive clicked target item 选择最相似的 Item;&lt;/li&gt;&#xA;&lt;li&gt;通过过往的 &lt;strong&gt;Item2Item&lt;/strong&gt; 检索模型: 为每个 item 选择高相似度的 Item.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;得到高相似度的 Item pairs 之后, 通过对比学习进行训练:&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Language Representations Can be What Recommenders Need: Findings and Potentials</title>
       <link>http://localhost:1313/posts/alpharec/</link>
