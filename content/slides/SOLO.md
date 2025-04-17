@@ -28,7 +28,7 @@ tags:
 </div>
 
 - 解决方案: 
-  - MoE, LoRA; ZeRO, FDSP; 
+  - MoE, LoRA; ZeRO, FSDP; 
   - Network Quantization; <span style="color: red;">Lightweight Optimizers</span>
 
 </textarea>
