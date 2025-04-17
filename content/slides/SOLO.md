@@ -10,6 +10,8 @@ tags:
   - EMA
 ---
 
+<!-- --------------------------------------------------------- -->
+
 <section data-markdown>
 ## Pushing the Limits of Low-Bit Optimizers with a Focus on EMA Dynamics
 </section>
@@ -32,6 +34,7 @@ tags:
 </textarea>
 </section>
 
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
@@ -54,6 +57,8 @@ tags:
 </textarea>
 </section>
 
+<!-- --------------------------------------------------------- -->
+
 <section data-markdown>
 <textarea data-template>
 
@@ -62,7 +67,7 @@ tags:
 - Quantization:
 
   $$
-  q = Q(x) := \mathop{\text{argmin}} \limits_{k=0}^{2^b - 1} \big|\frac{x}{\Delta} - \iota_k \big|.
+  q = Q(x) := \mathop{\text{argmin}} \limits_{k=0}^{2^b - 1} \big|\frac{x}{\textcolor{red}{\Delta}} - \textcolor{red}{\iota_k} \big|.
   $$
 
 <div class="slide-img">
@@ -77,10 +82,12 @@ tags:
 </textarea>
 </section>
 
+<!-- --------------------------------------------------------- -->
+
 <section data-markdown>
 <textarea data-template>
 
-### <u>S</u>tateful <u>O</u>ptimizers with <u>LO</u>w-Bit States
+### <u>S</u>tateful <u>O</u>ptimizers in Ultra <u>LO</u>w Bits
 
 - Low-Bitwidth EMA update:
 
@@ -102,16 +109,22 @@ $$
 </textarea>
 </section>
 
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
 
 ### Quantization for Unsigned EMA Update
 
-- *Signal Swamping*
+- *Signal Swamping* (<u>large-to-small number addition</u>)
+
+$$
+\text{EMA update:  }  \hat{x}_{t+1} \leftarrow \beta \cdot \tilde{x}_t + \underbrace{\textcolor{red}{(1 - \beta) \cdot z_{t + 1}}}_{\text{very small for } \beta \rightarrow 1}.
+$$
+
 
 <div style="text-align: center; margin-top: 50px; margin-bottom: -80px; padding: 0">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312211840.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312211840.png" alt="Image" style="max-width: 70%; height: auto;margin: 0 auto;">
 </div>
 
 
@@ -123,6 +136,8 @@ $$
 </textarea>
 </section>
 
+
+<!-- --------------------------------------------------------- -->
 
 
 <section data-markdown>
@@ -139,7 +154,7 @@ $$
 </textarea>
 </section>
 
-
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
@@ -158,11 +173,11 @@ $$
 
 <div class="slide-col-4">
 
-- 满足一定情况:
+- 一定<span style="color: red">条件</span>下:
   - Linear 下全部不更新
   - DE 下部分更新
 
-- $\beta \ge \cdots$ 条件很容易满足
+- 实际上 $\beta \ge 0.9$ 为<span style="color: red">相当常见的 setting</span>
 
 </div>
 
@@ -171,7 +186,7 @@ $$
 </textarea>
 </section>
 
-
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
@@ -185,8 +200,12 @@ $$
 - $X \in \mathbb{R}^{1000}$
 - $Z \sim \mathcal{U}[0, 1]$
 
-- 理想的值: 0.5
+<span style="color: red;">*X*</span> &nbsp; Fixed $\Delta$
 
+<span style="color: red;">*X*</span> &nbsp; $z \le \Delta$
+
+
+- 理论收敛至: 0.5
 
 </div>
 
@@ -204,6 +223,7 @@ $$
 </textarea>
 </section>
 
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
@@ -231,6 +251,7 @@ $$
 </textarea>
 </section>
 
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
@@ -241,11 +262,11 @@ $$
 \begin{array}{ll}
 Q(x) 
 &=\text{Clip}(\lfloor \log_{\alpha} \frac{x}{\Delta} + \xi \rceil; 0, 2^b - 1) \\
-&\approx \mathop{argmin} \limits_{k=0}^{2^b - 1} \big|\frac{x}{\Delta} \cdot \alpha^\xi - \iota_k \big|,
+&\approx \mathop{\text{argmin}} \limits_{k=0}^{2^b - 1} \big|\frac{x}{\Delta} \cdot \alpha^\xi - \iota_k \big|,
 \end{array}
 $$
 
-- 3bit quantization anchors:
+- 3-bit quantization anchors:
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250313113440.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
@@ -253,6 +274,8 @@ $$
 
 </textarea>
 </section>
+
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
@@ -268,6 +291,7 @@ $$
 </textarea>
 </section>
 
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
@@ -291,11 +315,11 @@ $$
 
 ### Quantization for Signed EMA Update
 
-**X** Singal Swamping
+**X** &nbsp; <span style="color: gray">Singal Swamping</span>
 
-**✓** Sign representation
+**✓** &nbsp; **Sign representation**
 
-**✓** Descent direction
+**✓** &nbsp; **Descent direction**
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314115701.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
@@ -303,6 +327,8 @@ $$
 
 </textarea>
 </section>
+
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
@@ -319,13 +345,13 @@ $$
 
 <div class="slide-col-4">
 
--> <span style="color: red">Low bitwidth</span> or <span style="color: red">$\beta \uparrow$ </span>
+$\rightarrow$ <span style="color: red">Bits $\downarrow$</span> or <span style="color: red">$\beta \uparrow$ </span>
 
--> Quantization errors <span style="color: red">$\uparrow$</span>
+$\rightarrow$ Quantization errors <span style="color: red">$\uparrow$</span>
 
--> gradient variance <span style="color: red"> $\uparrow$ </span>
+$\rightarrow$ gradient variance <span style="color: red"> $\uparrow$ </span>
 
--> <span style="color: red"> bad </span> convergence
+$\rightarrow$ <span style="color: red"> bad </span> convergence
 
 </div>
 
@@ -335,20 +361,21 @@ $$
 </textarea>
 </section>
 
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
 
 ### Momentum Adjustment
 
-- 方差控制, 给定 $b$ bitwidth 要求选择 $\beta'$ 满足:
+- **方差控制:** 选择 $\beta'$ 满足:
 
 $$
-  \frac{\beta'}{1 - \beta'} r_{\text{median}}(b')
-  \le \frac{\beta}{1 - \beta} r_{\text{median}}(b).
+  \underbrace{\frac{\textcolor{gray}{\beta'}}{1 - \textcolor{gray}{\beta'}} r_{\text{median}}(b')}_{\textcolor{gray}{\text{undetermined}}}
+  \le \underbrace{\frac{\beta}{1 - \beta} r_{\text{median}}(b)}_{\textcolor{green}{\text{valid setup}}}.
 $$
 
-- 查表:
+- **查表:** (<u>灰色区域代表了经验可行的参数推荐</u>)
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314121510.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
@@ -357,6 +384,7 @@ $$
 </textarea>
 </section>
 
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
@@ -364,26 +392,14 @@ $$
 ### Experiments
 
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250407195719.png" alt="Image" style="max-width: 100%; height: auto;margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250417145811.png" alt="Image" style="max-width: 85%; height: auto;margin: 0 auto;">
 </div>
-
 
 
 </textarea>
 </section>
 
-<section data-markdown>
-<textarea data-template>
-
-### Experiments
-
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250407195839.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
-</div>
-
-</textarea>
-</section>
-
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
@@ -399,6 +415,7 @@ $$
 </textarea>
 </section>
 
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
@@ -414,6 +431,7 @@ $$
 </textarea>
 </section>
 
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
@@ -429,7 +447,7 @@ $$
 </textarea>
 </section>
 
-
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
@@ -443,6 +461,8 @@ $$
 </textarea>
 </section>
 
+<!-- --------------------------------------------------------- -->
+
 <section data-markdown>
 <textarea data-template>
 
@@ -454,6 +474,8 @@ $$
 
 </textarea>
 </section>
+
+<!-- --------------------------------------------------------- -->
 
 <section>
 
@@ -469,3 +491,5 @@ $$
 </div>
 
 </section>
+
+<!-- --------------------------------------------------------- -->
