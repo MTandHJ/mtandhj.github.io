@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Trends on MTandHJ</title>
+    <link>http://localhost:1313/trends/</link>
+    <description>Recent content in Trends on MTandHJ</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 19 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/trends/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>谱图神经网络</title>
+      <link>http://localhost:1313/trends/gnn/</link>
+      <pubDate>Wed, 19 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/trends/gnn/</guid>
+      <description>&lt;div class=&#34;timeline-container&#34; data-title=&#34;图神经网络发展&#34; data-timeline=&#39;[&#xD;&#xA;  {&#34;name&#34;: &#34;GNN&#34;, &#34;year&#34;: 2014, &#34;description&#34;: &#34;图神经网络基础模型&#34;, &#34;link&#34;: &#34;/trends/gnn/#gnn&#34;},&#xD;&#xA;  {&#34;name&#34;: &#34;GNN3&#34;, &#34;year&#34;: 2014, &#34;description&#34;: &#34;图神经网络基础模型&#34;, &#34;link&#34;: &#34;/trends/gnn/#gnn&#34;},&#xD;&#xA;  {&#34;name&#34;: &#34;GNN4&#34;, &#34;year&#34;: 2014, &#34;description&#34;: &#34;图神经网络基础模型&#34;, &#34;link&#34;: &#34;/trends/gnn/#gnn&#34;},&#xD;&#xA;  {&#34;name&#34;: &#34;GNN5&#34;, &#34;year&#34;: 2014, &#34;description&#34;: &#34;图神经网络基础模型&#34;, &#34;link&#34;: &#34;/trends/gnn/#gnn&#34;},&#xD;&#xA;  {&#34;name&#34;: &#34;GNN6&#34;, &#34;year&#34;: 2014, &#34;description&#34;: &#34;图神经网络基础模型&#34;, &#34;link&#34;: &#34;/trends/gnn/#gnn&#34;},&#xD;&#xA;  {&#34;name&#34;: &#34;GNN7&#34;, &#34;year&#34;: 2014, &#34;description&#34;: &#34;图神经网络基础模型&#34;, &#34;link&#34;: &#34;/trends/gnn/#gnn&#34;},&#xD;&#xA;  {&#34;name&#34;: &#34;GNN8&#34;, &#34;year&#34;: 2014, &#34;description&#34;: &#34;图神经网络基础模型&#34;, &#34;link&#34;: &#34;/trends/gnn/#gnn&#34;},&#xD;&#xA;  {&#34;name&#34;: &#34;GNN9&#34;, &#34;year&#34;: 2014, &#34;description&#34;: &#34;图神经网络基础模型&#34;, &#34;link&#34;: &#34;/trends/gnn/#gnn&#34;},&#xD;&#xA;  {&#34;name&#34;: &#34;GAT&#34;, &#34;year&#34;: 2015, &#34;description&#34;: &#34;引入注意力机制的图神经网络&#34;, &#34;link&#34;: &#34;/trends/gnn/#gat&#34;},&#xD;&#xA;  {&#34;name&#34;: &#34;GraphSage&#34;, &#34;year&#34;: 2017, &#34;description&#34;: &#34;可扩展的归纳学习方法&#34;, &#34;link&#34;: &#34;/trends/gnn/#graphsage&#34;}&#xD;&#xA;]&#39;&gt;&lt;/div&gt;</description>
+    </item>
+  </channel>
+</rss>

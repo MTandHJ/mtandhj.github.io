@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh" dir="ltr">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<title>EMR-MERGING: Tuning-Free High-Performance Model Merging | MTandHJ</title>
+	<meta name="keywords" content="Note, Weight Merging, Multi-task, Empirical, NeurIPS, 2024">
+	<meta name="description" content="EMR-MERGING, 多任务权重合并技术">
+	<link rel="canonical"
+		href="http://localhost:1313/posts/emr-merging/">
+
+
+
+	<link rel="stylesheet" href="/css/output.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="/css/private.css" type="text/css" media="all" />
+
+	
+	<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css" 
+    integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww" 
+    crossorigin="anonymous"
+/>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js" integrity="sha384-hIoBPJpTUs74ddyc4bFZSM1TVlQDA60VBbJS0oA934VSz82sBx1X7kSx2ATBDIyd" crossorigin="anonymous"></script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+    onload="
+    window.addEventListener('DOMContentLoaded', function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true}, // 块级公式
+                {left: '$', right: '$', display: false},  // 行内公式
+                {left: '\\[', right: '\\]', display: true}, // 支持 \[ \] 块级公式
+                {left: '\\(', right: '\\)', display: false} // 支持 \( \) 行内公式
+            ]
+        });
+    });
+"></script>
+</head>
+
+<body class="bg-stone-50 font-custom flex flex-col justify-between min-h-screen dark:bg-stone-800 dark:text-white">
+
+	<header
+  class="site-header w-full bg-stone-100 dark:bg-stone-900 dark:text-white border-stone-400 border-b px-3 lg:px-3"
+  style="padding-top: 7px; padding-bottom: 7px;">
+  <nav class="site-nav flex items-center justify-between gap-3 container mx-auto " >
+    <div class="flex items-center  flex-wrap">
+      <a class="logo text-2xl md:text-3xl font-black" href="http://localhost:1313/">
+        <img src="/images/logo.png" alt="MTandHJ" 
+        class="w-[35px] h-[35px] md:w-[38px] md:h-[38px] lg:w-[40px] lg:h-[40px]"
+        style="border-radius:50%; border:2px solid #DCD9D6;">
+      </a>
+      <ul class="main-menu flex items-center gap-3 mr-5">
+        
+        <li>
+          <a class=" text-lg" href="/pubs">俺的论文</a>
+        </li>
+        
+        <li>
+          <a class=" text-lg" href="/posts">随笔</a>
+        </li>
+        
+        <li>
+          <a class=" text-lg" href="/tags">Tags</a>
+        </li>
+        
+        <li>
+          <a class=" text-lg" href="/slides">Slides</a>
+        </li>
+        
+        <li>
+          <a class=" text-lg" href="/trends">Trends</a>
+        </li>
+        
+      </ul>
+    </div>
+    
+
+<li id="search-click" class="menu-item" style="display: none;">
+    <a class="menu-item-link" href="javascript:void(0)">Search</a>
+</li>
+
+<script>
+    
+    document.addEventListener("keydown", function (event) {
+        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+            event.preventDefault();
+            document.getElementById("search-click").click();
+        }
+    });
+</script>
+
+
+<div id="fastSearch">
+    <input id="searchInput" autocomplete="off">
+    <ul id="searchResults"></ul>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
+
+<script type="text/javascript" src="/js/search.min.11e5cbc2fba0bf4758d71a4907b06761ce901a1d490f1abec12c37da88a5e70d.js"></script>
+    <button aria-label="theme-toggle" id="toggle-theme">
+      <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+    >
+    <path
+    class="fill-stone-800"
+        d="M12 10.999c1.437.438 2.562 1.564 2.999 3.001.44-1.437 1.565-2.562 3.001-3-1.436-.439-2.561-1.563-3.001-3-.437 1.436-1.562 2.561-2.999 2.999zm8.001.001c.958.293 1.707 1.042 2 2.001.291-.959 1.042-1.709 1.999-2.001-.957-.292-1.707-1.042-2-2-.293.958-1.042 1.708-1.999 2zm-1-9c-.437 1.437-1.563 2.562-2.998 3.001 1.438.44 2.561 1.564 3.001 3.002.437-1.438 1.563-2.563 2.996-3.002-1.433-.437-2.559-1.564-2.999-3.001zm-7.001 22c-6.617 0-12-5.383-12-12s5.383-12 12-12c1.894 0 3.63.497 5.37 1.179-2.948.504-9.37 3.266-9.37 10.821 0 7.454 5.917 10.208 9.37 10.821-1.5.846-3.476 1.179-5.37 1.179z">
+    </path>
+</svg>
+      <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+   >
+    <path
+    class="fill-white"
+        d="M4.069 13h-4.069v-2h4.069c-.041.328-.069.661-.069 1s.028.672.069 1zm3.034-7.312l-2.881-2.881-1.414 1.414 2.881 2.881c.411-.529.885-1.003 1.414-1.414zm11.209 1.414l2.881-2.881-1.414-1.414-2.881 2.881c.528.411 1.002.886 1.414 1.414zm-6.312-3.102c.339 0 .672.028 1 .069v-4.069h-2v4.069c.328-.041.661-.069 1-.069zm0 16c-.339 0-.672-.028-1-.069v4.069h2v-4.069c-.328.041-.661.069-1 .069zm7.931-9c.041.328.069.661.069 1s-.028.672-.069 1h4.069v-2h-4.069zm-3.033 7.312l2.88 2.88 1.415-1.414-2.88-2.88c-.412.528-.886 1.002-1.415 1.414zm-11.21-1.415l-2.88 2.88 1.414 1.414 2.88-2.88c-.528-.411-1.003-.885-1.414-1.414zm2.312-4.897c0 2.206 1.794 4 4 4s4-1.794 4-4-1.794-4-4-4-4 1.794-4 4zm10 0c0 3.314-2.686 6-6 6s-6-2.686-6-6 2.686-6 6-6 6 2.686 6 6z">
+    </path>
+</svg>
+    </button>
+  </nav>
+</header>
+
+	<main class="content container max-w-prose mx-auto flex-1 py-5 px-4 md:px-0">
+
+
+<div dir="" class="prose mx-auto break-normal px-5 mt-8 dark:prose-invert">
+    
+
+    <h1 class="text-2xl mb-0 md:text-3xl font-black ">EMR-MERGING: Tuning-Free High-Performance Model Merging</h1>
+    <time class="text-sm my-2 text-muted mb-5" datetime=" 2025-04-18T00:00:00Z">
+        April 18, 2025
+    </time>
+    <div class="mt-3"></div>
+    <div class="toc select-none p-3 bg-stone-100 text-black dark:bg-stone-900 dark:text-white rounded">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details cursor-pointer">Content</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e9%a2%84%e5%a4%87%e7%9f%a5%e8%af%86" aria-label="预备知识">预备知识</a></li>
+                <li>
+                    <a href="#%e6%a0%b8%e5%bf%83%e6%80%9d%e6%83%b3" aria-label="核心思想">核心思想</a></li>
+                <li>
+                    <a href="#%e5%8f%82%e8%80%83%e6%96%87%e7%8c%ae" aria-label="参考文献">参考文献</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+    <h2 id="预备知识">预备知识</h2>
+<ul>
+<li>
+<p>了解基本 pretrain-finetune 范式.</p>
+</li>
+<li>
+<p>预训练模型权重: $W_{pre} \in \mathbb{R}^d$;</p>
+</li>
+<li>
+<p>微调后的模型权重: $W_i, i=1,2,\ldots, N$.</p>
+</li>
+</ul>
+<h2 id="核心思想">核心思想</h2>
+<ul>
+<li>
+<p>现阶段, pretrain-finetune 最为主流的范式: 即为了推广到一个新的任务上, 我们通常是在一个预训练好的模型上进行微调 (可以是全量微调, 也可以是通过如 分类头, pre-tuning, LORA 等方式进行微调).</p>
+</li>
+<li>
+<p>现在的问题是, 比如我们可能有许许多多的子任务, 然后我们必须为每个子任务都存一份权重, 即使权重相较于预训练模型的权重会小很多, 这依旧是一个较为麻烦的事情 (其实个人感觉还好, 但是故事是这般讲的).</p>
+</li>
+<li>
+<p>假设我们有 $N$ 个任务, 分别微调得到了微调后的权重 $W_i, i=1,2,\ldots, N$. 一种很自然的方式是通过<strong>平均</strong>的方式进行<strong>权重融合</strong>:</p>
+$$
+    W_M = \mathcal{M}([W_1,\ldots, W_N]).
+    $$</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250418152012.png" alt="20250418152012"></p>
+<ul>
+<li>
+<p>但是如上图所示, 这个结果其实非常糟糕, 当然了, 作者也比较其它的融合方法, 大抵上和单独微调的模型结果相去甚远, 离多任务训练的模型也有不小的差距.</p>
+</li>
+<li>
+<p>EMR-MERGING 另辟蹊径, 融合之后返回</p>
+$$
+    W_{uni}, [E_1, \ldots, E_N] = \mathcal{M}'([W_1, \ldots, W_N]).
+    $$<p>这里 $W_{uni}$ 是所有任务共享的模型权重, $[E_1, \ldots, E_N]$ 则是每个任务单独的一组参数, 它包含一个非常轻量化的 mask 矩阵以及一个 scale factor. 示意图如下:</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250418152358.png" alt="20250418152358"></p>
+<ul>
+<li>EMR-MERGING 的具体流程非常简单:
+<ol>
+<li>
+<p>计算每个微调任务的权重 $W_i$ 与预训练权重 $W_{pre}$ 间的差值:</p>
+$$
+        \tau_i = W_i - W_{pre} \in \mathbb{R}^d.
+        $$</li>
+<li>
+<p>然后计算:</p>
+$$
+        \tau_{uni} = \gamma_{uni} \odot \epsilon_{uni}, \\
+        \gamma_{uni} = \text{sgn}(\sum_{i=1}^N \tau_i), \\
+        [\epsilon_{uni}]_k = \max |[\tau_i]_k| \cdot \mathbb{I}[\text{sgn}([\tau_i]_k) = \text{sgn}([\tau_{uni}]_k)].
+        $$<p>即 $\tau_{uni}$ 是每个 entry 中和平均结果符号一致的最大值 (in absolute value).</p>
+</li>
+<li>
+<p>得到了共享的部分之后, 接下来为每个任务 $i$ 计算它所独有的 mask 以及 scale factor:</p>
+$$
+        M_i = (\tau_i \odot \tau_{uni} > 0), \\
+        \lambda_i = \frac{
+            \text{sum}(\text{abs}( \tau_i))
+        }{
+            \text{sum}(\text{abs}(M_i \odot \tau_F))
+        },
+        $$<p>即, 我们只保留和原有权重 $W_i$ 方向一致的, 然后通过一个 scale factor $\lambda_i$ 来使得调整后的权重在 L1 范数上保持不变.</p>
+</li>
+</ol>
+</li>
+</ul>
+<p><strong>注:</strong> 个人其实不太喜欢这个方法, 但是这个问题有一点意思.</p>
+<h2 id="参考文献">参考文献</h2>
+<ol class="reference">
+  <li>
+    Huang C., Ye P., Chen T., He T., Yue X., and Ouyang W.
+    <u>EMR-MERGING: Tuning-Free High-Performance Model Merging.</u>
+    <i>NeurIPS</i>, 2024.
+    <a href="http://arxiv.org/abs/2405.17461" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
+    <a href="https://github.com/harveyhuang18/EMR_Merging" style="color: #007acc; font-weight: bold; text-decoration: none;">[Code]</a>
+  </li>
+  <!-- 添加更多文献条目 -->
+</ol>
+
+</div>
+<div class="mt-5 mb-3 px-5">
+    
+<ul class="flex items-center gap-2">
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/note/">Note</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/weight-merging/">Weight Merging</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/multi-task/">Multi-Task</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/empirical/">Empirical</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/neurips/">NeurIPS</a>
+  </li>
+  <li><a class="px-2 py-1 rounded shadow bg-stone-800 text-white dark:bg-white dark:text-slate-800  "
+      href="http://localhost:1313/tags/2024/">2024</a>
+  </li>
+</ul>
+</div>
+
+<div class="post-comment">
+    
+    <link
+    rel="stylesheet"
+    href="https://unpkg.com/@waline/client@v3/dist/waline.css"
+/>
+<div id="waline"></div>
+<script type="module">
+import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+window.onload = () => {
+    init({
+        el: '#waline',
+        reaction: false,
+        serverURL: 'https://comment.mtandhj.com',
+    });
+}
+</script>
+</div>
+
+</main>
+
+<script src="/js/main.js"></script>
+
+<footer class="bg-stone-100 dark:bg-stone-900 dark:text-white border-t border-stone-400 w-full p-4 text-center font-bold">
+  <div class="container mx-auto flex items-center justify-between">
+    <p> MTandHJ &copy; 2025 </p>
+  </div>
+</footer>
+
+</body>
+
+</html>

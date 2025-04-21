@@ -6,8 +6,22 @@
     <description>Recent content in Blogs on MTandHJ</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 15 Apr 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 21 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Scaling Laws for Online Advertisement Retrieval</title>
+      <link>http://localhost:1313/posts/advertisement-scaling-law/</link>
+      <pubDate>Mon, 21 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/advertisement-scaling-law/</guid>
+      <description>&lt;h2 id=&#34;预备知识&#34;&gt;预备知识&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;请先了解 &lt;a href=&#34;https://arxiv.org/abs/2001.08361&#34;&gt;NLP 中的 Scaling Law&lt;/a&gt;.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;核心思想&#34;&gt;核心思想&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;作者团队希望验证一下在广告场景下是否也有类似于 NLP 中的 scaling law, 即探究是否随着广告预测模型地&lt;strong&gt;增大&lt;/strong&gt;, 是否能够&lt;strong&gt;有规律&lt;/strong&gt;地提升一些&lt;strong&gt;线上指标&lt;/strong&gt;. (因为关注的是实际的线上指标, 这也衍生出了一些独特的问题, 这里就不讲了).&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250421171053.png&#34; alt=&#34;20250421171053&#34;&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;注意到, 实际的推荐系统通常是包含多个阶段, 每个阶段可能还包含不同指标导向的模型, 因此相当复杂. 为了探究 scaling law, 作者团队主要针对 Pre-ranking 阶段探究一个排序模型 (MLPs):&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;特征:&lt;/strong&gt; 同时包括 sparse 和 dense features, 对于 dense features 应用 &lt;a href=&#34;https://openreview.net/pdf?id=Ut1vF_q_vC&#34;&gt;log1p transformation&lt;/a&gt;.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;模型:&lt;/strong&gt; 5-layer 的 MLPs, 每一层包括一个 batch normalization, linear mapping 和 PReLU. 通过 He initialization 初始化权重.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250421171806.png&#34; alt=&#34;20250421171806&#34;&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;如上图所示, FLOPs 和作者设定的指标 R/R* 随着 MLPs 变大所产生的变化情况, 可以通过 Broken Neural Scaling Law (BNSL) 的公式很好的拟合.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;参考文献&#34;&gt;参考文献&lt;/h2&gt;&#xA;&lt;ol class=&#34;reference&#34;&gt;&#xD;&#xA;  &lt;li&gt;&#xD;&#xA;    Wang Y., Yang Z., Zhang Z., Wang Z., Yang J.,&#xD;&#xA;    Wen S., Jiang P., and Gai K.&#xD;&#xA;    &lt;u&gt;Scaling Laws for Online Advertisement Retrieval.&lt;/u&gt;&#xD;&#xA;    &lt;i&gt;arXiv&lt;/i&gt;, 2024.&#xD;&#xA;    &lt;a href=&#34;http://arxiv.org/abs/2411.13322&#34; style=&#34;color: #007acc; font-weight: bold; text-decoration: none;&#34;&gt;[PDF]&lt;/a&gt;&#xD;&#xA;    &lt;a href=&#34;&#34; style=&#34;color: #007acc; font-weight: bold; text-decoration: none;&#34;&gt;[Code]&lt;/a&gt;&#xD;&#xA;  &lt;/li&gt;&#xD;&#xA;  &lt;!-- 添加更多文献条目 --&gt;&#xD;&#xA;&lt;/ol&gt;</description>
+    </item>
+    <item>
+      <title>EMR-MERGING: Tuning-Free High-Performance Model Merging</title>
+      <link>http://localhost:1313/posts/emr-merging/</link>
+      <pubDate>Fri, 18 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/emr-merging/</guid>
+      <description>&lt;h2 id=&#34;预备知识&#34;&gt;预备知识&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;了解基本 pretrain-finetune 范式.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;预训练模型权重: $W_{pre} \in \mathbb{R}^d$;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;微调后的模型权重: $W_i, i=1,2,\ldots, N$.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;核心思想&#34;&gt;核心思想&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;现阶段, pretrain-finetune 最为主流的范式: 即为了推广到一个新的任务上, 我们通常是在一个预训练好的模型上进行微调 (可以是全量微调, 也可以是通过如 分类头, pre-tuning, LORA 等方式进行微调).&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;现在的问题是, 比如我们可能有许许多多的子任务, 然后我们必须为每个子任务都存一份权重, 即使权重相较于预训练模型的权重会小很多, 这依旧是一个较为麻烦的事情 (其实个人感觉还好, 但是故事是这般讲的).&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;假设我们有 $N$ 个任务, 分别微调得到了微调后的权重 $W_i, i=1,2,\ldots, N$. 一种很自然的方式是通过&lt;strong&gt;平均&lt;/strong&gt;的方式进行&lt;strong&gt;权重融合&lt;/strong&gt;:&lt;/p&gt;&#xA;$$&#xD;&#xA;    W_M = \mathcal{M}([W_1,\ldots, W_N]).&#xD;&#xA;    $$&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250418152012.png&#34; alt=&#34;20250418152012&#34;&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;但是如上图所示, 这个结果其实非常糟糕, 当然了, 作者也比较其它的融合方法, 大抵上和单独微调的模型结果相去甚远, 离多任务训练的模型也有不小的差距.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;EMR-MERGING 另辟蹊径, 融合之后返回&lt;/p&gt;&#xA;$$&#xD;&#xA;    W_{uni}, [E_1, \ldots, E_N] = \mathcal{M}&#39;([W_1, \ldots, W_N]).&#xD;&#xA;    $$&lt;p&gt;这里 $W_{uni}$ 是所有任务共享的模型权重, $[E_1, \ldots, E_N]$ 则是每个任务单独的一组参数, 它包含一个非常轻量化的 mask 矩阵以及一个 scale factor. 示意图如下:&lt;/p&gt;</description>
+    </item>
     <item>
       <title>OneRec: Unifying Retrieve and Rank with Generative Recommender and Preference Alignment</title>
       <link>http://localhost:1313/posts/onerec/</link>
@@ -38,9 +52,9 @@
     </item>
     <item>
       <title>Physics of Language Models: Part 3.1, Knowledge Storage and Extraction</title>
-      <link>http://localhost:1313/posts/knowledgestorageandextraction/</link>
+      <link>http://localhost:1313/posts/knowledge-storage-and-extraction/</link>
       <pubDate>Wed, 02 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/knowledgestorageandextraction/</guid>
+      <guid>http://localhost:1313/posts/knowledge-storage-and-extraction/</guid>
       <description>&lt;h2 id=&#34;核心思想&#34;&gt;核心思想&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;LLM 已经惊艳了所有人, 尤其是它广博的知识面, 几乎可以说是博古通今 (当然了, 有幻觉问题). 所以, 一个很自然的问题是, LLM 存储和提取知识的机制是怎么样的呢? 虽然已经有一些工作在现有的 LLM 的基础上进行探索, 但是并没有严格控制变量, 导致其得出的结论并不那么严谨. 比如询问 &amp;ldquo;高斯的出生日期?&amp;rdquo;, LLM 得到的答案可能来自两种: 1. 记忆了 wikipedia 等知识库并从中抽取; 2. 训练语料里中恰好有这个问题, 从而能够很好地回答.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;为了避免上述第二种情况引发的一个干扰, 作者人为构造一些数据集, 并从头训练以严格控制变量.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;setting&#34;&gt;Setting&lt;/h3&gt;&#xA;&lt;h4 id=&#34;数据集&#34;&gt;数据集&lt;/h4&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;bioS:&lt;/strong&gt; 从 $N=100,000$ 个体中随机生成 profiles: 每个个体的出生日期, 出生的城市, 毕业院校, 就职公司, 工作城市等独立随机生成. 每个个体的 full name 是独一无二的. 如下是一个例子,&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;u&gt;Anya Briar Forger&lt;/u&gt; was born on &lt;u&gt;October 2, 1996&lt;/u&gt;. She spent her early years in &lt;u&gt;Princeton, NJ&lt;/u&gt;. She received mentorship and guidance from faculty members at &lt;u&gt;Massachusetts Institute of Technology&lt;/u&gt;. She completed her education with a focus on Communications. She had a professional role at &lt;u&gt;Meta Platforms&lt;/u&gt;. She was employed in &lt;u&gt;Menlo Park, CA&lt;/u&gt;.&lt;/p&gt;</description>
     </item>
     <item>

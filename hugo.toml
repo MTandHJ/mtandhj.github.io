@@ -31,6 +31,12 @@ name = "Slides"
 url = "/slides"
 weight = 30
 
+[[menu.main]]
+identifier = "trends"
+name = "Trends"
+url = "/trends"
+weight = 35
+
 [params]
 github = "https://www.github.com/MTandHJ"
 mail = "congxueric@gmail.com"
