@@ -339,7 +339,7 @@ which4best: NDCG@20
 
 - 从自己处理的数据集来看, LLM 并没有比传统的 BERT 好上太多.
 
-- 不过 Next-token embedding 的能力还是比较令人惊讶的, 这方面的原因可能可以通过 [这篇文章](https://www.mtandhj.com/posts/knowledgestorageandextraction/) 解释.
+- 不过 Next-token embedding 的能力还是比较令人惊讶的, 这方面的原因可能可以通过 [这篇文章](https://www.mtandhj.com/posts/knowledge-storage-and-extraction/) 解释.
 
 
 ## 参考文献
