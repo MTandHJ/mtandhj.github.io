@@ -18,6 +18,7 @@ tags:
 <script>
 // 时间线数据
 window.timelineData = [
+
   {
     "date": "2023-12-14",
     "title": "DSF",
@@ -25,6 +26,15 @@ window.timelineData = [
     "paperUrl": "https://arxiv.org/abs/2312.09041",
     "importance": "emmm"
   },
+
+  {
+    "date": "2023-06-06",
+    "title": "JGCF",
+    "description": "JacobiConv 在协同过滤上的应用, 对于高低频的分析比较有意思",
+    "paperUrl": "https://arxiv.org/abs/2306.03624",
+    "importance": "novel"
+  },
+
 
   {
     "date": "2023-02-24",
