@@ -31,7 +31,7 @@ window.timelineData = [
   {
     "date": "2023-06-06",
     "title": "JGCF",
-    "description": "JacobiConv 在协同过滤上的应用, 对于高低频的分析比较有意思",
+    "description": "JacobiConv 在协同过滤上的应用, 对于频谱的定量分析比较有意思",
     "paperUrl": "https://arxiv.org/abs/2306.03624",
     "importance": "novel"
   },
@@ -39,7 +39,7 @@ window.timelineData = [
   {
     "date": "2023-02-24",
     "title": "FavardGNN",
-    "description": "分析 ChebyNet 的训练问题并改进",
+    "description": "可学习的最优多项式基",
     "paperUrl": "https://arxiv.org/abs/2302.12432",
     "importance": "novel"
   },

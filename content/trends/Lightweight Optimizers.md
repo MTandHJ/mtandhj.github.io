@@ -23,7 +23,7 @@ window.timelineData = [
   {
     "date": "2024-12-27",
     "title": "Deepseek-v3",
-    "description": "采用了 BF16 的优化器",
+    "description": "在大规模训练中采用了 BF16 的优化器",
     "paperUrl": "https://arxiv.org/abs/2412.19437",
     "importance": "seminal"
   },
@@ -47,7 +47,7 @@ window.timelineData = [
   {
     "date": "2024-03-06",
     "title": "GaLore",
-    "description": "Low-rank state, 等价于 LoRA",
+    "description": "Low-rank state, 理论上等价于 LoRA",
     "paperUrl": "https://arxiv.org/abs/2403.03507",
     "importance": "novel"
   },
@@ -87,7 +87,7 @@ window.timelineData = [
   {
     "date": "2019-01-30",
     "title": "SM3",
-    "description": "集合状态共享 (如, 行和列的方式) ",
+    "description": "同一集合的状态共享 (集合可以是行和列的形式) ",
     "paperUrl": "https://arxiv.org/abs/1901.11150",
     "importance": "novel"
   },
@@ -95,7 +95,7 @@ window.timelineData = [
   {
     "date": "2018-04-11",
     "title": "Adafactor",
-    "description": "row-wise, col-wise 的二阶状态",
+    "description": "row-wise, col-wise 的二阶状态, 以及一些自适应的改进",
     "paperUrl": "https://arxiv.org/abs/1804.04235",
     "importance": "seminal"
   },
