@@ -33,7 +33,7 @@ weight = 30
 
 [[menu.main]]
 identifier = "trends"
-name = "Trends"
+name = "⤴"
 url = "/trends"
 weight = 35
 

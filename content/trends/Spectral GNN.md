@@ -4,9 +4,12 @@ draft: false
 title: "谱图神经网络"
 author: MTandHJ
 tags:
+  - Trend
   - GNN
   - Spectral
 ---
+
+<link rel="stylesheet" href="/css/timeline.css">
 
 <div id="timeline">
   <!-- 时间线将由 JavaScript 自动生成 -->
