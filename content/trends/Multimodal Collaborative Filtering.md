@@ -1,0 +1,111 @@
+---
+date: "2025-04-22"
+draft: false
+title: "Multimodal Collaborative Filtering"
+author: MTandHJ
+tags:
+  - Trend
+  - Collaborative Filtering
+  - Multimodal
+---
+
+- 单独讨论**协同过滤** (而非 Multimodal Recommendation) 是因为这个方向的论文更注重模态的融合和去噪, 而在多模态序列推荐中, 往往掺杂更多对于 Encoder 的思考, 也更多是舍弃 ID 的场景.
+
+
+<!-- 使用更高效的CSS加载方式 -->
+<link rel="stylesheet" href="/css/timeline.css">
+
+<div id="timeline">
+  <!-- 时间线将由 JavaScript 自动生成 -->
+</div>
+
+<script>
+// 时间线数据
+window.timelineData = [
+
+  {
+    "date": "2024-12-16",
+    "title": "STAIR",
+    "description": "指出电商场景下交互行为的非模态驱动性",
+    "paperUrl": "https://arxiv.org/abs/2308.03588",
+    "importance": "novel"
+  },
+
+  {
+    "date": "2023-08-07",
+    "title": "MGCN",
+    "description": "提出后续常用的门控机制用以模态去噪",
+    "paperUrl": "https://arxiv.org/abs/2308.03588",
+    "importance": "novel"
+  },
+
+  {
+    "date": "2023-07-18",
+    "title": "LightGT",
+    "description": "Layer-wise (graph) position encoder + Attention",
+    "paperUrl": "https://dl.acm.org/doi/pdf/10.1145/3539618.3591716",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2023-02-21",
+    "title": "MMSSL",
+    "description": "相当复杂的对比学习",
+    "paperUrl": "",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2022-11-13",
+    "title": "FREEDOM",
+    "description": "进一步简化 LATTICE + 动态图采样",
+    "paperUrl": "https://arxiv.org/abs/2211.06924",
+    "importance": "novel"
+  },
+
+  {
+    "date": "2022-07-13",
+    "title": "BM3",
+    "description": "'高效'的对比学习",
+    "paperUrl": "https://arxiv.org/abs/2207.05969",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2021-08-17",
+    "title": "DualGNN",
+    "description": "应用 User 共现图",
+    "paperUrl": "https://jhyin12.github.io/Papers/TMM21%20DualGNN%20Dual%20Graph%20Neural%20Network%20for%20Multimedia%20Recommendation.pdf",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2021-04-19",
+    "title": "LATTICE",
+    "description": "首次尝试使用多模 kNN 图",
+    "paperUrl": "https://arxiv.org/abs/2104.09036",
+    "importance": "seminal"
+  },
+
+  {
+    "date": "2019-01-01",
+    "title": "MMGCN",
+    "description": "图、文、音三路卷积然后合并",
+    "paperUrl": "http://staff.ustc.edu.cn/~hexn/papers/mm19-MMGCN.pdf",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2015-10-06",
+    "title": "VBPR",
+    "description": "多模态首次用在协同过滤上, 图像特征拼接ID embedding",
+    "paperUrl": "https://arxiv.org/abs/1510.01784",
+    "importance": "seminal"
+  },
+
+
+];
+</script>
+
+<!-- 使用defer属性延迟执行脚本，不阻塞页面渲染 -->
+<script src="/js/timeline.js" defer></script>

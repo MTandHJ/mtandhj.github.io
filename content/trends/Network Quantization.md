@@ -10,9 +10,10 @@ tags:
 ---
 
 
-- **FQT:** Fully Quantized Quantization, 在训练时将权重, 梯度, 激活值以低精度表示.
-- **QAT:** Quantization-Aware Training, 通过一些训练, 使得推理量化更容易
-- **PTQ:** Post-Training Quantization, 推理量化, 无需反复训练
+- 网络量化主要分为三个主流方向:
+    - **FQT:** Fully Quantized Quantization, 在训练时将权重, 梯度, 激活值以低精度表示.
+    - **QAT:** Quantization-Aware Training, 通过一些训练, 使得推理量化更容易
+    - **PTQ:** Post-Training Quantization, 推理量化, 无需反复训练
 
 <!-- 使用更高效的CSS加载方式 -->
 <link rel="stylesheet" href="/css/timeline.css">

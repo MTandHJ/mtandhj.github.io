@@ -9,6 +9,8 @@ tags:
   - Lightweight
 ---
 
+- Lightweight optimiers 的主要出发点是 Adam(W) 需要 2x model size 的状态存储, 实际使用时实际上会消耗相当多的显存.
+
 <!-- 使用更高效的CSS加载方式 -->
 <link rel="stylesheet" href="/css/timeline.css">
 
