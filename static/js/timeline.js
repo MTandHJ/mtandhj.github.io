@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         /* 论文标题样式 */
         .paper-title {
-          margin-bottom: 8px;
+          margin-bottom: 0px;
         }
         
         .paper-link {
@@ -280,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function() {
         /* 论文描述样式 */
         .paper-description {
           color: #666;
-          font-size: 0.85em;
+          font-size: 0.8em;
           line-height: 1.5;
         }
         
