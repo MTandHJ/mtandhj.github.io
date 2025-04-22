@@ -24,9 +24,18 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-02-12",
+    "title": "Spectrum Shift Correction",
+    "description": "指出了交互图掺杂多模态信息后频谱偏移现象并提出解决方法",
+    "paperUrl": "https://arxiv.org/pdf/2502.08071",
+    "importance": "novel"
+  },
+
+
+  {
     "date": "2024-12-16",
     "title": "STAIR",
-    "description": "指出电商场景下交互行为的非模态驱动性",
+    "description": "指出电商场景下交互行为的非模态驱动性, 以及交互图卷积的模态擦除问题",
     "paperUrl": "https://arxiv.org/abs/2308.03588",
     "importance": "novel"
   },
