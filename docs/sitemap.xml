@@ -77,6 +77,9 @@
     <loc>http://localhost:1313/posts/qarm/</loc>
     <lastmod>2025-04-15T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/slides/</loc>
+    <lastmod>2025-04-15T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/tags/vector-quantization/</loc>
     <lastmod>2025-04-15T00:00:00+00:00</lastmod>
   </url><url>
@@ -189,9 +192,6 @@
     <lastmod>2025-03-24T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/slide/</loc>
-    <lastmod>2025-03-21T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/slides/</loc>
     <lastmod>2025-03-21T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/slides/vq/</loc>

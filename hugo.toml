@@ -9,7 +9,7 @@ tag = "tags"
 
 [[menu.main]]
 identifier = "publication"
-name = "俺的论文"
+name = "论文"
 url = "/pubs"
 weight = 7
 
