@@ -1,7 +1,7 @@
 ---
 date: "2025-04-22"
 draft: false
-title: "谱图神经网络"
+title: "Spectral Graph Neural Networks"
 author: MTandHJ
 tags:
   - Trend

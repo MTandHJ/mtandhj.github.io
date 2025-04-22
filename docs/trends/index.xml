@@ -9,7 +9,7 @@
     <lastBuildDate>Tue, 22 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/trends/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>谱图神经网络</title>
+      <title>Spectral Graph Neural Networks</title>
       <link>http://localhost:1313/trends/spectral-gnn/</link>
       <pubDate>Tue, 22 Apr 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/trends/spectral-gnn/</guid>
