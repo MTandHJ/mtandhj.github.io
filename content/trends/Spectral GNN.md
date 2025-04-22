@@ -9,6 +9,7 @@ tags:
   - Spectral
 ---
 
+<!-- 使用更高效的CSS加载方式 -->
 <link rel="stylesheet" href="/css/timeline.css">
 
 <div id="timeline">
@@ -223,4 +224,5 @@ window.timelineData = [
 ];
 </script>
 
-<script src="/js/timeline.js"></script>
+<!-- 使用defer属性延迟执行脚本，不阻塞页面渲染 -->
+<script src="/js/timeline.js" defer></script>
