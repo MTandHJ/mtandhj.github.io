@@ -36,7 +36,6 @@ window.timelineData = [
     "importance": "novel"
   },
 
-
   {
     "date": "2023-02-24",
     "title": "FavardGNN",
