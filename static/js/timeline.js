@@ -270,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .emmm-paper {
           color: #777777;
           font-weight: 500;
-          font-size: 1.05em;
+          font-size: 0.95em;
         }
         
         .emmm-paper:hover {
