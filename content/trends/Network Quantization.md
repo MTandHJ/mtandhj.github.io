@@ -1,5 +1,4 @@
 ---
-date: "2025-04-22"
 draft: false
 title: "Network Quantization"
 author: MTandHJ

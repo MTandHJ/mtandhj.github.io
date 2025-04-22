@@ -1,5 +1,4 @@
 ---
-date: "2025-04-22"
 draft: false
 title: "Lightweight Optimizers"
 author: MTandHJ
