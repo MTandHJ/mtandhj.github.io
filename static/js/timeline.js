@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
         itemsByYear[year].sort((a, b) => {
           const dateA = dateCache.get(a.date);
           const dateB = dateCache.get(b.date);
-          return dateA - dateB;
+          return dateB - dateA;
         });
       }
     }
