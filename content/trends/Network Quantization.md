@@ -65,8 +65,6 @@ window.timelineData = [
     "importance": "emmm"
   },
 
-
-
   {
     "date": "2019-04-26",
     "title": "SWALP",
