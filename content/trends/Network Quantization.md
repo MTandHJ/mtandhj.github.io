@@ -5,7 +5,7 @@ author: MTandHJ
 tags:
   - Trend
   - Quantization
-  - Low-bit
+  - Low-Precision
 ---
 
 
@@ -24,6 +24,14 @@ tags:
 <script>
 // 时间线数据
 window.timelineData = [
+
+  {
+    "date": "2025-05-02",
+    "title": "Low-Precision Training of Large Language Models: Methods, Challenges, and Opportunities",
+    "description": "Survey, 调研了一系列低精度训练方法",
+    "paperUrl": "https://arxiv.org/abs/2505.01043",
+    "importance": "novel"
+  },
 
   {
     "date": "2023-06-21",
@@ -54,6 +62,24 @@ window.timelineData = [
     "title": "Ultra-Low Precision 4-bit Training of Deep Neural Networks",
     "description": "4-bit FQT, 提出一种特殊的 FP4 format 以及 Grad Scale 机制来实现 4-bit 量化",
     "paperUrl": "https://proceedings.neurips.cc/paper_files/paper/2020/file/13b919438259814cd5be8cb45877d577-Paper.pdf",
+    "importance": "emmm"
+  },
+
+
+
+  {
+    "date": "2019-04-26",
+    "title": "SWALP",
+    "description": "通过 Stochastic Weight Averaging 稳定低精度训练",
+    "paperUrl": "https://www.mtandhj.com/posts/swalp",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2019-01-23",
+    "title": "Backprop with Approximate Activations for Memory-efficient Network Training",
+    "description": "针对使用 BatchNorm, ReLU 特殊的反向传播机制",
+    "paperUrl": "https://arxiv.org/abs/1901.07988",
     "importance": "emmm"
   },
 
@@ -96,6 +122,15 @@ window.timelineData = [
     "paperUrl": "https://arxiv.org/abs/1702.03044",
     "importance": "emmm"
   },
+
+  {
+    "date": "2015-02-09",
+    "title": "Deep Learning with Limited Numerical Precision",
+    "description": "深度学习中初步尝试低精度训练, 提出了很多 tricks",
+    "paperUrl": "https://arxiv.org/abs/1502.02551",
+    "importance": "emmm"
+  },
+
 
 ];
 </script>

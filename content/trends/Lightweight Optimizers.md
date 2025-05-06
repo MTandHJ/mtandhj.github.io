@@ -105,7 +105,7 @@ window.timelineData = [
     "date": "2014-01-01",
     "title": "1-bit SGD",
     "description": "将误差补偿用于梯度的 allreduce, 减小通信代价",
-    "paperUrl": "row-wise, col-wise 的二阶状态",
+    "paperUrl": "https://www.isca-archive.org/interspeech_2014/seide14_interspeech.html",
     "importance": "seminal"
   },
 
