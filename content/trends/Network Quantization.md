@@ -58,6 +58,14 @@ window.timelineData = [
   },
 
   {
+    "date": "2021-01-25",
+    "title": "CPT",
+    "description": "Cyclic Precision Training, 类似 CosineAnnealingWarmRestarts 的 Precision 循环机制",
+    "paperUrl": "https://www.mtandhj.com/posts/cpt/",
+    "importance": "novel"
+  },
+
+  {
     "date": "2020-06-01",
     "title": "Ultra-Low Precision 4-bit Training of Deep Neural Networks",
     "description": "4-bit FQT, 提出一种特殊的 FP4 format 以及 Grad Scale 机制来实现 4-bit 量化",
