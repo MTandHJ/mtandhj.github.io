@@ -9,6 +9,7 @@ tags:
 ---
 
 - Lightweight optimiers 的主要出发点是 Adam(W) 需要 2x model size 的状态存储, 实际使用时实际上会消耗相当多的显存.
+- 主流的改进策略是如何存储压缩后的状态, 可以是通过低精度的量化方法, 也可以是通过矩阵的低秩近似. 此外, 也有像 Lion 这样设计之初就更为轻量的方法.
 
 <!-- 使用更高效的CSS加载方式 -->
 <link rel="stylesheet" href="/css/timeline.css">
@@ -27,6 +28,14 @@ window.timelineData = [
     "description": "在大规模训练中采用了 BF16 的优化器",
     "paperUrl": "https://arxiv.org/abs/2412.19437",
     "importance": "seminal"
+  },
+
+  {
+    "date": "2024-07-11",
+    "title": "Q-GaLore",
+    "description": "对 GaLore 进一步施加低精度量化",
+    "paperUrl": "www.mtandhj.com/posts/q-galore",
+    "importance": "emmm"
   },
 
   {
@@ -49,7 +58,7 @@ window.timelineData = [
     "date": "2024-03-06",
     "title": "GaLore",
     "description": "Low-rank state, 理论上等价于 LoRA",
-    "paperUrl": "https://arxiv.org/abs/2403.03507",
+    "paperUrl": "www.mtandhj.com/posts/galore",
     "importance": "novel"
   },
 

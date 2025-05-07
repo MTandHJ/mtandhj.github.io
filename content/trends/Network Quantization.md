@@ -68,7 +68,7 @@ window.timelineData = [
   {
     "date": "2019-04-26",
     "title": "SWALP",
-    "description": "通过 Stochastic Weight Averaging 稳定低精度训练",
+    "description": "FQT, 通过 Stochastic Weight Averaging 稳定低精度训练",
     "paperUrl": "https://www.mtandhj.com/posts/swalp",
     "importance": "emmm"
   },
