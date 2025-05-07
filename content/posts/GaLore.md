@@ -48,6 +48,7 @@ pinned: false
     $$
     W_{t+1} = W_t - \eta  \tilde{G}_t, \quad \tilde{G}_t = P_t \:\rho_t (P_t^T G_t Q_t) \: Q_t^T,
     $$
+
     其中 $P_t \in \mathbb{R}^{m \times r}, Q_t \in \mathbb{R}^{n \times r}, r \ll m, n$.
 
 - 即 梯度转移到低秩空间 $\longrightarrow$ 在低秩空间中完成 $\rho_t$ $\longrightarrow$ 恢复到原空间. 于是在整个训练过程中, 我们只需要缓存这些投影矩阵即可. 如下是 Adam 的一个例子 (只用了一半的投影):
@@ -55,15 +56,19 @@ pinned: false
 ![20250507105029](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250507105029.png)
 
 - 收敛性是容易理解的, 每一步更新都相当于 (理论上应该和使用 LoRA 是等价的, 如果 $P, Q$ 是固定的):
+
     $$
     \varphi_t(\hat{W}_t), \quad \hat{W}_t = \text{stop-gradient}(W_t) + P \tilde{W}_t Q^T, \quad \tilde{W}_t \in \mathbb{R}^{r \times r}.
     $$
 
 - 则
+
     $$
     \nabla_{\tilde{W}_t} \varphi_t  = P^T G_t Q,
     $$
+
     此时便有:
+
     $$
     \hat{W}_{t+1} = \hat{W}_t + P \Delta \tilde{W} Q^T = \hat{W}_t - \eta P \:  \rho_t (P^T G_t Q) Q^T.
     $$

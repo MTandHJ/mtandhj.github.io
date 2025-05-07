@@ -34,7 +34,7 @@ window.timelineData = [
     "date": "2024-07-11",
     "title": "Q-GaLore",
     "description": "对 GaLore 进一步施加低精度量化",
-    "paperUrl": "www.mtandhj.com/posts/q-galore",
+    "paperUrl": "https://www.mtandhj.com/posts/q-galore/",
     "importance": "emmm"
   },
 
@@ -58,7 +58,7 @@ window.timelineData = [
     "date": "2024-03-06",
     "title": "GaLore",
     "description": "Low-rank state, 理论上等价于 LoRA",
-    "paperUrl": "www.mtandhj.com/posts/galore",
+    "paperUrl": "https://www.mtandhj.com/posts/galore/",
     "importance": "novel"
   },
 
