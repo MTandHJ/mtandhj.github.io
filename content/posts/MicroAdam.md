@@ -7,7 +7,6 @@ author: MTandHJ
 tags:
   - Note
   - Lightweight
-  - Low-Precision
   - Error Compensation
   - Quantization
   - Optimizer
