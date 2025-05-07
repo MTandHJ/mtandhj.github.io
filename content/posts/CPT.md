@@ -7,6 +7,7 @@ author: MTandHJ
 tags:
   - Note
   - Low-Precision
+  - Quantization
   - Generalization
   - Empirical
   - ICLR

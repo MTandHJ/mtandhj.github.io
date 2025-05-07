@@ -47,6 +47,14 @@ window.timelineData = [
   },
 
   {
+    "date": "2024-05-24",
+    "title": "MicroAdam",
+    "description": "通过梯度稀疏化以及 error compensation 实现轻量的优化器",
+    "paperUrl": "https://www.mtandhj.com/posts/microadam/",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2024-04-03",
     "title": "BAdam",
     "description": "Block corrdinate descent 来节约显存开销",
@@ -90,7 +98,7 @@ window.timelineData = [
     "date": "2021-02-04",
     "title": "1-bit Adam",
     "description": "本质上是 Adam 预训练 + 1-bit SGD",
-    "paperUrl": "https://arxiv.org/abs/2102.02888",
+    "paperUrl": "https://www.mtandhj.com/posts/1-bit-adam/",
     "importance": "emmm"
   },
 
@@ -114,7 +122,7 @@ window.timelineData = [
     "date": "2014-01-01",
     "title": "1-bit SGD",
     "description": "将误差补偿用于梯度的 allreduce, 减小通信代价",
-    "paperUrl": "https://www.isca-archive.org/interspeech_2014/seide14_interspeech.html",
+    "paperUrl": "https://www.mtandhj.com/posts/1-bit-adam/",
     "importance": "seminal"
   },
 
