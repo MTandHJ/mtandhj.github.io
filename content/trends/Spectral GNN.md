@@ -22,6 +22,14 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-05-01",
+    "title": "ChebyCF",
+    "description": "基于 Chebyshev 多项式, 多项式通过插值得到 (正主是 ChebNetII)",
+    "paperUrl": "https://arxiv.org/abs/2505.00552",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2024-04-18",
     "title": "ReSN",
     "description": "理论分析了低频与流行度的关系, 探究了训练过程中的变化, 并提出了一种谱正则化工具",
