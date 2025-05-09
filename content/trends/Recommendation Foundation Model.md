@@ -27,6 +27,14 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-04-23",
+    "title": "UniGRF",
+    "description": "用 Next-item (并非论文宣称的生成式推荐) 统一 Retrieval and Ranking, 强调 ranking 对于 retrieval 阶段的辅助",
+    "paperUrl": "https://arxiv.org/abs/2504.16454",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-02-26",
     "title": "OneRec",
     "description": "端到端生成式推荐在快手团队的尝试, 主要用于视频流推荐, 其中的 Fixed 向量量化颇有意思",
