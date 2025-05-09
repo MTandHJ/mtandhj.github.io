@@ -34,7 +34,7 @@ window.timelineData = [
     "date": "2024-07-11",
     "title": "Q-GaLore",
     "description": "对 GaLore 进一步施加低精度量化",
-    "paperUrl": "https://www.mtandhj.com/posts/q-galore/",
+    "paperUrl": "/posts/q-galore/",
     "importance": "emmm"
   },
 
@@ -50,7 +50,7 @@ window.timelineData = [
     "date": "2024-05-24",
     "title": "MicroAdam",
     "description": "通过梯度稀疏化以及 error compensation 实现轻量的优化器",
-    "paperUrl": "https://www.mtandhj.com/posts/microadam/",
+    "paperUrl": "/posts/microadam/",
     "importance": "emmm"
   },
 
@@ -66,7 +66,7 @@ window.timelineData = [
     "date": "2024-03-06",
     "title": "GaLore",
     "description": "Low-rank state, 理论上等价于 LoRA",
-    "paperUrl": "https://www.mtandhj.com/posts/galore/",
+    "paperUrl": "/posts/galore/",
     "importance": "novel"
   },
 
@@ -98,7 +98,7 @@ window.timelineData = [
     "date": "2021-02-04",
     "title": "1-bit Adam",
     "description": "本质上是 Adam 预训练 + 1-bit SGD",
-    "paperUrl": "https://www.mtandhj.com/posts/1-bit-adam/",
+    "paperUrl": "/posts/1-bit-adam/",
     "importance": "emmm"
   },
 
@@ -122,7 +122,7 @@ window.timelineData = [
     "date": "2014-01-01",
     "title": "1-bit SGD",
     "description": "将误差补偿用于梯度的 allreduce, 减小通信代价",
-    "paperUrl": "https://www.mtandhj.com/posts/1-bit-adam/",
+    "paperUrl": "/posts/1-bit-adam/",
     "importance": "seminal"
   },
 

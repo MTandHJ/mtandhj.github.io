@@ -30,7 +30,7 @@ window.timelineData = [
     "date": "2025-02-26",
     "title": "OneRec",
     "description": "端到端生成式推荐在快手团队的尝试, 主要用于视频流推荐, 其中的 Fixed 向量量化颇有意思",
-    "paperUrl": "https://www.mtandhj.com/posts/onerec/",
+    "paperUrl": "/posts/onerec/",
     "importance": "emmm"
   },
 
@@ -38,7 +38,7 @@ window.timelineData = [
     "date": "2024-07-07",
     "title": "AlphaRec",
     "description": "论证了 LLM 有着不逊色 BERT 类模型的编码能力, 同时扩展了用户意图嵌入等方向",
-    "paperUrl": "https://www.mtandhj.com/posts/alpharec/",
+    "paperUrl": "/posts/alpharec/",
     "importance": "novel"
   },
 

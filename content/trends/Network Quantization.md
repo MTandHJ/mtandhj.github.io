@@ -61,7 +61,7 @@ window.timelineData = [
     "date": "2021-01-25",
     "title": "CPT",
     "description": "Cyclic Precision Training, 类似 CosineAnnealingWarmRestarts 的 Precision 循环机制",
-    "paperUrl": "https://www.mtandhj.com/posts/cpt/",
+    "paperUrl": "/posts/cpt/",
     "importance": "novel"
   },
 
@@ -77,7 +77,7 @@ window.timelineData = [
     "date": "2019-04-26",
     "title": "SWALP",
     "description": "FQT, 通过 Stochastic Weight Averaging 稳定低精度训练",
-    "paperUrl": "https://www.mtandhj.com/posts/swalp",
+    "paperUrl": "/posts/swalp",
     "importance": "emmm"
   },
 
