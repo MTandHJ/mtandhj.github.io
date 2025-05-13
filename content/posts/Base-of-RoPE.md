@@ -1,8 +1,8 @@
 ---
 date: "2025-05-13"
 draft: false
-title: ""
-description: ""
+title: "Base of RoPE Bounds Context Length"
+description: "讨论 RoPE base 对于相似 Tokens 感知能力的影响"
 author: MTandHJ
 tags:
   - Note
