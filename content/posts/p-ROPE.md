@@ -139,6 +139,8 @@ pinned: false
 
 - 上表展示了 $p$-RoPE 在 $p=0.75$ 的一个优势. 这说明, 的确, RoPE 所引入的位置信息对于最基本的语义信息来说其实本没有多大的必要性.
 
+- RoPE 的作者也在他的博客里讨论了[部分旋转](https://kexue.fm/archives/10122).
+
 ## 参考文献
 
 <ol class="reference">
