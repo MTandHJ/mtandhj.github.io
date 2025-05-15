@@ -32,9 +32,9 @@ pinned: false
 
 - DKVMN (Dynamic Key-Value Memory Networks) 主要是通过改进一个记忆网络 MANN 来实现对习题的概念和学生的掌握情况的一个动态建模.
 
-- 我们构建 $\mathbf{M}^k \in \mathbb{R}^{N \times d_k}$ 来建模 $N$ latent concepts $\{c^1, c^2, \ldots, c^N\}$, 以及 $\mathbf{M}^v \in \mathbb{R}^{N \times d_v}$ 来建模某个学生的对于不同 concept 的掌握情况 $\{\mathbf{s}_t^1, \mathbf{s}_t^2, \ldots, \mathbf{s}_t^2 \}$. 并用 $\mathbf{M}_t^v$ 表示在了解 $q_t$ 做题情况后的状态.
+- 我们构建 $\mathbf{M}^k \in \mathbb{R}^{N \times d_k}$ 来建模 $N$ latent concepts $\{c^1, c^2, \ldots, c^N\}$, 以及 $\mathbf{M}^v \in \mathbb{R}^{N \times d_v}$ 来建模某个学生的对于不同 concept 的掌握情况 $\{\mathbf{s}_t^1, \mathbf{s}_t^2, \ldots, \mathbf{s}_t^N \}$. 并用 $\mathbf{M}_t^v$ 表示在了解 $q_t$ 做题情况后的状态.
 
-- **Read:** 通过 $q_t$ 检索出其对应的 embedding $\mathbf{k}_t$:
+- **Read:** 通过 $q_t$ 从 $Q \times d_k$ 的 embedding table 中检索出其对应的 embedding $\mathbf{k}_t$:
     1. 计算 read 的权重分布:
 
         $$
@@ -64,7 +64,7 @@ pinned: false
   ).
   $$
 
-- **Write:** 更新 $\mathbf{M}_t^v$ 分为: 遗忘和加强:
+- **Write:** 更新 $\mathbf{M}_t^v$ 分为 "遗忘和加强" ($\mathbf{v}$ 是根据 $(q, r)$ 从 $2Q \times d_v$ 的 embedding table 中检索出的 embedding):
   1. 遗忘 (erasing):
 
     $$
