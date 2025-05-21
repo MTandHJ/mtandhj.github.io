@@ -51,7 +51,7 @@ pinned: false
     这里 $\theta_i = b^{-2i / d}$ 表示基本的旋转单位, $b$ (base) 越大, 旋转的角度越小. 因此, 靠前维度的旋转角度越大, 被认为是高频区域, 靠后的维度旋转角度小, 被认为是低频区域. 然后通过如下方式可以计算注入位置信息后的 Attention:
 
     $$
-    A_{ij} = (R_{i, \theta} q_i)^T (R_{j, \theta} k_i) = q_i^T R_{j-1, \theta} k_j = q_i^T R_{m, \theta} k_j.
+    A_{ij} = (R_{i, \theta} q_i)^T (R_{j, \theta} k_i) = q_i^T R_{j-i, \theta} k_j = q_i^T R_{m, \theta} k_j.
     $$
 
     这里 $m = j - i$ 表示相对距离.
