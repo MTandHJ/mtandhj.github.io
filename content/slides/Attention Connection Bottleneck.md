@@ -400,7 +400,7 @@ Note:
 <div class="slide-col-half">
 
 $$
-\underset{\text{Freq}\uparrow \quad \text{Norm} \downarrow}{\xrightarrow{\|\bm{q}_{0:1}\|, \|\bm{q}_{2:3}\|, \cdots, \|\bm{q}_{d-1:d}\|}}
+\underset{\text{Freq}\downarrow \quad \text{Norm} \uparrow}{\xrightarrow{\|\bm{q}_{0:1}\|, \|\bm{q}_{2:3}\|, \cdots, \|\bm{q}_{d-1:d}\|}}
 $$
 
 </div>
