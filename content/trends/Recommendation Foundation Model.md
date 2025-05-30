@@ -53,9 +53,9 @@ window.timelineData = [
   {
     "date": "2024-02-27",
     "title": "HSTU",
-    "description": "针对 transformers Attention 的改进很吸引人, 而且似乎已经被工业界验证了",
+    "description": "通过 Action 统一 retrieval 和 ranking. 针对 transformers Attention 的改进很吸引人, 而且似乎已经被工业界验证了",
     "paperUrl": "https://arxiv.org/abs/2402.17152",
-    "importance": "novel"
+    "importance": "seminal"
   },
 
   {
