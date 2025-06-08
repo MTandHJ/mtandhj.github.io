@@ -1,6 +1,6 @@
 ---
-date: "2025-05-08"
-draft: true
+date: "2025-06-08"
+draft: false
 title: "Simba: 符号梯度的可行性"
 description: "在 Lion 优化器之上的一些探索"
 author: MTandHJ
