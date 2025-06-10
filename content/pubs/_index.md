@@ -15,6 +15,15 @@ description: ""
 
 <div style="border: 2px solid #E0E0E0; padding: 15px; margin-bottom: 15px; border-radius: 5px; background-color: #FFFFFF; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: justify; word-wrap: break-word; white-space: normal;">
   <p>
+    Kun Ma, <strong>Cong Xu</strong>, Zeyuan Chen, Wei Zhang*.
+    <u>Pattern-Wise Transparent Sequential Recommendation.</u>
+    <i>TKDE</i>, 2025.
+    <a href="" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
+  </p>
+</div>
+
+<div style="border: 2px solid #E0E0E0; padding: 15px; margin-bottom: 15px; border-radius: 5px; background-color: #FFFFFF; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: justify; word-wrap: break-word; white-space: normal;">
+  <p>
     <strong>Cong Xu</strong>, Yunhang He, Jun Wang*, Wei Zhang*.
     <u>STAIR: Manipulating Collaborative and Multimodal Information for E-Commerce Recommendation.</u>
     <i>AAAI</i>, 2025.
