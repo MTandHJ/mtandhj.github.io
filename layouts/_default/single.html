@@ -1,5 +1,7 @@
 {{ partial "header.html" . }}
 
+<!-- 添加代码折叠功能的 CSS -->
+<link rel="stylesheet" href="/css/code-collapse.css">
 
 <div dir="{{.Params.Direction}}" class="prose mx-auto break-normal px-5 mt-8 dark:prose-invert">
     {{ if .Params.Cover }}
@@ -24,5 +26,8 @@
     <!-- 加入评论功能 -->
     {{ partial "comment.html" . }}
 </div>
+
+<!-- 添加代码折叠功能的 JavaScript -->
+<script src="/js/code-collapse.js"></script>
 
 {{ partial "footer.html" . }}
