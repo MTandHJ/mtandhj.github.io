@@ -221,7 +221,7 @@
   </div>
 </div>
 
-<button id="laser-btn" title="激光笔 (Alt键切换)">
+<button id="laser-btn" title="激光笔 (Alt + O 切换)">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
     <circle cx="12" cy="12" r="3"/>
     <path d="M12 5v2m0 10v2M5 12h2m10 0h2"/>
@@ -553,20 +553,13 @@
         }
       }
       
-      // Alt 键切换激光笔（在所有视图中都有效）
-      if (e.key === 'Alt') {
+      // Alt + O 切换激光笔（在所有视图中都有效）
+      if (e.key === 'o' && e.altKey) {
         e.preventDefault(); // 防止触发浏览器默认行为
         toggleLaser(!isLaserActive);
       }
     });
     
-    // 添加 Alt 键释放处理
-    document.addEventListener('keyup', function(e) {
-      if (e.key === 'Alt') {
-        e.preventDefault(); // 防止触发浏览器默认行为
-      }
-    });
-
     // 在页面加载时检查激光笔按钮显示状态
     window.addEventListener('load', function() {
       // 如果是演示者视图，不显示激光笔按钮和全屏按钮
@@ -643,7 +636,7 @@
     });
 
     // 更新激光笔按钮的提示文字
-    document.querySelector('#laser-btn').title = '激光笔 (Alt键切换)';
+    document.querySelector('#laser-btn').title = '激光笔 (Alt + O 切换)';
 
     // 窗口大小改变事件 - 恢复此事件处理以便在调整大小时正确处理激光笔
     window.addEventListener('resize', function() {
