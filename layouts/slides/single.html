@@ -553,8 +553,11 @@
         }
       }
       
-      // Alt + O 切换激光笔（在所有视图中都有效）
-      if (e.key === 'o' && e.altKey) {
+      // Alt/Option + O、Ctrl + O、Command + O 均可切换激光笔（在所有视图中都有效）
+      if (
+        e.key.toLowerCase() === 'o' &&
+        (e.altKey || e.ctrlKey || e.metaKey)
+      ) {
         e.preventDefault(); // 防止触发浏览器默认行为
         toggleLaser(!isLaserActive);
       }
