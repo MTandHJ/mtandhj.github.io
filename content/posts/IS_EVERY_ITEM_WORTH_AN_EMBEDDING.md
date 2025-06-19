@@ -25,6 +25,7 @@ pinned: false
 
 - 因此:
     1. 首先验证频率对于结果的影响, 是否会有比如说出现频率很低的商品被预测准确的概率会低.
+    2. 部分商品是否可以不建立单独的可学习 Embedding, 而是利用其周围邻居的平均作为替代.
 
 ## 实验结果
 
@@ -73,7 +74,11 @@ Norm <= 0.6 的数量恰好是 9,282
 
 1. 对于传统的协同过滤模型, 的确有 **频率高 $\rightarrow$ 模长大** 的趋势, 但是在序列模型之上, 却并没有观察到这一点, 只要出现在训练集中的频率不怎么为 0, 就基本上会有相当的模长.
 
+2. 我一开始怀疑, 是不是因为 SASRec 的 user embedding 经过了 LayerNorm, 这导致对应的 Item embedding 没法吸收到有效的模长信号, 但是多番测试下, LayerNorm 对此没有丝毫影响.
+
 ### 舍弃部分 Embeddings
+
+- 我们对一定频率内的商品的 Embedding 不做单独的 Embedding 训练, 而是利用其周围邻居的 Embedding 的平均.
 
 #### Amazon2014Beauty_1000_LOU
 
@@ -84,6 +89,14 @@ Norm <= 0.6 的数量恰好是 9,282
 - **SASRec:**
 
 ![20250615214441](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250615214441.png)
+
+- 进一步测试所有 Freqs 落在 $[l, u]$ 内的 Items 均不训练, 结果如下:
+
+![20250616115641](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250616115641.png)
+
+
+
+- 从上面的实验可以发现, 冷启动的商品和热门的商品, 都比较依赖 Embedding. 相比较下, 个人感觉热门商品相对来说不那么吃 Embedding. 当然这和我们的策略有关, 既然我们采取的是周围邻居的平均, 最热门的商品往往就是最大众化的. 冷门商品的连接, 相对而言可能反而有那么点随机性.
 
 ## 代码
 
@@ -858,19 +871,3 @@ fp.set_title()
 fp.show()
 # %%
 ```
-
-
-## 参考文献
-
-<ol class="reference">
-
-  <li>
-    Chen X., Liang C., Huang D., Real E., Wang K., Liu Y., Pham H., Dong X., Luong T., Hsieh C., Liu Y., and Le Q. V.
-    <u>Symbolic Discovery of Optimization Algorithms</u>.
-    <i>NeurIPS</i>, 2024.
-    <a href="http://arxiv.org/abs/2302.06675" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
-    <a href="https://github.com/google/automl/blob/master/lion/lion_pytorch.py" style="color: #007acc; font-weight: bold; text-decoration: none;">[Code]</a>
-  </li>
-
-  <!-- 添加更多文献条目 -->
-</ol>
