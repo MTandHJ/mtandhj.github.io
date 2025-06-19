@@ -43,6 +43,22 @@ window.timelineData = [
   },
 
   {
+    "date": "2025-02-13",
+    "title": "PrefEval",
+    "description": "一个衡量 LLM 是否具备 Preference Following 的 Benchmark",
+    "paperUrl": "https://arxiv.org/abs/2502.09597",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2025-02-12",
+    "title": "MoLoRec",
+    "description": "LLM-based, Domain-general + Domain-specific LoRAs",
+    "paperUrl": "https://arxiv.org/pdf/2502.08271",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2024-07-07",
     "title": "AlphaRec",
     "description": "论证了 LLM 有着不逊色 BERT 类模型的编码能力, 同时扩展了用户意图嵌入等方向",
