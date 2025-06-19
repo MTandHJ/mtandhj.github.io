@@ -21,7 +21,7 @@ tags:
 
 ### Background
 
-- 模型大小飞速增加 vs. 硬件价格居高不下
+↗️ 模型大小飞速增加 vs. 硬件价格居高不下
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312203012.png" alt="Image" style="max-width: 65%; height: auto; margin: 0 auto;">
@@ -41,7 +41,7 @@ tags:
 
 ### Background
   
-- Optimizer States (2x model size):
+⚙️ Optimizer States (2x model size):
 
   $$
   m_{t+1} \leftarrow \beta_1 \cdot m_t + (1 - \beta_1) \cdot g, \\
@@ -87,23 +87,10 @@ tags:
 <section data-markdown>
 <textarea data-template>
 
-### <u>S</u>tateful <u>O</u>ptimizers in Ultra <u>LO</u>w Bits
+### <u>S</u>tateful <u>O</u>ptimizers in Ultra-<u>LO</u>w Bits
 
-- Low-Bitwidth EMA update:
-
-$$
-\begin{array}{rl}
-  \text{Dequantization:  }  & \tilde{x}_t = Q^{\dagger}(q_t) = \iota_{q_t} \cdot \Delta_t, \\
-  \text{EMA update:  } & \hat{x}_{t+1} \leftarrow \beta \cdot \tilde{x}_t + (1 - \beta) \cdot z_{t + 1}, \\
-  \text{Quantization:  } & q_{t+1} = Q(\hat{x}_{t+1}).
-\end{array}
-$$
-
-
-<div class="slide-ref">
-    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">Dettmers T., et al. 8-bit Optimizers via Block-wise Quantization. ICLR, 2022.</p>
-    <p style="margin: 2px 0;">Li B., et al. Memory Efficient Optimizers with 4-bit States. NeurIPS, 2023.</p>
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617110019.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
 </div>
 
 </textarea>
@@ -119,7 +106,7 @@ $$
 - *Signal Swamping* (<u>large-to-small number addition</u>)
 
 $$
-\text{EMA update:  }  \hat{x}_{t+1} \leftarrow \beta \cdot \tilde{x}_t + \underbrace{\textcolor{red}{(1 - \beta) \cdot z_{t + 1}}}_{\text{very small for } \beta \rightarrow 1}.
+\text{EMA update:  }  \hat{x}_{t+1} \leftarrow \beta \cdot \tilde{x}_t + \underbrace{\textcolor{red}{(1 - \beta) \cdot z_{t + 1}}}_{\text{very small as } \beta \rightarrow 1}.
 $$
 
 
@@ -145,7 +132,7 @@ $$
 
 ### Signal Swamping
 
-- 总结
+💡 总结
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312212039.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
@@ -173,6 +160,8 @@ $$
 
 <div class="slide-col-4">
 
+&nbsp;
+
 - 一定<span style="color: red">条件</span>下:
   - Linear 下全部不更新
   - DE 下部分更新
@@ -197,15 +186,20 @@ $$
 
 <div class="slide-col-4">
 
-- $X \in \mathbb{R}^{1000}$
-- $Z \sim \mathcal{U}[0, 1]$
+&nbsp;
 
-<span style="color: red;">*X*</span> &nbsp; Fixed $\Delta$
+- 随机信号:
+  - $X \in \mathbb{R}^{1000}$
+  - $Z \sim \mathcal{U}[0, 1]$
 
-<span style="color: red;">*X*</span> &nbsp; $z \le \Delta$
+- Relaxed 条件:
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;">*X*</span> &nbsp; Fixed $\Delta$
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: red;">*X*</span> &nbsp; $z \le \Delta$
 
 
-- 理论收敛至: 0.5
+- 理论收敛至: $0.5$
 
 </div>
 
@@ -266,7 +260,7 @@ Q(x)
 \end{array}
 $$
 
-- 3-bit quantization anchors:
+- 3-bit quantization levels:
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250313113440.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
@@ -298,9 +292,9 @@ $$
 
 ### Logarithmic Quantization
 
-- Easy to implement
+✅ Easy to implement
 
-- State Decay Alignment
+✅ State decay alignment
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250313115306.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
@@ -315,11 +309,13 @@ $$
 
 ### Quantization for Signed EMA Update
 
-**X** &nbsp; <span style="color: gray">Singal Swamping</span>
+❎ &nbsp; <span style="color: gray">Singal Swamping</span>
 
-**✓** &nbsp; **Sign representation**
+☑️ &nbsp; **Sign representation**
 
-**✓** &nbsp; **Descent direction**
+☑️ &nbsp; **Descent direction**
+
+💡 总结:
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314115701.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
@@ -345,13 +341,15 @@ $$
 
 <div class="slide-col-4">
 
+&nbsp;
+
 $\rightarrow$ <span style="color: red">Bits $\downarrow$</span> or <span style="color: red">$\beta \uparrow$ </span>
 
 $\rightarrow$ Quantization errors <span style="color: red">$\uparrow$</span>
 
 $\rightarrow$ gradient variance <span style="color: red"> $\uparrow$ </span>
 
-$\rightarrow$ <span style="color: red"> bad </span> convergence
+$\rightarrow$ <span style="color: red"> worse </span> convergence
 
 </div>
 
@@ -392,12 +390,30 @@ $$
 ### Experiments
 
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250417145811.png" alt="Image" style="max-width: 85%; height: auto;margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617111401.png" alt="Image" style="max-width: 100%; height: auto;margin: 0 auto;">
 </div>
 
+😒 **传统方法:** $\underset{\text{Training from scratch}}{\xrightarrow{\text{Ultra-Low-Bit}}}$ degeneration/collapse 
+
+😊 **SOLO:** Robust to bits/tasks/models
 
 </textarea>
 </section>
+
+<!-- --------------------------------------------------------- -->
+
+<section data-markdown>
+<textarea data-template>
+
+### Experiments (Giant Models)
+
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617112643.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
+</div>
+
+</textarea>
+</section>
+
 
 <!-- --------------------------------------------------------- -->
 
@@ -452,10 +468,10 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### 2nd State Distribution
+### State Changes
 
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250407201114.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617112843.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
 </div>
 
 </textarea>
@@ -466,10 +482,18 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### AdaBelief
+### Generalizability of SOLO
+
+-  AdaBelief
 
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250407202155.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617113113.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
+</div>
+
+- Larger-scale models:
+
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617113029.png" alt="Image" style="max-width: 100%; height: auto;margin: 0 auto;">
 </div>
 
 </textarea>
