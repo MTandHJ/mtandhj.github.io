@@ -202,6 +202,52 @@
       right: 1em !important;
   }
 
+  /* 自定义项目符号样式 - 使用 list-style-type */
+  .reveal .slides section ul {
+    list-style: none !important;
+  }
+  
+  .reveal .slides section ul > li {
+    font-size: 1em !important;
+    position: relative;
+    padding-left: 0.4em !important;
+  }
+  
+  /* 只有一级列表使用自定义箭头 */
+  .reveal .slides section ul > li::marker {
+    content: "❯" !important;
+    color: #1F4E79 !important;
+  }
+  
+  /* 二级列表 - 圆点 */
+  .reveal .slides section ul ul > li {
+    font-size: 0.8em !important;
+    color: #444;
+    position: static !important;
+    padding-left: 0.5em !important;
+  }
+  
+  /* 强制覆盖二级列表的marker */
+  .reveal .slides section ul ul > li::marker {
+    content: "●" !important;
+    color: #444 !important;
+    font-size: 1em !important;
+  }
+  
+  /* 三级列表 - 方块 */
+  .reveal .slides section ul ul ul > li {
+    font-size: 0.7em !important;
+    color: #555;
+    position: static !important;
+    padding-left: 0.3em !important;
+  }
+  
+  /* 强制覆盖三级列表的marker */
+  .reveal .slides section ul ul ul > li::marker {
+    content: "■" !important;
+    color: #555 !important;
+    font-size: 1.2em !important;
+  }
 
   body.is-fullscreen header,
   body.is-fullscreen footer,
