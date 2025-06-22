@@ -1,7 +1,7 @@
 ---
-date: "2025-03-17"
-draft: true
-title: "个人介绍"
+date: "2025-06-22"
+draft: false
+title: "关于我"
 author: MTandHJ
 tags:
   - Slide
@@ -9,7 +9,7 @@ tags:
 ---
 
 <section>
-<h1> 个人介绍 </h1>
+<h1> 关于我 </h1>
 
 <div>
 <p style="text-align: right"> 徐聪 </p>
@@ -17,6 +17,8 @@ tags:
 </div>
 
 </section>
+
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
@@ -41,272 +43,253 @@ tags:
 </textarea>
 </section>
 
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
 
-### 科研成果
+### 科研经历
   
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250317113550.png" alt="Image" style="max-width: 110%; height: auto;margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250622145301.png" 
+    alt="Image" 
+    style="max-width: 95%; height: auto;margin: 0 auto;"
+  >
 </div>
 
 </textarea>
 </section>
 
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
 
-### 推荐系统 (背景)
+### 科研经历
   
-- 任务目标: 挖掘<u>用户</u>**潜在**的**兴趣偏好**、推荐**高概率**被点击的<u>商品</u>
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250622145643.png" 
+    alt="Image" 
+    style="max-width: 95%; height: auto;margin: 0 auto;"
+  >
+</div>
 
-- 阶段区分: 
-    - **粗排**: 粗筛百万级别的商品
-    - 精排: 结合丰富特征、对粗筛得到的商品进行精排
-
-- 数据类型:
-    - 交互数据 $\overset{\text{二部图}}{\longrightarrow}$  协同过滤 $\rightarrow$ MF、GNN
-    - 序列数据 $\overset{\text{时序信息}}{\longrightarrow}$ 序列推荐 $\rightarrow$ RNN、Transformer
-    - 媒体数据 $\overset{\text{图片、文本}}{\longrightarrow}$ 多模态推荐 $\rightarrow$ GNN、Attention、Gate
 
 </textarea>
 </section>
 
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
 
-### 研究路线
-
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250317143247.png" alt="Image" style="max-width: 70%; height: auto;margin: 0 auto;">
-</div>
-
+### 科研经历
   
-</textarea>
-</section>
 
-
-<section data-markdown>
-<textarea data-template>
-
-### 图协同过滤: StableGCN
-
-<div class="slide-cols">
-
-<div class="slide-col-half">
-
-- 图神经网络在协同过滤中:
-    - **N**eighborhood **A**ggregation (NA) (**√**)
-    - **F**eature **T**ransformation (FT) (**X**)
-
-
-</div>
-
-<div class="slide-col-half">
+&nbsp;
 
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250317150356.png" alt="Image" style="max-width: 90%; height: auto;margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250622150238.png" 
+    alt="Image" 
+    style="max-width: 100%; height: auto;margin: 0 auto;"
+  >
 </div>
 
-
-</div>
-
-</div>
 
 <div class="slide-ref">
     <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">Xu C., et al. StableGCN: Decoupling and Reconciling Information Propagation for Collaborative Filtering. TKDE, 2023.</p>
+    <p style="margin: 2px 0;">Goodfellow I. J., et al. Explaining and Harnessing Adversarial Examples. ICLR, 2015.</p>
+ 
 </div>
-
 
 </textarea>
 </section>
 
-<!-- --------------------------------------------- -->
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
 
-### 图协同过滤: StableGCN
-
-<div class="slide-cols">
-
-<div class="slide-col-half">
-
-- 图神经网络在协同过滤中:
-    - **N**eighborhood **A**ggregation (NA) (**√**)
-    - **F**eature **T**ransformation (FT) (**X**)
-
-- FT 导致"振荡平滑性"
-
-- StableGCN:
-    1. Decoupled GCN
-    2. Feature Extraction
-    3. Feature Denoising
-    4. Progressive Training 
-
-</div>
-
-<div class="slide-col-half">
+### 科研经历
+  
 
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250317151547.png" alt="Image" style="max-width: 110%; height: auto;margin: 0 auto;">
-</div>
-
-<p>&nbsp;</p>
-
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250317151742.png" alt="Image" style="max-width: 110%; height: auto;margin: 0 auto;">
-</div>
-
-
-</div>
-
-</div>
-
-<div class="slide-ref">
-    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">Xu C., et al. StableGCN: Decoupling and Reconciling Information Propagation for Collaborative Filtering. TKDE, 2023.</p>
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250622150730.png"
+    alt="Image" 
+    style="max-width: 90%; height: auto;margin: 0 auto;"
+  >
 </div>
 
 
 </textarea>
 </section>
 
-<!-- --------------------------------------------- -->
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
 
-### 图+序列: SEvo
+### 图优化器: Background
+
+$\textcircled{\small 1}$ Embedding $\xrightarrow{\text{实体 (User, Item) 的向量表示}}$ 现代推荐系统的基础
+
 
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250317152831.png" alt="Image" style="max-width: 90%; height: auto;margin: 0 auto;">
-</div>
-
-- 序列模型 $\overset{\text{+结构化的图}}{\longrightarrow}$ 特质化、缺乏通用性的模型 $\rightarrow$ SEvo
-
-
-<div class="slide-ref">
-    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">Xu C., et al. Graph-enhanced Optimizers for Structure-aware Recommendation Embedding Evolution. NeurIPS, 2024.</p>
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619102807.png" 
+  alt="Image" 
+  style="max-width: 65%; height: auto;margin: 0 auto;">
 </div>
 
 </textarea>
 </section>
 
-
-<!-- --------------------------------------------- -->
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
 
-### 图+序列: SEvo
+### 图优化器: Background
+
+$\textcircled{\small 2}$ 多元信息 $\xrightarrow{\text{交互信息, 类别相似性}}$ 潜在的结构性约束
+
 
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250317155009.png" alt="Image" style="max-width: 73%; height: auto;margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619110409.png" 
+  alt="Image" 
+  style="max-width: 100%; height: auto;margin: 0 auto;">
 </div>
 
-- 序列模型 $\overset{\text{+结构化的图}}{\longrightarrow}$ 特质化、缺乏通用性的模型 $\rightarrow$ SEvo
-- **Challenge:** 收敛速度、 如何应用于不同的优化器
+❓Embedding 学习如何高效融入这些结构性先验
 
+</textarea>
+</section>
 
-<div class="slide-ref">
-    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">Xu C., et al. Graph-enhanced Optimizers for Structure-aware Recommendation Embedding Evolution. NeurIPS, 2024.</p>
+<!-- --------------------------------------------------------- -->
+
+<section data-markdown>
+<textarea data-template>
+
+### 图优化器: SEvo
+
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250622152012.png" 
+  alt="Image" 
+  style="max-width: 100%; height: auto;margin: 0 auto;">
+</div>
+
+🤔 平滑性 vs. 收敛性 
+
+🤔 如何应用到现代优化器之中
+
+</textarea>
+</section>
+
+<!-- --------------------------------------------------------- -->
+
+<section data-markdown>
+<textarea data-template>
+
+### 图优化器: SEvo
+
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250622170316.png" 
+  alt="Image" 
+  style="max-width: 100%; height: auto;margin: 0 auto;">
 </div>
 
 </textarea>
 </section>
 
-<!-- --------------------------------------------- -->
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
 
-### 图+多模态: STAIR
+### 低精度优化器: Background
 
-<div class="slide-cols">
-
-<div class="slide-col-half">
-
-- 多模态协同过滤:
-    - 往往非模态驱动!
-    - **融合问题:** 多模态 + 交互数据
-
-
-</div>
-
-<div class="slide-col-half">
+↗️ 模型大小飞速增加 vs. 硬件价格居高不下
 
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250317155427.png" alt="Image" style="max-width: 90%; height: auto;margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312203012.png" alt="Image" style="max-width: 65%; height: auto; margin: 0 auto;">
 </div>
 
-
-</div>
-
-</div>
-
-
-<div class="slide-ref">
-    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">Xu C., et al. STAIR: Manipulating Collaborative and Multimodal Information for E-Commerce Recommendation. AAAI, 2025.</p>
-</div>
+- 解决方案: 
+  - MoE, LoRA; ZeRO, FSDP; 
+  - Network Quantization; <span style="color: red;">Lightweight Optimizers</span>
 
 </textarea>
 </section>
 
 
-<!-- --------------------------------------------- -->
+<!-- --------------------------------------------------------- -->
 
 <section data-markdown>
 <textarea data-template>
 
-### 图+多模态: STAIR
+### 低精度优化器: Background
+  
+⚙️ Optimizer States (2x model size):
 
-<div class="slide-cols">
+  $$
+  m_{t+1} \leftarrow \beta_1 \cdot m_t + (1 - \beta_1) \cdot g, \\
+  v_{t+1} \leftarrow \beta_2 \cdot v_t + (1 - \beta_2) \cdot g^2.
+  $$
 
-<div class="slide-col-half">
-
-- 多模态协同过滤:
-    - 往往非模态驱动!
-    - **融合问题:** 多模态 + 交互数据
-
-- STAIR:
-    - **Challenge I:** Modality erasure
-        - Forward Stepwise Convolution (FSC)
-    - **Challenge II:** Modality forgetting
-        - Backward Stepwise Convolution (BSC)
-
-
-</div>
-
-<div class="slide-col-half">
+- DeepSeek-v3 训练框架: $g \overset{\text{BF16}}{\rightarrow} m, v \overset{\text{FP32}}{\rightarrow} \theta$
 
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250317155427.png" alt="Image" style="max-width: 90%; height: auto;margin: 0 auto;">
-</div>
-
-<p style="margin-top: 1.5em !important"></p>
-
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250317155710.png" alt="Image" style="max-width: 90%; height: auto;margin: 0 auto;">
-</div>
-
-
-</div>
-
-</div>
-
-
-<div class="slide-ref">
-    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">Xu C., et al. STAIR: Manipulating Collaborative and Multimodal Information for E-Commerce Recommendation. AAAI, 2025.</p>
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312204230.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
 </div>
 
 </textarea>
+</section>
+
+<!-- --------------------------------------------------------- -->
+
+<section data-markdown>
+<textarea data-template>
+
+### 低精度优化器: SOLO
+
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250622153303.png" 
+    alt="Image" 
+    style="max-width: 90%; height: auto;margin: 0 auto;"
+  >
+</div>
+
+❓超低精度下: <span style="color: red">sigal swamping</span> & <span style="color: red">high gradient variance</span>
+
+✅ 定制的对数量化 & 改良的动量系数: 50GB $\xrightarrow{\text{LLaMA-7B}}$ 5GB
+
+
+</textarea>
+</section>
+
+<!-- --------------------------------------------------------- -->
+
+<section data-markdown>
+<textarea data-template>
+
+### 
+
+
+</textarea>
+</section>
+
+<!-- --------------------------------------------------------- -->
+
+<section>
+
+
+<div style="
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40%;
+  font-size: 10rem;
+">
+  Thanks!
+</div>
+
 </section>
