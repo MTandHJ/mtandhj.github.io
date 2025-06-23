@@ -1,6 +1,6 @@
 ---
 date: "2025-06-22"
-draft: false
+draft: true
 title: "关于我"
 author: MTandHJ
 tags:
@@ -9,7 +9,7 @@ tags:
 ---
 
 <section>
-<h1> 关于我 </h1>
+<h1> XX 大学面试 </h1>
 
 <div>
 <p style="text-align: right"> 徐聪 </p>
@@ -271,7 +271,85 @@ $\textcircled{\small 2}$ 多元信息 $\xrightarrow{\text{交互信息, 类别�
 <section data-markdown>
 <textarea data-template>
 
-### 
+### 教材编写
+
+<div class="slide-cols">
+
+<!-- left -->
+<div class="slide-col-4">
+
+&nbsp;
+
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250622211535.png" 
+  alt="Image" 
+  style="max-width: 100%; height: auto;margin: 0 auto;">
+</div>
+
+
+</div>
+
+<!-- right -->
+<div class="slide-col-4">
+
+- 第 5 章 无监督学习
+  - 推荐系统 
+  - K 均值聚类
+  - 谱聚类
+  - EM 算法
+  - 变分自编码
+
+- 第 6 章 监督学习
+  - 朴素贝叶斯分类
+  - 感知器
+  - 支持向量机
+  - 深度学习分类
+
+</div>
+
+<div class="slide-col-4">
+
+- 第 7 章 深度学习的鲁棒性
+  - 神经网络的脆弱性
+  - 攻击扰动的构造
+  - 对抗训练防御
+  - 基于分类器改进的防御的方法
+
+- 附录 B 神经网络
+  - 全连接网络与反向传播算法
+  - 卷积神经网络
+  - 循环神经网络
+
+</div>
+
+
+
+</div>
+
+
+</textarea>
+</section>
+
+<!-- --------------------------------------------------------- -->
+
+<section data-markdown>
+<textarea data-template>
+
+### 未来的思考
+
+- Human & AI
+  - 科研工作者/教师有什么是 AI 不能替代的
+  - 日渐崩坏的审稿体系
+
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250623143320.png" 
+  alt="Image" 
+  style="max-width: 50%; height: auto;margin: 0 auto;">
+</div>
+
+- 学术界 & 工业界
+  - 学术界应该追逐什么
+
 
 
 </textarea>
