@@ -24,6 +24,14 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-04-22",
+    "title": "LVLM Benchmark",
+    "description": "多模态大模型通过 5 种策略增强多模态序列推荐的评测",
+    "paperUrl": "https://dl.acm.org/doi/10.1145/3696410.3714764",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-02-12",
     "title": "Spectrum Shift Correction",
     "description": "指出了交互图掺杂多模态信息后频谱偏移现象并提出解决方法",
