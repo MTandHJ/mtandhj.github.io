@@ -37,9 +37,9 @@ window.timelineData = [
   {
     "date": "2025-02-26",
     "title": "OneRec",
-    "description": "端到端生成式推荐在快手团队的尝试, 主要用于视频流推荐, 其中的 Fixed 向量量化颇有意思",
+    "description": "端到端生成式推荐在快手团队的尝试, 主要用于视频流推荐, 特征处理 + 离散编码 + reward",
     "paperUrl": "/posts/onerec/",
-    "importance": "emmm"
+    "importance": "novel"
   },
 
   {
