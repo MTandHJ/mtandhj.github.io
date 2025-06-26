@@ -9,7 +9,7 @@ tags:
 ---
 
 <section>
-<h1> XX 大学面试 </h1>
+<h1> XX大学面试 </h1>
 
 <div>
 <p style="text-align: right"> 徐聪 </p>
@@ -26,8 +26,9 @@ tags:
 ### 教育背景
 
 
-- 2015.09| 烟台大学 $\circ$ 数学与信息科学学院 
-- 2019.06| 统计学 $\circ$ 多元统计分析 $\circ$ <u>稀疏主成分分析</u>
+
+- 2022.09| 华东师范大学 $\circ$ 计算机科学与技术学院 
+- 2026.06| 计算机应用技术 $\circ$ 机器学习 $\circ$ <u>推荐系统/优化方法</u>
 
 <p style="margin-top: 2em !important"></p>
 
@@ -37,8 +38,8 @@ tags:
 
 <p style="margin-top: 2em !important"></p>
 
-- 2022.09| 华东师范大学 $\circ$ 计算机科学与技术学院 
-- 2026.06| 计算机应用技术 $\circ$ 机器学习 $\circ$ <u>推荐系统/优化方法</u>
+- 2015.09| 烟台大学 $\circ$ 数学与信息科学学院 
+- 2019.06| 统计学 $\circ$ 多元统计分析 $\circ$ <u>稀疏主成分分析</u>
 
 </textarea>
 </section>
@@ -56,24 +57,6 @@ tags:
     style="max-width: 95%; height: auto;margin: 0 auto;"
   >
 </div>
-
-</textarea>
-</section>
-
-<!-- --------------------------------------------------------- -->
-
-<section data-markdown>
-<textarea data-template>
-
-### 科研经历
-  
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250622145643.png" 
-    alt="Image" 
-    style="max-width: 95%; height: auto;margin: 0 auto;"
-  >
-</div>
-
 
 </textarea>
 </section>
@@ -258,7 +241,7 @@ $\textcircled{\small 2}$ 多元信息 $\xrightarrow{\text{交互信息, 类别�
   >
 </div>
 
-❓超低精度下: <span style="color: red">sigal swamping</span> & <span style="color: red">high gradient variance</span>
+❓超低精度下: <span style="color: red">signal swamping</span> & <span style="color: red">high gradient variance</span>
 
 ✅ 定制的对数量化 & 改良的动量系数: 50GB $\xrightarrow{\text{LLaMA-7B}}$ 5GB
 
@@ -350,6 +333,23 @@ $\textcircled{\small 2}$ 多元信息 $\xrightarrow{\text{交互信息, 类别�
 - 学术界 & 工业界
   - 学术界应该追逐什么
 
+
+
+</textarea>
+</section>
+
+<!-- --------------------------------------------------------- -->
+
+<section data-markdown>
+<textarea data-template>
+
+  
+<div class="slide-img">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250622145643.png" 
+    alt="Image" 
+    style="max-width: 95%; height: auto;margin: 0 auto;"
+  >
+</div>
 
 
 </textarea>
