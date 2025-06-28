@@ -29,7 +29,7 @@ pinned: false
 
 - **向量量化:** 首先需要做的事情是将 Item 映射到 LLM 的语义空间中去:
     1. 以往这种方式可能是通过一个 projector 来将 Item 的语义 embedding 映射到 LLM 的语义空间当中去;
-    2. **LC-Rec** 选择通过和 Tiger 类似的方法, 用 [RQ-VAE](/posts/rq-vae/) 首先将所有的 Item 映射为一组语义 IDs, 然后这组 IDs 作为 LLM 原本的词表的扩展, 后续通过一系列任务进行学习.
+    2. **LC-Rec** 选择通过和 Tiger 类似的方法, 用 [RQ-VAE](/posts/rqvae/) 首先将所有的 Item 映射为一组语义 IDs, 然后这组 IDs 作为 LLM 原本的词表的扩展, 后续通过一系列任务进行学习.
 
 **注:** 我不觉得从表达能力上来说, 向量量化会比直接用 projector 的方式好, 但是感觉向量量化的确更贴合 LLM 本身的设计.
 

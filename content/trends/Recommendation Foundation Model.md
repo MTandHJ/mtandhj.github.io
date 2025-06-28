@@ -94,7 +94,7 @@ window.timelineData = [
     "date": "2023-11-15",
     "title": "LC-Rec",
     "description": "LLM + RQ-VAE + 非常丰富的多任务训练",
-    "paperUrl": "https://arxiv.org/abs/2305.05065",
+    "paperUrl": "/posts/lc-rec/",
     "importance": "novel"
   },
 
