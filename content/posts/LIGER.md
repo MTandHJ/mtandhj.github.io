@@ -42,7 +42,7 @@ pinned: false
     $$
     \tag{2}
     \mathbf{e}_{s_i^j} = \underbrace{\mathbf{x}_{s_i^j}}_{ID} + \underbrace{\mathbf{x}_i^{\text{text}}}_{text} + \underbrace{\mathbf{x}_i^{\text{pos}} + \mathbf{x}_j^{\text{pos}}}_{positional}.
-    $$
+    $g'g
 
     于是, 此时每个 item 通过一组 embeddings 表示:
 
