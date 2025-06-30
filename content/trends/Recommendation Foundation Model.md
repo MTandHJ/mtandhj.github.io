@@ -27,6 +27,14 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-05-24",
+    "title": "MTGR",
+    "description": "美团将 HSTU 应用到 ranking 阶段的尝试: Group Normalization 对齐不同语义空间的操作有点意思",
+    "paperUrl": "https://arxiv.org/abs/2505.18654",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-04-23",
     "title": "UniGRF",
     "description": "用 Next-item (并非论文宣称的生成式推荐) 统一 Retrieval and Ranking, 强调 ranking 对于 retrieval 阶段的辅助",
