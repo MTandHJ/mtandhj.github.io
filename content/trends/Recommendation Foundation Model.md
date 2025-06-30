@@ -43,6 +43,14 @@ window.timelineData = [
   },
 
   {
+    "date": "2025-03-04",
+    "title": "COBRA",
+    "description": "百度提出了一种通过离散编码衍生到稠密表示的框架, 二者结合可以获得更好的效果",
+    "paperUrl": "/posts/cobra/",
+    "importance": "novel"
+  },
+
+  {
     "date": "2025-02-26",
     "title": "OneRec",
     "description": "端到端生成式推荐在快手团队的尝试, 主要用于视频流推荐, 特征处理 + 离散编码 + reward",
