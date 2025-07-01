@@ -99,6 +99,14 @@ window.timelineData = [
   },
 
   {
+    "date": "2024-03-27",
+    "title": "IDGenRec",
+    "description": "利用语言模型'精炼'出文本 ID, 用于 Base Recommender 的 Diverse Beam Search 生成",
+    "paperUrl": "https://arxiv.org/abs/2403.19021",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2024-02-27",
     "title": "HSTU",
     "description": "通过 Action 统一 retrieval 和 ranking. 针对 transformers Attention 的改进很吸引人, 而且似乎已经被工业界验证了",
