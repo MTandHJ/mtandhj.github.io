@@ -19,7 +19,7 @@ pinned: false
 
 ## 预备知识
 
-- 在学习 VQGAN 之前, 请务必先了解 [VQ-VAE](https://www.mtandhj.com/posts/vqvae/).
+- 在学习 VQGAN 之前, 请务必先了解 [VQ-VAE](https://www.mtandhj.com/posts/vq-vae/).
 
 
 ## 核心思想
@@ -69,7 +69,7 @@ pinned: false
     这里 $\delta = 1e-6$ 是一个小量防止数值不稳定.
 
 - 特别地, 文中有一句话:
-> To do so, we propose VQGAN, a variant of the original VQVAE, and use a discriminator and perceptual loss to keep good perceptual quality at increased compression rate.
+> To do so, we propose VQGAN, a variant of the original VQ-VAE, and use a discriminator and perceptual loss to keep good perceptual quality at increased compression rate.
 
 - 因此, 实际使用的时候, $\mathcal{L}_{VQ}$ 中的 $\mathcal{L}_{rec}$ 应当替换为 [perceptual loss](https://zhuanlan.zhihu.com/p/92102879).
 

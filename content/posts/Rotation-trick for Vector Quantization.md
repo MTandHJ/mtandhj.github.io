@@ -19,7 +19,7 @@ pinned: false
 
 ## 预备知识
 
-- 需要对 [VQVAE](/posts/vqvae) 有基本的了解.
+- 需要对 [VQ-VAE](/posts/vq-vae) 有基本的了解.
 
 ## 核心思想
 

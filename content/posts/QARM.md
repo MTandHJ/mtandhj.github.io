@@ -17,7 +17,7 @@ pinned: false
 
 ## 预备知识
 
-- 请了解 [RQ-VAE](https://www.mtandhj.com/posts/rqvae/).
+- 请了解 [RQ-VAE](https://www.mtandhj.com/posts/rq-vae/).
 
 ## 核心思想
 
@@ -66,7 +66,7 @@ pinned: false
 
 ### Quantitative Code of QARM
 
-- QARM 不采取之前常用的 [RQ-VAE](https://www.mtandhj.com/posts/rqvae/).
+- QARM 不采取之前常用的 [RQ-VAE](https://www.mtandhj.com/posts/rq-vae/).
 
 - 作者认为既然先前已经对 Encoder 进行微调了, 我们只需要从得到的 embeddings 中估计一些聚类中心, 即可作为 codebook. 当然了, 如果我们还希望使用 RQ-VAE 的格式, 就需要为每一层筛选 codebook $\mathbf{R}^l \in \mathbb{R}^{K \times d}, \: l=1,2,\ldots, L$:
     1. 将所有 item 喂入 Encoder 得到 embedding table $\mathbf{M}^{(0)} \in \mathbb{R}^{N \times d}$.

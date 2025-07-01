@@ -18,7 +18,7 @@ pinned: false
 
 ## 预备知识
 
-- 请务必了解 [VQ-VAE](https://www.mtandhj.com/posts/vqvae/).
+- 请务必了解 [VQ-VAE](https://www.mtandhj.com/posts/vq-vae/).
 
 ## 核心思想
 

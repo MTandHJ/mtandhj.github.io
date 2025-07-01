@@ -32,7 +32,7 @@ pinned: false
 
 ![20250630162957](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250630162957.png)
 
-- **Sparse Representation:** 类似于 TIGER, 采用 [RQ-VAE](/posts/rqvae/) 为每个 item 赋予一组语义 IDs.
+- **Sparse Representation:** 类似于 TIGER, 采用 [RQ-VAE](/posts/rq-vae/) 为每个 item 赋予一组语义 IDs.
 
 - **Dense Representation:** End-to-end 地训练一个 Encoder, 其中的 [CLS] token 作为整个 item textual features 的融合表征, 记为 $\mathbf{v}$.
 
