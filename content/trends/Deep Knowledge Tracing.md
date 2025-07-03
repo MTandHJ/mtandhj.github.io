@@ -30,6 +30,14 @@ window.timelineData = [
   },
 
   {
+    "date": "2019-10-29",
+    "title": "SKVMN",
+    "description": "DKVMN 的基础上用 LSTM 处理子系列",
+    "paperUrl": "",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2019-07-16",
     "title": "SAKT",
     "description": "将 decoder-only transformer 应用于 DKT 上, 并提出习题/作答的 cross attention",
