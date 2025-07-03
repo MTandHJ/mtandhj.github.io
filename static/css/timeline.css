@@ -264,7 +264,9 @@
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
-  will-change: opacity;
+  max-width: 40vw;
+  min-width: 200px;
+  overflow: hidden;
 }
 
 .timeline-tooltip.show {
@@ -274,8 +276,7 @@
 .timeline-tooltip img {
   width: auto;
   height: auto;
-  max-width: 80vw;
-  max-height: 80vh;
+  max-width: 100%;
   border-radius: 4px;
   display: block;
 }

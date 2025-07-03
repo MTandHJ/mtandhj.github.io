@@ -194,6 +194,19 @@ document.addEventListener('DOMContentLoaded', function() {
       const imageUrl = link.getAttribute('data-image-url');
       if (!imageUrl) return;
       
+      // 预加载图片以获取尺寸信息
+      const preloadImg = new Image();
+      let preloadedSize = null;
+      
+      preloadImg.onload = function() {
+        preloadedSize = {
+          width: this.naturalWidth,
+          height: this.naturalHeight
+        };
+      };
+      
+      preloadImg.src = imageUrl;
+      
       // 创建工具提示元素
       const tooltip = document.createElement('div');
       tooltip.className = 'timeline-tooltip';
@@ -201,27 +214,37 @@ document.addEventListener('DOMContentLoaded', function() {
       document.body.appendChild(tooltip);
       
       let hideTimeout;
+      let currentEvent = null;
+      
+      // 图片加载完成后重新计算缩放
+      const img = tooltip.querySelector('img');
+      img.addEventListener('load', function() {
+        if (currentEvent) {
+          positionTooltip(tooltip, currentEvent, preloadedSize);
+        }
+      });
       
       // 鼠标进入事件
       link.addEventListener('mouseenter', function(e) {
         clearTimeout(hideTimeout);
+        currentEvent = e;
         tooltip.style.display = 'block';
-        // 使用requestAnimationFrame确保display:block生效后再添加show类
         requestAnimationFrame(() => {
           tooltip.classList.add('show');
         });
-        positionTooltip(tooltip, e);
+        positionTooltip(tooltip, e, preloadedSize);
       });
       
       // 鼠标移动事件（更新位置）
       link.addEventListener('mousemove', function(e) {
-        positionTooltip(tooltip, e);
+        currentEvent = e;
+        positionTooltip(tooltip, e, preloadedSize);
       });
       
       // 鼠标离开事件
       link.addEventListener('mouseleave', function() {
+        currentEvent = null;
         tooltip.classList.remove('show');
-        // 等待过渡动画完成后再隐藏
         hideTimeout = setTimeout(() => {
           tooltip.style.display = 'none';
         }, 200);
@@ -230,27 +253,29 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   // 定位工具提示
-  function positionTooltip(tooltip, event) {
-    const rect = tooltip.getBoundingClientRect();
+  function positionTooltip(tooltip, event, preloadedSize = null) {
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
     
-    // 默认位置（鼠标右侧）
+    // 先设置图片尺寸
+    const img = tooltip.querySelector('img');
+    if (img) {
+      resizeImageToFit(img, windowWidth, event.clientX, preloadedSize);
+    }
+    
+    // 获取工具提示尺寸
+    const rect = tooltip.getBoundingClientRect();
+    
+    // 始终显示在鼠标右侧
     let left = event.clientX + 10;
     let top = event.clientY - rect.height / 2;
     
-    // 如果工具提示超出右边界，显示在左侧
-    if (left + rect.width > windowWidth - 20) {
-      left = event.clientX - rect.width - 10;
-    }
-    
-    // 确保工具提示完全在屏幕内
-    if (left < 20) {
-      left = 20;
-    }
+    // 确保不超出右边界
     if (left + rect.width > windowWidth - 20) {
       left = windowWidth - rect.width - 20;
     }
+    
+    // 确保不超出上下边界
     if (top < 20) {
       top = 20;
     }
@@ -258,8 +283,44 @@ document.addEventListener('DOMContentLoaded', function() {
       top = windowHeight - rect.height - 20;
     }
     
+    // 确保最终位置在鼠标右侧
+    if (left < event.clientX + 10) {
+      left = event.clientX + 10;
+    }
+    
     tooltip.style.left = left + 'px';
     tooltip.style.top = top + 'px';
+  }
+  
+  // 简化的图片缩放逻辑
+  function resizeImageToFit(img, windowWidth, mouseX, preloadedSize = null) {
+    // 计算鼠标右侧可用空间
+    const availableWidth = windowWidth - mouseX - 30;
+    const maxWidth = Math.min(availableWidth, windowWidth * 0.4);
+    
+    // 获取图片尺寸
+    let originalWidth = img.naturalWidth;
+    let originalHeight = img.naturalHeight;
+    
+    // 如果图片还未加载完成，使用预加载的尺寸
+    if ((!originalWidth || !originalHeight) && preloadedSize) {
+      originalWidth = preloadedSize.width;
+      originalHeight = preloadedSize.height;
+    } else if (!originalWidth || !originalHeight) {
+      // 使用默认尺寸
+      originalWidth = 400;
+      originalHeight = 300;
+    }
+    
+    // 如果图片宽度超出可用空间，进行缩放
+    if (originalWidth > maxWidth) {
+      const scale = maxWidth / originalWidth;
+      img.style.width = maxWidth + 'px';
+      img.style.height = (originalHeight * scale) + 'px';
+    } else {
+      img.style.width = 'auto';
+      img.style.height = 'auto';
+    }
   }
   
   // 获取重要性类名
