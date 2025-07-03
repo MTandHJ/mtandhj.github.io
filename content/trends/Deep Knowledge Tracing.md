@@ -8,7 +8,7 @@ tags:
   - Education
 ---
 
-- 知识追踪是智能教育中的一个重要课题: 根据学生的历史作答序列, 追踪学生的知识掌握状态, 判断习题的答对答错.
+- 知识追踪是智能教育中的一个重要课题: 根据学生的历史作答序列, 追踪学生的**知识掌握状态**, 判断习题的答对答错.
 
 <!-- 使用更高效的CSS加载方式 -->
 <link rel="stylesheet" href="/css/timeline.css">
@@ -26,6 +26,7 @@ window.timelineData = [
     "title": "SAINT",
     "description": "Encoder-decoder transformer 在 DKT 上的应用, 设计颇为奇怪",
     "paperUrl": "https://arxiv.org/abs/2002.07033",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250703162056.png",
     "importance": "emmm"
   },
 
@@ -33,7 +34,8 @@ window.timelineData = [
     "date": "2019-10-29",
     "title": "SKVMN",
     "description": "DKVMN 的基础上用 LSTM 处理子系列",
-    "paperUrl": "",
+    "paperUrl": "https://arxiv.org/abs/1910.13197",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250703162220.png",
     "importance": "emmm"
   },
 
@@ -42,6 +44,7 @@ window.timelineData = [
     "title": "SAKT",
     "description": "将 decoder-only transformer 应用于 DKT 上, 并提出习题/作答的 cross attention",
     "paperUrl": "/posts/sakt",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250401140515.png",
     "importance": "novel"
   },
 
@@ -50,6 +53,7 @@ window.timelineData = [
     "title": "DKVMN",
     "description": "改进记忆网络 MANN 来实现对习题的概念和学生的掌握情况的一个动态建模",
     "paperUrl": "/posts/dkvmn",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250330174039.png",
     "importance": "novel"
   },
 
@@ -58,6 +62,7 @@ window.timelineData = [
     "title": "DKT",
     "description": "将 RNN/LSTM 模型应用于 KT",
     "paperUrl": "/posts/dkt",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250327212027.png",
     "importance": "seminal"
   },
 
