@@ -42,15 +42,15 @@ pinned: false
     $$
     \tag{2}
     \mathbf{e}_{s_i^j} = \underbrace{\mathbf{x}_{s_i^j}}_{ID} + \underbrace{\mathbf{x}_i^{\text{text}}}_{text} + \underbrace{\mathbf{x}_i^{\text{pos}} + \mathbf{x}_j^{\text{pos}}}_{positional}.
-    $$
+    $g'g
 
     于是, 此时每个 item 通过一组 embeddings 表示:
 
-    $$
+    $ben'wen
     \mathbf{E}_{i} = [\mathbf{e}_{s_i^1}, \mathbf{e}_{s_i^2}, \cdots, \mathbf{e}_{s_i^m}].
     $$
 
-- 比较的结果如下: Dense (SID) 即 (2) 能够和普通的 UniSRec (Dense) 结果相当了, 且在冷启动上也有不错的效果, 这说明 semantic ID 本文对于 item-item 的关系的学习其实并不差. 如果将 TIGER 中的 semantic ID 替换为一般的 ID (TIGER (T)), 效果也并没有什么增长, 这进一步验证了这一点.
+- 比较的结果如下: Dense (SID) 即 (2) 能够和普通的 UniSRec (Dense) 结果相当了, 且在冷启动上也有不错的效果, 这说明 semantic ID 本身对于 item-item 的关系的学习其实并不差. 如果将 TIGER 中的 semantic ID 替换为一般的 ID (TIGER (T)), 效果也并没有什么增长, 这进一步验证了这一点.
 
 ![20250327145319](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250327145319.png)
 

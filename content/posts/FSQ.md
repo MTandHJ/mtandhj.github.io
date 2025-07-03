@@ -18,7 +18,7 @@ pinned: false
 
 ## 预备知识
 
-- [VQ-VAE](https://www.mtandhj.com/posts/vqvae/) 提供了一种优雅的向量量化 (离散化表示) 的一种方式, 然而其中的 codebook 的训练以及前置的 encoder 的训练依赖 stop gradient ($\text{sg}(\cdot)$) 以及 straight-through estimator (STE) 操作, 这会导致训练起来比较困难. 具体来说, 可能:
+- [VQ-VAE](https://www.mtandhj.com/posts/vq-vae/) 提供了一种优雅的向量量化 (离散化表示) 的一种方式, 然而其中的 codebook 的训练以及前置的 encoder 的训练依赖 stop gradient ($\text{sg}(\cdot)$) 以及 straight-through estimator (STE) 操作, 这会导致训练起来比较困难. 具体来说, 可能:
     1. codebook 中的部分向量过于接近, 从而冗余;
     2. 很多向量在训练过程中完全不会匹配到任何向量.
 
