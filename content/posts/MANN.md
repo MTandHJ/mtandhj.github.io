@@ -67,7 +67,7 @@ pinned: false
     \mathbf{w}_t^u \leftarrow \gamma \mathbf{w}_{t-1}^u + \mathbf{w}_t^r + \mathbf{w}_t^w.
     $$
 
-    这里, $\alpha$ 是一个可学西的 sigmoid gate parameter, $m(\mathbf{v}, n)$ 返回的是 $\mathbf{v}$ 中 $n$-th 最小的元素. 即 $w_t^{lu}$ 指示了当前 memory matrix 中哪些是 least-used (lu) 的. 最后写入的权重由 $\mathbf{w}_t^w$ 决定, 它是当前 **Read** 的权重以及 **least-used** 权重的加权. 即 $\mathbf{M}_t (i)$ 的更新程度比较大, 当且仅当它在这一轮中被**充分**读取了, 或它在过去**许多轮**都没有被**充分读取**.
+    这里, $\alpha$ 是一个可学习的 sigmoid gate parameter, $m(\mathbf{v}, n)$ 返回的是 $\mathbf{v}$ 中 $n$-th 最小的元素. 即 $w_t^{lu}$ 指示了当前 memory matrix 中哪些是 least-used (lu) 的. 最后写入的权重由 $\mathbf{w}_t^w$ 决定, 它是当前 **Read** 的权重以及 **least-used** 权重的加权. 即 $\mathbf{M}_t (i)$ 的更新程度比较大, 当且仅当它在这一轮中被**充分**读取了, 或它在过去**许多轮**都没有被**充分读取**.
 
 ## 参考文献
 
