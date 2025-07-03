@@ -244,12 +244,16 @@ document.addEventListener('DOMContentLoaded', function() {
       left = event.clientX - rect.width - 10;
     }
     
-    // 如果工具提示超出上边界，调整垂直位置
+    // 确保工具提示完全在屏幕内
+    if (left < 20) {
+      left = 20;
+    }
+    if (left + rect.width > windowWidth - 20) {
+      left = windowWidth - rect.width - 20;
+    }
     if (top < 20) {
       top = 20;
     }
-    
-    // 如果工具提示超出下边界，调整垂直位置
     if (top + rect.height > windowHeight - 20) {
       top = windowHeight - rect.height - 20;
     }
