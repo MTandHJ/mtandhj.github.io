@@ -25,7 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
         description: item.description || '',
         paperUrl: item.paperUrl || '#',
         importance: item.importance || '',
-        date: item.date || '1970-01-01'
+        date: item.date || '1970-01-01',
+        imageUrl: item.imageUrl || ''
       };
       
       // 验证日期格式并解析
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // 直接从缓存获取年份
       processedItem.year = dateCache.get(processedItem.date).getFullYear();
       return processedItem;
-    }).filter(Boolean); // 过滤掉可能的null项
+    }).filter(Boolean);
     
     // 如果处理后没有有效数据，提前返回
     if (!processedData.length) {
@@ -57,7 +58,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 预计算所有年份并排序，减少后续计算
-    // 使用Set去重
     const years = [...new Set(processedData.map(item => item.year))];
     years.sort((a, b) => b - a); // 降序排列
     
@@ -102,6 +102,9 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // 一次性更新DOM
       timelineContainer.appendChild(fragmentContainer);
+      
+      // 添加悬停事件监听器
+      addHoverEventListeners();
     } else {
       timelineContainer.innerHTML = '<p>没有找到有效的时间线数据</p>';
     }
@@ -167,19 +170,92 @@ document.addEventListener('DOMContentLoaded', function() {
     const paperTitle = (item.title || '').trim() || '未命名论文';
     const paperDesc = (item.description || '').trim() || '';
     const paperUrl = (item.paperUrl || '').trim() || '#';
+    const imageUrl = (item.imageUrl || '').trim() || '';
     
     // 根据重要性级别添加不同的类名
     const importanceClass = getImportanceClass(item.importance);
     
-    // 构建HTML字符串
+    // 构建HTML字符串，添加data属性用于悬停事件
     return `
       <div class="paper-item">
         <div class="paper-title">
-          <a href="${escapeHTML(paperUrl)}" target="_blank" rel="noopener" class="paper-link ${importanceClass}">${escapeHTML(paperTitle)}</a>
+          <a href="${escapeHTML(paperUrl)}" target="_blank" rel="noopener" class="paper-link ${importanceClass}" ${imageUrl ? `data-image-url="${escapeHTML(imageUrl)}"` : ''}>${escapeHTML(paperTitle)}</a>
         </div>
         <div class="paper-description">${escapeHTML(paperDesc)}</div>
       </div>
     `;
+  }
+  
+  // 添加悬停事件监听器
+  function addHoverEventListeners() {
+    const paperLinks = document.querySelectorAll('.paper-link[data-image-url]');
+    
+    paperLinks.forEach(link => {
+      const imageUrl = link.getAttribute('data-image-url');
+      if (!imageUrl) return;
+      
+      // 创建工具提示元素
+      const tooltip = document.createElement('div');
+      tooltip.className = 'timeline-tooltip';
+      tooltip.innerHTML = `<img src="${escapeHTML(imageUrl)}" alt="缩略图" loading="lazy">`;
+      document.body.appendChild(tooltip);
+      
+      let hideTimeout;
+      
+      // 鼠标进入事件
+      link.addEventListener('mouseenter', function(e) {
+        clearTimeout(hideTimeout);
+        tooltip.style.display = 'block';
+        // 使用requestAnimationFrame确保display:block生效后再添加show类
+        requestAnimationFrame(() => {
+          tooltip.classList.add('show');
+        });
+        positionTooltip(tooltip, e);
+      });
+      
+      // 鼠标移动事件（更新位置）
+      link.addEventListener('mousemove', function(e) {
+        positionTooltip(tooltip, e);
+      });
+      
+      // 鼠标离开事件
+      link.addEventListener('mouseleave', function() {
+        tooltip.classList.remove('show');
+        // 等待过渡动画完成后再隐藏
+        hideTimeout = setTimeout(() => {
+          tooltip.style.display = 'none';
+        }, 200);
+      });
+    });
+  }
+  
+  // 定位工具提示
+  function positionTooltip(tooltip, event) {
+    const rect = tooltip.getBoundingClientRect();
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+    
+    // 默认位置（鼠标右侧）
+    let left = event.clientX + 10;
+    let top = event.clientY - rect.height / 2;
+    
+    // 如果工具提示超出右边界，显示在左侧
+    if (left + rect.width > windowWidth - 20) {
+      left = event.clientX - rect.width - 10;
+    }
+    
+    // 如果工具提示超出上边界，调整垂直位置
+    if (top < 20) {
+      top = 20;
+    }
+    
+    // 如果工具提示超出下边界，调整垂直位置
+    if (top + rect.height > windowHeight - 20) {
+      top = windowHeight - rect.height - 20;
+    }
+    
+    tooltip.style.left = left + 'px';
+    tooltip.style.top = top + 'px';
   }
   
   // 获取重要性类名

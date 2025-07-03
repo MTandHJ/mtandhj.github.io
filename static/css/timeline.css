@@ -249,4 +249,57 @@
   .emmm-paper {
     font-size: 1.02em;
   }
+}
+
+/* 工具提示样式 */
+.timeline-tooltip {
+  position: fixed;
+  display: none;
+  z-index: 1000;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 8px;
+  max-width: 700px;
+  max-height: 600px;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  will-change: opacity;
+}
+
+.timeline-tooltip.show {
+  opacity: 1;
+}
+
+.timeline-tooltip img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  display: block;
+  max-width: 100%;
+}
+
+/* 暗色模式下的工具提示 */
+.dark .timeline-tooltip {
+  background: #333;
+  border-color: #555;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 响应式工具提示 */
+@media (max-width: 700px) {
+  .timeline-tooltip {
+    max-width: 600px;
+    max-height: 500px;
+  }
+}
+
+@media (max-width: 500px) {
+  .timeline-tooltip {
+    max-width: 500px;
+    max-height: 400px;
+  }
 } 
