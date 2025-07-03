@@ -27,6 +27,14 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-06-13",
+    "title": "RecFound",
+    "description": "华为提出的 Recommendation Foundation Model 的设想: 通过多样的 Embedding/Generative + Task-specific MoE + Adaptive Sampling 来增强 LLM",
+    "paperUrl": "https://arxiv.org/abs/2506.11999",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-05-24",
     "title": "MTGR",
     "description": "美团将 HSTU 应用到 ranking 阶段的尝试: Group Normalization 对齐不同语义空间的操作有点意思",
