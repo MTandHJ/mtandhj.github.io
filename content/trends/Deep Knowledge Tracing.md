@@ -22,6 +22,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2021-03-08",
+    "title": "HawkesKT",
+    "description": "借鉴 Hawkes Process 思想建模知识掌握的交叉影响和衰减",
+    "paperUrl": "/posts/hawkeskt/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250704132814.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2020-02-14",
     "title": "SAINT",
     "description": "Encoder-decoder transformer 在 DKT 上的应用, 设计颇为奇怪",
