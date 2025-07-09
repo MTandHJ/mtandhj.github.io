@@ -233,6 +233,8 @@ pinned: false
 
 <ol class="reference">
   <li>
+    Fifty C., Junkins R. G., Duan D., Iyengar A., Liu J. W., Amid E.,
+    Thrun S. and Re C.
     <u>Restructuring Vector Quantization with The Rotation Trick.</u>
     <i>ICLR</i>, 2025.
     <a href="https://arxiv.org/abs/2410.06424" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>

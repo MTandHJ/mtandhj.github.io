@@ -101,7 +101,7 @@ pinned: false
 
 ![20250624153117](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250624153117.png)
 
-- Decoder 部分主要依赖的是 item 的离散编码, 而 item 离散编码则主要是根据一些特征通过 RQ-VAE 得到的. 自然, RQ-VAE 所依赖的 item features 起到了基石的作用. 这要求我们不能像 Tiger 这类最初的方法, 仅仅通过一些 **freezed** Encoder 模型来提取特征. 因此 OneRec 会添加如下的约束:
+- Decoder 部分主要依赖的是 item 的离散编码, 而 item 离散编码则主要是根据一些特征通过 Residual-KMeans 得到的. 自然, Residual-KMeans 所依赖的 item features 起到了基石的作用. 这要求我们不能像 Tiger 这类最初的方法, 仅仅通过一些 **freezed** Encoder 模型来提取特征. 因此 OneRec 会添加如下的约束:
     1. 通过 miniCPM-V-8B 将多模态信息整合为 $\mathbf{M} \in \mathbb{R}^{N_M \times d_t}$ 大小的 token vectors (per item).
     2. 通过 QFormer 进一步融合得到 $\mathbf{\tilde{M}} \in \mathbb{R}^{N_{\tilde{M}} \times d_t}$, 通常 $N_{\tilde{M}} = 4$ (而 $N_M = 1280$).
     3. 通过 item-item 间的**相似度**构建高质量的 item-pair dataset $\mathcal{D}_{pair}$, 然后通过 item-item 间的对比学习来促使 item features 融合进这部分信息.
