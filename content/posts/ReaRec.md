@@ -7,7 +7,7 @@ author: MTandHJ
 tags:
   - Note
   - Sequential Recommendation
-  - Multi-step
+  - Multi-Step
   - Reasoning
   - Empirical
   - 2025

@@ -7,7 +7,7 @@ author: MTandHJ
 tags:
   - Note
   - Weight Merging
-  - Multi-task
+  - Multi-Task
   - Empirical
   - NeurIPS
   - 2024
