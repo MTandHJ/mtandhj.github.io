@@ -31,11 +31,47 @@ window.timelineData = [
   },
 
   {
+    "date": "2024-12-14",
+    "title": "SoftVQ-VAE",
+    "description": "Softmax 版 Vector Quantization, 主要追求更高的压缩比",
+    "paperUrl": "/posts/softvq-vae/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250716141244.png",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2024-11-04",
+    "title": "SimVQ",
+    "description": "坐标变换替代可学习 Codebook, 避免 Collapse",
+    "paperUrl": "/posts/simvq/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250615103519.png",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2024-10-08",
+    "title": "Rotation Trick",
+    "description": "提出 Rotation Trick 替代 VQ-VAE 中的 STE",
+    "paperUrl": "/posts/rotation-trick-for-vector-quantization/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250612175428.png",
+    "importance": "novel"
+  },
+
+  {
     "date": "2024-04-22",
     "title": "SpaceByte: Towards Deleting Tokenization from Large Language Modeling",
     "description": "在 MegaByte 的基础上引入 Spacelike Bytes 以更合理地划分 patch",
     "paperUrl": "/posts/spacebyte/",
     "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250715140334.png",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2023-09-27",
+    "title": "FSQ",
+    "description": "采用传统 Element-wise Rounding 的方式实现向量量化, Codebook 为超矩体的顶点",
+    "paperUrl": "/posts/fsq/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312145029.png",
     "importance": "emmm"
   },
 
@@ -46,6 +82,24 @@ window.timelineData = [
     "paperUrl": "/posts/megabyte/",
     "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250715133503.png",
     "importance": "seminal"
+  },
+
+  {
+    "date": "2022-03-03",
+    "title": "RQ-VAE",
+    "description": "残差向量量化",
+    "paperUrl": "/posts/rq-vae",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250316155423.png",
+    "importance": "novel"
+  },
+
+  {
+    "date": "2020-12-17",
+    "title": "VQGAN",
+    "description": "向量量化 + 自回归式图片生成",
+    "paperUrl": "/posts/vqgan/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250311144000.png",
+    "importance": "novel"
   },
 
   {
@@ -64,6 +118,15 @@ window.timelineData = [
     "paperUrl": "https://arxiv.org/abs/1804.10959",
     "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250715144339.png",
     "importance": "novel"
+  },
+
+  {
+    "date": "2017-11-02",
+    "title": "VQ-VAE",
+    "description": "向量量化的开山之作",
+    "paperUrl": "/posts/vq-vae/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250310215306.png",
+    "importance": "seminal"
   },
 
   {
