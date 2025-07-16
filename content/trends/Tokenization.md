@@ -1,6 +1,6 @@
 ---
 draft: false
-title: "Tokenization is the Language of AI."
+title: "Tokenization is the Language of AI"
 author: MTandHJ
 tags:
   - Trend
