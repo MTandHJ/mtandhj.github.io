@@ -207,7 +207,7 @@ $$
 <div class="slide-col-6">
 
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312213810.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250717131423.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
 </div>
 
 </div>

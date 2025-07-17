@@ -31,6 +31,15 @@ window.timelineData = [
   },
 
   {
+    "date": "2025-02-02",
+    "title": "A Survey of Quantized Graph Representation Learning",
+    "description": "Survey, 向量量化在图上的研究",
+    "paperUrl": "https://arxiv.org/abs/2502.00681",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250717115818.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2024-12-14",
     "title": "SoftVQ-VAE",
     "description": "Softmax 版 Vector Quantization, 主要追求更高的压缩比",
