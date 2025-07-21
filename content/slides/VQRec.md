@@ -1,5 +1,5 @@
 ---
-date: "2025-03-21"
+date: "2025-07-09"
 draft: false
 title: "Is Vector Quantization the Future of Recommendation?"
 author: MTandHJ

@@ -22,12 +22,21 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2021-08-04",
+    "title": "LPKT",
+    "description": "Learning & Forgetting",
+    "paperUrl": "https://dl.acm.org/doi/10.1145/3447548.3467237",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250704150308.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2021-03-08",
     "title": "HawkesKT",
     "description": "借鉴 Hawkes Process 思想建模知识掌握的交叉影响和衰减",
     "paperUrl": "/posts/hawkeskt/",
     "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250704132814.png",
-    "importance": "emmm"
+    "importance": "novel"
   },
 
   {
