@@ -90,11 +90,10 @@ $\nabla_{\mathbf{E}} \mathcal{L}$: <span style="color:gray">Gradient</span>
 $\textcircled{\small 4}$ 图+序列模型: 过于依赖**特定场景**, 高昂的**训练/推理代价**
 
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619115311.png"
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250711202256.png"
   alt="Image" 
   style="max-width: 90%; height: auto;margin: 0 auto;">
 </div>
-
 
 <u>LightGCN:</u> <span style="color:gray">GNN-only</span>
 &nbsp; &nbsp; &nbsp;
