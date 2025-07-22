@@ -67,7 +67,7 @@ tags:
 - Quantization:
 
   $$
-  q = Q(x) := \mathop{\text{argmin}} \limits_{k=0}^{2^b - 1} \big|\frac{x}{\textcolor{red}{\Delta}} - \textcolor{red}{\iota_k} \big|.
+  q = Q(x) := \mathop{\text{argmin}} \limits_{k=0}^{2^b - 1} \big|\frac{x}{\textcolor{red}{\Delta}} - \textcolor{red}{y_k} \big|.
   $$
 
 <div class="slide-img">
@@ -77,7 +77,7 @@ tags:
 - Dequantization:
 
   $$
-  \tilde{x} = Q^{\dagger}(q) := \iota_{q} \cdot \Delta.
+  \tilde{x} = Q^{\dagger}(q) := y_{q} \cdot \Delta.
   $$
 </textarea>
 </section>
@@ -111,9 +111,8 @@ $$
 
 
 <div style="text-align: center; margin-top: 50px; margin-bottom: -80px; padding: 0">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312211840.png" alt="Image" style="max-width: 70%; height: auto;margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250722100933.png" alt="Image" style="max-width: 70%; height: auto;margin: 0 auto;">
 </div>
-
 
 <div class="slide-ref">
   <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
@@ -152,8 +151,10 @@ $$
 
 <div class="slide-col-6">
 
+&nbsp;
+
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312212821.png" alt="Image" style="max-width: 90%; height: auto;margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250722101123.png" alt="Image" style="max-width: 90%; height: auto;margin: 0 auto;">
 </div>
 
 </div>
@@ -224,14 +225,14 @@ $$
 
 ### Stochastic Rounding
 
-- 假设 $\iota_{k-1} \le x / \Delta \le \iota_k$:
+- 假设 $y_{k-1} \le x / \Delta \le y_k$:
 
   $$
   Q_{sr}(x) :=
   \left \{
       \begin{array}{ll}
-          k-1 & w.p. \quad \frac{\iota_k - x / \Delta}{ \iota_k - \iota_{k-1}}, \\
-          k & w.p. \quad \frac{x / \Delta - \iota_{k-1}}{ \iota_k - \iota_{k-1}}.
+          k-1 & w.p. \quad \frac{y_k - x / \Delta}{ y_k - y_{k-1}}, \\
+          k & w.p. \quad \frac{x / \Delta - y_{k-1}}{ y_k - y_{k-1}}.
       \end{array}
   \right .
   $$
@@ -239,7 +240,7 @@ $$
 - High variance:
 
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250313112908.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250722101414.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
 </div>
 
 </textarea>
@@ -256,7 +257,7 @@ $$
 \begin{array}{ll}
 Q(x) 
 &=\text{Clip}(\lfloor \log_{\alpha} \frac{x}{\Delta} + \xi \rceil; 0, 2^b - 1) \\
-&\approx \mathop{\text{argmin}} \limits_{k=0}^{2^b - 1} \big|\frac{x}{\Delta} \cdot \alpha^\xi - \iota_k \big|,
+&\approx \mathop{\text{argmin}} \limits_{k=0}^{2^b - 1} \big|\frac{x}{\Delta} \cdot \alpha^\xi - y_k \big|,
 \end{array}
 $$
 
@@ -334,8 +335,11 @@ $$
 <div class="slide-cols">
 
 <div class="slide-col-6">
+
+&nbsp;
+
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314115959.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250722101739.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
 </div>
 </div>
 
