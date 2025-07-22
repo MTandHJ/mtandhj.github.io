@@ -49,6 +49,15 @@ window.timelineData = [
   },
 
   {
+    "date": "2024-12-04",
+    "title": "TokenFlow",
+    "description": "兼顾 Low-level 的 Pixel 信息和 High-level 的 Semantic 信息",
+    "paperUrl": "/posts/tokenflow/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250720142111.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2024-11-04",
     "title": "SimVQ",
     "description": "坐标变换替代可学习 Codebook, 避免 Collapse",
@@ -67,6 +76,15 @@ window.timelineData = [
   },
 
   {
+    "date": "2024-04-03",
+    "title": "VAR",
+    "description": "自回归图像生成: Multi-scale Quantization & Next-scale Prediction",
+    "paperUrl": "/posts/var",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250721145423.png",
+    "importance": "seminal"
+  },
+
+  {
     "date": "2024-04-22",
     "title": "SpaceByte: Towards Deleting Tokenization from Large Language Modeling",
     "description": "在 MegaByte 的基础上引入 Spacelike Bytes 以更合理地划分 patch",
@@ -74,6 +92,7 @@ window.timelineData = [
     "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250715140334.png",
     "importance": "emmm"
   },
+
 
   {
     "date": "2023-09-27",
