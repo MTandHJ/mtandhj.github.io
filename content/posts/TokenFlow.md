@@ -23,7 +23,7 @@ pinned: false
 
 
 
-- 本文试图将 Image 编码为离散 Token 以方便以直接通过 LLM 实现 Image 的理解和生成任务.
+- 本文试图将 Image 编码为离散 Token 以方便直接通过 LLM 实现 Image 的理解和生成任务.
 
 - 作者将研究重心放在 Vector Quantization 之上, 认为之前的方法通常只采用一个单独的 Vector Quantization, 这会导致对应的编码要么过于偏向语义 Embedding 要么过于偏向 pixel-to-pixel 这种强调 low-level 特征的.
 
