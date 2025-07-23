@@ -42,7 +42,7 @@ window.timelineData = [
   {
     "date": "2024-12-14",
     "title": "SoftVQ-VAE",
-    "description": "Softmax 版 Vector Quantization, 主要追求更高的压缩比",
+    "description": "Softmax 版 Vector Quantization, 沿用 TiTok 的框架, 主要追求更高的压缩比",
     "paperUrl": "/posts/softvq-vae/",
     "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250716141244.png",
     "importance": "emmm"
@@ -72,6 +72,15 @@ window.timelineData = [
     "description": "提出 Rotation Trick 替代 VQ-VAE 中的 STE",
     "paperUrl": "/posts/rotation-trick-for-vector-quantization/",
     "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250612175428.png",
+    "importance": "novel"
+  },
+
+  {
+    "date": "2024-06-11",
+    "title": "TiTok",
+    "description": "Transformer-based 1-Dimensional Tokenizer, 追求更高的压缩比",
+    "paperUrl": "/posts/titok/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250723115513.png",
     "importance": "novel"
   },
 

@@ -2,7 +2,7 @@
 date: "2025-07-16"
 draft: false
 title: "SoftVQ-VAE: Efficient 1-Dimensional Continuous Tokenizer"
-description: "Softmax 版 Vector Quantization 以期更高的压缩比"
+description: "TiTok 框架 + Softmax 版 Vector Quantization 以期更高的压缩比"
 author: MTandHJ
 tags:
   - Note
@@ -16,7 +16,7 @@ pinned: false
 
 ## 预备知识
 
-- 对 [VQ-VAE](/posts/vq-vae/) 有基本的了解.
+- 对 [VQ-VAE](/posts/vq-vae/) 和 [TiTok](/posts/titok/) 有基本的了解.
 
 ## 核心思想
 

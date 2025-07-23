@@ -7,6 +7,7 @@ author: MTandHJ
 tags:
   - Note
   - Autoregressive 
+  - Image Generation
   - Vector Quantization
   - Empirical
   - NeurIPS
