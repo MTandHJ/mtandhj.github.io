@@ -2,7 +2,7 @@
 date: "2025-07-27"
 draft: false
 title: "Bridging Textual-Collaborative Gap through Semantic Codes for Sequential Recommendation"
-description: "通过 Q-Formerr 将 semantic IDs 转换为 textual IDs"
+description: "通过 Q-Former 将 semantic IDs 转换为 textual IDs"
 author: MTandHJ
 tags:
   - Note

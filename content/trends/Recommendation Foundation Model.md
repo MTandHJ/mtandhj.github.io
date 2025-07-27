@@ -53,6 +53,15 @@ window.timelineData = [
   },
 
   {
+    "date": "2025-03-15",
+    "title": "CCFRec",
+    "description": "通过 Q-Former 将 semantic IDs 转换为 textual IDs, 旨在实现协同/文本特征的高效融合",
+    "paperUrl": "/posts/ccfrec/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250727103615.png",
+    "importance": "novel"
+  },
+
+  {
     "date": "2025-03-04",
     "title": "COBRA",
     "description": "百度提出了一种通过离散编码衍生到稠密表示的框架, 二者结合可以获得更好的效果",
