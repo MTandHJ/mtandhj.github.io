@@ -55,7 +55,7 @@ pinned: false
     \right ] \in \mathbb{R}^{T \times d}.
     $$
 
-    我们的目标是找到所有目标的下降方向 $\mathbf{v}$ 使得
+    我们的目标是找到符合所有目标的下降方向 $\mathbf{v}$ 使得
 
     $$
     \tag{4}
