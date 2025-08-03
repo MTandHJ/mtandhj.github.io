@@ -26,6 +26,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-07-29",
+    "title": "GRID",
+    "description": "Snap 提出的一个生成式推荐的训练框架, 并分析比较了一些常用的 Tricks",
+    "paperUrl": "/posts/grid/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250803135947.png",
+    "importance": "novel"
+  },
+
+  {
     "date": "2025-06-13",
     "title": "RecFound",
     "description": "华为提出的 Recommendation Foundation Model 的设想: 通过多样的 Embedding/Generative + Task-specific MoE + Adaptive Sampling 来增强 LLM",
