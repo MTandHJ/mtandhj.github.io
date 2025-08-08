@@ -19,7 +19,7 @@ pinned: false
 
 ## 预备知识
 
-- 请了解 [RQ-VAE](https://www.mtandhj.com/posts/rq-vae/).
+- 请了解 [RQ-VAE](/posts/rq-vae/).
 
 ## 核心思想
 

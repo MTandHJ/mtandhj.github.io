@@ -89,6 +89,15 @@ window.timelineData = [
   },
 
   {
+    "date": "2025-02-23",
+    "title": "Unified Semantic and ID Representation Learning",
+    "description": "Unified Semantic and ID Representation Learning",
+    "paperUrl": "/posts/unified-semantic-id/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250808113842.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-02-13",
     "title": "PrefEval",
     "description": "一个衡量 LLM 是否具备 Preference Following 的 Benchmark",
