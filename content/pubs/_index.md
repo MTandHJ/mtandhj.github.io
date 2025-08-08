@@ -31,7 +31,7 @@ description: ""
     <u>Pattern-Wise Transparent Sequential Recommendation.</u>
     <i>TKDE</i>, 2025.
     &nbsp;&nbsp;
-    <a href="" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
+    <a href="https://arxiv.org/abs/2402.11480" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
   </p>
 </div>
 
