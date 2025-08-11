@@ -42,6 +42,166 @@ pinned: false
 **注:** 这里省略了避免 ID 碰撞的细节.
 
 
+## 个人测试
+
+
+- Semantic embedding 处理流程:
+
+```python
+
+# %%
+
+
+import pandas as pd
+import torch
+import numpy as np
+import os
+import pickle
+from tqdm import tqdm
+
+# Load model directly
+from transformers import AutoTokenizer, AutoModelForCausalLM
+from sentence_transformers import SentenceTransformer
+
+os.environ["CUDA_VISIBLE_DEVICES"] = "3"
+
+# %%
+
+
+item_df = pd.read_csv('../data/Processed/Amazon2014Beauty_550_LOU/item.txt', sep='\t')
+
+# fields = ('TITLE', 'CATEGORIES', 'BRAND')
+fields = ('TITLE',)
+for field in fields:
+    item_df[field] = item_df[field].fillna('')
+
+item_df['TEXT'] = item_df.apply(
+    lambda row: "\n".join([f"{field}: {row[field]}." for field in fields]),
+    axis=1
+)
+
+print(item_df['TEXT'].head(5))
+
+# %%
+
+
+def export_pickle(data, file: str):
+    r"""
+    Export data into pickle format.
+
+    data: Any
+    file: str
+        The file (path/filename) to be saved
+    """
+    fh = None
+    try:
+        fh = open(file, "wb")
+        pickle.dump(data, fh, pickle.HIGHEST_PROTOCOL)
+    except (EnvironmentError, pickle.PicklingError) as err:
+        ExportError_ = type("ExportError", (Exception,), dict())
+        raise ExportError_(f"Export Error: {err}")
+    finally:
+        if fh is not None:
+            fh.close()
+
+
+def encode_by_llama(
+    item_df: pd.DataFrame,
+    model_dir: str = "./models",
+    model: str = "Llama-2-7b-hf",
+    batch_size: int = 32
+):
+    saved_filename = f"{model}_{'_'.join(fields)}.pkl".lower()
+    model_path = os.path.join(model_dir, model)
+    tokenizer = AutoTokenizer.from_pretrained(model_path, device_map = 'cuda')
+    model = AutoModelForCausalLM.from_pretrained(model_path, device_map = 'cuda')
+
+    tokenizer.padding_side = "left"
+    tokenizer.pad_token = tokenizer.eos_token
+
+    for i in tqdm(range(0, len(item_df), batch_size)):
+        # print(i)
+        item_names = item_df['TEXT'][i:i+batch_size]
+        # 生成输出
+        inputs = tokenizer(item_names.tolist(), return_tensors="pt", padding=True, truncation=True, max_length=128).to(model.device)
+        with torch.no_grad():
+            output = model(**inputs, output_hidden_states=True)
+        seq_embeds = output.hidden_states[-1][:, -1, :].detach().cpu().numpy()
+        # break
+        if i == 0:
+            tFeats = seq_embeds
+        else:
+            tFeats = np.concatenate((tFeats, seq_embeds), axis=0)
+    tFeats = torch.from_numpy(tFeats).float()
+
+    export_pickle(
+        tFeats,
+        saved_filename
+    )
+
+    return tFeats
+
+
+def encode_textual_modality(
+    item_df: pd.DataFrame,
+    model: str = "all-MiniLM-L12-v2", model_dir: str = "./models",
+    batch_size: int = 128
+):
+    saved_filename = f"{model}_{'_'.join(fields)}.pkl".lower()
+    sentences = item_df['TEXT']
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    encoder = SentenceTransformer(
+        os.path.join(model_dir, model),
+        device=device
+    ).eval()
+
+    with torch.no_grad():
+        tFeats = encoder.encode(
+            sentences, 
+            convert_to_tensor=True,
+            batch_size=batch_size, show_progress_bar=True
+        ).cpu()
+    assert tFeats.size(0) == len(item_df), f"Unknown errors happen ..."
+
+    export_pickle(
+        tFeats,
+        saved_filename
+    )
+
+    return tFeats
+
+
+# %%
+
+encode_by_llama(item_df)
+encode_textual_modality(item_df)
+```
+
+### SASRec
+
+
+#### Blocks
+
+- **Blocks:** 有着非常重要的意义, 只有当 Blocks 足够大的时候, Invalid Beams 的数目才能被控制住.
+
+![20250707105044](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250707105044.png)
+
+
+#### Gradient Estimator
+
+||HR@1|HR@5|HR@10|NDCG@5|NDCG@10|
+|:-:|:-:|:-:|:-:|:-:|:-:|
+|Random|0.0025|0.0080|0.0114|0.0052|0.0063|
+|KMeans (random; iters=10)|0.0039|0.0146|0.0233|0.0092|0.0120|
+|KMeans (random; iters=100)|0.0038|0.0154|0.0246|0.0096|0.0126|
+|KMeans (points; iters=10)|0.0032|0.0119|0.0219|0.0074|0.0107|
+|KMeans (points; iters=100)|0.0043|0.0144|0.0239|0.0092|0.0123|
+|STE|0.0023|0.0111|0.0188|0.0067|0.0091|
+|Rotation-trick|0.0041|0.0122|0.0195|0.0083|0.0106|
+|Rotation-trick w/o KMeans init|0.0025|0.0105|0.0178|0.0064|0.0087|
+|SimVQ|0.0029|0.0092|0.0164|0.0060|0.0083|
+
+
 ## 参考文献
 
 <ol class="reference">
