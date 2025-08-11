@@ -26,6 +26,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-08-06",
+    "title": "HiD-VAE",
+    "description": "借助 LLM 打标的 Tag 来限制 RQ-VAE 量化过程, 得到解释性更强的 Semantic IDs",
+    "paperUrl": "http://arxiv.org/abs/2508.04618",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250808155357.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-07-29",
     "title": "GRID",
     "description": "Snap 提出的一个生成式推荐的训练框架, 并分析比较了一些常用的 Tricks",
@@ -86,6 +95,15 @@ window.timelineData = [
     "paperUrl": "/posts/onerec/",
     "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250415143509.png",
     "importance": "novel"
+  },
+
+  {
+    "date": "2025-02-23",
+    "title": "Unified Semantic and ID Representation Learning",
+    "description": "Unified Semantic and ID Representation Learning",
+    "paperUrl": "/posts/unified-semantic-id/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250808113842.png",
+    "importance": "emmm"
   },
 
   {

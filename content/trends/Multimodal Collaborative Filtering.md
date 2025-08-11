@@ -23,6 +23,17 @@ tags:
 // 时间线数据
 window.timelineData = [
 
+
+
+  {
+    "date": "2025-08-07",
+    "title": "Does Multimodality Improve Recommender Systems as Expected? A Critical  Analysis and Future Directions",
+    "description": "系统比较了多模态在不同场景不同阶段的效用, 以及最佳的利用结构",
+    "paperUrl": "http://arxiv.org/abs/2508.05377",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250809134808.png",
+    "importance": "emmm"
+  },
+
   {
     "date": "2025-04-22",
     "title": "LVLM Benchmark",

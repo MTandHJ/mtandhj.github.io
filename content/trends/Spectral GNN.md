@@ -22,6 +22,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-05-16",
+    "title": "PRISM",
+    "description": "分析 Weight Decay 与 (流行) Embedding Magnitude 的关系, 并提出了 Weight Decay 的高效替代",
+    "paperUrl": "https://arxiv.org/abs/2505.11318",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250805115240.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-05-01",
     "title": "ChebyCF",
     "description": "基于 Chebyshev 多项式, 多项式通过插值得到 (正主是 ChebNetII)",

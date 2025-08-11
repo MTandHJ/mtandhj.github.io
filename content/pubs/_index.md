@@ -3,12 +3,24 @@ title: Publications
 description: ""
 ---
 
+<div style="border: 2px solid #E0E0E0; padding: 15px; margin-bottom: 15px; border-radius: 5px; background-color: #FFFFFF; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: justify; word-wrap: break-word; white-space: normal;">
+  <p>
+    <strong>Cong Xu</strong>, Wenbin Liang, Mo Yu,
+    Anan Liu, Ke-Yue Zhang, Shunli Wang, Lizhuang Ma,
+    Jianyong Wang, Jun Wang*, Wei Zhang*.
+    <u>Pushing the Limits of Low-Bit Optimizers: A Focus on EMA Dynamics.</u>
+    2025.
+    &nbsp;&nbsp;
+    <a href="https://arxiv.org/abs/2505.00347" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
+  </p>
+</div>
 
 <div style="border: 2px solid #E0E0E0; padding: 15px; margin-bottom: 15px; border-radius: 5px; background-color: #FFFFFF; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: justify; word-wrap: break-word; white-space: normal;">
   <p>
     Yunhang He, <strong>Cong Xu</strong>, Jun Wang, Wei Zhang*.
     <u>Collaborative Filtering Meets Spectrum Shift: Connecting User-Item Interaction with Graph-Structured Side Information.</u>
     <i>KDD</i>, 2025.
+    &nbsp;&nbsp;
     <a href="https://arxiv.org/abs/2502.08071" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
   </p>
 </div>
@@ -18,7 +30,8 @@ description: ""
     Kun Ma, <strong>Cong Xu</strong>, Zeyuan Chen, Wei Zhang*.
     <u>Pattern-Wise Transparent Sequential Recommendation.</u>
     <i>TKDE</i>, 2025.
-    <a href="" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
+    &nbsp;&nbsp;
+    <a href="https://arxiv.org/abs/2402.11480" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
   </p>
 </div>
 
@@ -27,6 +40,7 @@ description: ""
     <strong>Cong Xu</strong>, Yunhang He, Jun Wang*, Wei Zhang*.
     <u>STAIR: Manipulating Collaborative and Multimodal Information for E-Commerce Recommendation.</u>
     <i>AAAI</i>, 2025.
+    &nbsp;&nbsp;
     <a href="https://arxiv.org/pdf/2412.11729" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
   </p>
 </div>
