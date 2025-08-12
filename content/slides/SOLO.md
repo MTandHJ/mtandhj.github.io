@@ -310,7 +310,7 @@ $$
 
 ### Quantization for Signed EMA Update
 
-❎ &nbsp; <span style="color: gray">Singal Swamping</span>
+❎ &nbsp; <span style="color: gray">Signal Swamping</span>
 
 ☑️ &nbsp; **Sign representation**
 
