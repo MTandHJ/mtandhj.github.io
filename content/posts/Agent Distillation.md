@@ -26,7 +26,8 @@ pinned: false
         \min_{\theta} \:
         \mathbb{E}_{(\bm{x}, \bm{y}) \sim \mathcal{D}_{\text{train}}} \frac{1}{L_y}  \sum_{n=1}^{L_{\bm{y}}} \text{KL}
         \left(
-            p_T(\cdot | y_{<n, \bm{x}}) \| p_S(\cdot | \bm{y}_{< n}, \bm{x}; \theta)
+            p_T(\cdot | \bm{y}_{< n}, \bm{x}) 
+            \| p_S(\cdot | \bm{y}_{< n}, \bm{x}; \theta)
         \right),
         $$
 
