@@ -23,7 +23,14 @@ tags:
 // 时间线数据
 window.timelineData = [
 
-
+  {
+    "date": "2025-08-08",
+    "title": "MMR",
+    "description": "Enhanced I-I Semantic Graph",
+    "paperUrl": "http://arxiv.org/abs/2508.06154",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250812113828.png",
+    "importance": "emmm"
+  },
 
   {
     "date": "2025-08-07",
