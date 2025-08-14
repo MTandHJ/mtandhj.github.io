@@ -26,6 +26,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-08-13",
+    "title": "SPARC",
+    "description": "双塔模型 & End-to-End joint learning CodeBook",
+    "paperUrl": "http://arxiv.org/abs/2508.09090",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250814110606.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-08-06",
     "title": "HiD-VAE",
     "description": "借助 LLM 打标的 Tag 来限制 RQ-VAE 量化过程, 得到解释性更强的 Semantic IDs",
