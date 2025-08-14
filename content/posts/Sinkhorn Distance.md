@@ -37,7 +37,7 @@ pinned: false
     \end{align*}
     $$
 
-    此时, $\sum_{i=1}^m x_i / \theta = \sum_{j=1}^n y_j / \theta = 1$. 因此不是一般性, 可以假设 $\sum_{i=1}^m x_i = \sum_{j=1}^n y_j = 1$. 容易发现, 此时 $P$ 实际上描述了一个离散概率矩阵, 其中
+    此时, $\sum_{i=1}^m x_i / \theta = \sum_{j=1}^n y_j / \theta = 1$. 因此不失一般性, 可以假设 $\sum_{i=1}^m x_i = \sum_{j=1}^n y_j = 1$. 容易发现, 此时 $P$ 实际上描述了一个离散概率矩阵, 其中
 
     $$
     p_{ij} = \mathbb{P}\left( i \rightarrow j \right).
@@ -79,7 +79,7 @@ pinned: false
     &= \sum_{ij} \left[p_{ij} \log p_{ij} - p_{ij}\log{x_i y_j} \right]\\
     &= -\mathcal{H}(P) - \sum_{ij} p_{ij} \log{x_i y_j} \\
     &= -\mathcal{H}(P) - \sum_{ij} p_{ij} \log x_i  - \sum_{ij} p_{ij} \log y_j \\
-    &= -\mathcal{H}(P) - \sum_{i} x_{ij} \log x_i  - \sum_{j} y_j \log y_j \\
+    &= -\mathcal{H}(P) - \sum_{i} x_{i} \log x_i  - \sum_{j} y_j \log y_j \\
     &= -\mathcal{H}(P) + \mathcal{H}(x) + \mathcal{H}(y).
     \end{align*}
     $$
@@ -159,7 +159,7 @@ pinned: false
 
 <ol class="reference">
   <li>
-    Cutural M.
+    Cuturi M.
     <u>Sinkhorn Distances: Lightspeed Computation of Optimal Transportation Distances.</u>
     <a href="http://arxiv.org/abs/1306.0895" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
     <a href="" style="color: #007acc; font-weight: bold; text-decoration: none;">[Code]</a>
@@ -167,7 +167,7 @@ pinned: false
 
   <li>
     小白一枚.
-    <u>Skinkhorn 距离简单易懂！</u>
+    <u>Sinkhorn 距离简单易懂！</u>
     <a href="https://zhuanlan.zhihu.com/p/527799934" style="color: #007acc; font-weight: bold; text-decoration: none;">[Link]</a>
   </li>
 
