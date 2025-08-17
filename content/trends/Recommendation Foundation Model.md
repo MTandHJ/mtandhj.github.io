@@ -26,6 +26,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-08-14",
+    "title": "DAS",
+    "description": "协同对齐 & 量化: One-Stage Contrastive Alignment",
+    "paperUrl": "http://arxiv.org/abs/2508.10584",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250817173717.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-08-13",
     "title": "SPARC",
     "description": "双塔模型 & End-to-End joint learning CodeBook",
