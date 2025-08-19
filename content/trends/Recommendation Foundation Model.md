@@ -26,6 +26,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-08-15",
+    "title": "DQ-VAE",
+    "description": "在 SVD 分解张成的子空间中分别进行向量量化",
+    "paperUrl": "/posts/dqrec/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250819115929.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-08-14",
     "title": "DAS",
     "description": "协同对齐 & 量化: One-Stage Contrastive Alignment",
