@@ -1,5 +1,5 @@
 ---
-date: "2025-07-29"
+date: "2025-08-19"
 draft: false
 title: "Scaled-Dot-Product Attention as One-Sided Entropic Optimal Transport"
 description: "从最优传输的角度理解和统一 Attention 机理"
