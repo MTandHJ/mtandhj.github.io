@@ -1,6 +1,6 @@
 ---
 date: "2025-08-07"
-draft: true
+draft: false
 title: "On the Markovian Nature of the Next-Item Recommendation Task"
 description: "序列推荐任务的马尔科夫性"
 author: MTandHJ
@@ -59,8 +59,18 @@ def sure_trainpipe(self, maxlen: int, batch_size: int):
   \end{align}
   $$
 
+- 既然假设 Last Item 起着重要的作用, 那么另一个相对公平的实验方案是验证
 
-## 实验结果
+  $$
+  \begin{align}
+  P(v| v_1, v_2, \ldots, v_t) \overset{?}{\approx}
+  P(v| \text{Shuffle}(v_1, v_2, \ldots), v_t).
+  \end{align}
+  $$
+
+  理论上来说, 如果说序列推荐是强序列的, 那么 Shuffle 后应该会观测到明显的效果的下降. 注意, 我们具体的实验方案是正常训练 SASRec, 只是在测试的时候加入一组进 Shuffle 非 Last Item 部分的比较, 来验证我们的猜想.
+
+## 修改 `maxlen` 的实验结果
 
 ### Amazon2014Beauty_550_LOU
 
@@ -159,8 +169,52 @@ def sure_trainpipe(self, maxlen: int, batch_size: int):
 
 ![20250811101004](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250811101004.png)
 
+### Yelp2018_10100_LOU
 
-### 
+![20250812101329](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250812101329.png)
+
+### Steam_550_LOU
+
+![20250814095324](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250814095324.png)
+
+### Tmall2016Buy_550_LOU
+
+
+![20250820203156](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250820203156.png)
+
+### MovieLens1M_550_LOU
+
+![20250817181810](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250817181810.png)
+
+
+## Shuffle 后的实验结果
+
+|                                 | Orignal | -      | -      | -      | -       | Shuffled | -      | -      | -      | -       |   |
+|---------------------------------|---------|--------|--------|--------|---------|----------|--------|--------|--------|---------|---|
+| Dataset                         | HR@1    | HR@5   | HR@10  | NDCG@5 | NDCG@10 | HR@1     | HR@5   | HR@10  | NDCG@5 | NDCG@10 |   |
+| Amazon2014Beauty_550_LOU        | 0.0296  | 0.0699 | 0.0990 | 0.0502 | 0.0595  | 0.0298   | 0.0700 | 0.0992 | 0.0503 | 0.0596  |   |
+| Amazon2014Beauty_554_LOU        | 0.0367  | 0.0935 | 0.1282 | 0.0656 | 0.0768  | 0.0369   | 0.0932 | 0.1280 | 0.0655 | 0.0767  |   |
+| MovieLens1M_550_LOU             | 0.0540  | 0.1609 | 0.2411 | 0.1088 | 0.1345  | 0.0437   | 0.1444 | 0.2099 | 0.0957 | 0.1169  |   |
+| RetailrocketTransaction_500_LOU | 0.0424  | 0.1114 | 0.1353 | 0.0797 | 0.0869  | 0.0398   | 0.1114 | 0.1379 | 0.0787 | 0.0867  |   |
+| Steam_550_LOU                   | 0.1216  | 0.1680 | 0.2049 | 0.1452 | 0.1570  | 0.1212   | 0.1675 | 0.2041 | 0.1447 | 0.1564  |   |
+| Tmall2016Buy_550_LOU            |         |        |        |        |         |          |        |        |        |         |   |
+| Amazon2014Tools_550_LOU         | 0.0166  | 0.0426 | 0.0588 | 0.0300 | 0.0352  | 0.0167   | 0.0431 | 0.0588 | 0.0302 | 0.0353  |   |
+| Amazon2014Tools_554_LOU         | 0.0174  | 0.0445 | 0.0664 | 0.0313 | 0.0384  | 0.0173   | 0.0450 | 0.0666 | 0.0315 | 0.0385  |   |
+| Amazon2014Toys_550_LOU          | 0.0334  | 0.0735 | 0.1010 | 0.0540 | 0.0629  | 0.0334   | 0.0737 | 0.1010 | 0.0541 | 0.0628  |   |
+| Amazon2014Toys_554_LOU          | 0.0392  | 0.0857 | 0.1164 | 0.0631 | 0.0729  | 0.0386   | 0.0858 | 0.1165 | 0.0630 | 0.0728  |   |
+| Yelp2018_10100_LOU              | 0.0072  | 0.0294 | 0.0510 | 0.0182 | 0.0252  | 0.0071   | 0.0293 | 0.0516 | 0.0181 | 0.0253  |   |
+
+- (**现象**)
+  1. 绝大部分数据集 (实际上是除了 MovieLens1M 之外) Shuffle 前后效果几乎都没有变化, 要知道, 我们是没有在 Shuffle 后的数据集上训练的, 模型有如此的泛化性只能说明大部分序列推荐数据集不存在强序列性.
+  2. 在之前的实验中, **Yelp2018_10100_LOU** 明显是对 `maxlen` 敏感的, 然而这个差距可能仅仅来自于 `maxlen` 的降低导致了非序列信息的缺失. 这部分信息可能只是反映了用户的一些 (非动态) 的兴趣. 
+
+## 结论
+
+- 对于序列推荐而言, Last Item 起着决定性作用.
+
+- 仅依赖 Last Item 会丢失掉一部分起作用的**信息**, 但是 Shuffle 部分的实验证明了这部分信息与序列性并没有强烈的关系.
+
+- 令人比较困惑的点在于, MovieLens1M 这个从数据收集上就没有序列性的数据集为什么反而体现出了序列性, 是不是因为数据集本身一块内容一块内容出现的呢?
 
 ## 参考文献
 
