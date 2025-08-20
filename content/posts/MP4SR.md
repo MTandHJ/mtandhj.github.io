@@ -2,12 +2,12 @@
 date: "2025-03-24"
 draft: false
 title: "Multimodal Pre-training for Sequential Recommendation via Contrastive Learning"
-description: "MP4SR, 模态融合之于多模态协同过滤"
+description: "MP4SR, 模态融合之于多模态序列推荐"
 author: MTandHJ
 tags:
   - Note
+  - Multimodal Recommendation
   - Sequential Recommendation
-  - Multimodal
   - Universal Embedding 
   - Empirical
   - TORS
