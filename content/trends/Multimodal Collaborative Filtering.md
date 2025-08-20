@@ -51,6 +51,15 @@ window.timelineData = [
   },
 
   {
+    "date": "2025-02-13",
+    "title": "R<sup>2</sup>MR",
+    "description": "由高质量模态修正另一高质量模态特征以改善多模态协同过滤",
+    "paperUrl": "/posts/r2mr/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250820114642.png",
+    "importance": "novel"
+  },
+
+  {
     "date": "2025-02-12",
     "title": "Spectrum Shift Correction",
     "description": "指出了交互图掺杂多模态信息后频谱偏移现象并提出解决方法",
