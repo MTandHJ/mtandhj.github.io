@@ -1,7 +1,7 @@
 ---
 date: "2025-08-20"
 draft: false
-title: "R<sup>2</sup> MR: Review and Rewrite Modality for Recommendation"
+title: "R2MR: Review and Rewrite Modality for Recommendation"
 description: "修正低质量模态特征以改善多模态协同过滤"
 author: MTandHJ
 tags:
