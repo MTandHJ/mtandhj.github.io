@@ -31,6 +31,15 @@ window.timelineData = [
   },
 
   {
+    "date": "2025-04-02",
+    "title": "GQT",
+    "description": "Graph Quantized Tokenizer: 多任务监督下的图节点向量量化",
+    "paperUrl": "http://arxiv.org/abs/2410.13798",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250821145118.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-02-02",
     "title": "A Survey of Quantized Graph Representation Learning",
     "description": "Survey, 向量量化在图上的研究",
