@@ -70,8 +70,8 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 
 item_df = pd.read_csv('../data/Processed/Amazon2014Beauty_550_LOU/item.txt', sep='\t')
 
-# fields = ('TITLE', 'CATEGORIES', 'BRAND')
-fields = ('TITLE',)
+fields = ('TITLE', 'CATEGORIES', 'BRAND')
+# fields = ('TITLE',)
 for field in fields:
     item_df[field] = item_df[field].fillna('')
 
@@ -186,8 +186,11 @@ encode_textual_modality(item_df)
 
 ![20250707105044](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250707105044.png)
 
+- 这个图是在 `Amazon2014Beauty_1000_LOU` 上测的, 不过在 `Amazon2014Beauty_550_LOU` 上也能观察到类似的结果.
 
-#### Gradient Estimator
+#### Quantization
+
+- 下面是不同 Quantization 在 `Amazon2014Beauty_1000_LOU` 数据集上的表现, KMeans 的效果要好太多.
 
 ||HR@1|HR@5|HR@10|NDCG@5|NDCG@10|
 |:-:|:-:|:-:|:-:|:-:|:-:|
@@ -201,6 +204,37 @@ encode_textual_modality(item_df)
 |Rotation-trick w/o KMeans init|0.0025|0.0105|0.0178|0.0064|0.0087|
 |SimVQ|0.0029|0.0092|0.0164|0.0060|0.0083|
 
+- 在 `Amazon2014Beauty_550_LOU` 上, 观察到了类似的结果, 不过和上面的不同是. 在 `Amazon2014Beauty_1000_LOU` 上不论是何种量化方法, 基本上都存在不可忽略的 ID 冲突 (虽然只要 Blocks 足够, 模型是可以通过额外添加一个 Token 来区分的). 但是在 `Amazon2014Beauty_550_LOU` 中, 虽然 Rotation-trick/STE 这些的冲突基本上只有 30 左右, 但是效果依旧比不上 Kmeans (它足足有 3472 个 Item 产生冲突). 注意, KMeans 比普通的 quantization 方法好, 不是因为额外的 Tokens 多 (实际上第四个位置只有 20 个不同的 Tokens, 即最多有 20 个 Item 被映射到同一个 ID). 我觉得这反而说了普通的 VQ-VAE 实际上没有学到什么东西.
+
+#### Commit Weight
+
+- 在 `Amazon2014Beauty_550_LOU` 上的测试结果:
+
+![20250814201818](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250814201818.png)
+
+- (**结论**) 影响不大.
+
+#### PPL -> Performance
+
+- 个人观察到, KMeans 的 PPL 挺高, 那么会不会这是个合理的性能指标呢?
+
+![20250818202549](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250818202549.png)
+
+![20250818203151](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250818203151.png)
+
+- 确实在 Epoch=25-30 的地方有一个小高峰 (PPL 的图横坐标需要 x 5), 但是后续还能涨回来?
+
+#### Epochs
+
+- (**Valid**)
+
+![20250821192533](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250821192533.png)
+
+- (**Test**)
+
+![20250821192549](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250821192549.png)
+
+- 从验证集看, 训练更长的时间是明显有用的, 但是这体现在测试集上的优势过于微弱了, 需要进一步验证.
 
 ## 参考文献
 
