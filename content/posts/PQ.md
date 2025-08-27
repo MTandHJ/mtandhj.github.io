@@ -37,7 +37,7 @@ pinned: false
     q(x) = \underset{c_i \in \mathcal{C}}{\text{argmin}} \: d(x, c_i).
     $$
 
-    当 $k=256$ 时, 可以任务整个向量数据库可以被压缩为 8-bit integers 表示. 对于以 $c_i$ 为中心的向量 $\mathcal{V}_i := \{x: q(x) = c_i\}$ (这个集合可以作为一个 Voronoi cell), 均可以用 $c_i$ 近似表达. 当然这里面有一定的误差.
+    当 $k=256$ 时, 可以认为整个向量数据库可以被压缩为 8-bit integers 表示. 对于以 $c_i$ 为中心的向量 $\mathcal{V}_i := \{x: q(x) = c_i\}$ (这个集合可以作为一个 Voronoi cell), 均可以用 $c_i$ 近似表达. 当然这里面有一定的误差.
 
 ## 核心思想
 
@@ -45,7 +45,7 @@ pinned: false
 
 - 因此, 本文希望将向量通过向量量化后存储起来, 减少 Memory 占用的同时方便 Search.
 
-- **(Product Quantization)** 与普通的向量量化基础上, PQ 将整个向量均匀分成 $m$ 段 ($D$ 可以被 $m$ 整除) 然后分别进行向量量化:
+- **(Product Quantization)** 在普通的向量量化基础上, PQ 将整个向量均匀分成 $m$ 段 ($D$ 可以被 $m$ 整除) 然后分别进行向量量化:
 
     $$
     \underbrace{
