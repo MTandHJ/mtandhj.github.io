@@ -73,7 +73,7 @@ pinned: false
     Wang L. Y., Zhao T. and Shah N.
     <u>Generative Recommendation with Semantic IDs: A Practitioner’s Handbook.</u>
     <i>arXiv</i>, 2025.
-    <a href="Generative Recommendation with Semantic IDs: A Practitioner's Handbook" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
+    <a href="https://arxiv.org/abs/2507.22224" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
     <a href="https://github.com/snap-research/GRID" style="color: #007acc; font-weight: bold; text-decoration: none;">[Code]</a>
   </li>
   <!-- 添加更多文献条目 -->
