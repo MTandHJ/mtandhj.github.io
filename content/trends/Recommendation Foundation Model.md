@@ -26,6 +26,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-08-28",
+    "title": "PSRQ",
+    "description": "Progressive Semantic Residual Quantization: 残差与残差补的量化",
+    "paperUrl": "/posts/psrq/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250901114718.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-08-15",
     "title": "DQ-VAE",
     "description": "在 SVD 分解张成的子空间中分别进行向量量化",
