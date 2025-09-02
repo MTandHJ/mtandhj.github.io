@@ -27,6 +27,15 @@ window.timelineData = [
 
   {
     "date": "2025-08-28",
+    "title": "OneRecv2",
+    "description": "提出 Lazy Decoder 以提高效率 & 用户反馈作为强化学习信号",
+    "paperUrl": "http://arxiv.org/abs/2508.20900",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250902113832.png",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2025-08-28",
     "title": "PSRQ",
     "description": "Progressive Semantic Residual Quantization: 残差与残差补的量化",
     "paperUrl": "/posts/psrq/",
