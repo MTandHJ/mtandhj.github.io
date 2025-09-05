@@ -26,6 +26,24 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-09-04",
+    "title": "OneSearch",
+    "description": "快手的生成式检索模型, 在向量量化前引入协同和语义融合",
+    "paperUrl": "http://arxiv.org/abs/2509.03236",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250905144845.png",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2025-08-29",
+    "title": "RECBENCH-MD",
+    "description": "基座模型通用推荐能力 Benchmark: 19 基座模型 & 10 场景 & 15 数据集",
+    "paperUrl": "http://arxiv.org/abs/2508.21354",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250902131304.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-08-28",
     "title": "OneRecv2",
     "description": "提出 Lazy Decoder 以提高效率 & 用户反馈作为强化学习信号",
