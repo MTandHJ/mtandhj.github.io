@@ -35,6 +35,15 @@ window.timelineData = [
   },
 
   {
+    "date": "2025-09-03",
+    "title": "RecBase: Generative Foundation Model Pretraining for Zero-Shot Recommendation",
+    "description": "华为在多个开源数据集上训练的生成式推荐模型, 利用课程学习训练 Tokenizer",
+    "paperUrl": "http://arxiv.org/abs/2509.03131",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250905151002.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-08-29",
     "title": "RECBENCH-MD",
     "description": "基座模型通用推荐能力 Benchmark: 19 基座模型 & 10 场景 & 15 数据集",
