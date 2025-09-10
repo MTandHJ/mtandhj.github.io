@@ -26,6 +26,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-09-08",
+    "title": "UniSearch",
+    "description": "快手的端到端生成式检索模型: Progressive Contrastive Learning & SimVQ",
+    "paperUrl": "/posts/unisearch/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250910121256.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-09-04",
     "title": "OneSearch",
     "description": "快手的生成式检索模型, 在向量量化前引入协同和语义融合",
