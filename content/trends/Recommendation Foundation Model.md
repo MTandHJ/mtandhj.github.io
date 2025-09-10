@@ -26,6 +26,51 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-09-04",
+    "title": "OneSearch",
+    "description": "快手的生成式检索模型, 在向量量化前引入协同和语义融合",
+    "paperUrl": "http://arxiv.org/abs/2509.03236",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250905144845.png",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2025-09-03",
+    "title": "RecBase: Generative Foundation Model Pretraining for Zero-Shot Recommendation",
+    "description": "华为在多个开源数据集上训练的生成式推荐模型, 利用课程学习训练 Tokenizer",
+    "paperUrl": "http://arxiv.org/abs/2509.03131",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250905151002.png",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2025-08-29",
+    "title": "RECBENCH-MD",
+    "description": "基座模型通用推荐能力 Benchmark: 19 基座模型 & 10 场景 & 15 数据集",
+    "paperUrl": "http://arxiv.org/abs/2508.21354",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250902131304.png",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2025-08-28",
+    "title": "OneRecv2",
+    "description": "提出 Lazy Decoder 以提高效率 & 用户反馈作为强化学习信号",
+    "paperUrl": "http://arxiv.org/abs/2508.20900",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250902113832.png",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2025-08-28",
+    "title": "PSRQ",
+    "description": "Progressive Semantic Residual Quantization: 残差与残差补的量化",
+    "paperUrl": "/posts/psrq/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250901114718.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-08-15",
     "title": "DQ-VAE",
     "description": "在 SVD 分解张成的子空间中分别进行向量量化",
@@ -235,5 +280,4 @@ window.timelineData = [
 ];
 </script>
 
-<!-- 使用defer属性延迟执行脚本，不阻塞页面渲染 -->
-<script src="/js/timeline.js" defer></script>
+<script src="/js/timeline.js"></script>

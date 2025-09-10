@@ -87,5 +87,4 @@ window.timelineData = [
 ];
 </script>
 
-<!-- 使用defer属性延迟执行脚本，不阻塞页面渲染 -->
-<script src="/js/timeline.js" defer></script>
+<script src="/js/timeline.js"></script>
