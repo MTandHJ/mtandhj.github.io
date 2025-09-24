@@ -26,6 +26,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-09-22",
+    "title": "OnePiece",
+    "description": "Shoppe 的 retrieval & ranking 混合 (bi-directional) Transformer: 丰富的 Context 以及渐进式的多步推理",
+    "paperUrl": "http://arxiv.org/abs/2509.18091",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250924203824.png",
+    "importance": "novel"
+  },
+
+  {
     "date": "2025-09-04",
     "title": "OneSearch",
     "description": "快手的生成式检索模型, 在向量量化前引入协同和语义融合",
