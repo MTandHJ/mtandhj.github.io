@@ -19,14 +19,14 @@ pinned: false
 
 - (**Generative Recommendation**) 生成式推荐目前主要分为三个阶段:
     1. **Semantic Features:** 通过预训练好的 Encoder 将一些多媒体信息 (通常是文本) 提取为 semantic features.
-    2. **Semantic ID, SID:** 通过 [RQ-KMeans](/posts/onerec/) 或者 [RQ-VAE](/posts/rq-vae/) 将上述得到的 Semantic Features 编码为 Item 对应的离散编码, 如 $(c^{(1)}, c^{(2)}, c^{(3)})) \in \mathbb{Z}_+^3$.
+    2. **Semantic ID, SID:** 通过 [Residual KMeans](/posts/onerec/) 或者 [RQ-VAE](/posts/rq-vae/) 将上述得到的 Semantic Features 编码为 Item 对应的离散编码, 如 $(c^{(1)}, c^{(2)}, c^{(3)})) \in \mathbb{Z}_+^3$.
     3. 得到的 SID 用于训练生成式模型, 推理的时候一般使用 **Beam Search** 实现.
 
 ![20250803135947](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250803135947.png)
 
 - (**Bag of Tricks**) 在生成式推荐中涉及到如下的几个 Tricks:
     1. **Semantic Encoder:** 一般来说, 编码模型越大越好;
-    2. **Quantizer:** 采用 RQ-KMeans, RQ-VAE 或者其他, 这直接影响了 SID 的生成质量;
+    2. **Quantizer:** 采用 Residual KMeans, RQ-VAE 或者其他, 这直接影响了 SID 的生成质量;
     3. **Codebook Size:** Codebook Size 包含 (i) codebook 的数量 $L$; (ii) 每个 codebook 包含的词表大小 $M$;
     4. **生成式推荐的 Backbone:** 过往的方法往往采用 Flan-T5 (Encoder-Decoder) 作为推荐模型的 backbone, 另一种是现在比较流行 Decoder-only 的方案;
     5. **User Token:** 在 [TIGER](/posts/tiger/) 中, T5 的 encoder 除了接收 Item 的 SID 历史序列外, 还有一个 User Token (特别地是, 该 token 通过将 user 随机 hash 得到, 因此有些 user 会共享一个 user Token);
@@ -44,7 +44,7 @@ pinned: false
 
 ![20250803140809](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250803140809.png)
 
-- **Quantizer:** 虽然 [RQ-VAE](/posts/rq-vae/) 在生成式推荐中最为常用, RQ-Kmeans 的实际效果是最好的.
+- **Quantizer:** 虽然 [RQ-VAE](/posts/rq-vae/) 在生成式推荐中最为常用, Residual Kmeans 的实际效果是最好的.
 
 ![20250803140943](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250803140943.png)
 
@@ -73,7 +73,7 @@ pinned: false
     Wang L. Y., Zhao T. and Shah N.
     <u>Generative Recommendation with Semantic IDs: A Practitioner’s Handbook.</u>
     <i>arXiv</i>, 2025.
-    <a href="Generative Recommendation with Semantic IDs: A Practitioner's Handbook" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
+    <a href="https://arxiv.org/abs/2507.22224" style="color: #007acc; font-weight: bold; text-decoration: none;">[PDF]</a>
     <a href="https://github.com/snap-research/GRID" style="color: #007acc; font-weight: bold; text-decoration: none;">[Code]</a>
   </li>
   <!-- 添加更多文献条目 -->

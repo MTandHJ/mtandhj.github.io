@@ -20,7 +20,7 @@ pinned: false
 
 - (**Generative Foundation Recommender**) 有不少的研究在追逐推荐系统的基模, 以期待超强的 Zero-Shot 能力 & 卓越的 Cross-Domain 能力. 生成式推荐无疑是导向这个目标的重要手段之一.
 
-- (**Semantic ID**) 通过 Item 的语义表征首先编码得到 Semantic ID (SID) 已经是目前的生成式推荐的主流方案. 通常是利用 [RQ-VAE](/posts/tiger/) 或者 [RQ-KMeans](/posts/qarm/) 实现.
+- (**Semantic ID**) 通过 Item 的语义表征首先编码得到 Semantic ID (SID) 已经是目前的生成式推荐的主流方案. 通常是利用 [RQ-VAE](/posts/tiger/) 或者 [Residual KMeans](/posts/qarm/) 实现.
 
 - 就我个人的尝试而言, 训练此类 Foundation Model 的难点在于糟糕的数据质量以及不可忽视的 Domain Gap. 似乎 RecBase 的一些举措并不足以解决这两个问题.
 

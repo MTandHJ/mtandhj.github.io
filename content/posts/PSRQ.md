@@ -20,7 +20,7 @@ pinned: false
 
 - (**向量量化**) 现阶段, 推荐系统倾向于不直接使用 textual/visual embeddings, 而是将他们转换成 semantic IDs, 再利用.
 
-- (**Residual Quantization**) 残差向量量化, 包括 RQ-KMeans, [RQ-VAE](/posts/rq-vae/), 进一步使得同一组 SID 内的各 ID 存在某些联系, 从而得到更准确的表示.
+- (**Residual Quantization**) 残差向量量化, 包括 Residual KMeans, [RQ-VAE](/posts/rq-vae/), 进一步使得同一组 SID 内的各 ID 存在某些联系, 从而得到更准确的表示.
 
 ## 核心思想
 
