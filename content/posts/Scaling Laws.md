@@ -1,6 +1,6 @@
 ---
 date: "2025-09-26"
-draft: false
+draft: true
 title: "Scaling Laws"
 description: "Scaling Laws 的细节推导"
 author: MTandHJ
