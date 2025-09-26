@@ -496,7 +496,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Allocation Conflict❓
+### Beam Search❓
 
 <div class="slide-cols">
 

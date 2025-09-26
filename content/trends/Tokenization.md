@@ -22,6 +22,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-09-11",
+    "title": "MOT",
+    "description": "Mixture-of-Tinkers: 在 Graph Quantized Tokenizer 基础上添加了 Codebook 的对比 Alignment 和 Load-balancing 约束",
+    "paperUrl": "http://arxiv.org/abs/2509.08401",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250912114314.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-07-15",
     "title": "H-Net",
     "description": "符号序列的自动切分, 实现自适应的子词划分",
