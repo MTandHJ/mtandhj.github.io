@@ -34,7 +34,7 @@ window.timelineData = [
     "importance": "novel"
   },
 
-  }
+  {
     "date": "2025-09-08",
     "title": "UniSearch",
     "description": "快手的端到端生成式检索模型: Progressive Contrastive Learning & SimVQ",
