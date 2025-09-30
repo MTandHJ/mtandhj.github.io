@@ -17,6 +17,13 @@
   margin-bottom: 30px;
 }
 
+/* 年份区域样式 */
+.year-section {
+  position: relative;
+  display: flex;
+  margin-bottom: 40px;
+}
+
 /* 左侧区域 */
 .timeline-left {
   width: 130px;
@@ -368,7 +375,7 @@
     font-size: 1.5em;
   }
   
-  .time-label, .current-time-label {
+  .time-label {
     font-size: 1.1em;
   }
   
@@ -403,7 +410,7 @@
     font-size: 1.3em;
   }
   
-  .time-label, .current-time-label {
+  .time-label {
     font-size: 1.0em;
   }
   

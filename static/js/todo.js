@@ -16,9 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 获取当前时间
     const currentDate = new Date();
-    const currentYear = currentDate.getFullYear();
-    const currentMonth = currentDate.getMonth() + 1;
-    const currentDay = currentDate.getDate();
     
     // 预处理和验证数据
     const processedData = timelineData.map(item => {
@@ -53,11 +50,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
       
-      // 直接从缓存获取年份和日期信息
+      // 直接从缓存获取年份和月份信息
       const dateObj = dateCache.get(processedItem.date);
       processedItem.year = dateObj.getFullYear();
       processedItem.month = dateObj.getMonth() + 1;
-      processedItem.day = dateObj.getDate();
       
       // 判断是否延期：如果日期早于当前时间且状态不是completed，则自动标记为延期
       processedItem.isOverdue = isOverdue(dateObj, currentDate, processedItem.status);
@@ -160,9 +156,6 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // 添加悬停事件监听器
       addHoverEventListeners();
-      
-      // 调试：检查生成的HTML
-      console.log('Generated HTML:', timelineWrapper.innerHTML);
     } else {
       timelineContainer.innerHTML = '<p>没有找到有效的TODO数据</p>';
     }
@@ -171,33 +164,6 @@ document.addEventListener('DOMContentLoaded', function() {
     timelineContainer.innerHTML = '<p>加载TODO时间线时出错。请刷新页面重试。</p>';
   }
   
-  // 获取一年中的第几周
-  function getWeekOfYear(date) {
-    const start = new Date(date.getFullYear(), 0, 1);
-    const diff = date - start;
-    const oneWeek = 1000 * 60 * 60 * 24 * 7;
-    return Math.floor(diff / oneWeek) + 1;
-  }
-  
-  // 获取月份信息
-  function getMonthInfo(items, year) {
-    const monthNames = ['', '1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
-    const monthSet = new Set();
-    
-    for (const item of items) {
-      const dateObj = new Date(item.date);
-      const month = dateObj.getMonth() + 1;
-      monthSet.add(month);
-    }
-    
-    const monthArray = Array.from(monthSet).sort((a, b) => a - b);
-    
-    if (monthArray.length === 0) return '';
-    
-    const monthTexts = monthArray.map(month => monthNames[month]);
-    
-    return monthTexts.join(' · ');
-  }
   
   // 判断TODO是否延期：如果日期早于当前时间且状态不是completed，则自动标记为延期
   function isOverdue(todoDate, currentDate, status) {
@@ -332,7 +298,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 否则显示原始状态
     const statusMap = {
-      'pending': '待办',
+      'pending': '进行中',
       'completed': '已完成'
     };
     
