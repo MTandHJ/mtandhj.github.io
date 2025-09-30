@@ -51,18 +51,8 @@ window.timelineData = [
 
   {
     "date": "2025-10-15",
-    "title": "论文投稿",
-    "description": "将当前研究成果投稿到相关会议",
-    "paperUrl": "",
-    "imageUrl": "",
-    "importance": "seminal",
-    "status": "pending"
-  },
-
-  {
-    "date": "2025-10-05",
-    "title": "开始 MPT 的论文撰写工作",
-    "description": "构思初步的想法，开始撰写论文",
+    "title": "MPT scaling law 的初步探索",
+    "description": "",
     "paperUrl": "",
     "imageUrl": "",
     "importance": "emmm",
@@ -70,42 +60,32 @@ window.timelineData = [
   },
 
   {
-    "date": "2025-09-30",
+    "date": "2025-10-08",
+    "title": "构思 MPT 的写作思路",
+    "description": "",
+    "paperUrl": "",
+    "imageUrl": "",
+    "importance": "emmm",
+    "status": "pending"
+  },
+
+  {
+    "date": "2025-10-02",
+    "title": "check 论文 response",
+    "description": "",
+    "paperUrl": "",
+    "imageUrl": "",
+    "importance": "emmm",
+    "status": "pending"
+  },
+
+  {
+    "date": "2025-10-02",
     "title": "安排国庆回家事宜",
     "description": "购买车票，安排国庆假期回家计划",
     "paperUrl": "",
     "imageUrl": "",
     "importance": "emmm",
-    "status": "pending"
-  },
-
-  {
-    "date": "2025-09-28",
-    "title": "完成实验数据收集",
-    "description": "收集所有实验数据，准备分析",
-    "paperUrl": "",
-    "imageUrl": "",
-    "importance": "novel",
-    "status": "pending"
-  },
-
-  {
-    "date": "2025-09-20",
-    "title": "准备实验环境",
-    "description": "搭建实验环境，配置相关工具",
-    "paperUrl": "",
-    "imageUrl": "",
-    "importance": "emmm",
-    "status": "completed"
-  },
-
-  {
-    "date": "2025-08-20",
-    "title": "完成实验数据分析",
-    "description": "对收集的实验数据进行深入分析",
-    "paperUrl": "",
-    "imageUrl": "",
-    "importance": "novel",
     "status": "pending"
   },
 
