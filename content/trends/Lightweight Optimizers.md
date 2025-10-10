@@ -23,6 +23,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-9-27",
+    "title": "8-bit Muon",
+    "description": "轻量化的 Muon 优化器: Lienar or Dynamic quantization",
+    "paperUrl": "http://arxiv.org/abs/2509.23106",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251010114521.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2024-12-27",
     "title": "Deepseek-v3",
     "description": "在大规模训练中采用了 BF16 的优化器",
