@@ -76,23 +76,13 @@ window.timelineData = [
     "paperUrl": "",
     "imageUrl": "",
     "importance": "emmm",
-    "status": "pending"
+    "status": "completed"
   },
 
   {
     "date": "2025-10-02",
     "title": "安排国庆回家事宜",
     "description": "购买车票，安排国庆假期回家计划",
-    "paperUrl": "",
-    "imageUrl": "",
-    "importance": "emmm",
-    "status": "pending"
-  },
-
-  {
-    "date": "2025-07-15",
-    "title": "文献调研",
-    "description": "完成相关领域的文献调研工作",
     "paperUrl": "",
     "imageUrl": "",
     "importance": "emmm",
