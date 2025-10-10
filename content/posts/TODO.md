@@ -50,6 +50,16 @@ window.timelineData = [
   },
 
   {
+    "date": "2025-10-16",
+    "title": "SDQ 适配 LlamaModel",
+    "description": "",
+    "paperUrl": "",
+    "imageUrl": "",
+    "importance": "emmm",
+    "status": "pending"
+  },
+
+  {
     "date": "2025-10-15",
     "title": "MPT scaling law 的初步探索",
     "description": "",
