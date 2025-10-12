@@ -23,6 +23,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-10-09",
+    "title": "SymTime",
+    "description": "时间序列数据生成: 符号表示 & ARMA 统计模型",
+    "paperUrl": "http://arxiv.org/abs/2510.08445",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251012164600.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-09-23",
     "title": "The Indispensable Role of User Simulation in the Pursuit of AGI",
     "description": "初步说明了用户仿真的重要性和挑战",
