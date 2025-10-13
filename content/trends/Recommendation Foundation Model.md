@@ -134,6 +134,15 @@ window.timelineData = [
   },
 
   {
+    "date": "2025-07-26",
+    "title": "RankMixer",
+    "description": "抖音在 (非生成式) 大模型推荐上的探索: TokenMixing & Per-token FFN",
+    "paperUrl": "/posts/rankmixer/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251013152919.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-06-13",
     "title": "RecFound",
     "description": "华为提出的 Recommendation Foundation Model 的设想: 通过多样的 Embedding/Generative + Task-specific MoE + Adaptive Sampling 来增强 LLM",
