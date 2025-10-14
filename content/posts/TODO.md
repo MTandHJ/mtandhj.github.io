@@ -50,13 +50,23 @@ window.timelineData = [
   },
 
   {
+    "date": "2025-10-20",
+    "title": "调研 Recommendation Pre-training & Fine-tuning",
+    "description": "",
+    "paperUrl": "",
+    "imageUrl": "",
+    "importance": "emmm",
+    "status": "pending"
+  },
+
+  {
     "date": "2025-10-16",
     "title": "SDQ 适配 LlamaModel",
     "description": "",
     "paperUrl": "",
     "imageUrl": "",
     "importance": "emmm",
-    "status": "pending"
+    "status": "completed"
   },
 
   {
@@ -66,7 +76,7 @@ window.timelineData = [
     "paperUrl": "",
     "imageUrl": "",
     "importance": "emmm",
-    "status": "pending"
+    "status": "completed"
   },
 
   {
