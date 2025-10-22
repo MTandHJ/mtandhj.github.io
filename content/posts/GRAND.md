@@ -28,7 +28,7 @@ pinned: false
 
     这里 $\mathbf{A} = [a_{ij}] \in \mathbb{R}^{n \times n}$ 是图上的权重矩阵, $a_{ij}$ 可以是一些预定义的权重, 也可以是通过特征计算得到的, 如 $a_{ij} = a(x_i, x_j)$.
 
-- (**[Heat Equation](https://en.wikipedia.org/wiki/Heat_equation)**) 热扩散方差是基于傅里叶定律推得的微分方程:  热量流动的方向与温度降低的方向相同，其速率与温度的梯度成正比. 令 $u(x, y, z, t)$ 表示时刻 $t$ 时在空间坐标 $(x, y, z)$ 上的温度, 则 Heat Equation 方程为:
+- (**[Heat Equation](https://en.wikipedia.org/wiki/Heat_equation)**) 热扩散方程是基于傅里叶定律推得的微分方程:  热量流动的方向与温度降低的方向相同，其速率与温度的梯度成正比. 令 $u(x, y, z, t)$ 表示时刻 $t$ 时在空间坐标 $(x, y, z)$ 上的温度, 则 Heat Equation 方程为:
 
     $$
     \dot{u} = \alpha \cdot \nabla^2 u,
