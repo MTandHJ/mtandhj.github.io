@@ -50,6 +50,26 @@ window.timelineData = [
   },
 
   {
+    "date": "2025-10-25",
+    "title": "Survey 格式修正",
+    "description": "",
+    "paperUrl": "",
+    "imageUrl": "",
+    "importance": "emmm",
+    "status": "pending"
+  },
+
+  {
+    "date": "2025-10-23",
+    "title": "完成评审意见",
+    "description": "",
+    "paperUrl": "",
+    "imageUrl": "",
+    "importance": "emmm",
+    "status": "pending"
+  },
+
+  {
     "date": "2025-10-20",
     "title": "调研 Recommendation Pre-training & Fine-tuning",
     "description": "",
