@@ -50,6 +50,16 @@ window.timelineData = [
   },
 
   {
+    "date": "2025-11-01",
+    "title": "跑通 UniSRec 和 RecFormer 的微调流程",
+    "description": "",
+    "paperUrl": "",
+    "imageUrl": "",
+    "importance": "emmm",
+    "status": "pending"
+  },
+
+  {
     "date": "2025-10-25",
     "title": "Survey 格式修正",
     "description": "",
@@ -86,7 +96,7 @@ window.timelineData = [
     "paperUrl": "",
     "imageUrl": "",
     "importance": "emmm",
-    "status": "pending"
+    "status": "completed"
   },
 
   {
