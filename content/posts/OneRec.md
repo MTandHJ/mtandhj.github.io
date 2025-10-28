@@ -18,7 +18,7 @@ pinned: false
 
 ## 预备知识
 
-- 请了解 [QARM](https://www.mtandhj.com/posts/qarm/).
+- 请了解 [QARM](/posts/qarm/).
 - $\mathcal{H}_u = \{v_1^h, v_2^h, \ldots, v_n^h\}$, user historical behavior sequence, 在快手的场景下, $v$ 表示一个视频.
 - $\mathcal{S} = \{v_1, v_2, \ldots, v_m\}$, 推荐的一串视频流.
 - session watch time (**swt**), view probability (**vtr**), follow probability (**wtr**), like probability (**ltr**).
