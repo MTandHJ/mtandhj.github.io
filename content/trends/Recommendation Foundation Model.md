@@ -27,6 +27,15 @@ window.timelineData = [
 
   {
     "date": "2025-10-24",
+    "title": "BLOGER",
+    "description": "Tokenizer & Recommender 共同训练  (bi-level optimization)",
+    "paperUrl": "http://arxiv.org/abs/2510.21242",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251028160341.png",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2025-10-24",
     "title": "Pctx",
     "description": "个性化 semantic IDs",
     "paperUrl": "/posts/pctx/",
