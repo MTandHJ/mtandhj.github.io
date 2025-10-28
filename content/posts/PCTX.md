@@ -49,7 +49,7 @@ pinned: false
         ).
         $$
     
-    4. 通过 RQ-AE 生成 semantic IDs.
+    4. 通过 RQ-VAE 生成 semantic IDs.
 
 
 **注:** 感觉得不偿失.
