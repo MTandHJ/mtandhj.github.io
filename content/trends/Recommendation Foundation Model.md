@@ -26,6 +26,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-10-24",
+    "title": "Pctx",
+    "description": "个性化 semantic IDs",
+    "paperUrl": "/posts/pctx/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251028145406.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-09-22",
     "title": "OnePiece",
     "description": "Shoppe 的 retrieval & ranking 混合 (bi-directional) Transformer: 丰富的 Context 以及渐进式的多步推理",
