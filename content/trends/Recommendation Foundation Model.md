@@ -26,6 +26,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-10-28",
+    "title": "MiniOneRec",
+    "description": "何向南老师团队开源的类 OneRec 架构 (基于 Qwen3)",
+    "paperUrl": "http://arxiv.org/abs/2510.24431",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251030142615.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-10-24",
     "title": "BLOGER",
     "description": "Tokenizer & Recommender 共同训练  (bi-level optimization)",

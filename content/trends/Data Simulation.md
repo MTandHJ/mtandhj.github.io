@@ -23,6 +23,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-09-12",
+    "title": "RecoWorld",
+    "description": "Meta 的推荐仿真环境构建指南 (User Simulator & Agentic RecSys)",
+    "paperUrl": "http://arxiv.org/abs/2509.10397",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251030143006.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-10-09",
     "title": "SymTime",
     "description": "时间序列数据生成: 符号表示 & ARMA 统计模型",
