@@ -26,6 +26,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-10-31",
+    "title": "A Survey on Generative Recommendation: Data, Model, and Tasks",
+    "description": "相当全面的综述",
+    "paperUrl": "http://arxiv.org/abs/2510.27157",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251104145836.png",
+    "importance": "novel"
+  },
+
+  {
     "date": "2025-10-28",
     "title": "MiniOneRec",
     "description": "何向南老师团队开源的类 OneRec 架构 (基于 Qwen3)",
