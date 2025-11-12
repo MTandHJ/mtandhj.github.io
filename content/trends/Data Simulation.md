@@ -23,6 +23,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-11-10",
+    "title": "Can LLM Annotations Replace User Clicks for Learning to Rank?",
+    "description": "探究 LLM 标注检索网页相关性的可行性, 并发现所得数据与正常数据为分属不同频段的信号",
+    "paperUrl": "",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251112150550.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-09-12",
     "title": "RecoWorld",
     "description": "Meta 的推荐仿真环境构建指南 (User Simulator & Agentic RecSys)",
