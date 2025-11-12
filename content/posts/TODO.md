@@ -60,6 +60,16 @@ window.timelineData = [
   },
 
   {
+    "date": "2025-11-14",
+    "title": "实现 Encoder-Decoder 架构的 Tiger",
+    "description": "",
+    "paperUrl": "",
+    "imageUrl": "",
+    "importance": "emmm",
+    "status": "pending"
+  },
+
+  {
     "date": "2025-11-01",
     "title": "跑通 UniSRec 和 RecFormer 的微调流程",
     "description": "",
