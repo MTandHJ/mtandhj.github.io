@@ -26,6 +26,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-11-16",
+    "title": "Climber",
+    "description": "一个 CTR 领域更加高效 Scaling 的推荐架构",
+    "paperUrl": "https://dl.acm.org/doi/10.1145/3746252.3761561",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251117210558.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-10-31",
     "title": "A Survey on Generative Recommendation: Data, Model, and Tasks",
     "description": "相当全面的综述",
