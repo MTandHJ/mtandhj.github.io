@@ -6,7 +6,7 @@ description: "Scaling Laws 的细节推导"
 author: MTandHJ
 tags:
   - Note
-  - Scaling Laws
+  - Scaling Law
   - Foundation
   - Empirical
 pinned: false
