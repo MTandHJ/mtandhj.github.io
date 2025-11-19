@@ -26,6 +26,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-11-17",
+    "title": "UniTok",
+    "description": "通过 TokenMOE 和 互信息约束 实现一个 multi-domain 的 Tokenizer",
+    "paperUrl": "https://arxiv.org/abs/2511.12922",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251119153629.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-11-16",
     "title": "Climber",
     "description": "一个 CTR 领域更加高效 Scaling 的推荐架构",
