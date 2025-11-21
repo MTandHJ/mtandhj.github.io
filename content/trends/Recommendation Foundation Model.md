@@ -305,6 +305,15 @@ window.timelineData = [
   },
 
   {
+    "date": "2024-05-12",
+    "title": "LETTER",
+    "description": "兼顾语义和协同信息的 Tokenizer: 引入协同对齐损失",
+    "paperUrl": "/posts/letter/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251121150632.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2024-03-27",
     "title": "IDGenRec",
     "description": "利用语言模型'精炼'出文本 ID, 用于 Base Recommender 的 Diverse Beam Search 生成",
