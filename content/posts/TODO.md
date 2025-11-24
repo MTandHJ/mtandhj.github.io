@@ -50,6 +50,26 @@ window.timelineData = [
   },
 
   {
+    "date": "2025-11-27",
+    "title": "准备两个 LLMRec 的 baseline",
+    "description": "",
+    "paperUrl": "",
+    "imageUrl": "",
+    "importance": "emmm",
+    "status": "pending"
+  },
+
+  {
+    "date": "2025-11-27",
+    "title": "复现 LETTER",
+    "description": "",
+    "paperUrl": "",
+    "imageUrl": "",
+    "importance": "emmm",
+    "status": "pending"
+  },
+
+  {
     "date": "2025-11-15",
     "title": "撰写论文初稿",
     "description": "",
@@ -66,7 +86,7 @@ window.timelineData = [
     "paperUrl": "",
     "imageUrl": "",
     "importance": "emmm",
-    "status": "pending"
+    "status": "completed"
   },
 
   {
