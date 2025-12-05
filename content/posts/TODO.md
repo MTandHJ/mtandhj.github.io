@@ -50,6 +50,16 @@ window.timelineData = [
   },
 
   {
+    "date": "2025-12-03",
+    "title": "FreeRec 修改",
+    "description": "torchdata 版本问题 & STAMP 的代码错误",
+    "paperUrl": "",
+    "imageUrl": "",
+    "importance": "emmm",
+    "status": "pending"
+  },
+
+  {
     "date": "2025-11-27",
     "title": "准备两个 LLMRec 的 baseline",
     "description": "",
