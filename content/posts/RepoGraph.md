@@ -30,6 +30,8 @@ pinned: false
     2. **Project-dependent relation filtering:** 很多元素其实和 Bug 往往没有联系, 需要移除以降低 Graph 的大小: 1) global relation: e.g., Python 的标准和内置函数; 2) local relation: 第三方库.
     3. **Graph organization:** 由此, 我们可以构建图 $\mathcal{G} = \{\mathcal{V}, \mathcal{E}\}$, 其中 $\mathcal{V}$ 表示节点 (每一个节点表示一行代码), $\mathcal{E}$ 则是节点和节点之间的关系. 节点主要包括两种类型: 1) `def` (definition): 即这行代码定义了一个 function 或 class (e.g., `class Model`); 2) `ref` (reference): 指得是这行代码是引用的其他地方已经定义好的实体. 边的类型也主要有两种: 1) `contain`:  ($\mathcal{V}_1, \mathcal{E}_{contain}, \mathcal{V}_2$) 表示 $\mathcal{V}_1$ 包含另一个节点 $\mathcal{V}_2$ (比如, $\mathcal{V}_2$ 是 $\mathcal{V}_1$ 的一个内置方法); 2) `invoke`: $\mathcal{E}_{invoke}$ 通常连接 `def` 和 `ref`, 即 reference node 依赖/引用了 definition node.
 
+**注:** 每个节点上附带 meta-information: line_number, file_name, directory ...
+
 - 在实际操作中, RepoGraph 提供了 *search_repograph()*, 给定一个 search term (往往是跟 bug 直接联系的元素), 会返回一个以 search term 为中心展开的 k-hop ego-graph, 基于这个 graph, 可以直接用 LLM, 或者 Agent 来实现更为精准的代码生成.
 
 
