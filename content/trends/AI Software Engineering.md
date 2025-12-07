@@ -21,6 +21,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-05-22",
+    "title": "Code Graph Model (CGM)",
+    "description": "Code Graph & Graph Attention Mask",
+    "paperUrl": "/posts/cgm/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251207205526.png",
+    "importance": "novel"
+  },
+
+  {
     "date": "2024-10-03",
     "title": "RepoGraph",
     "description": "通过 Repository-level 的 Code Graph 实现更为高效的工程代码生成",
