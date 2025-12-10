@@ -21,13 +21,15 @@ tags:
 
 ### Background
 
-↗️ 模型大小飞速增加 vs. 硬件价格居高不下
+<div class="slide-highlight">
+模型飞速膨胀 vs. 硬件价格居高不下
+</div>
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312203012.png" alt="Image" style="max-width: 65%; height: auto; margin: 0 auto;">
 </div>
 
-- 解决方案: 
+- 可能的一些解决方案: 
   - MoE, LoRA; ZeRO, FSDP; 
   - Network Quantization; <span style="color: red;">Lightweight Optimizers</span>
 
@@ -48,10 +50,39 @@ tags:
   v_{t+1} \leftarrow \beta_2 \cdot v_t + (1 - \beta_2) \cdot g^2.
   $$
 
-- DeepSeek-v3 训练框架: $g \overset{\text{BF16}}{\rightarrow} m, v \overset{\text{FP32}}{\rightarrow} \theta$
+- Lightweight Optimizers:
+  - **重新设计:** Lion, Muon ...
+  - **状态共享:** Adafactor, SM3, Adam-Mini ...
+  - **降维/稀疏化:** GaLore, MicroAdam
+  - **低精度:** 1-bit SGD/Adam, <u>16/8/4-bit Optimizers</u>, Q-GaLore, 8-bit Muon
 
+<div class="slide-highlight">
+Why Low-Bit Optimizers?
+</div>
+
+</textarea>
+</section>
+
+<!-- --------------------------------------------------------- -->
+
+<section data-markdown>
+<textarea data-template>
+
+### Why Low-Bit Optimizers?
+
+- **泛化性:** ✅无需额外调参 ✅适用任意场景
+
+- **灵活性:** ✅非环境依赖
+
+- **成功的工程实践:** DeepSeek-v3 训练框架 ($g \overset{\rightarrow} m,v \overset{\text{FP32}}{\rightarrow} \theta$)
+  
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312204230.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
+</div>
+
+<div class="slide-ref">
+  <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
+  <p style="margin: 2px 0;">DeepSeek-AI. DeepSeek-V3 Technical Report, 2024.</p>
 </div>
 
 </textarea>
@@ -101,6 +132,46 @@ tags:
 <section data-markdown>
 <textarea data-template>
 
+### Challenges in Ultra-Low-Bit Cases
+
+- **表示精度:** 42 亿 (32-bit) vs. 8 (3-bit) vs. 4 (2-bit)
+
+- **量化范围:** 如何将尽可能多的元素一起量化?
+
+- **一阶/二阶动量:**
+  - (Signed) 一阶动量 ($m$): 决定参数更新方向 
+  - (Unsigned) 一阶动量 ($m$): 决定参数更新步长
+
+</textarea>
+</section>
+
+<!-- --------------------------------------------------------- -->
+
+<section data-markdown>
+<textarea data-template>
+
+### Challenges in Ultra-Low-Bit Cases
+
+- **表示精度:** 42 亿 (32-bit) vs. 8 (3-bit) vs. 4 (2-bit)
+
+- **量化范围:** 如何将尽可能多的元素一起量化?
+
+- **一阶/二阶动量:**
+  - (Signed) 一阶动量 ($m$): 决定参数更新方向 
+  - (Unsigned) 一阶动量 ($m$): 决定参数更新步长
+
+<div class='slide-highlight'>
+关键: EMA Dynamics
+</div>
+
+</textarea>
+</section>
+
+<!-- --------------------------------------------------------- -->
+
+<section data-markdown>
+<textarea data-template>
+
 ### Quantization for Unsigned EMA Update
 
 - *Signal Swamping* (<u>large-to-small number addition</u>)
@@ -135,6 +206,12 @@ $$
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312212039.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
+</div>
+
+<div class='slide-highlight'>
+
+❎Unsigned ❎ $\beta \uparrow$ ❎ $b \downarrow$
+
 </div>
 
 </textarea>
@@ -223,7 +300,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Stochastic Rounding
+### Solution (1/2): Stochastic Rounding
 
 - 假设 $y_{k-1} \le x / \Delta \le y_k$:
 
@@ -251,7 +328,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Logarithmic Quantization
+### (Solution 2/2) Logarithmic Quantization
 
 $$
 \begin{array}{ll}
@@ -310,17 +387,20 @@ $$
 
 ### Quantization for Signed EMA Update
 
-❎ &nbsp; <span style="color: gray">Signal Swamping</span>
+😄&nbsp; <span style="color: gray">No Signal Swamping</span>
 
-☑️ &nbsp; **Sign representation**
+😞&nbsp; **额外的符号表示 (1 bit)**
 
-☑️ &nbsp; **Descent direction**
+😞&nbsp; **直接决定更新方向 (误差敏感)**
+
+
 
 💡 总结:
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314115701.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
 </div>
+
 
 </textarea>
 </section>
@@ -359,6 +439,10 @@ $\rightarrow$ <span style="color: red"> worse </span> convergence
 
 </div>
 
+<div class="slide-ref">
+  <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
+  <p style="margin: 2px 0;">Li H., et al. Convergence of Adam under Relaxed Assumptions. NeurIPS, 2023.</p>
+</div>
 
 </textarea>
 </section>
@@ -458,7 +542,7 @@ $$
 
 ### Beta, Block size
 
-- 损失正常收敛
+- Lower-bit SOLO needs a smaller $\beta$
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250407200935.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
