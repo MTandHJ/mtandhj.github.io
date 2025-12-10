@@ -22,7 +22,7 @@ tags:
 ### Background
 
 <div class="slide-highlight">
-模型飞速膨胀 vs. 硬件价格居高不下
+模型飞速膨胀 vs. 吃紧的硬件设备
 </div>
 
 <div class="slide-img">
@@ -74,7 +74,7 @@ Why Low-Bit Optimizers?
 
 - **灵活性:** ✅非环境依赖
 
-- **成功的工程实践:** DeepSeek-v3 训练框架 ($g \overset{\rightarrow} m,v \overset{\text{FP32}}{\rightarrow} \theta$)
+- **成功的工程实践:** DeepSeek-v3 训练框架 ($g \overset{\text{BF16}}{\rightarrow} m,v \overset{\text{FP32}}{\rightarrow} \theta$)
   
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312204230.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
@@ -140,7 +140,7 @@ Why Low-Bit Optimizers?
 
 - **一阶/二阶动量:**
   - (Signed) 一阶动量 ($m$): 决定参数更新方向 
-  - (Unsigned) 一阶动量 ($m$): 决定参数更新步长
+  - (Unsigned) 二阶动量 ($v$): 决定参数更新步长
 
 </textarea>
 </section>
@@ -330,18 +330,15 @@ $$
 
 ### (Solution 2/2) Logarithmic Quantization
 
-$$
-\begin{array}{ll}
-Q(x) 
-&=\text{Clip}(\lfloor \log_{\alpha} \frac{x}{\Delta} + \xi \rceil; 0, 2^b - 1) \\
-&\approx \mathop{\text{argmin}} \limits_{k=0}^{2^b - 1} \big|\frac{x}{\Delta} \cdot \alpha^\xi - y_k \big|,
-\end{array}
-$$
 
-- 3-bit quantization levels:
+<div class='slide-highlight'>
+$1 \overset{\text{more levels}}{\Longrightarrow} 0$
+</div>
+
+- 3-bit quantization levels (Linear vs. Dynamic Exponent vs. Ours):
 
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250313113440.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
+  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251210214923.png" alt="Image" style="max-width: 100%; height: auto;margin: 0 auto;">
 </div>
 
 </textarea>
@@ -393,8 +390,6 @@ $$
 
 😞&nbsp; **直接决定更新方向 (误差敏感)**
 
-
-
 💡 总结:
 
 <div class="slide-img">
@@ -410,7 +405,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Theoretical Analysis
+### Quantization Errors $\Rightarrow$ Gradient Variance
 
 <div class="slide-cols">
 
@@ -437,6 +432,10 @@ $\rightarrow$ <span style="color: red"> worse </span> convergence
 
 </div>
 
+</div>
+
+<div class='slide-highlight'>
+不稳定性难以在量化算法层面避免!
 </div>
 
 <div class="slide-ref">
