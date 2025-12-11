@@ -195,7 +195,7 @@ style="max-width: 80%; height: auto;margin: 0 auto;">
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
+<!-- <section data-markdown>
 <textarea data-template>
 
 ## 模型优化与梯度下降
@@ -214,10 +214,10 @@ style="max-width: 80%; height: auto;margin: 0 auto;">
 
 
 </textarea>
-</section>
+</section> -->
 
 <!-- --------------------------------------------------------- -->
-
+<!-- 
 <section data-markdown>
 <textarea data-template>
 
@@ -241,11 +241,11 @@ style="max-width: 80%; height: auto;margin: 0 auto;">
 </div>
 
 </textarea>
-</section>
+</section> -->
 
 
 <!-- --------------------------------------------------------- -->
-
+<!-- 
 <section data-markdown>
 <textarea data-template>
 
@@ -276,10 +276,10 @@ style="max-width: 80%; height: auto;margin: 0 auto;">
 </div>
 
 </textarea>
-</section>
+</section> -->
 
 <!-- --------------------------------------------------------- -->
-
+<!-- 
 <section data-markdown>
 <textarea data-template>
 
@@ -293,10 +293,10 @@ style="max-width: 100%; height: auto;margin: 0 auto;">
 </div>
 
 </textarea>
-</section>
+</section> -->
 
 <!-- --------------------------------------------------------- -->
-
+<!-- 
 <section data-markdown>
 <textarea data-template>
 
@@ -319,7 +319,7 @@ style="max-width: 100%; height: auto;margin: 0 auto;">
     </div>
 
 </textarea>
-</section>
+</section> -->
 
 <!-- --------------------------------------------------------- -->
 
