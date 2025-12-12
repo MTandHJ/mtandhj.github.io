@@ -31,7 +31,7 @@ tags:
     - **E 步:** 计算期望对数似然函数
 
         $$
-        Q(\theta, \theta^{t-1}) := \sum_{i=1}^N \mathbb{E}_{z} \left[
+        Q(\theta, \theta^{t-1}) := \sum_{i=1}^N \underset{\bm{z}_i \sim p(\bm{z}|\bm{x}_i; \theta^{t-1})}{\mathbb{E}} \left[
             \log p(\bm{x}_i, \bm{z}_i; \theta)
         \right]
         $$
@@ -194,7 +194,28 @@ $$
     Q(\theta, \hat{\theta}) 
     &\Leftrightarrow \sum_{i=1}^N \int_{\bm{z}} p(\bm{z}|\bm{x}_i; \hat{\theta}) 
     \log \frac{p(\bm{x}_i, \bm{z}; \theta)}{p(\bm{z}|\bm{x}_i; \hat{\theta})} \mathrm{d} \bm{z} \\
-    &= \sum_{i=1}^N \Big\{\underbrace{\log p(\bm{x}_i; \theta)}_{\text{似然}} - 
+    &= \sum_{i=1}^N \Big\{\underbrace{\log p(\bm{x}_i; \theta)}_{\text{边际似然}} - 
+    \underbrace{\text{KL}(p(\bm{z}|\bm{x}_i; \hat{\theta}) \| p(\bm{z}|\bm{x}_i; \theta))}_{\text{GAP, } \ge 0} \Big\}
+\end{align*}
+$$
+
+
+</textarea>
+</section>
+
+<!-- --------------------------------------------------------- -->
+
+<section data-markdown>
+<textarea data-template>
+
+## 从 EM 算法到 ELBO
+
+$$
+\begin{align*}
+    Q(\theta, \hat{\theta}) 
+    &\Leftrightarrow \sum_{i=1}^N \int_{\bm{z}} p(\bm{z}|\bm{x}_i; \hat{\theta}) 
+    \log \frac{p(\bm{x}_i, \bm{z}; \theta)}{p(\bm{z}|\bm{x}_i; \hat{\theta})} \mathrm{d} \bm{z} \\
+    &= \sum_{i=1}^N \Big\{\underbrace{\log p(\bm{x}_i; \theta)}_{\text{边际似然}} - 
     \underbrace{\text{KL}(p(\bm{z}|\bm{x}_i; \hat{\theta}) \| p(\bm{z}|\bm{x}_i; \theta))}_{\text{GAP, } \ge 0} \Big\}
 \end{align*}
 $$
@@ -209,6 +230,7 @@ $\textcircled{\small 2}$ $\hat{\theta} = \theta$ 时完全等价最大似然
 
 </textarea>
 </section>
+
 
 <!-- --------------------------------------------------------- -->
 
@@ -292,6 +314,34 @@ style="max-width: 100%; height: auto;margin: 0 auto;">
 <section data-markdown>
 <textarea data-template>
 
+## 从 VAE 到 EM 算法
+
+$$
+\max_{\phi, \theta} \quad \sum_{i=1}^N \int_{\bm{z}} q(\bm{z}|\bm{x}_i; \phi)
+\log \frac{p(\bm{x}_i, \bm{z}; \theta)}{q(\bm{z}|\bm{x}_i; \phi)} \mathrm{d} \bm{z}
+$$
+
+- **E 步:** 保持 $\theta$ 固定, 关于 $\phi$
+
+    $$
+    \max_{\textcolor{blue}{\phi}} \quad -\sum_{i=1}^N \text{KL} (q(\bm{z}|\bm{x}_i; \textcolor{blue}{\phi}) \| p(\bm{z}|\bm{x}_i; \theta))
+    $$
+
+
+- **M 步:** 保持 $\phi$ 固定, 关于 $\theta$
+
+    $$
+    \max_{\textcolor{blue}{\theta}} \quad \sum_{i=1}^N \mathbb{E}_q [\log p(\bm{x}_i| \bm{z}; \textcolor{blue}{\theta})]
+    $$
+
+</textarea>
+</section>
+
+<!-- --------------------------------------------------------- -->
+
+<section data-markdown>
+<textarea data-template>
+
 ## 知识点总结
 
 - 期望对数似然 $\Leftrightarrow$ ELBO $\Leftrightarrow$ 对数似然下界
@@ -322,6 +372,8 @@ style="max-width: 100%; height: auto;margin: 0 auto;">
     $$
     \text{ELBO} \le \sum_{i=1}^N \log p(\bm{x}_i; \theta)
     $$
+
+- 仿照 EM $\rightarrow$ ELBO 的方法反推 VAE $\rightarrow$ EM
 
 </textarea>
 </section>
