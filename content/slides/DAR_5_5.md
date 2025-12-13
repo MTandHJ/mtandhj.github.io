@@ -187,7 +187,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-## 从 EM 算法到 ELBO
+## 从 EM 算法到 VAE
 
 $$
 \begin{align*}
@@ -208,7 +208,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-## 从 EM 算法到 ELBO
+## 从 EM 算法到 VAE
 
 $$
 \begin{align*}
@@ -237,7 +237,7 @@ $\textcircled{\small 2}$ $\hat{\theta} = \theta$ 时完全等价最大似然
 <section data-markdown>
 <textarea data-template>
 
-## 从 EM 算法到 ELBO
+## ELBO
 
 $$
 \theta^t = \mathop{\text{argmax}} \limits_{\theta} \sum_{i=1}^N \int_{\bm{z}} \textcolor{red}{p(\bm{z}|\bm{x}_i; \theta^{t-1})}
@@ -252,7 +252,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-## 从 EM 算法到 ELBO
+## ELBO
 
 $$
 \theta^t = \mathop{\text{argmax}} \limits_{\theta} \sum_{i=1}^N \int_{\bm{z}} \textcolor{red}{p(\bm{z}|\bm{x}_i; \theta^{t-1})}
@@ -271,7 +271,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-## 从 EM 算法到 ELBO
+## ELBO
 
 $$
 \theta^t = \mathop{\text{argmax}} \limits_{\theta} \sum_{i=1}^N \int_{\bm{z}} \textcolor{red}{p(\bm{z}|\bm{x}_i; \theta^{t-1})}
