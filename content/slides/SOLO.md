@@ -47,7 +47,7 @@ tags:
 
   $$
   m_{t+1} \leftarrow \beta_1 \cdot m_t + (1 - \beta_1) \cdot g, \\
-  v_{t+1} \leftarrow \beta_2 \cdot v_t + (1 - \beta_2) \cdot g^2.
+  v_{t+1} \leftarrow \beta_2 \cdot v_t + (1 - \beta_2) \cdot g^2
   $$
 
 - Lightweight Optimizers:
@@ -123,24 +123,6 @@ Why Low-Bit Optimizers?
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617110019.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
 </div>
-
-</textarea>
-</section>
-
-<!-- --------------------------------------------------------- -->
-
-<section data-markdown>
-<textarea data-template>
-
-### Challenges in Ultra-Low-Bit Cases
-
-- **表示精度:** 42 亿 (32-bit) vs. 8 (3-bit) vs. 4 (2-bit)
-
-- **量化范围:** 如何将尽可能多的元素一起量化?
-
-- **一阶/二阶动量:**
-  - (Signed) 一阶动量 ($m$): 决定参数更新方向 
-  - (Unsigned) 二阶动量 ($v$): 决定参数更新步长
 
 </textarea>
 </section>
