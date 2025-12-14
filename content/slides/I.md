@@ -79,7 +79,7 @@ style="max-width: 80%; height: auto;margin: 0 auto;">
   <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
   <p style="margin: 2px 0;">
   <strong>Cong Xu</strong>, Min Yang*, Jin Zhang.
-  <u>Fast Deflation Sparse Principal Component Analysis via Subspace Projections.</u>
+  Fast Deflation Sparse Principal Component Analysis via Subspace Projections.
   <i>Statistical Computation and Simulation</i>, 2020.
   &nbsp;&nbsp;
   <strong>数学四区</strong>
@@ -108,21 +108,21 @@ style="max-width: 80%; height: auto;margin: 0 auto;">
   <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
   <p style="margin: 2px 0;">
   <strong>Cong Xu</strong>, Xiang Li, Min Yang*.
-  <u>An Orthogonal Classifier for Improving the Adversarial Robustness of Neural Networks.</u>
+  An Orthogonal Classifier for Improving the Adversarial Robustness of Neural Networks.
   <i>Information Sciences</i>, 2022.
   &nbsp;&nbsp;
   <strong>发文年, 一区 Top</strong>
   </p>
   <p style="margin: 2px 0;">
   <strong>Cong Xu</strong>, Dan Li, Min Yang*.
-  <u>Adversarial Momentum-Contrastive Pre-Training.</u>
+  Adversarial Momentum-Contrastive Pre-Training.
   <i>Pattern Recognition Letters</i>, 2022.
   &nbsp;&nbsp;
   <strong>三区</strong>
   </p>
   <p style="margin: 2px 0;">
   <strong>Cong Xu</strong>, Wei Zhang, Jun Wang, Min Yang*.
-  <u>Understanding Adversarial Robustness From Feature Maps of Convolutional Layers.</u>
+  Understanding Adversarial Robustness From Feature Maps of Convolutional Layers.
   <i>TNNLS</i>, 2024.
   &nbsp;&nbsp;
   <strong>CCF-B, 一区 Top</strong>
@@ -146,34 +146,28 @@ style="max-width: 80%; height: auto;margin: 0 auto;">
   <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
   <p style="margin: 2px 0;">
   <strong>Cong Xu</strong>, Jun Wang*, Wei Zhang*.
-  <u>StableGCN: Decoupling and Reconciling Information Propagation for Collaborative Filtering.</u>
+  StableGCN: Decoupling and Reconciling Information Propagation for Collaborative Filtering.
   <i>TKDE</i>, 2023.
   &nbsp;&nbsp;
   <strong>CCF-A, 一区 Top</strong>
   </p>
   <p style="margin: 2px 0;">
-  <strong>Cong Xu</strong>, Zhangchi Zhu, Mo Yu, Jun Wang*, Jianyong Wang, Wei Zhang*.
-  <u>Are LLM-based Recommenders Already the Best? Simple Scaled Cross-entropy Unleashes the Potential of Traditional Sequential Recommenders.</u>
-  2024.
-  &nbsp;&nbsp;
-  </p>
-  <p style="margin: 2px 0;">
     <strong>Cong Xu</strong>, Jun Wang, Jianyong Wang, Wei Zhang*.
-    <u>Graph-enhanced Optimizers for Structure-aware Recommendation Embedding Evolution.</u>
+    Graph-enhanced Optimizers for Structure-aware Recommendation Embedding Evolution.
     <i>NeurIPS</i>, 2024.
     &nbsp;&nbsp;
     <strong>CCF-A</strong>
   </p>
   <p style="margin: 2px 0;">
     Yunhang He, <strong>Cong Xu</strong>, Jun Wang, Wei Zhang*.
-    <u>Collaborative Filtering Meets Spectrum Shift: Connecting User-Item Interaction with Graph-Structured Side Information.</u>
+    Collaborative Filtering Meets Spectrum Shift: Connecting User-Item Interaction with Graph-Structured Side Information.
     <i>KDD</i>, 2025.
     &nbsp;&nbsp;
     <strong>共一, CCF-A</strong>
   </p>
   <p style="margin: 2px 0;">
     <strong>Cong Xu</strong>, Yunhang He, Jun Wang*, Wei Zhang*.
-    <u>STAIR: Manipulating Collaborative and Multimodal Information for E-Commerce Recommendation.</u>
+    STAIR: Manipulating Collaborative and Multimodal Information for E-Commerce Recommendation.
     <i>AAAI</i>, 2025.
     &nbsp;&nbsp;
     <strong>CCF-A</strong>
@@ -182,10 +176,8 @@ style="max-width: 80%; height: auto;margin: 0 auto;">
     <strong>Cong Xu</strong>, Wenbin Liang, Mo Yu,
     Anan Liu, Ke-Yue Zhang, Shunli Wang, Lizhuang Ma,
     Jianyong Wang, Jun Wang*, Wei Zhang*.
-    <u>Pushing the Limits of Low-Bit Optimizers: A Focus on EMA Dynamics.</u>
+    Pushing the Limits of Low-Bit Optimizers: A Focus on EMA Dynamics.
     2025.
-    &nbsp;&nbsp;
-    <strong>Submitted to TPAMI</strong>
   </p>
 
 </div>
@@ -340,6 +332,7 @@ style="max-width: 105%; height: auto;margin: 0 auto;">
   <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
   <p style="margin: 2px 0;">
   Cong Xu, et al. Pushing the Limits of Low-Bit Optimizers: A Focus on EMA Dynamics. 2025.
+  <strong>Submitted to TPAMI</strong>
   </p>
 </div>
 

@@ -97,7 +97,7 @@ style="max-width: 100%; height: auto;margin: 0 auto;">
 </div>
 
 <div class="slide-highlight">
-与 EM、VAE 核心思想同宗同源
+与 EM、VAE 核心思想一脉相承
 </div>
 
 </textarea>
@@ -132,7 +132,6 @@ style="max-width: 100%; height: auto;margin: 0 auto;">
 </textarea>
 </section>
 
-
 <!-- --------------------------------------------------------- -->
 
 <section data-markdown>
@@ -140,15 +139,17 @@ style="max-width: 100%; height: auto;margin: 0 auto;">
 
 ## (期望) 对数似然间的关系
 
+<p style="font-size: 0.63em">
 $$
 \begin{align*}
     Q(\theta, \hat{\theta}) 
-    &= \mathbb{E}_{\bm{z}} \left[\ell (\bm{x}, \bm{z}; \theta) \right] \\
-    &= \sum_{i=1}^N \int_{\bm{z}} p(\bm{z}|\bm{x}_i; \hat{\theta}) \log p(\bm{x}_i, \bm{z}; \theta) \mathrm{d} \bm{z} \\
+    &= \mathbb{E}_{\bm{z}} \left[\ell (\bm{x}, \bm{z}; \theta) \right]
+    = \sum_{i=1}^N \int_{\bm{z}} p(\bm{z}|\bm{x}_i; \hat{\theta}) \log p(\bm{x}_i, \bm{z}; \theta) \mathrm{d} \bm{z} \\
     &\textcolor{red}{\Leftrightarrow} \sum_{i=1}^N \int_{\bm{z}} p(\bm{z}|\bm{x}_i; \hat{\theta}) 
     \log \frac{p(\bm{x}_i, \bm{z}; \theta)}{\textcolor{red}{p(\bm{z}|\bm{x}_i; \hat{\theta})}} \mathrm{d} \bm{z} \\
 \end{align*}
 $$
+</p>
 
 </textarea>
 </section>
@@ -160,17 +161,22 @@ $$
 
 ## (期望) 对数似然间的关系
 
+<p style="font-size: 0.63em">
 $$
 \begin{align*}
     Q(\theta, \hat{\theta}) 
-    &= \mathbb{E}_{\bm{z}} \left[\ell (\bm{x}, \bm{z}; \theta) \right] \\
+    &= \mathbb{E}_{\bm{z}} \left[\ell (\bm{x}, \bm{z}; \theta) \right]
+    = \sum_{i=1}^N \int_{\bm{z}} p(\bm{z}|\bm{x}_i; \hat{\theta}) \log p(\bm{x}_i, \bm{z}; \theta) \mathrm{d} \bm{z} \\
     &\textcolor{red}{\Leftrightarrow} \sum_{i=1}^N \int_{\bm{z}} p(\bm{z}|\bm{x}_i; \hat{\theta}) 
     \log \frac{p(\bm{x}_i, \bm{z}; \theta)}{\textcolor{red}{p(\bm{z}|\bm{x}_i; \hat{\theta})}} \mathrm{d} \bm{z} \\
     &= \sum_{i=1}^N \int_{\bm{z}} p(\bm{z}|\bm{x}_i; \hat{\theta}) 
     \log \frac{p(\bm{z}| \bm{x}_i; \theta) p(\bm{x}_i; \theta)}{p(\bm{z}|\bm{x}_i; \hat{\theta})} \mathrm{d} \bm{z} \\
+    &= \sum_{i=1}^N \int_{\bm{z}} p(\bm{z}|\bm{x}_i; \hat{\theta}) 
+    \left(\log p(\bm{x}_i; \theta) + \log \frac{p(\bm{z}| \bm{x}_i; \theta) }{p(\bm{z}|\bm{x}_i; \hat{\theta})} \right) \mathrm{d} \bm{z} \\
     &= \sum_{i=1}^N \Big\{\log p(\bm{x}_i; \theta) - \text{KL}(p(\bm{z}|\bm{x}_i; \hat{\theta}) \| p(\bm{z}|\bm{x}_i; \theta)) \Big\}
 \end{align*}
 $$
+</p>
 
 <div class="slide-ref">
   <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
@@ -237,7 +243,7 @@ $\textcircled{\small 2}$ $\hat{\theta} = \theta$ 时完全等价最大似然
 <section data-markdown>
 <textarea data-template>
 
-## ELBO
+## ELBO (Evidence Lower Bound)
 
 $$
 \theta^t = \mathop{\text{argmax}} \limits_{\theta} \sum_{i=1}^N \int_{\bm{z}} \textcolor{red}{p(\bm{z}|\bm{x}_i; \theta^{t-1})}
@@ -252,7 +258,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-## ELBO
+## ELBO (Evidence Lower Bound)
 
 $$
 \theta^t = \mathop{\text{argmax}} \limits_{\theta} \sum_{i=1}^N \int_{\bm{z}} \textcolor{red}{p(\bm{z}|\bm{x}_i; \theta^{t-1})}
@@ -271,7 +277,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-## ELBO
+## ELBO (Evidence Lower Bound)
 
 $$
 \theta^t = \mathop{\text{argmax}} \limits_{\theta} \sum_{i=1}^N \int_{\bm{z}} \textcolor{red}{p(\bm{z}|\bm{x}_i; \theta^{t-1})}
