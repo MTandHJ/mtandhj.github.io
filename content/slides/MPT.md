@@ -1,6 +1,6 @@
 ---
 date: "2025-09-18"
-draft: true
+draft: false
 title: "MPT"
 author: MTandHJ
 tags:
@@ -22,50 +22,20 @@ tags:
 <section data-markdown>
 <textarea data-template>
 
-### Markovian Nature of Next-Item Recommendation
+## Background: Pre-training & Fine-tuning
 
-- Next-Item Recommendation (for User $u$ given $\{x_i^u\}_{i=1}^t$)
+- **Pre-training & Fine-tuning:** 多个领域的致胜法宝
+  - (CV) ResNet, SimCLR, MAE, ViT ...
+  - (NLP) BERT, GPT ...
 
-    $$
-    \tag{1}
-    \mathbb{P}(x_{t+1}| x_{t}^u, x_{t-1}^u, \ldots, x_1^u; \theta).
-    $$
+- Pre-training & Fine-tuning for Next-Item Recommendation:
+  - (美好愿景) 😄 quick deployment; 😄 better generalizability
+  - (研究现状) 😞 效果远远逊色于 domain-specific 模型
 
-- <span style="color: blue">Sequential nature</span> is of 'paramount importance' because of
-    - personalized recommendation (user identifier)
-    - dynamic user interests (a particularly appealing characteristic)  
 
-🤔 Do existing public datasets inherently exhibit such characteristics? - <span style="color: red">NOT EXACTLY!</span>
-
-</textarea>
-</section>
-
-<!-- --------------------------------------------------------- -->
-
-<section data-markdown>
-<textarea data-template>
-
-### Markovian Nature of Next-Item Recommendation
-
-- If sequentiality is **prevalent** in public datasets,
-
-    $$
-    \mathbb{P}(x_{t+1}| x_{t}^u, \textcolor{red}{\text{Shuffle}(}x_{t-1}^u, \ldots, x_1^u\textcolor{red}{)}; \theta)
-    $$
-
-    should give <span style="color: red">wrong</span> probability estimation.
-
-- Otherwise, Markovian nature:
-
-    $$
-    \begin{align*}
-      & \mathbb{P}(x_{t+1}| x_{t}^u, x_{t-1}^u, \ldots, x_1^u; \theta) \\
-      \approx & \mathbb{P}(x_{t+1}| x_{t}^u, \text{Shuffle}(x_{t-1}^u, \ldots, x_1^u); \theta) \\
-      = & \mathbb{P}(x_{t+1}| x_{t}, \underbrace{\phi(u)}_{
-        \text{provides sequence-unaware personalized information}
-      }; \theta) \\
-    \end{align*}
-    $$
+<div class="slide-highlight">
+🤔什么阻碍了"推荐知识"的迁移?
+</div>
 
 </textarea>
 </section>
@@ -75,44 +45,71 @@ tags:
 <section data-markdown>
 <textarea data-template>
 
-### Markovian Nature of Next-Item Recommendation
+## Background: Pre-training & Fine-tuning
 
-|  Dataset                               | NDCG@10 |Shuffled |
-|---------------------------------|---------|---------|
-| Amazon2014Beauty_550_LOU        | 0.0595  | 0.0596  |
-| Amazon2014Beauty_554_LOU        | 0.0768  | 0.0767  |
-| Amazon2014Tools_550_LOU         | 0.0352  | 0.0353  |
-| Amazon2014Toys_550_LOU          | 0.0629  | 0.0628  |
-| MovieLens1M_550_LOU             | <span style="color: red">0.1345</span>  | <span style="color: red"> 0.1169 </span> |
-| RetailrocketTransaction_500_LOU | 0.0869  | 0.0867  |
-| Steam_550_LOU                   | 0.1570  | 0.1564  |
-| Yelp2018_10100_LOU              | 0.0252  | 0.0253  |
-
-
-</textarea>
-</section>
-
-<!-- --------------------------------------------------------- -->
-
-<section data-markdown>
-<textarea data-template>
-
-### Markovian Nature: Observations
-
-$\textcircled{\small 1}$  All datasets except MovieLens exhibit a markovian nature.
-
-
-$\textcircled{\small 2}$  The 'sequentiality' of MovieLens arises from repeated movie categories:
+- **Next-Item Recommendation:**
 
   $$
-  \text{Drama, Drama, Animation, Animation, Animation...}
+  [v_1, v_2, \ldots, v_t] \rightarrow v_{t+1}
   $$
 
-$\textcircled{\small 3}$  MovieLens datasets are not good datasets for assessing the performance of sequential recommendation${}^{\tiny [1]}$. Most interactions share the same timestamps!
+- 推荐数据的异构性 (heterogeneity):
+  1. diverse user behaviors
+  2. non-negligible domain gaps
+
+<div class="slide-highlight">
+🤔什么样的"推荐知识"是可迁移的?
+</div>
+
+</textarea>
+</section>
+
+<!-- --------------------------------------------------------- -->
+
+<section data-markdown>
+<textarea data-template>
+
+## RQI: Transferable Capabilities
+
+<div class="slide-highlight">
+学好 XXX 有什么用, 生活里又用不到!
+</div>
+
+- **Computer Vision:**
+  1. (图像分类) 特征提取、模式识别 ...
+  2. (图像生成) 数据分布建模 ...
+
+- **Natural Language Processing:** 
+  1. (传统语料) 语义理解、语法保持
+  2. (数学/代码) 逻辑推理
+
+<div class="slide-highlight">
+可迁移的是能力!
+</div>
+
+</textarea>
+</section>
+
+<!-- --------------------------------------------------------- -->
+
+<section data-markdown>
+<textarea data-template>
+
+## Transferable Capabilities for Recommendation
+
+- 推荐需要何种能力? 长短兴趣建模?
+
+<div class="slide-img">
+<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217112626.png" 
+alt="Image" 
+style="max-width: 100%; height: auto;margin: 0 auto;">
+</div>
 
 <div class="slide-ref">
   <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-  <p style="margin: 2px 0;">[1] Woolridge D., et al. Sequence or Pseudo-Sequence? An Analysis of Sequential Recommendation Datasets. PERSPECTIVES, 2021.</p>
+  <p style="margin: 2px 0;">
+  GRU4Rec: RNN; SASRec: Transformer; HSTU: Attention + Time-based positional encoding
+  </p>
 </div>
 
 </textarea>
@@ -123,20 +120,95 @@ $\textcircled{\small 3}$  MovieLens datasets are not good datasets for assessing
 <section data-markdown>
 <textarea data-template>
 
-### Markovian Nature: Situation
+## Transferable Capabilities for Recommendation
 
-- Barriers to **scaling** models effectively:
-  - Transformer may primarily learn to attend to the most recent token.
+$$
+  \begin{array}{rl}
+  \textcircled{\small 1} \text{ Chronologically ordered:} & \mathbb{P}\left(v_{t+1}\,|\,v_t, v_{t-1}, \ldots, v_1; \Theta \right), \\
+  \textcircled{\small 2} \text{ Partially shuffled:} & \mathbb{P}\left(v_{t+1}\,|\, v_t, \{v_1, v_2, \ldots \}; \Theta \right), \\
+  \textcircled{\small 3} \text{ Completely shuffled:} & \mathbb{P}\left(v_{t+1}\,|\,\{v_1, v_2, \ldots, v_t\}; \Theta \right)
+  \end{array}
+$$
+
+- $\textcircled{\small 1} \approx \textcircled{\small 2}$: 先进的序列推荐模型并没有依赖序列性做出更加复杂的推理 (即使 HSTU 引入了 Timestamps 信息)
+
+- $\textcircled{\small 1}/\textcircled{\small 2} \gtrapprox \textcircled{\small 3}$: Latest interaction 至关重要
+
+- 上述结论与数据集预处理方式、优化目标、模型表达能力无关
+
+</textarea>
+</section>
+
+<!-- --------------------------------------------------------- -->
+
+<section data-markdown>
+<textarea data-template>
+
+## Markovian Nature of Next-Item Prediction
+
+- 当前先进的序列推荐模型的推理逻辑:
+  1. 依赖整体序列推断 "general user preferences"
+  2. 格外强调用户最新的交互
+
+$$
+  \mathbb{P}\left(
+    v_{t+1}\,|\,v_{t}, v_{t-1}, \ldots, v_1; \Theta
+  \right)
+  \approx \mathbb{P}(
+    v_{t+1}\,|\,v_{t}, \underbrace{\{v_1,  v_2, \ldots\}}_{\text{non-sequential}}; \Theta
+  ).
+$$
+
+<div class="slide-highlight">
+💡当前序列推荐模型不约而同地以符合马尔科夫性的方式进行推理！
+</div>
+
+</textarea>
+</section>
+
+<!-- --------------------------------------------------------- -->
+
+<section data-markdown>
+<textarea data-template>
+
+## Short-term & Long-term Interests
+
+- **一一对应:**
+
+|马尔科夫性|推荐理论|
+|:-:|:-:|
+|User Identifiction|Long-term Interest$^{[1]}$|
+|Last-Item Attention|Short-term Interest$^{[2]}$|
+
+- **稍有不同:** Long-term interest 的建模并非宣称的那样复杂
+
+<div class="slide-ref">
+  <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
+  <p style="margin: 2px 0;">
+  [1] Xie X., et al. Contrastive Learning for Sequential Recommendation. ICDE, 2022.
+  </p>
+  <p style="margin: 2px 0;">
+  [2] Liu Q., et al.  STAMP: Short-term Attention/Memory Priority Model for Session-based Recommendation. KDD, 2018.
+  </p>
+</div>
+
+
+</textarea>
+</section>
+
+<!-- --------------------------------------------------------- -->
+
+<section data-markdown>
+<textarea data-template>
+
+## RQII: Data for Markovian Reasoner
 
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250918171752.png" 
-  alt="Image" 
-  style="max-width: 50%; height: auto;margin: 0 auto;">
+<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217120440.png" 
+alt="Image" 
+style="max-width: 100%; height: auto;margin: 0 auto;">
 </div>
 
-- Leading to **Markov-friendly** designs:
-  - Decoder-only $\succ$ Encoder-only
-  - Learnable PE $\succ$ Sinusoidal PE/RoPE
 
 </textarea>
 </section>
@@ -146,44 +218,24 @@ $\textcircled{\small 3}$  MovieLens datasets are not good datasets for assessing
 <section data-markdown>
 <textarea data-template>
 
-### Markovian Nature: Problems & Opportunities
+## Next-State Prediction
 
-😞 The community has overfitted to the Markovian nature!
-
-🤔 If this is a bug, how to alleviate such bias?
-
-😄 If this is the feature, how can we leverage the Markovian nature?
-
-💡 A 'good' sequential recommender is characterized by:  
-
-&emsp; $\textcircled{\small 1}$ the ability to <u>attend to the most recent item</u>;
-
-&emsp; $\textcircled{\small 2}$ the ability to estimate <u>individual preferences</u> from sequence.
-
-</textarea>
-</section>
-
-<!-- --------------------------------------------------------- -->
-
-<section data-markdown>
-<textarea data-template>
-
-### $x_t \rightarrow x_{t+1}$
-
-- Predict $x_{t+1}$ using the most recent $k$ items
-
-- (**Training**) Split $[x_1, x_2, x_3, x_4, x_5]$ (if $k=2$) into
+- 如何仅凭**上下文**推断马氏链下一时刻状态?
 
   $$
-  \begin{align*}
-  [x_1] \rightarrow x_2, \\
-  [x_1, x_2] \rightarrow x_3, \\
-  [x_2, x_3] \rightarrow x_4, \\
-  [x_3, x_4] \rightarrow x_5.
-  \end{align*}
+  s_1, s_2, \ldots, s_t \rightarrow s_{t+1}, \quad
+  s_{n} \in \mathcal{S}, \: \forall n=1,2,\ldots, t+1
   $$
 
-- When $k=1$, the transformer estimates the **transition probability** over the entire dataset.
+**Step1:** 根据 $[s_1, s_2, \ldots, s_t]$ 估计转移概率矩阵
+
+**Step2:** 确定当前时刻的状态 $s_t$
+
+**Step3:** 选取 $s_t \rightarrow ?$ 最大概率的状态作为预测
+
+- 擅长 Next-State Prediction 的模型, 需具备:
+  1. 自适应的序列总结能力;
+  2. 特别注意当前状态的机制
 
 </textarea>
 </section>
@@ -193,26 +245,119 @@ $\textcircled{\small 3}$  MovieLens datasets are not good datasets for assessing
 <section data-markdown>
 <textarea data-template>
 
-### $x_t \rightarrow x_{t+1}$
+## Markovian Pre-trained Transformer (MPT)
 
+- **Next-State Prediction Task:**
+
+$$
+  \mathcal{L}_{\text{NSP}} = 
+  \underset{\mathbf{P} \sim \text{Dir}(\bm{\alpha})}{\mathbb{E}} 
+  \underset{\{s_t\}_{t=2}^T \sim \mathbf{P}|s_1}{\mathbb{E}}
+  -\sum_{t=1}^{T-1} \log \mathbb{P}(s_{t+1}\,|\,s_{t}, \ldots, s_{1}; \Theta)
+$$
+
+<div class="slide-highlight">
+100% 人造数据用于预训练！
+</div>
+
+<div class="slide-highlight">
+✅ Controllable ✅ Unlimited
+</div>
+
+</textarea>
+</section>
+
+<!-- --------------------------------------------------------- -->
+
+<section data-markdown>
+<textarea data-template>
+
+### Markovian Pre-training & Recommendation Fine-tuning
+
+<div class="slide-img">
+<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217143749.png" 
+alt="Image" 
+style="max-width: 100%; height: auto;margin: 0 auto;">
+</div>
+
+</textarea>
+</section>
+
+<!-- --------------------------------------------------------- -->
+
+<section data-markdown>
+<textarea data-template>
+
+## Experiments
+
+<div class="slide-img">
+<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217145634.png" 
+alt="Image" 
+style="max-width: 90%; height: auto;margin: 0 auto;">
+</div>
+
+</textarea>
+</section>
+
+<!-- --------------------------------------------------------- -->
+
+<section data-markdown>
+<textarea data-template>
+
+## Empirical Analysis: NDCG@10 vs. #Tokens
 
 <div class="slide-cols">
+
+<div class="slide-col-4">
+
+<div class="slide-img">
+<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217150737.png" 
+alt="Image" 
+style="max-width: 100%; height: auto;margin: 0 auto;">
+</div>
+
+</div>
+
+<div class="slide-col-6">
+
+- $\mathcal{L}_{\text{NSP}}$ 随着 tokens 增加逐渐下降, 且有多次骤降
+
+- 在学习了 $10^{10}$ (约 10B) 左右 tokens 后, 大部分场景下都呈现饱和
+
+- 不同场景下的最优训练 #Tokens 存在差异
+
+</div>
+
+</div>
+
+</textarea>
+</section>
+
+<!-- --------------------------------------------------------- -->
+
+<section data-markdown>
+<textarea data-template>
+
+## Empirical Analysis: Attention Map
+
+<div class="slide-cols">
+
+<div class="slide-col-4">
+
+- MPT 更关注自身
+
+- Qwen-2.5 的 Attention Map 基本上没有区分度
+
+
+</div>
 
 <div class="slide-col-6">
 
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250807134137.png" 
-  alt="Image" 
-  style="max-width: 80%; height: auto;margin: 0 auto;">
+<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217151521.png" 
+alt="Image" 
+style="max-width: 100%; height: auto;margin: 0 auto;">
 </div>
-
-</div>
-
-<div class="slide-col-4">
-
-- Amazon2014Beauty_550_LOU
-
-- ($k$ = 1) More than 60% of users employ the same $x_t$ to predict $x_{t+1}$.
 
 </div>
 
@@ -226,23 +371,14 @@ $\textcircled{\small 3}$  MovieLens datasets are not good datasets for assessing
 <section data-markdown>
 <textarea data-template>
 
-### STAMP
+## Sensitivity Analysis: $|\mathcal{S}|$
+
+- Number of states $|\mathcal{S}|$
 
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250808103422.png" 
-  alt="Image" 
-  style="max-width: 50%; height: auto;margin: 0 auto;">
-</div>
-
-|Blocks|HR@1|HR@10|NDCG@10|
-|:-:|:-:|:-:|:-:|
-|STAMP|0.0168|0.0564|0.0343|
-|only $\bm{h}_t$|0.0270|0.0710|0.0466|
-|only $\bm{m}_t$|0.0246|0.0814|0.0496|
-
-<div class="slide-ref">
-  <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-  <p style="margin: 2px 0; font-size: 0.9em">Liu Q., et al. STAMP: Short-Term Attention Memory Priority Model for Session-based Recommendation. KDD, 2018.</p>
+<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217152317.png" 
+alt="Image" 
+style="max-width: 100%; height: auto;margin: 0 auto;">
 </div>
 
 </textarea>
@@ -253,86 +389,14 @@ $\textcircled{\small 3}$  MovieLens datasets are not good datasets for assessing
 <section data-markdown>
 <textarea data-template>
 
-### Markov Chain Estimation
+## Sensitivity Analysis: $\alpha$
 
-- Given an arbitrary **random** Markov chain  
-
-  $$
-  \underbrace{x_1, x_2, \ldots}_{\text{context}}, x_t, \quad x_i \in \{s_k\}_{k=1}^K,
-  $$  
-
-  a transformer model $f([x_1, x_2, \ldots, x_t])$ can accurately predict $x_{t+1}$ in agreement with the true transition probability.  
-
-
-😄 Markovian Pre-trained Transformer (MPT) has acquired:
-
-&emsp; ✅the ability to <u>attend to the most recent token</u>;
-
-&emsp; ✅ the ability to estimate <u>chain-wise transition probability</u>.
-
-
-<div class="slide-ref">
-  <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-  <p style="margin: 2px 0;">[1] Lepage S., et al. Markov Chain Estimation with In-Context Learning. arXiv, 2025.</p>
-</div>
-
-</textarea>
-</section>
-
-<!-- --------------------------------------------------------- -->
-
-<section data-markdown>
-<textarea data-template>
-
-### Markov Chain Estimation
-
-
-<div class="slide-cols">
-
-
-<div class="slide-col-6">
+- $\alpha$ of Dirichlet distribution
 
 <div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250813151043.png" 
-  alt="Image" 
-  style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
-
-</div>
-
-<div class="slide-col-4">
-
-- **Model loss**: 模型预测 Loss
-- **Oracle loss**: 最优预测 Loss
-- $N$: 训练所采样的转移概率矩阵数目
-
-- 充分训练的 Transformer 呈现稀疏的 attention map
-
-</div>
-
-</div>
-
-
-<div class="slide-ref">
-  <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-  <p style="margin: 2px 0;">[1] Lepage S., et al. Markov Chain Estimation with In-Context Learning. arXiv, 2025.</p>
-</div>
-
-</textarea>
-</section>
-
-
-<!-- --------------------------------------------------------- -->
-
-<section data-markdown>
-<textarea data-template>
-
-### MPT for Next-Item Recommendation
-
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250920164936.png" 
-  alt="Image" 
-  style="max-width: 100%; height: auto;margin: 0 auto;">
+<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217152637.png" 
+alt="Image" 
+style="max-width: 100%; height: auto;margin: 0 auto;">
 </div>
 
 </textarea>
@@ -343,93 +407,20 @@ $\textcircled{\small 3}$  MovieLens datasets are not good datasets for assessing
 <section data-markdown>
 <textarea data-template>
 
-### Markov Chains $\uparrow$
+## Summary
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250923103513.png" 
-  alt="Image" 
-  style="max-width: 60%; height: auto;margin: 0 auto;">
-</div>
+- **可迁移的推荐能力:** 序列无关的偏好推断 & 特别关注最新交互
 
-$\approx 10^9$ tokens for optimal performance
+- **Next-State Prediction:** ✅ Controllable ✅ Unlimited
 
-</textarea>
-</section>
+- **Markovian Pre-trained Transformer (MPT):** ✅ 高效 ✅ 易迁移
 
-<!-- --------------------------------------------------------- -->
-
-<section data-markdown>
-<textarea data-template>
-
-### MPT for Next-Item Recommendation
-
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250923102401.png" 
-  alt="Image" 
-  style="max-width: 70%; height: auto;margin: 0 auto;">
+<div class="slide-highlight">
+下一个时代: Data Simulation
 </div>
 
 </textarea>
 </section>
-
-<!-- --------------------------------------------------------- -->
-
-<section data-markdown>
-<textarea data-template>
-
-### Zero-Shot
-
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250924142541.png" 
-  alt="Image" 
-  style="max-width: 70%; height: auto;margin: 0 auto;">
-</div>
-
-- Last Item Prediction (NDCG@10): 0.0423
-
-</textarea>
-</section>
-
-<!-- --------------------------------------------------------- -->
-
-<section data-markdown>
-<textarea data-template>
-
-### SASRec vs MPT vs UniSRec
-
-| Dataset                   | SASRec+ | MPT    | UniSRec |
-| ------------------------- | ------- | ------ | ------- |
-| Amazon2014Beauty_550_LOU  | 0.0595  | 0.0614 | 0.0561  |
-| Amazon2014Beauty_1000_LOU | 0.0327  | 0.0413 | 0.0394  |
-| Amazon2014Toys_550_LOU    | 0.0629  | 0.0647 | 0.0632  |
-| Amazon2014Tools_550_LOU   | 0.0352  | 0.0387 | 0.0308  |
-| Yelp2018_10100_LOU        | 0.0252  | 0.0179 |         |
-| Steam_550_LOU             | 0.0802  | 0.0686 | 0.0103  |
-
-</textarea>
-</section>
-
-<!-- --------------------------------------------------------- -->
-
-<section data-markdown>
-<textarea data-template>
-
-### Summary
-
-- Most recommendation datasets exhibit a **Markovian nature**.
-
-- If this is the feature, sequential recommenders should be able to  
-  - infer **individual preferences** from the sequence, and
-  - place particular emphasis on the **most recent item**.
-
-- The **Markovian Pre-trained Transformer (MPT)** might become the recommendation **foundation** model?
-  - scaling law?
-
-- Semantic IDs?
-
-</textarea>
-</section>
-
 
 <!-- --------------------------------------------------------- -->
 
