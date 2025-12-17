@@ -19,7 +19,7 @@ tags:
 <section data-markdown>
 <textarea data-template>
 
-### Background
+## Background
 
 <div class="slide-highlight">
 模型飞速膨胀 vs. 吃紧的硬件设备
@@ -41,7 +41,7 @@ tags:
 <section data-markdown>
 <textarea data-template>
 
-### Background
+## Background
   
 ⚙️ Optimizer States (2x model size):
 
@@ -68,7 +68,7 @@ Why Low-Bit Optimizers?
 <section data-markdown>
 <textarea data-template>
 
-### Why Low-Bit Optimizers?
+## Why Low-Bit Optimizers?
 
 - **泛化性:** ✅无需额外调参 ✅适用任意场景
 
@@ -93,7 +93,7 @@ Why Low-Bit Optimizers?
 <section data-markdown>
 <textarea data-template>
 
-### Quantization and Dequantization
+## Quantization and Dequantization
   
 - Quantization:
 
@@ -118,7 +118,7 @@ Why Low-Bit Optimizers?
 <section data-markdown>
 <textarea data-template>
 
-### <u>S</u>tateful <u>O</u>ptimizers in Ultra-<u>LO</u>w Bits
+## <u>S</u>tateful <u>O</u>ptimizers in Ultra-<u>LO</u>w Bits
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617110019.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
@@ -132,7 +132,7 @@ Why Low-Bit Optimizers?
 <section data-markdown>
 <textarea data-template>
 
-### Challenges in Ultra-Low-Bit Cases
+## Challenges in Ultra-Low-Bit Cases
 
 - **表示精度:** 42 亿 (32-bit) vs. 8 (3-bit) vs. 4 (2-bit)
 
@@ -154,7 +154,7 @@ Why Low-Bit Optimizers?
 <section data-markdown>
 <textarea data-template>
 
-### Quantization for Unsigned EMA Update
+## Quantization for Unsigned EMA Update
 
 - *Signal Swamping* (<u>large-to-small number addition</u>)
 
@@ -182,7 +182,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Signal Swamping
+## Signal Swamping
 
 💡 总结
 
@@ -204,7 +204,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Case Study
+## Case Study
 
 <div class="slide-cols">
 
@@ -240,7 +240,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Case Study
+## Case Study
 
 <div class="slide-cols">
 
@@ -282,7 +282,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Solution (1/2): Stochastic Rounding
+## Solution (1/2): Stochastic Rounding
 
 - 假设 $y_{k-1} \le x / \Delta \le y_k$:
 
@@ -310,7 +310,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### (Solution 2/2) Logarithmic Quantization
+## (Solution 2/2) Logarithmic Quantization
 
 
 <div class='slide-highlight'>
@@ -331,7 +331,7 @@ $1 \overset{\text{more levels}}{\Longrightarrow} 0$
 <section data-markdown>
 <textarea data-template>
 
-### Logarithmic Quantization
+## Logarithmic Quantization
 
 - 2-bit quantization illustration
 
@@ -347,7 +347,7 @@ $1 \overset{\text{more levels}}{\Longrightarrow} 0$
 <section data-markdown>
 <textarea data-template>
 
-### Logarithmic Quantization
+## Logarithmic Quantization
 
 ✅ Easy to implement
 
@@ -364,7 +364,7 @@ $1 \overset{\text{more levels}}{\Longrightarrow} 0$
 <section data-markdown>
 <textarea data-template>
 
-### Quantization for Signed EMA Update
+## Quantization for Signed EMA Update
 
 😄&nbsp; <span style="color: gray">No Signal Swamping</span>
 
@@ -387,7 +387,7 @@ $1 \overset{\text{more levels}}{\Longrightarrow} 0$
 <section data-markdown>
 <textarea data-template>
 
-### Quantization Errors $\Rightarrow$ Gradient Variance
+## Quantization Errors $\Rightarrow$ Gradient Variance
 
 <div class="slide-cols">
 
@@ -433,7 +433,7 @@ $\rightarrow$ <span style="color: red"> worse </span> convergence
 <section data-markdown>
 <textarea data-template>
 
-### Momentum Adjustment
+## Momentum Adjustment
 
 - **方差控制:** 选择 $\beta'$ 满足:
 
@@ -456,7 +456,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Experiments
+## Experiments
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617111401.png" alt="Image" style="max-width: 100%; height: auto;margin: 0 auto;">
@@ -474,7 +474,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Experiments (Giant Models)
+## Experiments (Giant Models)
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617112643.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
@@ -489,7 +489,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Loss
+## Loss
 
 - 损失正常收敛
 
@@ -505,7 +505,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Quantile $x_p$
+## Quantile $x_p$
 
 - 基本上 $p \in [0.05, 0.3]$ 都有不错的性能
 
@@ -521,7 +521,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Beta, Block size
+## Beta, Block size
 
 - Lower-bit SOLO needs a smaller $\beta$
 
@@ -537,7 +537,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### State Changes
+## State Changes
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617112843.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
@@ -551,7 +551,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Generalizability of SOLO
+## Generalizability of SOLO
 
 -  AdaBelief
 

@@ -17,7 +17,7 @@ tags:
 <section data-markdown>
 <textarea data-template>
 
-### Text
+## Text
 
 - Image:
 
@@ -37,7 +37,7 @@ import matplotlib.pyplot as plt
 
 <div class="slide-ref">
     <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">XXX, et al. ################################################. XXXX, 20XX.</p>
+    <p style="margin: 2px 0;">XXX, et al. ################################. XXXX, 20XX.</p>
 </div>
 
 </textarea>
@@ -48,7 +48,7 @@ import matplotlib.pyplot as plt
 <section data-markdown>
 <textarea data-template>
 
-### Column
+## Column
 
 <div class="slide-cols">
 

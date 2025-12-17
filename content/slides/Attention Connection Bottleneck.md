@@ -19,7 +19,7 @@ tags:
 <section data-markdown>
 <textarea data-template>
 
-###  Attention
+##  Attention
 
 $$
 A_{ij} = \frac{\exp(S_{ij})}{\sum_j \exp(S_{ij})}, \quad
@@ -48,7 +48,7 @@ Attention 实际上定义了序列中各个位置的 Connection 强度
 <section data-markdown>
 <textarea data-template>
 
-### Over-Squashing in Graph Neural Networks
+## Over-Squashing in Graph Neural Networks
 
 
 - 广泛的连接导致过于狭窄的信息传递:
@@ -78,7 +78,7 @@ Note:
 <section data-markdown>
 <textarea data-template>
 
-### Over-Squashing in Graph Neural Networks
+## Over-Squashing in Graph Neural Networks
 
 
 - 实验(必须依赖 $\textcolor{blue}{k}$-阶邻居预测标签):
@@ -101,7 +101,7 @@ Note:
 <section data-markdown>
 <textarea data-template>
 
-### 'Over-Squashing' in Large Language Models
+## 'Over-Squashing' in Large Language Models
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250519155809.png" 
@@ -135,7 +135,7 @@ Note:
 <section data-markdown>
 <textarea data-template>
 
-### 'Over-Squashing' in Large Language Models
+## 'Over-Squashing' in Large Language Models
 
 
 **Theorem B.3** (Representational Collapse)
@@ -162,7 +162,7 @@ Note:
 <section data-markdown>
 <textarea data-template>
 
-### Copying
+## Copying
 
 <div class="slide-cols">
 
@@ -208,7 +208,7 @@ Copying 的例子有趣在于: First-token copying 比起 Last-token copying 反
 <section data-markdown>
 <textarea data-template>
 
-### Counting
+## Counting
 
 <div class="slide-cols">
 
@@ -249,7 +249,7 @@ $\textcircled{\small 4}$ **单词计数:** 统计一串序列中某个词出现�
 <section data-markdown>
 <textarea data-template>
 
-### Counting
+## Counting
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250511143754.png" 
@@ -272,7 +272,7 @@ Note:
 <section data-markdown>
 <textarea data-template>
 
-### Positional Encoding
+## Positional Encoding
 
 $$
 A_{ij} = \frac{\exp(S_{ij})}{\sum_j \exp(S_{ij})}, \quad
@@ -311,7 +311,7 @@ Note:
 <section data-markdown>
 <textarea data-template>
 
-### Positional Encoding
+## Positional Encoding
 
 <div class="slide-img">
   <img src="https://picx.zhimg.com/v2-595b69a2e3d6da57a7016f741d4bb8e1_r.webp?source=172ae18b&consumer=ZHI_MENG" 
@@ -337,7 +337,7 @@ Note:
 <section data-markdown>
 <textarea data-template>
 
-### Positional Encoding
+## Positional Encoding
 
 - RoPE 的距离衰减:
 
@@ -360,7 +360,7 @@ Note:
 <section data-markdown>
 <textarea data-template>
 
-### Positional Encoding
+## Positional Encoding
 
 - 个人的测试:
 
@@ -383,7 +383,7 @@ Note:
 <section data-markdown>
 <textarea data-template>
 
-### RoPE 的高频
+## RoPE 的高频
 
 - **猜想:** 过大的旋转角度会导致对应维度所得结果趋于噪声
 
@@ -432,7 +432,7 @@ Note:
 <section data-markdown>
 <textarea data-template>
 
-### RoPE 的高频
+## RoPE 的高频
 
 - **猜想:** 高频有利于特殊 Attention 形态的构建
 
@@ -464,7 +464,7 @@ Previous-token attention, 即 attention sink 现象在下面的文献有所讨�
 <section data-markdown>
 <textarea data-template>
 
-### RoPE 的高频
+## RoPE 的高频
 
 <span style="font-size: 3rem;">❓</span> 不施加位置编码, 是否依然能形成特殊的 Attention 形态
 
@@ -482,7 +482,7 @@ Previous-token attention, 即 attention sink 现象在下面的文献有所讨�
 <section data-markdown>
 <textarea data-template>
 
-### RoPE 的低频
+## RoPE 的低频
 
 <span style="font-size: 3rem;">❓</span> $\theta_i = b^{-2i / d} \xrightarrow{\textcolor{blue}{b \uparrow}} \text{long-context ability} \uparrow$
 
@@ -510,7 +510,7 @@ Previous-token attention, 即 attention sink 现象在下面的文献有所讨�
 <section data-markdown>
 <textarea data-template>
 
-### RoPE 的低频
+## RoPE 的低频
 
 
 - $\bm{q}, \bm{k}$ 独立同分布, $\mathbb{E}[\bm{\epsilon}] = 0$.
@@ -562,7 +562,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Counting (314 '1')
+## Counting (314 '1')
 
 
 ||Length| '1...' | '1,1...' | '1,1,1,1,1;1,...' |
@@ -584,7 +584,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Counting
+## Counting
 
 
 <div class="slide-img">
@@ -607,7 +607,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### 💡 Connection Bottleneck
+## 💡 Connection Bottleneck
 
 - 更好的位置编码? <span style="color: red">No!</span>
 

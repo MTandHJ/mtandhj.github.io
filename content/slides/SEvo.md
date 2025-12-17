@@ -19,7 +19,7 @@ tags:
 <section data-markdown>
 <textarea data-template>
 
-### Background
+## Background
 
 $\textcircled{\small 1}$ Embedding $\xrightarrow{\text{实体 (User, Item) 的向量表示}}$ 现代推荐系统的基础
 
@@ -38,7 +38,7 @@ $\textcircled{\small 1}$ Embedding $\xrightarrow{\text{实体 (User, Item) 的�
 <section data-markdown>
 <textarea data-template>
 
-### Background
+## Background
 
 $\textcircled{\small 2}$ 多元信息 $\xrightarrow{\text{交互信息, 类别相似性}}$ 潜在的结构性约束
 
@@ -60,7 +60,7 @@ $\textcircled{\small 2}$ 多元信息 $\xrightarrow{\text{交互信息, 类别�
 <section data-markdown>
 <textarea data-template>
 
-### Background
+## Background
 
 $\textcircled{\small 3}$ 图结构先验 $\underset{\text{超大规模 Embedding table}}{\xrightarrow{\text{训练随机性: 数据采样, dropout}}}$ 😞低效的信息融合
 
@@ -85,7 +85,7 @@ $\nabla_{\mathbf{E}} \mathcal{L}$: <span style="color:gray">Gradient</span>
 <section data-markdown>
 <textarea data-template>
 
-### Background
+## Background
 
 $\textcircled{\small 4}$ 图+序列模型: 过于依赖**特定场景**, 高昂的**训练/推理代价**
 
@@ -110,7 +110,7 @@ $\textcircled{\small 4}$ 图+序列模型: 过于依赖**特定场景**, 高昂�
 <section data-markdown>
 <textarea data-template>
 
-### Weighted Adjacency Matrix $\mathbf{A}$
+## Weighted Adjacency Matrix $\mathbf{A}$
 
 🤔 如何形式化定义图结构先验?
 
@@ -145,7 +145,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Structure-aware Embedding Evolution
+## Structure-aware Embedding Evolution
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619151431.png"
@@ -174,7 +174,7 @@ $\small \left\langle \textcolor{blue}{\psi} (\Delta \mathbf{E}), \Delta \mathbf{
 <section data-markdown>
 <textarea data-template>
 
-### Smoothness vs. Convergence
+## Smoothness vs. Convergence
 
 - 理想的 $\psi$ 应当是平滑性和收敛性的平衡:
 
@@ -205,7 +205,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### 近似解
+## 近似解
 
 
 $\textcircled{\small 1}$ **$L$-layer iterative approximation:**
@@ -235,7 +235,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### 近似解的缺陷
+## 近似解的缺陷
 
 $\textcircled{\small 1}$ $\psi_{iter}$ 的受限平滑性:
 
@@ -268,7 +268,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### SGD + SEvo
+## SGD + SEvo
 
 - SEvo 可以直接应用在其它优化器所衍生的更新量
 
@@ -288,7 +288,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Adam + SEvo
+## Adam + SEvo
 
 
 <div class="slide-img">
@@ -307,7 +307,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### AdamW + SEvo
+## AdamW + SEvo
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619163339.png" 
@@ -324,7 +324,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Overall Comparisons
+## Overall Comparisons
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619164021.png"
@@ -344,7 +344,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Empirical Analysis
+## Empirical Analysis
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619164506.png"
@@ -364,7 +364,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Ablation Study
+## Ablation Study
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619164907.png"
@@ -386,7 +386,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### 类别一致先验
+## 类别一致先验
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619165639.png"
@@ -405,7 +405,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### 教师模型先验
+## 教师模型先验
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619165855.png"

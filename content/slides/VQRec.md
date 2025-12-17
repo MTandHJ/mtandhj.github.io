@@ -17,7 +17,7 @@ tags:
 <section data-markdown>
 <textarea data-template>
 
-### VQ-VAE
+## VQ-VAE
 
 <div class="slide-img">
   <img 
@@ -39,7 +39,7 @@ tags:
 <section data-markdown>
 <textarea data-template>
 
-### VQ-VAE
+## VQ-VAE
 
 - **向量量化:**
 
@@ -76,7 +76,7 @@ Note:
 <section data-markdown>
 <textarea data-template>
 
-### VQ-GAN
+## VQ-GAN
 
 - 图片 Token 化 + Next-token prediction $p(s_i | s_{< i}, \textcolor{red}{condition})$
 
@@ -97,7 +97,7 @@ Note:
 <section data-markdown>
 <textarea data-template>
 
-### Why Discrete Representation Learning?
+## Why Discrete Representation Learning?
 
 ✅ **离散编码**更适合**生成式**XXX
 
@@ -121,7 +121,7 @@ Note:
 <section data-markdown>
 <textarea data-template>
 
-### Challenges
+## Challenges
 
 - **Undesirable Gradient Estimator:**
 
@@ -148,7 +148,7 @@ VQ-VAE 广为人知的几个问题
 <section data-markdown>
 <textarea data-template>
 
-### Solutions
+## Solutions
 
 - **Undesirable Gradient Estimator:**
     1. Gumbel-softmax estimator${}^{\text{[1]}}$;
@@ -176,7 +176,7 @@ VQ-VAE 广为人知的几个问题
 <section data-markdown>
 <textarea data-template>
 
-### Rotation Trick
+## Rotation Trick
 
 - '旋转' $\nabla_{q} \mathcal{L}$ 得到 $\nabla_{z} \mathcal{L}$ 满足
 
@@ -207,7 +207,7 @@ Rotation Trick 希望梯度和向量夹角一致.
 <section data-markdown>
 <textarea data-template>
 
-### Rotation Trick
+## Rotation Trick
 
 
 - 等价于利用 '旋转' 矩阵 $R$:
@@ -232,7 +232,7 @@ Rotation Trick 希望梯度和向量夹角一致.
 <section data-markdown>
 <textarea data-template>
 
-### Reflection
+## Reflection
 
 $$
 R = \left(I - 2 \frac{\bm{r}\bm{r}^T}{\|\bm{r}\|^2} \right), \quad \bm{r} := \frac{\bm{z}}{\|\bm{z}\|} - \frac{\bm{c}}{\|\bm{c}\|}
@@ -253,7 +253,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Rotation
+## Rotation
 
 $$
 R = \left(I - 2 \frac{\bm{c}\bm{c}^T}{\|\bm{c}\|^2} \right) \left(I - 2 \frac{\bm{r}\bm{r}^T}{\|\bm{r}\|^2} \right), \quad \bm{r} := \frac{\bm{z}}{\|\bm{z}\|} + \frac{\bm{c}}{\|\bm{c}\|}
@@ -274,7 +274,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### STE vs Rotation vs Reflection
+## STE vs Rotation vs Reflection
 
 
 <div class="slide-cols">
@@ -310,7 +310,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Rotation Trick
+## Rotation Trick
 
 🌟 Rotation trick:
 
@@ -336,7 +336,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Residual Quantization (RQ-VAE)
+## Residual Quantization (RQ-VAE)
 
 
 😞 $\text{Size}\textcolor{red}{\downarrow} \longrightarrow$ 表达能力$\textcolor{red}{\downarrow}$ &nbsp; **vs** &nbsp; $\text{Size}\textcolor{green}{\uparrow} \longrightarrow$ Collapse$\textcolor{red}{\uparrow}$
@@ -374,7 +374,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Fixed Codebook
+## Fixed Codebook
 
 - **固定** Codebook 为 (size: $|\mathcal{C}| = (2 \lfloor L / 2 \rfloor + 1)^d$):
 
@@ -415,7 +415,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### SimVQ
+## SimVQ
 
 <div class="slide-img">
   <img 
@@ -446,7 +446,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### TIGER
+## TIGER
 
 
 - **传统推荐 (matching):**
@@ -477,7 +477,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### TIGER
+## TIGER
 
 
 - **生成式推荐 (T5-based):**
@@ -496,7 +496,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Beam Search❓
+## Beam Search❓
 
 <div class="slide-cols">
 
@@ -541,7 +541,7 @@ $$
 <section data-markdown>
 <textarea data-template>
 
-### Cold-Start Item Recommendation❓
+## Cold-Start Item Recommendation❓
 
 
 - Cold-start items 可直接编码, 但
@@ -577,7 +577,7 @@ Note:
 <section data-markdown>
 <textarea data-template>
 
-### RQ-VAE vs (Hierarchical/Residual) KMeans❓
+## RQ-VAE vs (Hierarchical/Residual) KMeans❓
 
 
 - RQ-VAE 相较于 (Hierarchical/Residual) KMeans 的优势?
@@ -609,7 +609,7 @@ Note:
 <section data-markdown>
 <textarea data-template>
 
-### Semantic Features + Collaborative Signals❓
+## Semantic Features + Collaborative Signals❓
 
 
 - 微调 Encoder:
@@ -642,7 +642,7 @@ Note:
 <section data-markdown>
 <textarea data-template>
 
-### 总结
+## 总结
 
 - Vector Quantization: 一种优雅的 Tokenizer
 
@@ -665,7 +665,7 @@ Note:
 <section data-markdown>
 <textarea data-template>
 
-### Decoder-Encoder-XXX Vector Quantization
+## Decoder-Encoder-XXX Vector Quantization
 
 <div class="slide-img">
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250709165402.png" 
@@ -681,7 +681,7 @@ Note:
 <section data-markdown>
 <textarea data-template>
 
-### Decoder-Encoder-XXX Vector Quantization
+## Decoder-Encoder-XXX Vector Quantization
 
 - 实验结果:
 
