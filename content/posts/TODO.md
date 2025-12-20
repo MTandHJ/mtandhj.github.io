@@ -40,6 +40,26 @@ window.timelineData = [
   },
 
   {
+    "date": "2025-12-30",
+    "title": "完成图像检索的简易框架",
+    "description": "",
+    "paperUrl": "",
+    "imageUrl": "",
+    "importance": "emmm",
+    "status": "pending"
+  },
+
+  {
+    "date": "2025-12-30",
+    "title": "完成 MPT 论文撰写",
+    "description": "",
+    "paperUrl": "",
+    "imageUrl": "",
+    "importance": "emmm",
+    "status": "pending"
+  },
+
+  {
     "date": "2025-12-12",
     "title": "敲定工作",
     "description": "确定毕业后的工作去向",
@@ -56,7 +76,7 @@ window.timelineData = [
     "paperUrl": "",
     "imageUrl": "",
     "importance": "emmm",
-    "status": "pending"
+    "status": "completed"
   },
 
   {
@@ -66,7 +86,7 @@ window.timelineData = [
     "paperUrl": "",
     "imageUrl": "",
     "importance": "emmm",
-    "status": "pending"
+    "status": "completed"
   },
 
   {
@@ -86,7 +106,7 @@ window.timelineData = [
     "paperUrl": "",
     "imageUrl": "",
     "importance": "emmm",
-    "status": "pending"
+    "status": "completed"
   },
 
   {
