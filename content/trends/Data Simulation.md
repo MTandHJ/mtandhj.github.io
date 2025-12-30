@@ -67,6 +67,15 @@ window.timelineData = [
     "importance": "novel"
   },
 
+  {
+    "date": "2023-06-05",
+    "title": "RecAgent",
+    "description": "基于认知科学实现推荐用户模拟, 并以此探究信息茧房、从众心理等现象",
+    "paperUrl": "/posts/recagent",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251230172332.png",
+    "importance": "novel"
+  },
+
 ];
 </script>
 
