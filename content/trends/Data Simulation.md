@@ -32,20 +32,20 @@ window.timelineData = [
   },
 
   {
-    "date": "2025-09-12",
-    "title": "RecoWorld",
-    "description": "Meta 的推荐仿真环境构建指南 (User Simulator & Agentic RecSys)",
-    "paperUrl": "http://arxiv.org/abs/2509.10397",
-    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251030143006.png",
-    "importance": "emmm"
-  },
-
-  {
     "date": "2025-10-09",
     "title": "SymTime",
     "description": "时间序列数据生成: 符号表示 & ARMA 统计模型",
     "paperUrl": "http://arxiv.org/abs/2510.08445",
     "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251012164600.png",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2025-09-12",
+    "title": "RecoWorld",
+    "description": "Meta 的推荐仿真环境构建指南 (User Simulator & Agentic RecSys)",
+    "paperUrl": "http://arxiv.org/abs/2509.10397",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251030143006.png",
     "importance": "emmm"
   },
 
@@ -56,6 +56,15 @@ window.timelineData = [
     "paperUrl": "http://arxiv.org/abs/2509.19456",
     "imageUrl": "",
     "importance": "emmm"
+  },
+
+  {
+    "date": "2025-07-02",
+    "title": "The Future is Agentic: Definitions, Perspectives, and Open Challenges of Multi-Agent Recommender Systems",
+    "description": "Multi-Agent 推荐系统的形式化介绍: 定义; 区别; 应用; 挑战",
+    "paperUrl": "/posts/multi-agent-recommender-systems/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251230134038.png",
+    "importance": "novel"
   },
 
 ];
