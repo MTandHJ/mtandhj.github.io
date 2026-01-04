@@ -70,10 +70,46 @@ window.timelineData = [
   {
     "date": "2023-06-05",
     "title": "RecAgent",
-    "description": "基于认知科学实现推荐用户模拟, 并以此探究信息茧房、从众心理等现象",
+    "description": "基于认知科学实现推荐用户仿真, 并以此探究信息茧房、从众心理等现象",
     "paperUrl": "/posts/recagent",
     "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251230172332.png",
     "importance": "novel"
+  },
+
+  {
+    "date": "2022-06-22",
+    "title": "Synthetic Data-Based Simulators for Recommender Systems: A Survey",
+    "description": "调研了不同推荐仿真平台设计的目标和范围",
+    "paperUrl": "http://arxiv.org/abs/2206.11338",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260102164145.png",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2021-09-14",
+    "title": "Simulations in Recommender Systems: An industry perspective",
+    "description": "比较现有推荐仿真平台的优劣并总结了三条仿真需要遵循的准则",
+    "paperUrl": "http://arxiv.org/abs/2109.06723",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260104144643.png",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2019-09-26",
+    "title": "RecSim",
+    "description": "Google 提出的基于 RL 的推荐仿真平台",
+    "paperUrl": "http://arxiv.org/abs/1909.04847",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260102151244.png",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2018-05-25",
+    "title": "Virtual-Taobao",
+    "description": "阿里提出的基于 RL 和 GAN 的推荐仿真平台",
+    "paperUrl": "http://arxiv.org/abs/1805.10000",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260102151533.png",
+    "importance": "emmm"
   },
 
 ];
