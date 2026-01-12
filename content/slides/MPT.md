@@ -1,6 +1,6 @@
 ---
-date: "2025-09-18"
-draft: true
+date: "2026-01-12"
+draft: false
 title: "MPT"
 author: MTandHJ
 tags:
@@ -27,6 +27,7 @@ tags:
 - **Pre-training & Fine-tuning:** 多个领域的致胜法宝
   - (CV) ResNet, SimCLR, MAE, ViT ...
   - (NLP) BERT, GPT ...
+  - (CV & NLP) CLIP, BLIP, SigLIP ...
 
 - Pre-training & Fine-tuning for Next-Item Recommendation:
   - (美好愿景) 😄 quick deployment; 😄 better generalizability
@@ -100,7 +101,7 @@ tags:
 - 推荐需要何种能力? 长短兴趣建模?
 
 <div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217112626.png" 
+<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260112202832.png" 
 alt="Image" 
 style="max-width: 100%; height: auto;margin: 0 auto;">
 </div>
@@ -235,7 +236,7 @@ style="max-width: 100%; height: auto;margin: 0 auto;">
 
 - 擅长 Next-State Prediction 的模型, 需具备:
   1. 自适应的序列总结能力;
-  2. 特别注意当前状态的机制
+  2. 特别着重当前状态的机制
 
 </textarea>
 </section>
@@ -250,7 +251,7 @@ style="max-width: 100%; height: auto;margin: 0 auto;">
 - **Next-State Prediction Task:**
 
 $$
-  \mathcal{L}_{\text{NSP}} = 
+  \mathcal{L}_{\text{NSP}}(\Theta) = 
   \underset{\mathbf{P} \sim \text{Dir}(\bm{\alpha})}{\mathbb{E}} 
   \underset{\{s_t\}_{t=2}^T \sim \mathbf{P}|s_1}{\mathbb{E}}
   -\sum_{t=1}^{T-1} \log \mathbb{P}(s_{t+1}\,|\,s_{t}, \ldots, s_{1}; \Theta)
@@ -291,7 +292,7 @@ style="max-width: 100%; height: auto;margin: 0 auto;">
 ## Experiments
 
 <div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217145634.png" 
+<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260112203428.png" 
 alt="Image" 
 style="max-width: 90%; height: auto;margin: 0 auto;">
 </div>
@@ -304,18 +305,17 @@ style="max-width: 90%; height: auto;margin: 0 auto;">
 <section data-markdown>
 <textarea data-template>
 
-## Empirical Analysis: NDCG@10 vs. #Tokens
+## Data Scaling: NDCG@10 vs. #Tokens
 
 <div class="slide-cols">
 
 <div class="slide-col-4">
 
 <div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217150737.png" 
+<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260112203808.png"
 alt="Image" 
 style="max-width: 100%; height: auto;margin: 0 auto;">
 </div>
-
 </div>
 
 <div class="slide-col-6">
@@ -325,6 +325,8 @@ style="max-width: 100%; height: auto;margin: 0 auto;">
 - 在学习了 $10^{10}$ (约 10B) 左右 tokens 后, 大部分场景下都呈现饱和
 
 - 不同场景下的最优训练 #Tokens 存在差异
+
+- 存在理论上限 Bayes estimator
 
 </div>
 
@@ -338,23 +340,26 @@ style="max-width: 100%; height: auto;margin: 0 auto;">
 <section data-markdown>
 <textarea data-template>
 
-## Empirical Analysis: Attention Map
+## Comparison of Inference Mechanisms
 
 <div class="slide-cols">
 
 <div class="slide-col-4">
 
-- MPT 更关注自身
+- MPT 和 Qwen-2.5 的 Backbone 均未经过推荐训练
+
+- MPT 会更关注自身
 
 - Qwen-2.5 的 Attention Map 基本上没有区分度
+
+- MPT 甚至会产生和 SASRec+ 类似的模式
 
 
 </div>
 
 <div class="slide-col-6">
-
 <div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217151521.png" 
+<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260112204030.png"
 alt="Image" 
 style="max-width: 100%; height: auto;margin: 0 auto;">
 </div>
@@ -416,7 +421,7 @@ style="max-width: 100%; height: auto;margin: 0 auto;">
 - **Markovian Pre-trained Transformer (MPT):** ✅ 高效 ✅ 易迁移
 
 <div class="slide-highlight">
-下一个时代: Data Simulation
+下一个时代: Data Simulation?
 </div>
 
 </textarea>
