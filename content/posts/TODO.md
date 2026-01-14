@@ -40,13 +40,23 @@ window.timelineData = [
   },
 
   {
+    "date": "2025-01-30",
+    "title": "SOLO-R1",
+    "description": "完成 SOLO 的基本修改",
+    "paperUrl": "",
+    "imageUrl": "",
+    "importance": "emmm",
+    "status": "pending"
+  },
+
+  {
     "date": "2025-12-30",
     "title": "完成图像检索的简易框架",
     "description": "",
     "paperUrl": "",
     "imageUrl": "",
     "importance": "emmm",
-    "status": "pending"
+    "status": "completed"
   },
 
   {
@@ -56,7 +66,7 @@ window.timelineData = [
     "paperUrl": "",
     "imageUrl": "",
     "importance": "emmm",
-    "status": "pending"
+    "status": "completed"
   },
 
   {
@@ -96,7 +106,7 @@ window.timelineData = [
     "paperUrl": "",
     "imageUrl": "",
     "importance": "emmm",
-    "status": "pending"
+    "status": "completed"
   },
 
   {
