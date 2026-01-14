@@ -50,6 +50,16 @@ window.timelineData = [
   },
 
   {
+    "date": "2025-01-20",
+    "title": "构思毕业论文脉络",
+    "description": "",
+    "paperUrl": "",
+    "imageUrl": "",
+    "importance": "emmm",
+    "status": "pending"
+  },
+
+  {
     "date": "2025-12-30",
     "title": "完成图像检索的简易框架",
     "description": "",
