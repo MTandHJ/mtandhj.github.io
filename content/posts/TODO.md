@@ -40,7 +40,7 @@ window.timelineData = [
   },
 
   {
-    "date": "2025-01-30",
+    "date": "2026-01-30",
     "title": "SOLO-R1",
     "description": "完成 SOLO 的基本修改",
     "paperUrl": "",
@@ -50,7 +50,7 @@ window.timelineData = [
   },
 
   {
-    "date": "2025-01-20",
+    "date": "2026-01-20",
     "title": "构思毕业论文脉络",
     "description": "",
     "paperUrl": "",
