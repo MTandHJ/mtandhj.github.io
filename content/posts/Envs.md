@@ -26,7 +26,22 @@ chmod 600 ./.ssh/authorized_keys
 chmod 700 ./.ssh
 ```
 
+### 本地清理服务器 ssh 指纹
+
+- 服务器重装系统后 ssh 指纹会发生更改, 此时需要通过如下命令删除 `known_hosts`
+
+```bash
+# windows 终端
+ssh-keygen -R [服务器IP地址]
+```
+
 ## Conda
+
+- 下载后通过如下命令安装
+
+```bash
+bash Miniconda3-latest-Linux-x86_64.sh
+```
 
 ### 清华镜像
 
