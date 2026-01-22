@@ -50,13 +50,23 @@ window.timelineData = [
   },
 
   {
+    "date": "2026-01-30",
+    "title": "完成毕业论文的绪论和相关技术及综述",
+    "description": "",
+    "paperUrl": "",
+    "imageUrl": "",
+    "importance": "emmm",
+    "status": "pending"
+  },
+
+  {
     "date": "2026-01-20",
     "title": "构思毕业论文脉络",
     "description": "",
     "paperUrl": "",
     "imageUrl": "",
     "importance": "emmm",
-    "status": "pending"
+    "status": "completed"
   },
 
   {
