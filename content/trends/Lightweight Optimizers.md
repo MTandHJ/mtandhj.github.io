@@ -41,6 +41,15 @@ window.timelineData = [
   },
 
   {
+    "date": "2024-12-15",
+    "title": "GoLore",
+    "description": "分析在小批次下 GaLore 对梯度的错误估计, 建议采用随机投影矩阵",
+    "paperUrl": "http://arxiv.org/abs/2410.11289",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260124154419.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2024-07-11",
     "title": "Q-GaLore",
     "description": "对 GaLore 进一步施加低精度量化",
@@ -95,6 +104,15 @@ window.timelineData = [
   },
 
   {
+    "date": "2023-07-05",
+    "title": "CAME",
+    "description": "在 Adafactor 基础上引入置信度调节机制",
+    "paperUrl": "http://arxiv.org/abs/2307.02047",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260124153244.png",
+    "importance": "seminal"
+  },
+
+  {
     "date": "2023-02-13",
     "title": "Lion",
     "description": "符号梯度更新",
@@ -118,6 +136,15 @@ window.timelineData = [
     "description": "本质上是 Adam 预训练 + 1-bit SGD",
     "paperUrl": "/posts/1-bit-adam/",
     "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250507172614.png",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2019-05-23",
+    "title": "BAGM",
+    "description": "Blockwise Adaptive Learning Rate with Momentum",
+    "paperUrl": "http://arxiv.org/abs/1905.09899",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260124153727.png",
     "importance": "emmm"
   },
 
