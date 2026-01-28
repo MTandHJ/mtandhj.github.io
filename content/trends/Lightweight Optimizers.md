@@ -109,7 +109,7 @@ window.timelineData = [
     "description": "在 Adafactor 基础上引入置信度调节机制",
     "paperUrl": "http://arxiv.org/abs/2307.02047",
     "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260124153244.png",
-    "importance": "seminal"
+    "importance": "emmm"
   },
 
   {
@@ -118,7 +118,7 @@ window.timelineData = [
     "description": "符号梯度更新",
     "paperUrl": "https://arxiv.org/abs/2302.06675",
     "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250703164446.png",
-    "importance": "seminal"
+    "importance": "novel"
   },
 
   {
