@@ -253,7 +253,7 @@ window.timelineData = [
   {
     "date": "2025-02-23",
     "title": "Unified Semantic and ID Representation Learning",
-    "description": "Unified Semantic and ID Representation Learning",
+    "description": "分析了 Cosine 和 Euclidean 距离测度对于向量量化的差异",
     "paperUrl": "/posts/unified-semantic-id/",
     "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250808113842.png",
     "importance": "emmm"
