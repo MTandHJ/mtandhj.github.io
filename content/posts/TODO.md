@@ -56,7 +56,7 @@ window.timelineData = [
     "paperUrl": "",
     "imageUrl": "",
     "importance": "emmm",
-    "status": "pending"
+    "status": "completed"
   },
 
   {
