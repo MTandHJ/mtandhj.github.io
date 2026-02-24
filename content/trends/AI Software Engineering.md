@@ -38,6 +38,24 @@ window.timelineData = [
     "importance": "novel"
   },
 
+  {
+    "date": "2024-02-29",
+    "title": "StarCoder2",
+    "description": "构建 The Stack v2 并提出更广泛的数据选择和训练",
+    "paperUrl": "/posts/starcoder/",
+    "imageUrl": "",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2023-05-09",
+    "title": "StarCoder",
+    "description": "在 The Stack 基础上筛选高质量数据、过滤隐私敏感数据",
+    "paperUrl": "/posts/starcoder/",
+    "imageUrl": "",
+    "importance": "emmm"
+  },
+
 ];
 </script>
 
