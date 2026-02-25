@@ -48,11 +48,29 @@ window.timelineData = [
   },
 
   {
+    "date": "2024-06-17",
+    "title": "DeepSeek-Coder-V2",
+    "description": "开源之光: 在 DeepSeek-V2 中间节点接续训练",
+    "paperUrl": "https://arxiv.org/abs/2406.11931",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260225152510.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2024-02-29",
     "title": "StarCoder2",
     "description": "构建 The Stack v2 并提出更广泛的数据选择和训练",
     "paperUrl": "/posts/starcoder/",
     "imageUrl": "",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2024-01-25",
+    "title": "DeepSeek-Coder",
+    "description": "从零开始训练 Coder 基模: NTP & FIM",
+    "paperUrl": "https://arxiv.org/abs/2401.14196",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260225152228.png",
     "importance": "emmm"
   },
 
