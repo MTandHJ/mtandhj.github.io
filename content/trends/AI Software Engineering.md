@@ -21,6 +21,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2025-12-27",
+    "title": "GraphLocator",
+    "description": "如何根据 issue 准确定位相关代码: Code Graph -> Causal Issue Graph",
+    "paperUrl": "/posts/graphlocator/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260225115311.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-05-22",
     "title": "Code Graph Model (CGM)",
     "description": "Code Graph & Graph Attention Mask",
