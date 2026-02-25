@@ -68,9 +68,18 @@ window.timelineData = [
   {
     "date": "2024-01-25",
     "title": "DeepSeek-Coder",
-    "description": "从零开始训练 Coder 基模: NTP & FIM",
+    "description": "从零开始训练 Code 基模: NTP & FIM",
     "paperUrl": "https://arxiv.org/abs/2401.14196",
     "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260225152228.png",
+    "importance": "emmm"
+  },
+
+  {
+    "date": "2023-05-13",
+    "title": "CodeT5+",
+    "description": "在 CodeT5 的基础上引入更丰富的训练任务, 并强调任务感知的推理路径",
+    "paperUrl": "/posts/codet5/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260225185306.png",
     "importance": "emmm"
   },
 
@@ -81,6 +90,15 @@ window.timelineData = [
     "paperUrl": "/posts/starcoder/",
     "imageUrl": "",
     "importance": "emmm"
+  },
+
+  {
+    "date": "2021-09-02",
+    "title": "CodeT5",
+    "description": "Encoder-Decoder 的 Code 基模: Masked Span Prediction (MSP)",
+    "paperUrl": "/posts/codet5/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260225192436.png",
+    "importance": "novel"
   },
 
 ];
