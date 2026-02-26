@@ -75,6 +75,15 @@ window.timelineData = [
   },
 
   {
+    "date": "2023-10-10",
+    "title": "SWE-Bench",
+    "description": "Repository-level Benchmark",
+    "paperUrl": "/posts/swe-bench/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260226140844.png",
+    "importance": "seminal"
+  },
+
+  {
     "date": "2023-05-13",
     "title": "CodeT5+",
     "description": "在 CodeT5 的基础上引入更丰富的训练任务, 并强调任务感知的推理路径",
