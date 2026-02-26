@@ -57,6 +57,16 @@ window.timelineData = [
   },
 
   {
+    "date": "2024-05-06",
+    "title": "SWE-Agent",
+    "description": "定制化 Agent-Compute-Interface",
+    "paperUrl": "/posts/swe-agent/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260226180303.png",
+    "importance": "novel"
+  },
+
+
+  {
     "date": "2024-02-29",
     "title": "StarCoder2",
     "description": "构建 The Stack v2 并提出更广泛的数据选择和训练",
