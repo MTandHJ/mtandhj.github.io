@@ -1,5 +1,5 @@
 ---
-date: "2025-03-16"
+date: "2026-02-26"
 draft: false
 title: "SWE-Bench: Can Language Models Resolve Real-World GitHub Issues?"
 description: "SWE-Bench"
