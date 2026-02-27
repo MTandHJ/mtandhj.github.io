@@ -37,6 +37,15 @@ window.timelineData = [
     "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251207205526.png",
     "importance": "novel"
   },
+  
+  {
+    "date": "2025-04-30",
+    "title": "SWE-Smith",
+    "description": "自动化 Repository-level 实例任务生成",
+    "paperUrl": "/posts/swe-smith/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260227155336.png",
+    "importance": "novel"
+  },
 
   {
     "date": "2024-12-30",
