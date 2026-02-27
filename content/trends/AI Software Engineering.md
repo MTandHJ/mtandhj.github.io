@@ -39,6 +39,15 @@ window.timelineData = [
   },
 
   {
+    "date": "2024-12-30",
+    "title": "SWE-Gym",
+    "description": "提供更丰富的 Repository-level 任务并验证训练 verifier models 的潜力",
+    "paperUrl": "https://arxiv.org/abs/2412.21139",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260227105300.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2024-10-03",
     "title": "RepoGraph",
     "description": "通过 Repository-level 的 Code Graph 实现更为高效的工程代码生成",
