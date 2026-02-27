@@ -30,6 +30,15 @@ window.timelineData = [
   },
 
   {
+    "date": "2025-06-12",
+    "title": "SWE-Factory",
+    "description": "自动化 Repository-level 实例采集框架",
+    "paperUrl": "https://arxiv.org/abs/2506.10954",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260227191906.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-05-22",
     "title": "Code Graph Model (CGM)",
     "description": "Code Graph & Graph Attention Mask",
