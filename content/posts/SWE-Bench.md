@@ -55,9 +55,9 @@ pinned: false
 
 ![20260226142140](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260226142140.png)
 
-#### SWE-Bench-Lite
+#### SWE-Bench Lite
 
-- 由于 SWE-Bench 中每个实例的评估都需要配置环境, 跑测试用例, 因此相当耗时. 为了快速评估, 作者团队给出了一个轻量的版本: SWE-Bench-Lite, 包含 300 个测试用例:
+- 由于 SWE-Bench 中每个实例的评估都需要配置环境, 跑测试用例, 因此相当耗时. 为了快速评估, 作者团队给出了一个轻量的版本: SWE-Bench Lite, 包含 300 个测试用例:
   1. 移除设计图片和外部链接的任务;
   2. 移除问题描述少于 40 字符的任务;
   3. 移除需要同时编辑多个文件的任务;
