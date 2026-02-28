@@ -39,6 +39,15 @@ window.timelineData = [
   },
 
   {
+    "date": "2025-05-26",
+    "title": "SWE-Rebench",
+    "description": "自动化 Repository-level 实例采集框架",
+    "paperUrl": "https://arxiv.org/abs/2505.20411",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260228102730.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2025-05-22",
     "title": "Code Graph Model (CGM)",
     "description": "Code Graph & Graph Attention Mask",
