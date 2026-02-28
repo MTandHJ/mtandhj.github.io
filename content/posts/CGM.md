@@ -37,11 +37,20 @@ pinned: false
 
 ![20251207205526](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251207205526.png)
 
+### Training
+
+- CGM 的训练分为两部分, 如上图所示, 训练过程中 Encoder (CodeT5+) 以及 CGM (Qwen2.5-72B-instruct) 均采用 LoRA 微调:
+  - (**Subgraph Reconstruction Pre-training**) 为了让 Encoder 和 CGM 抓住更高效的结构信息, 首先通过一个 Graph -> Code 的重建任务进行训练: 通过按照拓扑顺序排列子图的 node embedding (通过 CodeT5+ 提取), 后续重建对应的 code. 
+  - (**Noisy Fine-tuning**) 为了更好地在 SWE-Bench 等实际 repository-level 的任务上应用, 该阶段在 subgraph & hints_text (指明那些文件需要被修改) 的基础上生成对应的 code patches. 注意, 这里 subgraph 融入了真正需要修改的文件, 下游节点以及一跳邻居. 为了进一步提高模型鲁棒性 (因为实际推理的时候不存在完美的 hints_text, 会导致"需要修改的文件"或者多或者缺), 10% 的实例增加无关文件, 10% 实例缺失相关文件.
+
+
+### Inference
+
 - 因此, CGM 修复一个 Bug 的流程如下:
     1. **Rewriter (Qwen2.5-72B-instruct):** Extractor 确定 ISSUE 的关键元素: 文件名, 函数名等. Inferer 在此基础上进行进一步润色, 添加具体的功能描述.
     2. **Retriever (CGE-Large model):** 在 Rewriter 给定信息的基础上, Retriever 抽出一个合适的 subgraph 用于后续推理.
     3. **Reranker (Qwen2.5-72B-instruct):** 通过上述方式可能选中相当多的代码文件, 这会导致 context 变得相当冗长, reranker 进一步筛选出 Top-K 最相关的.
-    4. **Reader (finetuned Qwen2.5-72B):** 将 subgraph 和选中的文件作为输入, CGM 进行代码生成.
+    4. **Reader (finetuned Qwen2.5-72B):** 将 subgraph (node embeddings) 和选中的文件作为输入, CGM 进行代码生成.
 
 
 ## 参考文献
