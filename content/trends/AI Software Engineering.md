@@ -84,6 +84,15 @@ window.timelineData = [
   },
 
   {
+    "date": "2024-09-06",
+    "title": "GALLa",
+    "description": "如何让模型理解语法结构: Graph -> Code 的重建任务 & GraphQA",
+    "paperUrl": "https://arxiv.org/abs/2409.04183",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260228154856.png",
+    "importance": "emmm"
+  },
+
+  {
     "date": "2024-06-17",
     "title": "DeepSeek-Coder-V2",
     "description": "开源之光: 在 DeepSeek-V2 中间节点接续训练",
