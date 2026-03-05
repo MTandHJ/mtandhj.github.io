@@ -21,6 +21,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2015-02-19",
+    "title": "TRPO",
+    "description": "信赖域内的策略优化: 引入后续常见的重要性采样和 KL 约束",
+    "paperUrl": "/posts/trpo/",
+    "imageUrl": "",
+    "importance": "seminal"
+  },
+
+  {
     "date": "1992-01-01",
     "title": "REINFORCE Algorithm",
     "description": "策略梯度法",
