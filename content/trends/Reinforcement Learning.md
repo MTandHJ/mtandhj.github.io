@@ -21,6 +21,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2024-02-05",
+    "title": "GRPO",
+    "description": "利用重复采样估计优势函数",
+    "paperUrl": "/posts/grpo/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260305133052.png",
+    "importance": "seminal"
+  },
+
+  {
     "date": "2017-07-20",
     "title": "PPO",
     "description": "策略更新的自适应裁剪",
