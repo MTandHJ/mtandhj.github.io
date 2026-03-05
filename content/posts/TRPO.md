@@ -22,8 +22,8 @@ pinned: false
 - $\pi(a|s)$ 给定状态 $s$ 产生动作 $a$ 的概率;
 - $r \in \mathbb{R}$, reward;
 - $\rho_0$, 初始状态 $s_0$ 的分布;
-- $\gamma \in (0, 1)$ reward 的折扣率
-- state-action value function:
+- $\gamma \in (0, 1)$ reward 的折扣因子;
+- State-action value function:
 
     $$
     Q_{\pi}(s_t, a_t) =
@@ -32,7 +32,7 @@ pinned: false
     \right ].
     $$
 
-- the value function:
+- Value function:
 
     $$
     V_{\pi}(s_t) = \mathbb{E}_{a_t, s_{t+1}, \ldots} \left [
@@ -40,7 +40,7 @@ pinned: false
     \right].
     $$
 
-- the advantage function:
+- Advantage function:
 
     $$
     A_{\pi} (s, a) = Q_{\pi}(s, a) - V_{\pi}(s).
@@ -53,7 +53,7 @@ pinned: false
     $$
     \max_{\pi} \, 
     \eta(\pi) = \mathbb{E}_{s_0, a_0, \ldots} \left[
-        \sum_{t=0}^{\infty} \gamma^t r(s_t).
+        \sum_{t=0}^{\infty} \gamma^t r(s_t)
     \right ], \\
     s_0 \sim \rho(s_0), a_t \sim \pi(a_t | s_t), s_{t+1} \sim p(s_{t+1}| s_t, a_t).
     $$
