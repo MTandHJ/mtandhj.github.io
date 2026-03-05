@@ -21,6 +21,15 @@ tags:
 window.timelineData = [
 
   {
+    "date": "2017-07-20",
+    "title": "PPO",
+    "description": "策略更新的自适应裁剪",
+    "paperUrl": "/posts/ppo/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260305101120.png",
+    "importance": "seminal"
+  },
+
+  {
     "date": "2015-02-19",
     "title": "TRPO",
     "description": "信赖域内的策略优化: 引入后续常见的重要性采样和 KL 约束",
