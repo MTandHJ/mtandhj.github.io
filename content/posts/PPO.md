@@ -7,7 +7,7 @@ author: MTandHJ
 tags:
   - Note
   - Reinforcement Learning
-  - Empirical
+  - Seminal
   - 2017
 pinned: false
 ---
