@@ -507,3 +507,16 @@ conda config --set show_channel_urls yes
 ```bash
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 ```
+
+
+## WSL
+
+- (**安装**) 在 powershell 中通过
+
+    ```shell
+    wsl --install
+    ```
+
+    进行安装.
+
+- (**本地代理**) 通过 "WSL Settings" 中开启 "已启用自动代理", "已启用 DNS 代理", 如有必要进一步**关闭** "已启用 Hyper-V 防火墙".
