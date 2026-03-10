@@ -25,9 +25,15 @@ pinned: false
     \mathcal{J}_{PPO}(\theta)
     =\underset{q \sim P, o \sim \pi_{\theta_{old}}(\cdot | q)}{\mathbb{E}} \left[
         \frac{1}{|o|}
-        \sum_{t=1}^{|o|} \min \left\{
-            \frac{\pi_{\theta}(o_t| q, o_{<t})}{\pi_{\theta_{old}}(o_t|q, o_{<t})} A_t,
-            \text{clip}\left(
+        \sum_{t=1}^{|o|} \min 
+        \left\{
+            \frac{
+                \pi_{\theta}(o_t| q, o_{\lt t})
+            }{
+                \pi_{\theta_{old}}(o_t|q, o_{\lt t})
+            } A_t,
+            \text{clip}
+            \left(
                 1 - \epsilon, 1 + \epsilon
             \right) A_t
         \right\}
@@ -58,7 +64,7 @@ $$
         \frac{1}{G}\sum_{i=1}^G
          \frac{1}{|o_i|}
         \sum_{t=1}^{|o_i|} \min \left\{
-            \frac{\pi_{\theta}(o_{i, t}| q, o_{i,<t})}{\pi_{\theta_{old}}(o_{i,t}|q, o_{i, <t})} \hat{A}_{i, t},
+            \frac{\pi_{\theta}(o_{i, t}| q, o_{i,\lt t})}{\pi_{\theta_{old}}(o_{i,t}|q, o_{i, \lt t})} \hat{A}_{i, t},
             \text{clip}\left(
                 1 - \epsilon, 1 + \epsilon
             \right) \hat{A}_{i, t}
