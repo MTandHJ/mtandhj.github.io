@@ -35,6 +35,7 @@ pinned: false
     现在的问题是, 如何通过梯度方法优化参数化的决策模型 $\pi_{\theta}$, 关键是如何通过上述式子计算梯度.
 
 - (**REINFORCE Algorithm**) 让我们一步一步计算梯度:
+
     1. 展开:
 
         $$
@@ -46,12 +47,13 @@ pinned: false
         $$
 
     2. 应用技巧 $\nabla f = f \nabla \log f$:
+
         $$
         \begin{align*}
         \int_{\tau} r(\tau) \cdot \nabla_{\theta} P(\tau; \theta)
-        =\int_{\tau} r(\tau) \cdot P(\tau; \theta) \log P(\tau; \theta)
+        =\int_{\tau} r(\tau) \cdot P(\tau; \theta) \nabla_{\theta} \log P(\tau; \theta)
         =\mathbb{E}_{\tau \sim P|\theta}
-        \left[r(\tau) \cdot \log P(\tau; \theta) \right ]
+        \left[r(\tau) \cdot \nabla_{\theta} \log P(\tau; \theta) \right ]
         \end{align*}.
         $$
 
