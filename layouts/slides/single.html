@@ -268,6 +268,12 @@
   body.is-fullscreen #fullscreen-btn {
     display: none;
   }
+
+  /* 非全屏时允许整页滚动，确保评论区与 footer 完整显示 */
+  body:not(.is-fullscreen) {
+    overflow: auto !important;
+    min-height: 100%;
+  }
 </style>
 
 <div class="reveal">
@@ -301,8 +307,9 @@
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/notes/notes.js"></script>
 
 <script>
-    // 初始化 Reveal.js
+    // 初始化 Reveal.js（embedded: true 使页面可滚动，评论区与 footer 正常显示）
     Reveal.initialize({
+      embedded: true,
       hash: true,
       slideNumber: true,
       navigationMode: 'linear',
