@@ -268,6 +268,11 @@
   body.is-fullscreen #fullscreen-btn {
     display: none;
   }
+
+  /* ?pdf 模式：全屏布局且不显示激光笔按钮 */
+  body.pdf-mode #laser-btn {
+    display: none !important;
+  }
 </style>
 
 <div class="reveal">
@@ -335,6 +340,15 @@
     const laserPositionInput = document.getElementById('laser-position');
     
     let isFullscreen = false;
+    
+    // ?pdf 模式：立即应用全屏布局，无激光笔（不等待 load）
+    const isPdfMode = /[?&]pdf\b/.test(window.location.search);
+    if (isPdfMode) {
+      document.body.classList.add('pdf-mode', 'is-fullscreen');
+      revealElement.classList.add('fullscreen');
+      if (laserBtn) laserBtn.style.display = 'none';
+      Reveal.layout();
+    }
     let isLaserActive = false;
     
     // 检测是否在演示者视图中
@@ -625,6 +639,11 @@
     
     // 在页面加载时检查激光笔按钮显示状态
     window.addEventListener('load', function() {
+      if (isPdfMode) {
+        Reveal.layout(); // 确保布局在资源加载完成后正确
+        return; // pdf 模式下跳过后续激光笔等逻辑
+      }
+
       // 如果是演示者视图，不显示激光笔按钮和全屏按钮
       if (isInPresenterView()) {
         console.log('当前是演示者视图，隐藏激光笔按钮和全屏按钮');
