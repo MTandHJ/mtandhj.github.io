@@ -62,9 +62,16 @@ fastSearch = true
           block = [['\[', '\]'], ['$$', '$$']]
           inline = [['\(', '\)'], ['$', '$']]
 
+[outputFormats.pdf]
+  mediaType = "text/html"
+  baseName = "index"
+  path = "pdf"
+  permalinkable = true
+
 [outputs]
   home = ["HTML", "RSS", "JSON"]
   section = ["HTML", "RSS"]
+  page = ["HTML", "pdf"]
   taxonomy = ["HTML"]
   term = ["HTML"]
 
