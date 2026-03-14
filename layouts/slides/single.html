@@ -326,7 +326,21 @@
       mouseWheel: true,
       click: false,
     });
-  
+    // 与 math.html 一致：data-markdown 由 Reveal 异步渲染，在 ready 后对 .slides 调用 KaTeX
+    var slideMathOpt = { delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false},
+      {left: '\\[', right: '\\]', display: true},
+      {left: '\\(', right: '\\)', display: false}
+    ]};
+    function renderSlideMath() {
+      if (typeof renderMathInElement !== 'function') return;
+      var el = document.querySelector('.reveal .slides');
+      if (el) { renderMathInElement(el, slideMathOpt); Reveal.layout(); }
+    }
+    Reveal.on('ready', function() { setTimeout(renderSlideMath, 80); });
+    Reveal.on('slidechanged', function() { setTimeout(renderSlideMath, 0); });
+
     // 获取所有需要的元素
     const revealElement = document.querySelector('.reveal');
     const fullscreenBtn = document.getElementById('fullscreen-btn');

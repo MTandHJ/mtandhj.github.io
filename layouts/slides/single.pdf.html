@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/theme/white.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/highlight/monokai.css">
+  {{ partial "math.html" . }}
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { width: 100%; height: 100%; overflow: hidden; }
@@ -136,6 +137,23 @@
       mouseWheel: true,
       click: false
     });
+    // 与 math.html 一致：Reveal 渲染完 markdown 后再对 .slides 调用 KaTeX
+    var slideMathOpt = { delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '$', right: '$', display: false},
+      {left: '\\[', right: '\\]', display: true},
+      {left: '\\(', right: '\\)', display: false}
+    ]};
+    function renderSlideMath() {
+      if (typeof renderMathInElement !== 'function') return;
+      var el = document.querySelector('.reveal .slides');
+      if (el) {
+        renderMathInElement(el, slideMathOpt);
+        if (typeof Reveal !== 'undefined' && Reveal.layout) Reveal.layout();
+      }
+    }
+    Reveal.on('ready', function() { setTimeout(renderSlideMath, 80); });
+    Reveal.on('slidechanged', function() { setTimeout(renderSlideMath, 0); });
   </script>
 </body>
 </html>
