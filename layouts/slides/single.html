@@ -85,12 +85,6 @@
 
   .reveal .slides section:not(:first-child) {
     top: 0 !important;
-    transform: none !important;
-  }
-
- /* 只取消非首页的垂直居中 */
- .reveal .slides section:not(:first-child) {
-    top: 0 !important;
     bottom: 0 !important;
     transform: none !important;
   }
@@ -295,9 +289,6 @@
 </button>
 <div class="laser-pointer"></div>
 
-<!-- 添加存储中，用于存储激光笔位置的输入框 -->
-<input type="hidden" id="laser-position" value="">
-
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/dist/reveal.js"></script>
 <!-- 添加 Markdown 插件 -->
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/markdown/markdown.js"></script>
@@ -307,7 +298,6 @@
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/notes/notes.js"></script>
 
 <script>
-    // 初始化 Reveal.js（embedded: true 使页面可滚动，评论区与 footer 正常显示）
     Reveal.initialize({
       embedded: true,
       hash: true,
@@ -321,70 +311,61 @@
       maxScale: 2.0,
       viewDistance: 3,
       overview: false,
-      plugins: [ 
-        RevealMarkdown,
-        RevealHighlight,
-        RevealNotes,
-      ],
-      markdown: {
-        smartypants: true,
-        gfm: true
-      },
+      plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      markdown: { smartypants: true, gfm: true },
       mouseWheel: true,
       click: false,
     });
-    // 与 math.html 一致：data-markdown 由 Reveal 异步渲染，在 ready 后对 .slides 调用 KaTeX
-    var slideMathOpt = { delimiters: [
-      {left: '$$', right: '$$', display: true},
-      {left: '$', right: '$', display: false},
-      {left: '\\[', right: '\\]', display: true},
-      {left: '\\(', right: '\\)', display: false}
-    ]};
+
+    var layoutRaf = null;
+    function scheduleRevealLayout() {
+      if (typeof Reveal === 'undefined' || !Reveal.layout) return;
+      if (layoutRaf) cancelAnimationFrame(layoutRaf);
+      layoutRaf = requestAnimationFrame(function () {
+        layoutRaf = null;
+        Reveal.layout();
+      });
+    }
+
+    var slideMathOpt = {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false},
+        {left: '\\[', right: '\\]', display: true},
+        {left: '\\(', right: '\\)', display: false}
+      ]
+    };
     function renderSlideMath() {
       if (typeof renderMathInElement !== 'function') return;
       var el = document.querySelector('.reveal .slides');
-      if (el) { renderMathInElement(el, slideMathOpt); Reveal.layout(); }
+      if (!el) return;
+      renderMathInElement(el, slideMathOpt);
+      scheduleRevealLayout();
     }
-    Reveal.on('ready', function() { setTimeout(renderSlideMath, 80); });
-    Reveal.on('slidechanged', function() { setTimeout(renderSlideMath, 0); });
+    Reveal.on('ready', function () { setTimeout(renderSlideMath, 80); });
+    Reveal.on('slidechanged', function () { requestAnimationFrame(renderSlideMath); });
 
-    // 评论区（Waline）异步加载会改变页面高度，需重新排版；网慢时更明显
-    (function () {
-      var layoutRaf = null;
-      function revealReflow() {
-        if (typeof Reveal === 'undefined' || !Reveal.layout) return;
-        if (layoutRaf) cancelAnimationFrame(layoutRaf);
-        layoutRaf = requestAnimationFrame(function () {
-          layoutRaf = null;
-          Reveal.layout();
-        });
+    function setupCommentReflow() {
+      scheduleRevealLayout();
+      var pc = document.querySelector('.post-comment');
+      if (pc && typeof ResizeObserver !== 'undefined') {
+        new ResizeObserver(scheduleRevealLayout).observe(pc);
       }
-      document.addEventListener('DOMContentLoaded', function () {
-        revealReflow();
-        var waline = document.getElementById('waline');
-        var postComment = document.querySelector('.post-comment');
-        if (typeof ResizeObserver !== 'undefined') {
-          if (waline) new ResizeObserver(revealReflow).observe(waline);
-          if (postComment) new ResizeObserver(revealReflow).observe(postComment);
-        }
-        window.addEventListener('load', function () {
-          revealReflow();
-          [200, 600, 1500].forEach(function (ms) { setTimeout(revealReflow, ms); });
-        });
-      });
-      var resizeTimer;
-      window.addEventListener('resize', function () {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(revealReflow, 100);
-      });
-    })();
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupCommentReflow);
+    } else {
+      setupCommentReflow();
+    }
+    window.addEventListener('load', function () {
+      scheduleRevealLayout();
+      setTimeout(scheduleRevealLayout, 400);
+    });
 
-    // 获取所有需要的元素
-    const revealElement = document.querySelector('.reveal');
-    const fullscreenBtn = document.getElementById('fullscreen-btn');
-    const laserBtn = document.getElementById('laser-btn');
-    const laserPointer = document.querySelector('.laser-pointer');
-    const laserPositionInput = document.getElementById('laser-position');
+    var revealElement = document.querySelector('.reveal');
+    var fullscreenBtn = document.getElementById('fullscreen-btn');
+    var laserBtn = document.getElementById('laser-btn');
+    var laserPointer = document.querySelector('.laser-pointer');
     
     let isFullscreen = false;
     let isLaserActive = false;
@@ -482,7 +463,7 @@
       if (isFullscreen) {
         document.documentElement.requestFullscreen();
         laserBtn.style.display = 'flex';
-        Reveal.layout();
+        scheduleRevealLayout();
       } else {
         cleanupLaserPointer();
       }
@@ -492,7 +473,7 @@
     document.addEventListener('fullscreenchange', function() {
       if (!document.fullscreenElement) {
         cleanupLaserPointer();
-        Reveal.layout();
+        scheduleRevealLayout();
       }
     });
   
@@ -544,9 +525,6 @@
       // 处理激光笔激活状态同步
       if (e.key === LASER_ACTIVE_KEY && (isInMainView() || isInPresentationView())) {
         const isActive = e.newValue === 'true';
-        console.log('接收到激光笔状态同步:', isActive);
-        
-        // 只更新UI状态，不再触发事件，避免循环
         isLaserActive = isActive;
         
         if (isActive) {
@@ -657,7 +635,7 @@
             revealElement.classList.remove('fullscreen');
             // 不关闭激光笔，但在演讲者模式下按钮保持隐藏
             laserBtn.style.display = 'none';
-            Reveal.layout();
+            scheduleRevealLayout();
           }
         } else {
           // 在其他视图中，ESC 键行为不变
@@ -679,19 +657,13 @@
     window.addEventListener('load', function() {
       // 如果是演示者视图，不显示激光笔按钮和全屏按钮
       if (isInPresenterView()) {
-        console.log('当前是演示者视图，隐藏激光笔按钮和全屏按钮');
         laserBtn.style.display = 'none';
         fullscreenBtn.style.display = 'none';
       }
       
-      // 如果是展示视图或主视图，检查是否有激光笔位置信息
       if (isInPresentationView() || isInMainView()) {
-        console.log('当前是展示视图或主视图，准备接收激光笔位置');
-        
-        // 检查激光笔激活状态
         const laserActiveState = localStorage.getItem(LASER_ACTIVE_KEY);
         if (laserActiveState === 'true') {
-          console.log('检测到激光笔处于激活状态');
           isLaserActive = true;
           laserBtn.classList.add('active');
           document.body.classList.add('cursor-hidden');
@@ -753,11 +725,13 @@
     // 更新激光笔按钮的提示文字
     document.querySelector('#laser-btn').title = '激光笔 (Alt + O 切换)';
 
-    // 窗口大小改变事件 - 恢复此事件处理以便在调整大小时正确处理激光笔
-    window.addEventListener('resize', function() {
-      if (!isFullscreen) {
-        cleanupLaserPointer();
-      }
+    var resizeT;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeT);
+      resizeT = setTimeout(function () {
+        if (!isFullscreen) cleanupLaserPointer();
+        scheduleRevealLayout();
+      }, 100);
     });
 
     // 为主动隐藏激光笔添加一个帮助函数

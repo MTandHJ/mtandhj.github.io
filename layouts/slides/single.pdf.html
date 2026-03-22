@@ -121,6 +121,7 @@
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/notes/notes.js"></script>
   <script>
     Reveal.initialize({
+      embedded: true,
       hash: true,
       slideNumber: true,
       navigationMode: 'linear',
@@ -137,23 +138,32 @@
       mouseWheel: true,
       click: false
     });
-    // 与 math.html 一致：Reveal 渲染完 markdown 后再对 .slides 调用 KaTeX
-    var slideMathOpt = { delimiters: [
-      {left: '$$', right: '$$', display: true},
-      {left: '$', right: '$', display: false},
-      {left: '\\[', right: '\\]', display: true},
-      {left: '\\(', right: '\\)', display: false}
-    ]};
+    var layoutRaf = null;
+    function scheduleRevealLayout() {
+      if (typeof Reveal === 'undefined' || !Reveal.layout) return;
+      if (layoutRaf) cancelAnimationFrame(layoutRaf);
+      layoutRaf = requestAnimationFrame(function () {
+        layoutRaf = null;
+        Reveal.layout();
+      });
+    }
+    var slideMathOpt = {
+      delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false},
+        {left: '\\[', right: '\\]', display: true},
+        {left: '\\(', right: '\\)', display: false}
+      ]
+    };
     function renderSlideMath() {
       if (typeof renderMathInElement !== 'function') return;
       var el = document.querySelector('.reveal .slides');
-      if (el) {
-        renderMathInElement(el, slideMathOpt);
-        if (typeof Reveal !== 'undefined' && Reveal.layout) Reveal.layout();
-      }
+      if (!el) return;
+      renderMathInElement(el, slideMathOpt);
+      scheduleRevealLayout();
     }
-    Reveal.on('ready', function() { setTimeout(renderSlideMath, 80); });
-    Reveal.on('slidechanged', function() { setTimeout(renderSlideMath, 0); });
+    Reveal.on('ready', function () { setTimeout(renderSlideMath, 80); });
+    Reveal.on('slidechanged', function () { requestAnimationFrame(renderSlideMath); });
   </script>
 </body>
 </html>
