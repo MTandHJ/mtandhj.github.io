@@ -348,6 +348,37 @@
     Reveal.on('ready', function() { setTimeout(renderSlideMath, 80); });
     Reveal.on('slidechanged', function() { setTimeout(renderSlideMath, 0); });
 
+    // 评论区（Waline）异步加载会改变页面高度，需重新排版；网慢时更明显
+    (function () {
+      var layoutRaf = null;
+      function revealReflow() {
+        if (typeof Reveal === 'undefined' || !Reveal.layout) return;
+        if (layoutRaf) cancelAnimationFrame(layoutRaf);
+        layoutRaf = requestAnimationFrame(function () {
+          layoutRaf = null;
+          Reveal.layout();
+        });
+      }
+      document.addEventListener('DOMContentLoaded', function () {
+        revealReflow();
+        var waline = document.getElementById('waline');
+        var postComment = document.querySelector('.post-comment');
+        if (typeof ResizeObserver !== 'undefined') {
+          if (waline) new ResizeObserver(revealReflow).observe(waline);
+          if (postComment) new ResizeObserver(revealReflow).observe(postComment);
+        }
+        window.addEventListener('load', function () {
+          revealReflow();
+          [200, 600, 1500].forEach(function (ms) { setTimeout(revealReflow, ms); });
+        });
+      });
+      var resizeTimer;
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(revealReflow, 100);
+      });
+    })();
+
     // 获取所有需要的元素
     const revealElement = document.querySelector('.reveal');
     const fullscreenBtn = document.getElementById('fullscreen-btn');
