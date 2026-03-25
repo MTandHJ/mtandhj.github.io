@@ -30,6 +30,15 @@ window.timelineData = [
   },
 
   {
+    "date": "2025-09-21",
+    "title": "SWE-Bench Pro",
+    "description": "强调多文件修改的 Benchmark",
+    "paperUrl": "/posts/swe-bench-pro",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260325153258.png",
+    "importance": "novel"
+  },
+
+  {
     "date": "2025-06-12",
     "title": "SWE-Factory",
     "description": "自动化 Repository-level 实例采集框架",
