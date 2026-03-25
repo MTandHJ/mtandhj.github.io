@@ -374,25 +374,17 @@ git worktree add [options] <path> [<commit-ish>]
 git worktree add ../proj-v1 feature/v1
 ```
 
----
-
 2. 新建分支并展开（默认基于当前 HEAD）
 
 ```bash
 git worktree add -b feature/v1 ../proj-v1
 ```
 
----
-
 3. 指定基点创建分支（推荐）
 
 ```bash
-git worktree add -b feature/v1 ../proj-v1 main
+git worktree add -b feature/v1 ../proj-v1 master
 ```
-
-（避免基于错误分支创建）
-
----
 
 创建完成后，可以通过：
 
@@ -402,18 +394,15 @@ cd ../proj-v1
 
 在独立工作区中并行开发。
 
----
 
 #### 合并修改
 
-开发完成后，回到主工作区（如 main 分支）：
+开发完成后，回到主工作区（如 master 分支）：
 
 ```bash
-git checkout main
+cd ../proj
 git merge feature/v1
 ```
-
----
 
 #### 常用补充命令
 
