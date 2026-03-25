@@ -350,3 +350,81 @@ git restore --staged filename
 revert后为
 
 ​	A -> B -> C -> B
+
+
+### git worktree
+
+`git checkout` 可以在单一工作区中切换分支或恢复文件状态, 但无法支持多分支并行工作.
+
+随着 AI 辅助编程的发展, 越来越多场景需要在多个分支上并行试验不同方案, 这时可以使用 `git worktree`：
+
+```bash
+git worktree add [options] <path> [<commit-ish>]
+```
+
+- `path`：新工作区目录（必须不存在或为空）  
+- `commit-ish`：可以是 branch / commit / tag  
+- `-b <branch>`：创建新分支，并在新 worktree 中检出  
+
+1. 基于已有分支展开工作目录
+
+在 `../proj-v1` 中检出已有分支 `feature/v1`:
+
+```bash
+git worktree add ../proj-v1 feature/v1
+```
+
+---
+
+2. 新建分支并展开（默认基于当前 HEAD）
+
+```bash
+git worktree add -b feature/v1 ../proj-v1
+```
+
+---
+
+3. 指定基点创建分支（推荐）
+
+```bash
+git worktree add -b feature/v1 ../proj-v1 main
+```
+
+（避免基于错误分支创建）
+
+---
+
+创建完成后，可以通过：
+
+```bash
+cd ../proj-v1
+```
+
+在独立工作区中并行开发。
+
+---
+
+#### 合并修改
+
+开发完成后，回到主工作区（如 main 分支）：
+
+```bash
+git checkout main
+git merge feature/v1
+```
+
+---
+
+#### 常用补充命令
+
+查看当前 worktree：
+
+```bash
+git worktree list
+```
+
+删除某个 worktree：
+
+```bash
+git worktree remove ../proj-v1
+```
