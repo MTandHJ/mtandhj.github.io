@@ -22,7 +22,7 @@ for html in "$DOCS_DIR"/pdf/slides/*/index.html; do
 
   if [ "$new_hash" = "$old_hash" ] && [ -f "$PDF_CACHE/$slug.pdf" ]; then
     echo "[cache hit] $slug"
-    cp "$PDF_CACHE/$slug.pdf" "$DOCS_DIR/pdf/slides/$slug.pdf"
+    cp "$PDF_CACHE/$slug.pdf" "$DOCS_DIR/slides/$slug.pdf"
   else
     echo "[rebuild] $slug"
     needs_build+=("$slug")
@@ -42,12 +42,14 @@ if [ ${#needs_build[@]} -gt 0 ]; then
 
   for slug in "${needs_build[@]}"; do
     echo "[decktape] $slug ..."
-    npx -y decktape reveal \
+    npx -y decktape \
       --chrome-arg=--no-sandbox \
+      --chrome-arg=--disable-dev-shm-usage \
       --load-pause $LOAD_PAUSE \
+      reveal \
       "http://localhost:$PORT/pdf/slides/$slug/" \
-      "$DOCS_DIR/pdf/slides/$slug.pdf"
-    cp "$DOCS_DIR/pdf/slides/$slug.pdf" "$PDF_CACHE/$slug.pdf"
+      "$DOCS_DIR/slides/$slug.pdf"
+    cp "$DOCS_DIR/slides/$slug.pdf" "$PDF_CACHE/$slug.pdf"
   done
 
   kill $SERVER_PID 2>/dev/null || true
@@ -55,4 +57,4 @@ if [ ${#needs_build[@]} -gt 0 ]; then
 fi
 
 echo "Done. PDF files:"
-ls -la "$DOCS_DIR"/pdf/slides/*.pdf 2>/dev/null || echo "(none)"
+ls -la "$DOCS_DIR"/slides/*.pdf 2>/dev/null || echo "(none)"
