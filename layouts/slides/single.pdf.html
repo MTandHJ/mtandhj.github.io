@@ -120,6 +120,59 @@
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/highlight/highlight.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.5.0/plugin/notes/notes.js"></script>
   <script>
+    // --- slide-section 转换（Reveal.js 初始化前执行） ---
+    document.querySelectorAll('.reveal .slides slide-section').forEach(function (el) {
+      var section = document.createElement('section');
+      section.setAttribute('data-markdown', '');
+      var textarea = document.createElement('textarea');
+      textarea.setAttribute('data-template', '');
+      textarea.textContent = el.innerHTML;
+      section.appendChild(textarea);
+      el.replaceWith(section);
+    });
+
+    // --- 自定义标签转换（Reveal.js ready 后执行） ---
+    function convertCustomTags() {
+      document.querySelectorAll('.reveal .slides slide-img').forEach(function (el) {
+        var src = el.getAttribute('src') || '';
+        var size = el.getAttribute('size') || '80%';
+        var div = document.createElement('div');
+        div.className = 'slide-img';
+        div.innerHTML = '<img src="' + src + '" alt="Image" style="max-width: ' + size + '; height: auto; margin: 0 auto;">';
+        el.replaceWith(div);
+      });
+      document.querySelectorAll('.reveal .slides slide-cols').forEach(function (el) {
+        var div = document.createElement('div');
+        div.className = 'slide-cols';
+        el.querySelectorAll('slide-col').forEach(function (col) {
+          var ratio = col.getAttribute('ratio') || '1';
+          var colDiv = document.createElement('div');
+          colDiv.style.flex = ratio;
+          colDiv.innerHTML = col.innerHTML;
+          col.replaceWith(colDiv);
+        });
+        div.innerHTML = el.innerHTML;
+        el.replaceWith(div);
+      });
+      document.querySelectorAll('.reveal .slides slide-ref').forEach(function (el) {
+        var lines = el.textContent.split('\n').filter(function (l) { return l.trim(); });
+        var div = document.createElement('div');
+        div.className = 'slide-ref';
+        var html = '<div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>';
+        lines.forEach(function (line) {
+          html += '<p style="margin: 2px 0;">' + line.trim() + '</p>';
+        });
+        div.innerHTML = html;
+        el.replaceWith(div);
+      });
+      document.querySelectorAll('.reveal .slides slide-highlight').forEach(function (el) {
+        var div = document.createElement('div');
+        div.className = 'slide-highlight';
+        div.innerHTML = el.innerHTML;
+        el.replaceWith(div);
+      });
+    }
+
     Reveal.initialize({
       embedded: true,
       hash: true,
@@ -162,7 +215,10 @@
       renderMathInElement(el, slideMathOpt);
       scheduleRevealLayout();
     }
-    Reveal.on('ready', function () { setTimeout(renderSlideMath, 80); });
+    Reveal.on('ready', function () {
+      convertCustomTags();
+      setTimeout(renderSlideMath, 80);
+    });
     Reveal.on('slidechanged', function () { requestAnimationFrame(renderSlideMath); });
   </script>
 </body>

@@ -1,0 +1,20 @@
+[
+  {
+    "date": "2026-06-01",
+    "title": "博士毕业",
+    "description": "完成博士学位论文答辩，获得博士学位",
+    "paperUrl": "",
+    "imageUrl": "",
+    "importance": "seminal",
+    "status": "pending"
+  },
+  {
+    "date": "2026-03-10",
+    "title": "毕业论文",
+    "description": "完成博士毕业论文的撰写和修改",
+    "paperUrl": "",
+    "imageUrl": "",
+    "importance": "novel",
+    "status": "pending"
+  }
+]

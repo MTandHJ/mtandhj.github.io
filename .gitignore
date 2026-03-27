@@ -1,5 +1,7 @@
-docs/
-specs/
 .vscode/
+.claude/
+docs/
+sepcs/
+
 .DS_Store
 node_modules

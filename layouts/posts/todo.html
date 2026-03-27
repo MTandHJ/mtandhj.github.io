@@ -1,0 +1,117 @@
+{{ partial "header.html" . }}
+
+<link rel="stylesheet" href="/css/todo.css">
+
+<div class="prose mx-auto break-normal px-5 mt-8 dark:prose-invert">
+    <h1 class="text-2xl mb-0 md:text-3xl font-black">{{ .Title }}</h1>
+    <div class="mt-3">{{ .Content }}</div>
+</div>
+
+{{- $datafile := .Params.datafile -}}
+{{- $entries := index hugo.Data.posts $datafile -}}
+
+{{ if $entries }}
+{{- $sorted := sort $entries "date" "desc" -}}
+{{- $now := now -}}
+{{- $currentYear := 0 -}}
+{{- $currentMonth := 0 -}}
+
+<div id="timeline">
+  <div class="timeline-wrapper">
+    {{- range $sorted -}}
+      {{- $itemDate := time .date -}}
+      {{- $year := $itemDate.Year -}}
+      {{- $month := int ($itemDate.Format "1") -}}
+      {{- $monthNames := slice "" "Jan" "Feb" "Mar" "Apr" "May" "Jun" "Jul" "Aug" "Sep" "Oct" "Nov" "Dec" -}}
+      {{- $monthLabel := index $monthNames $month -}}
+      {{- $isCurrentYear := eq $year $now.Year -}}
+
+      {{/* 年份变化：关闭上一个 month section，输出新的 year section */}}
+      {{- if ne $year $currentYear -}}
+        {{- if ne $currentMonth 0 -}}
+          </div></div></div>
+        {{- end -}}
+        {{- $currentYear = $year -}}
+        {{- $currentMonth = 0 -}}
+    <div class="year-section">
+      <div class="timeline-left">
+        <div class="year-marker">
+          {{ if $isCurrentYear }}<div class="current-time-marker"></div>
+          {{ else }}<div class="year-point"></div>
+          {{ end }}
+          <h3 class="{{ if $isCurrentYear }}current-time-label{{ else }}year-label{{ end }}">{{ $year }}</h3>
+        </div>
+      </div>
+      <div class="timeline-center"></div>
+      <div class="timeline-right"></div>
+    </div>
+      {{- end -}}
+
+      {{/* 月份变化：关闭上一个 month section，开启新的 */}}
+      {{- if ne $month $currentMonth -}}
+        {{- if ne $currentMonth 0 -}}
+          </div></div></div>
+        {{- end -}}
+        {{- $currentMonth = $month -}}
+        {{- $isCurrentMonth := and $isCurrentYear (eq $month (int ($now.Format "1"))) -}}
+    <div class="time-section">
+      <div class="timeline-left">
+        <div class="time-marker">
+          {{ if $isCurrentMonth }}<div class="current-time-marker"></div>
+          {{ else }}<div class="time-point"></div>
+          {{ end }}
+          <h3 class="{{ if $isCurrentMonth }}current-time-label{{ else }}time-label{{ end }}">{{ $monthLabel }}</h3>
+        </div>
+      </div>
+      <div class="timeline-center"></div>
+      <div class="timeline-right">
+        <div class="todo-items">
+      {{- end -}}
+
+      {{/* 单个 TODO 项目 */}}
+      {{- $status := .status | default "pending" -}}
+      {{- $isOverdue := and (gt $now $itemDate) (ne $status "completed") -}}
+      {{- $importanceClass := "" -}}
+      {{- if eq .importance "seminal" }}{{ $importanceClass = "seminal-todo" }}
+      {{- else if eq .importance "novel" }}{{ $importanceClass = "novel-todo" }}
+      {{- else if eq .importance "emmm" }}{{ $importanceClass = "emmm-todo" }}
+      {{- end -}}
+      {{- $paperUrl := .paperUrl | default "#" -}}
+          <div class="todo-item{{ if $isOverdue }} overdue{{ end }}">
+            <div class="todo-title">
+              <a href="{{ $paperUrl }}" target="_blank" rel="noopener"
+                 class="todo-link {{ $importanceClass }}"
+                 {{ with .imageUrl }}data-image-url="{{ . }}"{{ end }}>
+                {{- .title -}}
+              </a>
+              {{- if $isOverdue -}}
+                <span class="todo-status overdue">已延期</span>
+              {{- else if eq $status "completed" -}}
+                <span class="todo-status completed">已完成</span>
+              {{- else -}}
+                <span class="todo-status pending">进行中</span>
+              {{- end -}}
+            </div>
+            <div class="todo-description">{{ .description }}</div>
+          </div>
+    {{- end -}}
+
+    {{/* 关闭最后一个 month section */}}
+    {{- if ne $currentMonth 0 -}}
+        </div></div></div>
+    {{- end -}}
+  </div>
+</div>
+{{ end }}
+
+<div class="mt-5 mb-3 px-5">
+    {{ partial "tags.html" . }}
+</div>
+
+<div class="post-comment">
+    {{ partial "comment.html" . }}
+</div>
+
+<script src="/js/todo.js"></script>
+
+{{ partial "footer.html" . }}
