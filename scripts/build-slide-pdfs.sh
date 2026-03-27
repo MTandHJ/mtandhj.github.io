@@ -43,9 +43,10 @@ if [ ${#needs_build[@]} -gt 0 ]; then
   for slug in "${needs_build[@]}"; do
     echo "[decktape] $slug ..."
     npx -y decktape reveal \
+      --chrome-arg=--no-sandbox \
+      --load-pause $LOAD_PAUSE \
       "http://localhost:$PORT/pdf/slides/$slug/" \
-      "$DOCS_DIR/pdf/slides/$slug.pdf" \
-      --load-pause $LOAD_PAUSE
+      "$DOCS_DIR/pdf/slides/$slug.pdf"
     cp "$DOCS_DIR/pdf/slides/$slug.pdf" "$PDF_CACHE/$slug.pdf"
   done
 
