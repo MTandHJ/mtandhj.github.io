@@ -1,0 +1,268 @@
+.reveal.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  background-color: white;
+}
+.reveal:not(.fullscreen) {
+  width: 100%;
+  height: 600px;
+  margin: 2rem 0;
+  position: relative;
+}
+
+#fullscreen-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#laser-btn {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  width: 32px;
+  height: 32px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 1001;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+#laser-btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+#laser-btn.active {
+  background-color: rgba(255, 0, 0, 0.6);
+}
+
+.laser-pointer {
+  position: fixed;
+  width: 0.6rem;
+  height: 0.6rem;
+  background-color: red;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  display: none;
+  box-shadow: 0 0 0.25rem 0.15rem rgba(255, 0, 0, 0.5);
+}
+
+.cursor-hidden {
+  cursor: none !important;
+}
+
+.cursor-hidden * {
+  cursor: none !important;
+}
+
+.reveal .slides section:not(:first-child) {
+  top: 0 !important;
+  bottom: 0 !important;
+  transform: none !important;
+}
+
+.reveal .slides section:first-child {
+  text-align: right;
+}
+/* 首页保持 Reveal.js 默认的垂直居中 */
+.reveal .slides section:first-child h1,
+.reveal .slides section:first-child h2,
+.reveal .slides section:first-child h3 {
+  text-align: center;
+  text-transform: capitalize;
+}
+
+/* 其他页面的标题固定在左上角 */
+.reveal .slides section:not(:first-child) h1,
+.reveal .slides section:not(:first-child) h2,
+.reveal .slides section:not(:first-child) h3 {
+  position: absolute;
+  top: 0;
+  left: -4rem;
+  text-transform: none;
+  color: #1F4E79 !important;
+  font-weight: bold !important;
+}
+
+/* 为不同级别的标题设置不同的字体大小 */
+.reveal .slides section:not(:first-child) h1 { font-size: 55px; }
+.reveal .slides section:not(:first-child) h2 { font-size: 48px; }
+.reveal .slides section:not(:first-child) h3 { font-size: 40px; }
+
+.reveal .slides section:not(:first-child) {
+  padding-top: 1.7em;
+}
+/* 其他页面的主要内容区域添加上边距 */
+.reveal .slides section:not(:first-child) > *:not(h1):not(h2):not(h3) {
+  margin-top: 1em;
+  font-size: 0.8em;
+}
+
+/* 保持内容左对齐 */
+.reveal .slides section:not(:first-child) {
+  text-align: left;
+}
+
+/* 列表项左对齐 */
+.reveal .slides section ul,
+.reveal .slides section ol {
+  display: block;
+  text-align: left;
+}
+
+/* 代码块左对齐 */
+.reveal .slides section pre {
+  width: auto;
+  text-align: left;
+}
+
+/* 普通段落左对齐 */
+.reveal .slides section p {
+  text-align: left;
+}
+.reveal .slides section ul > li {
+  font-size: 1em !important;
+}
+.reveal .slides section ul ul > li {
+  font-size: 0.8em !important;
+}
+.reveal .slides section ul ul ul > li {
+  font-size: 0.7em !important;
+}
+
+/* Slide 的设置 */
+.reveal .slides .slide-cols {
+  display: flex;
+}
+.reveal .slides .slide-col-half {
+  flex: 1;
+}
+.reveal .slides .slide-col-4 {
+  flex: 4;
+}
+.reveal .slides .slide-col-6 {
+  flex: 6;
+}
+
+.reveal .slides .slide-img {
+  text-align: center;
+  padding: 0;
+  display: block;
+}
+.reveal .slides .slide-ref {
+  position: absolute;
+  bottom: 0; left: 0;
+  font-size: 0.5em !important;
+  text-align: left;
+  color: #A6A6A6;
+  width: 100%;
+}
+.reveal .slides .slide-highlight {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em !important;
+  font-weight: 700;
+  color: #A10F2B;
+  letter-spacing: 4px;
+  font-family: "Microsoft YaHei", sans-serif;
+}
+.reveal .slide-number {
+  font-size: 1.5rem !important;
+  right: 2.2em !important;
+  bottom: 1.1em !important;
+  background: none !important;
+  color: gray !important;
+}
+.reveal .navigate-left {
+  right: 6em !important;
+}
+.reveal .navigate-right {
+  right: 1em !important;
+}
+
+/* 自定义项目符号样式 */
+.reveal .slides section ul {
+  list-style: none !important;
+}
+
+.reveal .slides section ul > li {
+  font-size: 1em !important;
+  position: relative;
+  padding-left: 0.4em !important;
+}
+
+/* 只有一级列表使用自定义箭头 */
+.reveal .slides section ul > li::marker {
+  content: "❯" !important;
+  color: #1F4E79 !important;
+}
+
+/* 二级列表 - 圆点 */
+.reveal .slides section ul ul > li {
+  font-size: 0.8em !important;
+  color: #444;
+  position: static !important;
+  padding-left: 0.5em !important;
+}
+
+/* 强制覆盖二级列表的marker */
+.reveal .slides section ul ul > li::marker {
+  content: "●" !important;
+  color: #444 !important;
+  font-size: 1em !important;
+}
+
+/* 三级列表 - 方块 */
+.reveal .slides section ul ul ul > li {
+  font-size: 0.7em !important;
+  color: #555;
+  position: static !important;
+  padding-left: 0.3em !important;
+}
+
+/* 强制覆盖三级列表的marker */
+.reveal .slides section ul ul ul > li::marker {
+  content: "■" !important;
+  color: #555 !important;
+  font-size: 1.2em !important;
+}
+
+body.is-fullscreen header,
+body.is-fullscreen footer,
+body.is-fullscreen main > *:not(.reveal),
+body.is-fullscreen #fullscreen-btn {
+  display: none;
+}
+
+/* 非全屏时允许整页滚动，确保评论区与 footer 完整显示 */
+body:not(.is-fullscreen) {
+  overflow: auto !important;
+  min-height: 100%;
+}
+
+/* 评论区异步加载前预留空间，避免 footer 上浮 */
+.post-comment {
+  min-height: 20rem;
+}

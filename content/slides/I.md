@@ -9,32 +9,27 @@ tags:
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
+<slide-section>
 ## 自我介绍
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
-<div class="slide-cols">
+<slide-cols>
 
-<div class="slide-col-4">
+<slide-col ratio="4">
 
 &nbsp;
 
-<div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251203165507.png" 
-alt="Image" 
-style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251203165507.png"></slide-img>
 
-</div>
+</slide-col>
 
-<div class="slide-col-6">
+<slide-col ratio="6">
 
-<span class="slide-highlight">徐聪</span>
+<slide-highlight>徐聪</slide-highlight>
 
 
 **本科/硕士:** 烟台大学 (统计学/计算数学)
@@ -45,145 +40,67 @@ style="max-width: 80%; height: auto;margin: 0 auto;">
 
 **研究领域:** 优化算法/推荐系统
 
-<div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251203170743.png" 
-alt="Image" 
-style="max-width: 90%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251203170743.png" size="90%"></slide-img>
 
-</div>
+</slide-col>
 
-</div>
+</slide-cols>
 
-</textarea>
-</section>
+</slide-section>
 
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 科研经历|本科阶段
 
 - 快速稀疏主成分分析
 
-<div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251203182401.png" 
-alt="Image" 
-style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251203182401.png"></slide-img>
 
-<div class="slide-ref">
+<slide-ref>
   CPEV: Cumulative proportion of explained variance
-  <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-  <p style="margin: 2px 0;">
-  <strong>Cong Xu</strong>, Min Yang*, Jin Zhang.
-  Fast Deflation Sparse Principal Component Analysis via Subspace Projections.
-  <i>Statistical Computation and Simulation</i>, 2020.
-  &nbsp;&nbsp;
-  <strong>数学四区</strong>
-  </p>
-</div>
+  <strong>Cong Xu</strong>, Min Yang*, Jin Zhang. Fast Deflation Sparse Principal Component Analysis via Subspace Projections. <i>Statistical Computation and Simulation</i>, 2020. &nbsp;&nbsp; <strong>数学四区</strong>
+</slide-ref>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 科研经历|硕士阶段
 
 - 模型的对抗鲁棒性
 
-<div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251203194124.png" 
-alt="Image" 
-style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251203194124.png"></slide-img>
 
-<div class="slide-ref">
-  <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-  <p style="margin: 2px 0;">
-  <strong>Cong Xu</strong>, Xiang Li, Min Yang*.
-  An Orthogonal Classifier for Improving the Adversarial Robustness of Neural Networks.
-  <i>Information Sciences</i>, 2022.
-  &nbsp;&nbsp;
-  <strong>发文年, 一区 Top</strong>
-  </p>
-  <p style="margin: 2px 0;">
-  <strong>Cong Xu</strong>, Dan Li, Min Yang*.
-  Adversarial Momentum-Contrastive Pre-Training.
-  <i>Pattern Recognition Letters</i>, 2022.
-  &nbsp;&nbsp;
-  <strong>三区</strong>
-  </p>
-  <p style="margin: 2px 0;">
-  <strong>Cong Xu</strong>, Wei Zhang, Jun Wang, Min Yang*.
-  Understanding Adversarial Robustness From Feature Maps of Convolutional Layers.
-  <i>TNNLS</i>, 2024.
-  &nbsp;&nbsp;
-  <strong>CCF-B, 一区 Top</strong>
-  </p>
+<slide-ref>
+  <strong>Cong Xu</strong>, Xiang Li, Min Yang*. An Orthogonal Classifier for Improving the Adversarial Robustness of Neural Networks. <i>Information Sciences</i>, 2022. &nbsp;&nbsp; <strong>发文年, 一区 Top</strong>
+  <strong>Cong Xu</strong>, Dan Li, Min Yang*. Adversarial Momentum-Contrastive Pre-Training. <i>Pattern Recognition Letters</i>, 2022. &nbsp;&nbsp; <strong>三区</strong>
+  <strong>Cong Xu</strong>, Wei Zhang, Jun Wang, Min Yang*. Understanding Adversarial Robustness From Feature Maps of Convolutional Layers. <i>TNNLS</i>, 2024. &nbsp;&nbsp; <strong>CCF-B, 一区 Top</strong>
+</slide-ref>
 
-</div>
-
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 科研经历|博士阶段
 
 - **优化算法:** 复杂系统的结构感知优化 $\overset{应用于}{\longrightarrow}$ **推荐系统**
 
-<div class="slide-ref">
-  <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-  <p style="margin: 2px 0;">
-  <strong>Cong Xu</strong>, Jun Wang*, Wei Zhang*.
-  StableGCN: Decoupling and Reconciling Information Propagation for Collaborative Filtering.
-  <i>TKDE</i>, 2023.
-  &nbsp;&nbsp;
-  <strong>CCF-A, 一区 Top</strong>
-  </p>
-  <p style="margin: 2px 0;">
-    <strong>Cong Xu</strong>, Jun Wang, Jianyong Wang, Wei Zhang*.
-    Graph-enhanced Optimizers for Structure-aware Recommendation Embedding Evolution.
-    <i>NeurIPS</i>, 2024.
-    &nbsp;&nbsp;
-    <strong>CCF-A</strong>
-  </p>
-  <p style="margin: 2px 0;">
-    Yunhang He, <strong>Cong Xu</strong>, Jun Wang, Wei Zhang*.
-    Collaborative Filtering Meets Spectrum Shift: Connecting User-Item Interaction with Graph-Structured Side Information.
-    <i>KDD</i>, 2025.
-    &nbsp;&nbsp;
-    <strong>共一, CCF-A</strong>
-  </p>
-  <p style="margin: 2px 0;">
-    <strong>Cong Xu</strong>, Yunhang He, Jun Wang*, Wei Zhang*.
-    STAIR: Manipulating Collaborative and Multimodal Information for E-Commerce Recommendation.
-    <i>AAAI</i>, 2025.
-    &nbsp;&nbsp;
-    <strong>CCF-A</strong>
-  </p>
-  <p style="margin: 2px 0;">
-    <strong>Cong Xu</strong>, Wenbin Liang, Mo Yu,
-    Anan Liu, Ke-Yue Zhang, Shunli Wang, Lizhuang Ma,
-    Jianyong Wang, Jun Wang*, Wei Zhang*.
-    Pushing the Limits of Low-Bit Optimizers: A Focus on EMA Dynamics.
-    2025.
-  </p>
+<slide-ref>
+  <strong>Cong Xu</strong>, Jun Wang*, Wei Zhang*. StableGCN: Decoupling and Reconciling Information Propagation for Collaborative Filtering. <i>TKDE</i>, 2023. &nbsp;&nbsp; <strong>CCF-A, 一区 Top</strong>
+  <strong>Cong Xu</strong>, Jun Wang, Jianyong Wang, Wei Zhang*. Graph-enhanced Optimizers for Structure-aware Recommendation Embedding Evolution. <i>NeurIPS</i>, 2024. &nbsp;&nbsp; <strong>CCF-A</strong>
+  Yunhang He, <strong>Cong Xu</strong>, Jun Wang, Wei Zhang*. Collaborative Filtering Meets Spectrum Shift: Connecting User-Item Interaction with Graph-Structured Side Information. <i>KDD</i>, 2025. &nbsp;&nbsp; <strong>共一, CCF-A</strong>
+  <strong>Cong Xu</strong>, Yunhang He, Jun Wang*, Wei Zhang*. STAIR: Manipulating Collaborative and Multimodal Information for E-Commerce Recommendation. <i>AAAI</i>, 2025. &nbsp;&nbsp; <strong>CCF-A</strong>
+  <strong>Cong Xu</strong>, Wenbin Liang, Mo Yu, Anan Liu, Ke-Yue Zhang, Shunli Wang, Lizhuang Ma, Jianyong Wang, Jun Wang*, Wei Zhang*. Pushing the Limits of Low-Bit Optimizers: A Focus on EMA Dynamics. 2025.
+</slide-ref>
 
-</div>
-
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
@@ -315,127 +232,81 @@ style="max-width: 100%; height: auto;margin: 0 auto;">
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 低精度优化器 (Low-bit Optimizer)
 
 - 低精度"动量"状态维护: ️✅内存友好  ✅精度保持
 
-<div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251203215203.png" 
-alt="Image" 
-style="max-width: 105%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251203215203.png" size="105%"></slide-img>
 
-<div class="slide-ref">
-  <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-  <p style="margin: 2px 0;">
-  Cong Xu, et al. Pushing the Limits of Low-Bit Optimizers: A Focus on EMA Dynamics. 2025.
-  <strong>Submitted to TPAMI</strong>
-  </p>
-</div>
+<slide-ref>
+  Cong Xu, et al. Pushing the Limits of Low-Bit Optimizers: A Focus on EMA Dynamics. 2025. <strong>Submitted to TPAMI</strong>
+</slide-ref>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 图增强优化器 (Graph-enhanced Optimizer)
 
 - 图结构先验约束下降方向: ️✅高质量嵌入表示  ✅零推理成本
 
-<div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251203214337.png" 
-alt="Image" 
-style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251203214337.png" size="100%"></slide-img>
 
-<div class="slide-ref">
-  <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-  <p style="margin: 2px 0;">
+<slide-ref>
   Cong Xu, et al. Graph-enhanced Optimizers for Structure-aware Recommendation Embedding Evolution. NeurIPS, 2024.
-  </p>
-  <p style="margin: 2px 0;">
   Cong Xu, et al. STAIR: Manipulating Collaborative and Multimodal Information for E-Commerce Recommendation. AAAI, 2025.
-  </p>
-</div>
+</slide-ref>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 获奖情况
 
-<div class="slide-highlight">
-硕士/博士研究生国家奖学金
-</div>
+<slide-highlight>硕士/博士研究生国家奖学金</slide-highlight>
 
 
-<div class="slide-cols">
+<slide-cols>
 
-<div class="slide-col-4">
+<slide-col ratio="4">
 
-<div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251205120243.png" 
-alt="Image" 
-style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251205120243.png"></slide-img>
 
-</div>
+</slide-col>
 
-<div class="slide-col-4">
+<slide-col ratio="4">
 
-<div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251205135335.png" 
-alt="Image" 
-style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251205135335.png"></slide-img>
 
-</div>
+</slide-col>
 
-</div>
+</slide-cols>
 
-<div class="slide-highlight">
-山东省优秀硕士论文
-</div>
+<slide-highlight>山东省优秀硕士论文</slide-highlight>
 
-<div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251205115304.png" 
-alt="Image" 
-style="max-width: 25%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251205115304.png" size="25%"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 教材编写
 
-<div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251205140334.png" 
-alt="Image" 
-style="max-width: 40%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251205140334.png" size="40%"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 未来规划
 
@@ -451,8 +322,7 @@ style="max-width: 40%; height: auto;margin: 0 auto;">
         4. ...
 
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 

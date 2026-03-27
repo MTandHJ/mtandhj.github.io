@@ -8,36 +8,27 @@ tags:
   - Vector Quantization
 ---
 
-<section data-markdown>
+<slide-section>
 ## Is Vector Quantization the Future of Recommendation?
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## VQ-VAE
 
-<div class="slide-img">
-  <img 
-  src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250707120708.png" 
-  alt="Image" 
-  style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250707120708.png" size="100%"></slide-img>
 
-<div class="slide-ref">
-    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">van den Oord A., et al. Neural Discrete Representation Learning. NeurIPS, 2017.</p>
-</div>
+<slide-ref>
+  van den Oord A., et al. Neural Discrete Representation Learning. NeurIPS, 2017.
+</slide-ref>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## VQ-VAE
 
@@ -68,34 +59,27 @@ Note:
 1. STE 的引入会导致传回 Encoder 的梯度不太准确;
 2. Codebook 的学习仅仅依赖于 Commitment Loss.
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## VQ-GAN
 
 - 图片 Token 化 + Next-token prediction $p(s_i | s_{< i}, \textcolor{red}{condition})$
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250311144000.png" alt="Image" style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250311144000.png" size="100%"></slide-img>
 
-<div class="slide-ref">
-    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">Esser P., et al. Taming Transformers for High-Resolution Image Synthesis. CVPR, 2021.</p>
-</div>
+<slide-ref>
+  Esser P., et al. Taming Transformers for High-Resolution Image Synthesis. CVPR, 2021.
+</slide-ref>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Why Discrete Representation Learning?
 
@@ -113,24 +97,17 @@ Note:
 
 ✅ **鲁棒性:** 高效的信息压缩带来惊艳的去噪效果
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Challenges
 
 - **Undesirable Gradient Estimator:**
 
-<div class="slide-img">
-  <img 
-  src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250707152059.png" 
-  alt="Image" 
-  style="max-width: 90%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250707152059.png" size="90%"></slide-img>
 
 
 - **Codebook Collapse:** Low codebook usage
@@ -140,13 +117,11 @@ Note:
 Note:
 VQ-VAE 广为人知的几个问题
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Solutions
 
@@ -159,22 +134,19 @@ VQ-VAE 广为人知的几个问题
     2. Fixed Codebook${}^{\text{[4]}}$;
     3. Fixed Codebook + Trainable linear transformation${}^{\text{[5]}}$
 
-<div class="slide-ref">
-    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">[1] Takida Y., et al. SQ-VAE: Variational Bayes on Discrete Representation with Self-annealed Stochastic Quantization. ICML, 2022.</p>
-    <p style="margin: 2px 0;">[2] Fifty C., et al. Restructuring Vector Quantization with the Rotation Trick. ICLR, 2025.</p>
-    <p style="margin: 2px 0;">[3] Lancucki A., et al. Robust Training of Vector Quantized Bottleneck Models. 2020.</p>
-    <p style="margin: 2px 0;">[4] Mentzer F., et al. Finite Scalar Quantization: VQ-VAE Made Simple. 2023.</p>
-    <p style="margin: 2px 0;">[5] Zhu Y., et al. Addressing Representation Collapse in Vector Quantized Models with One Linear Layer. 2024.</p>
-</div>
+<slide-ref>
+  [1] Takida Y., et al. SQ-VAE: Variational Bayes on Discrete Representation with Self-annealed Stochastic Quantization. ICML, 2022.
+  [2] Fifty C., et al. Restructuring Vector Quantization with the Rotation Trick. ICLR, 2025.
+  [3] Lancucki A., et al. Robust Training of Vector Quantized Bottleneck Models. 2020.
+  [4] Mentzer F., et al. Finite Scalar Quantization: VQ-VAE Made Simple. 2023.
+  [5] Zhu Y., et al. Addressing Representation Collapse in Vector Quantized Models with One Linear Layer. 2024.
+</slide-ref>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Rotation Trick
 
@@ -184,28 +156,20 @@ VQ-VAE 广为人知的几个问题
     \angle (\bm{z}, \nabla_z \mathcal{L}) = \angle(\bm{q}, \nabla_q \mathcal{L}).
     $$
 
-<div class="slide-img">
-  <img 
-  src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250612151216.png" 
-  alt="Image" 
-  style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250612151216.png"></slide-img>
 
-<div class="slide-ref">
-    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">[2] Fifty C., et al. Restructuring Vector Quantization with the Rotation Trick. ICLR, 2025.</p>
-</div>
+<slide-ref>
+  [2] Fifty C., et al. Restructuring Vector Quantization with the Rotation Trick. ICLR, 2025.
+</slide-ref>
 
 Note:
 Rotation Trick 希望梯度和向量夹角一致.
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Rotation Trick
 
@@ -224,13 +188,11 @@ Rotation Trick 希望梯度和向量夹角一致.
 
 - **性质:** $\bm{x} = \alpha \bm{v}^{\perp} + \beta \bm{v} \rightarrow P\bm{x} = \alpha \bm{v}^{\perp} \textcolor{red}{-} \beta \bm{v}$
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Reflection
 
@@ -238,20 +200,13 @@ $$
 R = \left(I - 2 \frac{\bm{r}\bm{r}^T}{\|\bm{r}\|^2} \right), \quad \bm{r} := \frac{\bm{z}}{\|\bm{z}\|} - \frac{\bm{c}}{\|\bm{c}\|}
 $$
 
-<div class="slide-img">
-  <img 
-  src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250612173718.png" 
-  alt="Image" 
-  style="max-width: 90%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250612173718.png" size="90%"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Rotation
 
@@ -259,25 +214,18 @@ $$
 R = \left(I - 2 \frac{\bm{c}\bm{c}^T}{\|\bm{c}\|^2} \right) \left(I - 2 \frac{\bm{r}\bm{r}^T}{\|\bm{r}\|^2} \right), \quad \bm{r} := \frac{\bm{z}}{\|\bm{z}\|} + \frac{\bm{c}}{\|\bm{c}\|}
 $$
 
-<div class="slide-img">
-  <img 
-  src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250612173750.png" 
-  alt="Image" 
-  style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250612173750.png"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## STE vs Rotation vs Reflection
 
 
-<div class="slide-cols">
+<slide-cols>
 
 - **STE:** $\nabla_{z} \mathcal{L} \equiv \nabla_{q} \mathcal{L}$
 
@@ -285,30 +233,23 @@ $$
 
 - **Reflection:** $\bm{z}$ 基本上与 $\bm{q}$ 的更新"行为"可能非常不一致
 
-<div class="slide-cols-4">
+<slide-col ratio="4">
 
-</div>
+</slide-col>
 
-<div class="slide-cols-6">
+<slide-col ratio="6">
 
-<div class="slide-img">
-  <img 
-  src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250612175428.png" 
-  alt="Image" 
-  style="max-width: 120%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250612175428.png" size="120%"></slide-img>
 
-</div>
+</slide-col>
 
-</div>
+</slide-cols>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Rotation Trick
 
@@ -328,13 +269,11 @@ $$
 $$
 
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Residual Quantization (RQ-VAE)
 
@@ -361,18 +300,15 @@ $$
 
 - **离散编码:** $(k_1, k_2, \ldots, k_N)$
 
-<div class="slide-ref">
-    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">Lee D., et al. Autoregressive Image Generation using Residual Quantization. CVPR, 2022.</p>
-</div>
+<slide-ref>
+  Lee D., et al. Autoregressive Image Generation using Residual Quantization. CVPR, 2022.
+</slide-ref>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Fixed Codebook
 
@@ -402,27 +338,19 @@ $$
     \big).
     $$
 
-<div class="slide-ref">
-    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">Mentzer F., et al. Finite Scalar Quantization: VQ-VAE Made Simple. 2023.</p>
-</div>
+<slide-ref>
+  Mentzer F., et al. Finite Scalar Quantization: VQ-VAE Made Simple. 2023.
+</slide-ref>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## SimVQ
 
-<div class="slide-img">
-  <img 
-  src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250615103519.png" 
-  alt="Image" 
-  style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250615103519.png" size="100%"></slide-img>
 
 😞 Codebook 每个批次仅少量向量得到训练.
 
@@ -432,19 +360,16 @@ $$
 \mathcal{C} \longrightarrow \{W \bm{c}_1, W \bm{c}_2, \ldots, W \bm{c}_K\}
 $$
 
-<div class="slide-ref">
-    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">[5] Zhu Y., et al. Addressing Representation Collapse in Vector Quantized Models with One Linear Layer. 2024.</p>
-</div>
+<slide-ref>
+  [5] Zhu Y., et al. Addressing Representation Collapse in Vector Quantized Models with One Linear Layer. 2024.
+</slide-ref>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## TIGER
 
@@ -457,62 +382,49 @@ $$
 
 - **生成式推荐:**
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250316175859.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250316175859.png"></slide-img>
 
 
-<div class="slide-ref">
-    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">Rajput S., et al. Recommender Systems with Generative Retrieval. NeurIPS, 2023.</p>
-</div>
+<slide-ref>
+  Rajput S., et al. Recommender Systems with Generative Retrieval. NeurIPS, 2023.
+</slide-ref>
 
-</textarea>
-</section>
+</slide-section>
 
 
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## TIGER
 
 
 - **生成式推荐 (T5-based):**
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250316180725.png" alt="Image" style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250316180725.png" size="100%"></slide-img>
 
 - **Beam Search** $\overset{?}{\gg}$ **Approximate Nearest Neighbor**
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Beam Search❓
 
-<div class="slide-cols">
+<slide-cols>
 
 <!-- left -->
-<div class="slide-col-6">
+<slide-col ratio="6">
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250707105044.png" 
-  alt="Image" 
-  style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250707105044.png" size="100%"></slide-img>
 
-</div>
+</slide-col>
 
 <!-- right -->
-<div class="slide-col-4">
+<slide-col ratio="4">
 
 - Amazon2014Beauty_1000_LOU
 
@@ -524,58 +436,44 @@ $$
 
 - #Blocks$\textcolor{green}{\uparrow}$ $\longrightarrow$ #Invalids $\textcolor{green}{\downarrow}$
 
-</div>
+</slide-col>
 
-</div>
+</slide-cols>
 
-<div class="slide-ref">
-    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">Zheng B., et al. Adapting Large Language Models by Integrating Collaborative Semantics for Recommendation. ICDE, 2024.</p>
-</div>
+<slide-ref>
+  Zheng B., et al. Adapting Large Language Models by Integrating Collaborative Semantics for Recommendation. ICDE, 2024.
+</slide-ref>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Cold-Start Item Recommendation❓
 
 
 - Cold-start items 可直接编码, 但
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250327143851.png" 
-  alt="Image" 
-  style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250327143851.png"></slide-img>
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250327145319.png" 
-  alt="Image" 
-  style="max-width: 65%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250327145319.png" size="65%"></slide-img>
 
 
 
-<div class="slide-ref">
-    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">Yang L., et al. Unifying Generative and Dense Retrieval for Sequential Recommendation. 2024.</p>
-    <p style="margin: 2px 0;">Yang Y., et al. Sparse Meets Dense: Unified Generative Recommendations with Cascaded Sparse-Dense Representations. 2025.</p>
-</div>
+<slide-ref>
+  Yang L., et al. Unifying Generative and Dense Retrieval for Sequential Recommendation. 2024.
+  Yang Y., et al. Sparse Meets Dense: Unified Generative Recommendations with Cascaded Sparse-Dense Representations. 2025.
+</slide-ref>
 
 Note: 
 虽然应用 VQ 可以很好地支持冷启动d的商品 (可以相当方便地进行编码), 但是 LIGER 发现, 利用 VQ 训练的非常容易过拟合到出现过的组合中去, 反而冷启动的效果特别差.
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## RQ-VAE vs (Hierarchical/Residual) KMeans❓
 
@@ -591,41 +489,33 @@ Note:
 |SimVQ|0.0029|0.0092|0.0164|0.0060|0.0083|
 
 
-<div class="slide-ref">
-    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">Wang Y., et al. EAGER: Two-Stream Generative Recommender with Behavior-Semantic Collaboration. 2024.</p>
-    <p style="margin: 2px 0;">OneRec Team. OneRec Technical Report. 2025.</p>
-</div>
+<slide-ref>
+  Wang Y., et al. EAGER: Two-Stream Generative Recommender with Behavior-Semantic Collaboration. 2024.
+  OneRec Team. OneRec Technical Report. 2025.
+</slide-ref>
 
 
 Note: 
 参数还没有细调.
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Semantic Features + Collaborative Signals❓
 
 
 - 微调 Encoder:
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250624153117.png" 
-  alt="Image" 
-  style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250624153117.png" size="100%"></slide-img>
 
 
-<div class="slide-ref">
-    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">Luo X., et al. OneRec Team. OneRec Technical Report. 2024.</p>
-    <p style="margin: 2px 0;">OneRec Team. OneRec Technical Report. 2025.</p>
-</div>
+<slide-ref>
+  Luo X., et al. OneRec Team. OneRec Technical Report. 2024.
+  OneRec Team. OneRec Technical Report. 2025.
+</slide-ref>
 
 
 Note: 
@@ -634,13 +524,11 @@ Note:
 3. 通过 item-item 间的**相似度**构建高质量的 item-pair dataset $\mathcal{D}_{pair}$, 然后通过 item-item 间的对比学习来促使 item features 融合进这部分信息.
 4. 此外, 额外引入 Caption loss, 即通过 LLaMA3 来预测 Caption, 保证 features 不会丢失内容信息.
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 总结
 
@@ -657,29 +545,21 @@ Note:
     - (Rec) 似乎不太擅长冷启场景 (如何修正 Beam search)
     - (Rec) RQ-VAE 似乎没有必要
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Decoder-Encoder-XXX Vector Quantization
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250709165402.png" 
-  alt="Image" 
-  style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250709165402.png" size="100%"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Decoder-Encoder-XXX Vector Quantization
 
@@ -693,13 +573,11 @@ Note:
 |DEX-VQ|0.0033|0.0126|0.0216|0.0079|0.0107|
 
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 <div style="
   display: flex;
@@ -711,6 +589,5 @@ Note:
   Thanks!
 </div>
 
-</textarea>
-</section>
+</slide-section>
 

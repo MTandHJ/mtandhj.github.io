@@ -10,65 +10,48 @@ tags:
   - Recommendation
 ---
 
-<section data-markdown>
+<slide-section>
 ## Graph-enhanced Optimizers for Structure-aware Recommendation Embedding Evolution
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Background
 
 $\textcircled{\small 1}$ Embedding $\xrightarrow{\text{实体 (User, Item) 的向量表示}}$ 现代推荐系统的基础
 
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619102807.png" 
-  alt="Image" 
-  style="max-width: 65%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619102807.png" size="65%"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Background
 
 $\textcircled{\small 2}$ 多元信息 $\xrightarrow{\text{交互信息, 类别相似性}}$ 潜在的结构性约束
 
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619110409.png" 
-  alt="Image" 
-  style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619110409.png" size="100%"></slide-img>
 
 ❓Embedding 学习如何高效融入这些结构性先验
 
-</textarea>
-</section>
+</slide-section>
 
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Background
 
 $\textcircled{\small 3}$ 图结构先验 $\underset{\text{超大规模 Embedding table}}{\xrightarrow{\text{训练随机性: 数据采样, dropout}}}$ 😞低效的信息融合
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619112212.png"
-  alt="Image" 
-  style="max-width: 90%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619112212.png" size="90%"></slide-img>
 
 $\mathbf{E}$: <span style="color:gray">Embedding</span>
 &nbsp; &nbsp; &nbsp;
@@ -76,24 +59,18 @@ $\mathcal{L}$: <span style="color:gray">Loss</span>
 &nbsp; &nbsp; &nbsp;
 $\nabla_{\mathbf{E}} \mathcal{L}$: <span style="color:gray">Gradient</span>
 
-</textarea>
-</section>
+</slide-section>
 
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Background
 
 $\textcircled{\small 4}$ 图+序列模型: 过于依赖**特定场景**, 高昂的**训练/推理代价**
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250711202256.png"
-  alt="Image" 
-  style="max-width: 90%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250711202256.png" size="90%"></slide-img>
 
 <u>LightGCN:</u> <span style="color:gray">GNN-only</span>
 &nbsp; &nbsp; &nbsp;
@@ -101,14 +78,12 @@ $\textcircled{\small 4}$ 图+序列模型: 过于依赖**特定场景**, 高昂�
 
 <u>SR-GNN/LESSR/MAERec:</u> <span style="color:gray">GNN-based sequence models</span>
 
-</textarea>
-</section>
+</slide-section>
 
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Weighted Adjacency Matrix $\mathbf{A}$
 
@@ -130,28 +105,21 @@ $$
 
 💡 $\mathcal{J}_{smoothness}\downarrow$ $\longrightarrow$ 越相似的两个节点的表示越接近
 
-<div class="slide-ref">
-    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">Zhou D., et al. Learning With Local and Global Consistency. NeurIPS, 2003.</p>
-    <p style="margin: 2px 0;">Chen S., et al. Signal denoising on graphs via graph filtering. GlobalSIP, 2014.</p>
-</div>
+<slide-ref>
+  Zhou D., et al. Learning With Local and Global Consistency. NeurIPS, 2003.
+  Chen S., et al. Signal denoising on graphs via graph filtering. GlobalSIP, 2014.
+</slide-ref>
 
-</textarea>
-</section>
+</slide-section>
 
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Structure-aware Embedding Evolution
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619151431.png"
-  alt="Image" 
-  style="max-width: 90%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619151431.png" size="90%"></slide-img>
 
 $$
 \Delta \mathbf{E}_{t-1} \xrightarrow{\textcolor{blue}{\psi}(\cdot)} \psi(\mathbf{E}_{t-1}).
@@ -165,14 +133,12 @@ $\small \mathcal{J}_{smoothness} \left (\textcolor{blue}{\psi} (\Delta \mathbf{E
 $\textcircled{\small 2}$ <span style="color: blue">**Direction-aware:**</span> 
 $\small \left\langle \textcolor{blue}{\psi} (\Delta \mathbf{E}), \Delta \mathbf{E} \right\rangle > 0, \quad \forall \Delta \mathbf{E} \not= \bm{0}$
 
-</textarea>
-</section>
+</slide-section>
 
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Smoothness vs. Convergence
 
@@ -196,14 +162,12 @@ $$
   - 😞矩阵逆难以精确求解
 
 
-</textarea>
-</section>
+</slide-section>
 
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 近似解
 
@@ -221,38 +185,27 @@ $$
 \hat{\psi}_{nsa} (\Delta \mathbf{E}) := (1 - \beta) \sum_{l=1}^L \beta^l \mathbf{\tilde{A}}^l \Delta \mathbf{E}.
 $$
 
-<div class="slide-ref">
-    <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-    <p style="margin: 2px 0;">Klicpera J., et al. Predict Then Propagate: Graph Neural Networks Meet Personalized Pagerank. ICLR, 2019.</p>
-    <p style="margin: 2px 0;">Huang Q., et al. Combining Label Propagation and Simple Models Out-performs Graph Neural Networks. ICLR, 2021.</p>
-</div>
+<slide-ref>
+  Klicpera J., et al. Predict Then Propagate: Graph Neural Networks Meet Personalized Pagerank. ICLR, 2019.
+  Huang Q., et al. Combining Label Propagation and Simple Models Out-performs Graph Neural Networks. ICLR, 2021.
+</slide-ref>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 近似解的缺陷
 
 $\textcircled{\small 1}$ $\psi_{iter}$ 的受限平滑性:
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619161557.png" 
-  alt="Image" 
-  style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619161557.png" size="100%"></slide-img>
 
 
 $\textcircled{\small 2}$ $\psi_{nsa}$ 的次优收敛性:
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619161810.png" 
-  alt="Image" 
-  style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619161810.png" size="100%"></slide-img>
 
 😄 **SEvo:**
 
@@ -260,117 +213,81 @@ $$
 \hat{\psi} (\Delta \mathbf{E}; \beta) = \frac{1 - \beta}{\textcolor{orange}{1 - \beta^{L+1}}} \sum_{l=0}^L \beta^l \mathbf{\tilde{A}}\Delta \mathbf{E}.
 $$
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## SGD + SEvo
 
 - SEvo 可以直接应用在其它优化器所衍生的更新量
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619163020.png" 
-  alt="Image" 
-  style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619163020.png" size="100%"></slide-img>
 
 
-</textarea>
-</section>
+</slide-section>
 
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Adam + SEvo
 
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619163150.png" 
-  alt="Image" 
-  style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619163150.png" size="100%"></slide-img>
 
 
-</textarea>
-</section>
+</slide-section>
 
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## AdamW + SEvo
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619163339.png" 
-  alt="Image" 
-  style="max-width: 95%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619163339.png" size="95%"></slide-img>
 
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Overall Comparisons
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619164021.png"
-  alt="Image" 
-  style="max-width: 95%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619164021.png" size="95%"></slide-img>
 
 ✅ **Accuracy:** 平均 10+\% 的提升
 
 ✅ **Efficiency:** 略微训练消耗 & **零**推理成本增加
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Empirical Analysis
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619164506.png"
-  alt="Image" 
-  style="max-width: 95%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619164506.png" size="95%"></slide-img>
 
 ✅ **收敛性:** $\textcolor{orange}{1 / (1 - \beta^{L+1})}$ 加快收敛
 
 ✅ **平滑性:** $\beta \rightarrow 1$ 愈加平滑
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Ablation Study
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619164907.png"
-  alt="Image" 
-  style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619164907.png" size="100%"></slide-img>
 
 ✅ **泛化性:** 适用于 SGD/Adam/AdamW
 
@@ -378,53 +295,39 @@ $$
 
 ✅ **AdamW correction:** 稀疏梯度矫正的必要性
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 类别一致先验
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619165639.png"
-  alt="Image" 
-  style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619165639.png" size="100%"></slide-img>
 
 ✅ **类别一致性:** 类别一致的表示更加接近
 
-</textarea>
-</section>
+</slide-section>
 
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 教师模型先验
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619165855.png"
-  alt="Image" 
-  style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619165855.png" size="100%"></slide-img>
 
 ✅ **知识迁移性:** SEvo 本身就有较强的知识蒸馏能力
 
 ✅ **泛化性:** SEvo 可以和其它知识蒸馏方法结合
 
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 <div style="
   display: flex;
@@ -436,6 +339,5 @@ $$
   Thanks!
 </div>
 
-</textarea>
-</section>
+</slide-section>
 

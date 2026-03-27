@@ -13,14 +13,13 @@ tags:
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
+<slide-section>
 ## Markovian Pre-trained Transformer for Next-Item Recommendation
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Background: Pre-training & Fine-tuning
 
@@ -34,17 +33,15 @@ tags:
   - (研究现状) 😞 效果远远逊色于 domain-specific 模型
 
 
-<div class="slide-highlight">
+<slide-highlight>
 🤔什么阻碍了"推荐知识"的迁移?
-</div>
+</slide-highlight>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Background: Pre-training & Fine-tuning
 
@@ -58,23 +55,21 @@ tags:
   1. diverse user behaviors
   2. non-negligible domain gaps
 
-<div class="slide-highlight">
+<slide-highlight>
 🤔什么样的"推荐知识"是可迁移的?
-</div>
+</slide-highlight>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## RQI: Transferable Capabilities
 
-<div class="slide-highlight">
+<slide-highlight>
 学好 XXX 有什么用, 生活里又用不到!
-</div>
+</slide-highlight>
 
 - **Computer Vision:**
   1. (图像分类) 特征提取、模式识别 ...
@@ -84,42 +79,31 @@ tags:
   1. (传统语料) 语义理解、语法保持
   2. (数学/代码) 逻辑推理
 
-<div class="slide-highlight">
+<slide-highlight>
 可迁移的是能力!
-</div>
+</slide-highlight>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Transferable Capabilities for Recommendation
 
 - 推荐需要何种能力? 长短兴趣建模?
 
-<div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260112202832.png" 
-alt="Image" 
-style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260112202832.png" size="100%"></slide-img>
 
-<div class="slide-ref">
-  <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-  <p style="margin: 2px 0;">
+<slide-ref>
   GRU4Rec: RNN; SASRec: Transformer; HSTU: Attention + Time-based positional encoding
-  </p>
-</div>
+</slide-ref>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Transferable Capabilities for Recommendation
 
@@ -137,13 +121,11 @@ $$
 
 - 上述结论与数据集预处理方式、优化目标、模型表达能力无关
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Markovian Nature of Next-Item Prediction
 
@@ -160,17 +142,15 @@ $$
   ).
 $$
 
-<div class="slide-highlight">
+<slide-highlight>
 💡当前序列推荐模型不约而同地以符合马尔科夫性的方式进行推理！
-</div>
+</slide-highlight>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Short-term & Long-term Interests
 
@@ -183,41 +163,27 @@ $$
 
 - **稍有不同:** Long-term interest 的建模并非宣称的那样复杂
 
-<div class="slide-ref">
-  <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-  <p style="margin: 2px 0;">
+<slide-ref>
   [1] Xie X., et al. Contrastive Learning for Sequential Recommendation. ICDE, 2022.
-  </p>
-  <p style="margin: 2px 0;">
   [2] Liu Q., et al.  STAMP: Short-term Attention/Memory Priority Model for Session-based Recommendation. KDD, 2018.
-  </p>
-</div>
+</slide-ref>
 
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## RQII: Data for Markovian Reasoner
 
-<div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217120440.png" 
-alt="Image" 
-style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217120440.png" size="100%"></slide-img>
 
-
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Next-State Prediction
 
@@ -238,13 +204,11 @@ style="max-width: 100%; height: auto;margin: 0 auto;">
   1. 自适应的序列总结能力;
   2. 特别着重当前状态的机制
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Markovian Pre-trained Transformer (MPT)
 
@@ -257,68 +221,51 @@ $$
   -\sum_{t=1}^{T-1} \log \mathbb{P}(s_{t+1}\,|\,s_{t}, \ldots, s_{1}; \Theta)
 $$
 
-<div class="slide-highlight">
+<slide-highlight>
 100% 人造数据用于预训练！
-</div>
+</slide-highlight>
 
-<div class="slide-highlight">
+<slide-highlight>
 ✅ Controllable ✅ Unlimited
-</div>
+</slide-highlight>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ### Markovian Pre-training & Recommendation Fine-tuning
 
-<div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217143749.png" 
-alt="Image" 
-style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217143749.png" size="100%"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Experiments
 
-<div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260112203428.png" 
-alt="Image" 
-style="max-width: 90%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260112203428.png" size="100%"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Data Scaling: NDCG@10 vs. #Tokens
 
-<div class="slide-cols">
+<slide-cols>
 
-<div class="slide-col-4">
+<slide-col ratio="4">
 
-<div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260112203808.png"
-alt="Image" 
-style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260112203808.png" size="100%"></slide-img>
 
-<div class="slide-col-6">
+</slide-col>
+
+<slide-col ratio="6">
 
 - $\mathcal{L}_{\text{NSP}}$ 随着 tokens 增加逐渐下降, 且有多次骤降
 
@@ -328,23 +275,20 @@ style="max-width: 100%; height: auto;margin: 0 auto;">
 
 - 存在理论上限 Bayes estimator
 
-</div>
+</slide-col>
+</slide-cols>
 
-</div>
-
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Comparison of Inference Mechanisms
 
-<div class="slide-cols">
+<slide-cols>
 
-<div class="slide-col-4">
+<slide-col ratio="4">
 
 - MPT 和 Qwen-2.5 的 Backbone 均未经过推荐训练
 
@@ -354,63 +298,43 @@ style="max-width: 100%; height: auto;margin: 0 auto;">
 
 - MPT 甚至会产生和 SASRec+ 类似的模式
 
+</slide-col>
 
-</div>
+<slide-col ratio="6">
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260112204030.png" size="100%"></slide-img>
+</slide-col>
 
-<div class="slide-col-6">
-<div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260112204030.png"
-alt="Image" 
-style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+</slide-cols>
 
-</div>
-
-</div>
-
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Sensitivity Analysis: $|\mathcal{S}|$
 
 - Number of states $|\mathcal{S}|$
 
-<div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217152317.png" 
-alt="Image" 
-style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217152317.png" size="100%"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Sensitivity Analysis: $\alpha$
 
 - $\alpha$ of Dirichlet distribution
 
-<div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217152637.png" 
-alt="Image" 
-style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217152637.png" size="100%"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Summary
 
@@ -420,12 +344,11 @@ style="max-width: 100%; height: auto;margin: 0 auto;">
 
 - **Markovian Pre-trained Transformer (MPT):** ✅ 高效 ✅ 易迁移
 
-<div class="slide-highlight">
+<slide-highlight>
 下一个时代: Data Simulation?
-</div>
+</slide-highlight>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 

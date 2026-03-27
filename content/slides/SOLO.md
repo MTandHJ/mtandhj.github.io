@@ -12,43 +12,36 @@ tags:
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
+<slide-section>
 ## Pushing the Limits of Low-Bit Optimizers with a Focus on EMA Dynamics
-</section>
+</slide-section>
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Background
 
-<div class="slide-highlight">
-模型飞速膨胀 vs. 吃紧的硬件设备
-</div>
+<slide-highlight>模型飞速膨胀 vs. 吃紧的硬件设备</slide-highlight>
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312203012.png" alt="Image" style="max-width: 65%; height: auto; margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312203012.png" size="65%"></slide-img>
 
 - 可能的一些解决方案: 
   - MoE, LoRA; ZeRO, FSDP; 
   - Network Quantization; <span style="color: red;">Lightweight Optimizers</span>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Background
   
 ⚙️ Optimizer States (2x model size):
 
-  $$
-  m_{t+1} \leftarrow \beta_1 \cdot m_t + (1 - \beta_1) \cdot g, \\
-  v_{t+1} \leftarrow \beta_2 \cdot v_t + (1 - \beta_2) \cdot g^2
-  $$
+$$
+m_{t+1} \leftarrow \beta_1 \cdot m_t + (1 - \beta_1) \cdot g, \\
+v_{t+1} \leftarrow \beta_2 \cdot v_t + (1 - \beta_2) \cdot g^2
+$$
 
 - Lightweight Optimizers:
   - **重新设计:** Lion, Muon ...
@@ -56,17 +49,13 @@ tags:
   - **降维/稀疏化:** GaLore, MicroAdam
   - **低精度:** 1-bit SGD/Adam, <u>16/8/4-bit Optimizers</u>, Q-GaLore, 8-bit Muon
 
-<div class="slide-highlight">
-Why Low-Bit Optimizers?
-</div>
+<slide-highlight>Why Low-Bit Optimizers?</slide-highlight>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Why Low-Bit Optimizers?
 
@@ -76,22 +65,17 @@ Why Low-Bit Optimizers?
 
 - **成功的工程实践:** DeepSeek-v3 训练框架 ($g \overset{\text{BF16}}{\rightarrow} m,v \overset{\text{FP32}}{\rightarrow} \theta$)
   
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312204230.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312204230.png"></slide-img>
 
-<div class="slide-ref">
-  <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-  <p style="margin: 2px 0;">DeepSeek-AI. DeepSeek-V3 Technical Report, 2024.</p>
-</div>
+<slide-ref>
+  DeepSeek-AI. DeepSeek-V3 Technical Report, 2024.
+</slide-ref>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Quantization and Dequantization
   
@@ -101,36 +85,29 @@ Why Low-Bit Optimizers?
   q = Q(x) := \mathop{\text{argmin}} \limits_{k=0}^{2^b - 1} \big|\frac{x}{\textcolor{red}{\Delta}} - \textcolor{red}{y_k} \big|.
   $$
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312205652.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312205652.png"></slide-img>
 
 - Dequantization:
 
-  $$
-  \tilde{x} = Q^{\dagger}(q) := y_{q} \cdot \Delta.
-  $$
-</textarea>
-</section>
+$$
+\tilde{x} = Q^{\dagger}(q) := y_{q} \cdot \Delta.
+$$
+
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## <u>S</u>tateful <u>O</u>ptimizers in Ultra-<u>LO</u>w Bits
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617110019.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617110019.png"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Challenges in Ultra-Low-Bit Cases
 
@@ -142,17 +119,13 @@ Why Low-Bit Optimizers?
   - (Signed) 一阶动量 ($m$): 决定参数更新方向 
   - (Unsigned) 一阶动量 ($m$): 决定参数更新步长
 
-<div class='slide-highlight'>
-关键: EMA Dynamics
-</div>
+<slide-highlight>关键: EMA Dynamics</slide-highlight>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Quantization for Unsigned EMA Update
 
@@ -167,58 +140,45 @@ $$
   <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250722100933.png" alt="Image" style="max-width: 70%; height: auto;margin: 0 auto;">
 </div>
 
-<div class="slide-ref">
-  <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-  <p style="margin: 2px 0;">Higham N. J. The Accuracy of Floating Point Summation. SIAM Journal on Scientific Computing. 1993.</p>
-</div>
+<slide-ref>
+  Higham N. J. The Accuracy of Floating Point Summation. SIAM Journal on Scientific Computing. 1993.
+</slide-ref>
 
-</textarea>
-</section>
+</slide-section>
 
 
 <!-- --------------------------------------------------------- -->
 
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Signal Swamping
 
 💡 总结
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312212039.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250312212039.png"></slide-img>
 
-<div class='slide-highlight'>
+<slide-highlight>❎Unsigned ❎ $\beta \uparrow$ ❎ $b \downarrow$</slide-highlight>
 
-❎Unsigned ❎ $\beta \uparrow$ ❎ $b \downarrow$
-
-</div>
-
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Case Study
 
-<div class="slide-cols">
+<slide-cols>
 
-<div class="slide-col-6">
+<slide-col ratio="6">
 
 &nbsp;
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250722101123.png" alt="Image" style="max-width: 90%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250722101123.png" size="90%"></slide-img>
 
-</div>
+</slide-col>
 
-<div class="slide-col-4">
+<slide-col ratio="4">
 
 &nbsp;
 
@@ -228,23 +188,21 @@ $$
 
 - 实际上 $\beta \ge 0.9$ 为<span style="color: red">相当常见的 setting</span>
 
-</div>
+</slide-col>
 
-</div>
+</slide-cols>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Case Study
 
-<div class="slide-cols">
+<slide-cols>
 
-<div class="slide-col-4">
+<slide-col ratio="4">
 
 &nbsp;
 
@@ -261,26 +219,22 @@ $$
 
 - 理论收敛至: $0.5$
 
-</div>
+</slide-col>
 
 
-<div class="slide-col-6">
+<slide-col ratio="6">
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250908140511.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250908140511.png"></slide-img>
 
-</div>
+</slide-col>
 
-</div>
+</slide-cols>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Solution (1/2): Stochastic Rounding
 
@@ -298,54 +252,40 @@ $$
 
 - High variance:
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250722101414.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250722101414.png"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## (Solution 2/2) Logarithmic Quantization
 
 
-<div class='slide-highlight'>
-$1 \overset{\text{more levels}}{\Longrightarrow} 0$
-</div>
+<slide-highlight>$1 \overset{\text{more levels}}{\Longrightarrow} 0$</slide-highlight>
 
 - 3-bit quantization levels (Linear vs. Dynamic Exponent vs. Ours):
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251210214923.png" alt="Image" style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251210214923.png" size="100%"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Logarithmic Quantization
 
 - 2-bit quantization illustration
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250313113535.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250313113535.png"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Logarithmic Quantization
 
@@ -353,16 +293,12 @@ $1 \overset{\text{more levels}}{\Longrightarrow} 0$
 
 ✅ State decay alignment
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250313115306.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250313115306.png"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Quantization for Signed EMA Update
 
@@ -374,33 +310,28 @@ $1 \overset{\text{more levels}}{\Longrightarrow} 0$
 
 💡 总结:
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314115701.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314115701.png"></slide-img>
 
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Quantization Errors $\Rightarrow$ Gradient Variance
 
-<div class="slide-cols">
+<slide-cols>
 
-<div class="slide-col-6">
+<slide-col ratio="6">
 
 &nbsp;
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250722101739.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
-</div>
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250722101739.png" size="95%"></slide-img>
 
-<div class="slide-col-4">
+</slide-col>
+
+<slide-col ratio="4">
 
 &nbsp;
 
@@ -412,26 +343,21 @@ $\rightarrow$ gradient variance <span style="color: red"> $\uparrow$ </span>
 
 $\rightarrow$ <span style="color: red"> worse </span> convergence
 
-</div>
+</slide-col>
 
-</div>
+</slide-cols>
 
-<div class='slide-highlight'>
-不稳定性难以在量化算法层面避免!
-</div>
+<slide-highlight>不稳定性难以在量化算法层面避免!</slide-highlight>
 
-<div class="slide-ref">
-  <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-  <p style="margin: 2px 0;">Li H., et al. Convergence of Adam under Relaxed Assumptions. NeurIPS, 2023.</p>
-</div>
+<slide-ref>
+  Li H., et al. Convergence of Adam under Relaxed Assumptions. NeurIPS, 2023.
+</slide-ref>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Momentum Adjustment
 
@@ -444,129 +370,96 @@ $$
 
 - **查表:** (<u>灰色区域代表了经验可行的参数推荐</u>)
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314121510.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250314121510.png" size="95%"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Experiments
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617111401.png" alt="Image" style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617111401.png" size="100%"></slide-img>
 
 😒 **传统方法:** $\underset{\text{Training from scratch}}{\xrightarrow{\text{Ultra-Low-Bit}}}$ degeneration/collapse 
 
 😊 **SOLO:** Robust to bits/tasks/models
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Experiments (Giant Models)
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617112643.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617112643.png" size="95%"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Loss
 
 - 损失正常收敛
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250319170139.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250319170139.png" size="95%"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Quantile $x_p$
 
 - 基本上 $p \in [0.05, 0.3]$ 都有不错的性能
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250319170604.png" alt="Image" style="max-width: 55%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250319170604.png" size="55%"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Beta, Block size
 
 - Lower-bit SOLO needs a smaller $\beta$
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250407200935.png" alt="Image" style="max-width: 95%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250407200935.png" size="95%"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## State Changes
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617112843.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617112843.png"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## Generalizability of SOLO
 
 -  AdaBelief
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617113113.png" alt="Image" style="max-width: 80%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617113113.png"></slide-img>
 
 - Larger-scale models:
 
-<div class="slide-img">
-  <img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617113029.png" alt="Image" style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617113029.png" size="100%"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 

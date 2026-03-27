@@ -10,14 +10,13 @@ tags:
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
+<slide-section>
 ## 无监督学习: 变分自编码
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 知识回顾
 
@@ -42,13 +41,11 @@ tags:
         \theta^t = \underset{\theta}{\text{argmax}} \: Q(\theta, \theta^{t-1})
         $$
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 知识回顾
 
@@ -58,55 +55,35 @@ tags:
         p(\bm{x}; \theta) = \sum_{k=1}^K \alpha_k \varphi(\bm{x}; \bm{\mu_k}, \bm{\Sigma}_k), \: \sum_{k=1}^K \alpha_k = 1.
     $$
 
-<div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251211154717.png" 
-alt="Image" 
-style="max-width: 60%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251211154717.png" size="60%"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 变分自编码 (VAE, Variational Autoencoder)
 
-<div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251211155312.png" 
-alt="Image" 
-style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251211155312.png" size="100%"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 变分自编码 (VAE, Variational Autoencoder)
 
-<div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251211155312.png" 
-alt="Image" 
-style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251211155312.png" size="100%"></slide-img>
 
-<div class="slide-highlight">
-与 EM、VAE 核心思想一脉相承
-</div>
+<slide-highlight>与 EM、VAE 核心思想一脉相承</slide-highlight>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 一般模型下的 EM 算法
 
@@ -129,13 +106,11 @@ style="max-width: 100%; height: auto;margin: 0 auto;">
     Q(\theta, \hat{\theta}) = \mathbb{E}_{\bm{z}} \left[\ell (\bm{x}, \bm{z}; \theta) \right]
     $$
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## (期望) 对数似然间的关系
 
@@ -151,13 +126,11 @@ $$
 $$
 </p>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## (期望) 对数似然间的关系
 
@@ -178,20 +151,15 @@ $$
 $$
 </p>
 
-<div class="slide-ref">
-  <div style="width: 100px; height: 1px; background: black; margin-bottom: 5px;"></div>
-  <p style="margin: 2px 0;">
+<slide-ref>
   Kullback-Leibler Divergence: $\text{KL}(p\|q) = \int_z p(z) \log \frac{p(z)}{q(z)} \mathrm{d} z$
-  </p>
-</div>
+</slide-ref>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 从 EM 算法到 VAE
 
@@ -206,13 +174,11 @@ $$
 $$
 
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 从 EM 算法到 VAE
 
@@ -226,22 +192,16 @@ $$
 \end{align*}
 $$
 
-<div class='slide-highlight'>
-$\textcircled{\small 1}$  最大化 $Q$ $\Leftrightarrow$ 最大化似然下界
-</div>
+<slide-highlight>$\textcircled{\small 1}$  最大化 $Q$ $\Leftrightarrow$ 最大化似然下界</slide-highlight>
 
-<div class='slide-highlight'>
-$\textcircled{\small 2}$ $\hat{\theta} = \theta$ 时完全等价最大似然
-</div>
+<slide-highlight>$\textcircled{\small 2}$ $\hat{\theta} = \theta$ 时完全等价最大似然</slide-highlight>
 
-</textarea>
-</section>
+</slide-section>
 
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## ELBO (Evidence Lower Bound)
 
@@ -250,13 +210,11 @@ $$
 \log \frac{p(\bm{x}_i, \bm{z}; \theta)}{\textcolor{red}{p(\bm{z}|\bm{x}_i; \theta^{t-1})}} \mathrm{d} \bm{z}
 $$
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## ELBO (Evidence Lower Bound)
 
@@ -265,17 +223,13 @@ $$
 \log \frac{p(\bm{x}_i, \bm{z}; \theta)}{\textcolor{red}{p(\bm{z}|\bm{x}_i; \theta^{t-1})}} \mathrm{d} \bm{z}
 $$
 
-<div class='slide-highlight'>
-一般情况下 $p(\bm{z}|\bm{x}; \theta)$ 难以处理
-</div>
+<slide-highlight>一般情况下 $p(\bm{z}|\bm{x}; \theta)$ 难以处理</slide-highlight>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## ELBO (Evidence Lower Bound)
 
@@ -284,9 +238,7 @@ $$
 \log \frac{p(\bm{x}_i, \bm{z}; \theta)}{\textcolor{red}{p(\bm{z}|\bm{x}_i; \theta^{t-1})}} \mathrm{d} \bm{z}
 $$
 
-<div class='slide-highlight'>
-一般情况下 $p(\bm{z}|\bm{x}; \theta)$ 难以处理
-</div>
+<slide-highlight>一般情况下 $p(\bm{z}|\bm{x}; \theta)$ 难以处理</slide-highlight>
 
 &nbsp;
 
@@ -295,30 +247,22 @@ $$
 \log \frac{p(\bm{x}_i, \bm{z}; \theta)}{\textcolor{blue}{q(\bm{z}|\bm{x}_i; \phi)}} \mathrm{d} \bm{z}
 $$
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 变分自编码 (VAE)
 
 
-<div class="slide-img">
-<img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251211214031.png" 
-alt="Image" 
-style="max-width: 100%; height: auto;margin: 0 auto;">
-</div>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251211214031.png" size="100%"></slide-img>
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 从 VAE 到 EM 算法
 
@@ -340,13 +284,11 @@ $$
     \max_{\textcolor{blue}{\theta}} \quad \sum_{i=1}^N \mathbb{E}_q [\log p(\bm{x}_i| \bm{z}; \textcolor{blue}{\theta})]
     $$
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 知识点总结
 
@@ -361,13 +303,11 @@ $$
 |收敛性|✅||
 |灵活性|❎|✅|
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 
-<section data-markdown>
-<textarea data-template>
+<slide-section>
 
 ## 课后扩展
 
@@ -381,8 +321,7 @@ $$
 
 - 仿照 EM $\rightarrow$ ELBO 的方法反推 VAE $\rightarrow$ EM
 
-</textarea>
-</section>
+</slide-section>
 
 <!-- --------------------------------------------------------- -->
 

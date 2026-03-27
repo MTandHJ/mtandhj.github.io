@@ -69,7 +69,7 @@ fastSearch = true
   permalinkable = true
 
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
+  home = ["HTML", "RSS"]
   section = ["HTML", "RSS"]
   page = ["HTML", "pdf"]
   taxonomy = ["HTML"]
@@ -77,4 +77,4 @@ fastSearch = true
 
 # 添加 slides 内容类型的配置
 [permalinks]
-  slides = "/slides/:filename/"
+  slides = "/slides/:contentbasename/"
