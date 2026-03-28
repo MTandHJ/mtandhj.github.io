@@ -1,7 +1,8 @@
 .vscode/
 .claude/
 docs/
-sepcs/
-
+node_modules/
+.slide-cache/
+.hugo_build.lock
 .DS_Store
-node_modules
+Thumbs.db
