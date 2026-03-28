@@ -382,9 +382,9 @@ class SearchManager {
   _getTypeIcon(filters) {
     if (filters && filters.type) {
       const types = Object.keys(filters.type);
-      if (types.indexOf('slide') !== -1) return '\uD83D\uDCCA';
+      if (types.indexOf('slide') !== -1) return '𝄞';
     }
-    return '\uD83D\uDCC4';
+    return '𝄢';
   }
 
   // ======================

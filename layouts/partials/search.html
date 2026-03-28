@@ -26,11 +26,11 @@
 
 <script>
   window.__searchConfig = {
-    defaultPlaceholder: {{ .Site.Params.search.defaultPlaceholder | jsonify }},
-    tagPlaceholder: {{ .Site.Params.search.tagPlaceholder | jsonify }},
-    postPlaceholder: {{ .Site.Params.search.postPlaceholder | jsonify }},
-    slidePlaceholder: {{ .Site.Params.search.slidePlaceholder | jsonify }},
-    noResults: {{ .Site.Params.search.noResults | jsonify }},
+    defaultPlaceholder: {{ .Site.Params.search.defaultPlaceholder }},
+    tagPlaceholder: {{ .Site.Params.search.tagPlaceholder }},
+    postPlaceholder: {{ .Site.Params.search.postPlaceholder }},
+    slidePlaceholder: {{ .Site.Params.search.slidePlaceholder }},
+    noResults: {{ .Site.Params.search.noResults }},
     maxResults: {{ .Site.Params.search.maxResults | default 15 }}
   };
 </script>
