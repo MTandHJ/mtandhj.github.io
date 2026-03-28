@@ -11,7 +11,6 @@ if (theme === 'dark') {
     moonIcon.classList.remove('hidden')
     sunIcon.classList.add('hidden')
 }
-console.log(sunIcon)
 toggleThemeButton.addEventListener('click', function () {
 
     const theme = localStorage.getItem('theme');

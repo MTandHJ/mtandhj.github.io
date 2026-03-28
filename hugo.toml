@@ -4,6 +4,8 @@ languageCode = "en-us"
 defaultContentLanguage = "en-us"
 publishDir = "docs"
 
+disableKinds = ["taxonomy", "term"]
+
 [taxonomies]
 tag = "tags"
 
@@ -18,12 +20,6 @@ identifier = "blog"
 name = "随笔"
 url = "/posts"
 weight = 10
-
-[[menu.main]]
-identifier = "tags"
-name = "Tags"
-url = "/tags"
-weight = 20
 
 [[menu.main]]
 identifier = "slides"
@@ -45,13 +41,29 @@ logo = "/images/logo.png"
 fastSearch = true
 [params.taxonomies]
   includeNewer = true
-  postSections = ["posts", "slides"]  # 添加 slides 到内容区域
+  postSections = ["posts", "slides"]
+
+[params.comment]
+  serverURL = "https://comment.mtandhj.com"
+  reaction = false
+
+[params.search]
+  defaultPlaceholder = "搜索... (tag / post / slide + 空格)"
+  tagPlaceholder = "输入标签名..."
+  postPlaceholder = "搜索博文..."
+  slidePlaceholder = "搜索 Slides..."
+  noResults = "无结果"
+  maxResults = 15
+
+[params.dateFormat]
+  display = "January 2, 2006"
+  machine = "2006-01-02T15:04:05Z07:00"
 
 [markup]
   [markup.tableOfContents]
-    endLevel = 2
+    endLevel = 4
     startLevel = 2
-    ordered = true
+    ordered = false
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true

@@ -1,0 +1,26 @@
+{{- $page := .Page -}}
+{{- $extraClass := .extraClass | default "" -}}
+{{- $dataTags := .dataTags | default "" -}}
+{{- $showDescription := .showDescription | default true -}}
+{{- $showTags := .showTags | default true -}}
+<article class="post-snippet flex flex-col [&:not(:last-child)]:border-b border-stone-400 pb-6 {{ $extraClass }}"
+         dir="{{ $page.Params.Direction }}"
+         {{ with $dataTags }}data-tags="{{ . }}"{{ end }}>
+    {{ if $page.Params.Cover }}
+    <img src="{{ $page.Params.Cover }}" class="w-full h-64 object-cover rounded-md my-3" alt="{{ $page.Title }}" loading="lazy">
+    {{ end }}
+    <time class="text-xs text-muted" datetime="{{ $page.Date.Format site.Params.dateFormat.machine }}">
+        {{ $page.Date.Format site.Params.dateFormat.display }}
+    </time>
+    <h2 class="font-semibold text-2xl my-1">
+        <a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a>
+    </h2>
+    {{- if and $showDescription $page.Description }}
+    <p class="text-sm mb-3 text-stone-700 dark:text-white">{{ $page.Description }}</p>
+    {{- end }}
+    {{- if $showTags }}
+    <div class="">
+        {{ partial "tags.html" $page }}
+    </div>
+    {{- end }}
+</article>

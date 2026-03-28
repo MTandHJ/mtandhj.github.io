@@ -16,9 +16,23 @@
 
 <!-- 搜索框和结果 -->
 <div id="fastSearch">
-    <input id="searchInput" autocomplete="off">
+    <div id="search-wrapper">
+        <span id="searchBadge"></span>
+        <span id="searchChips"></span>
+        <input id="searchInput" autocomplete="off" placeholder="{{ .Site.Params.search.defaultPlaceholder }}">
+    </div>
     <ul id="searchResults"></ul>
 </div>
 
+<script>
+  window.__searchConfig = {
+    defaultPlaceholder: {{ .Site.Params.search.defaultPlaceholder | jsonify }},
+    tagPlaceholder: {{ .Site.Params.search.tagPlaceholder | jsonify }},
+    postPlaceholder: {{ .Site.Params.search.postPlaceholder | jsonify }},
+    slidePlaceholder: {{ .Site.Params.search.slidePlaceholder | jsonify }},
+    noResults: {{ .Site.Params.search.noResults | jsonify }},
+    maxResults: {{ .Site.Params.search.maxResults | default 15 }}
+  };
+</script>
 {{ $search := resources.Get "js/search.js" | minify | fingerprint }}
 <script type="text/javascript" src="{{ $search.RelPermalink }}"></script>

@@ -5,8 +5,8 @@
     {{ range $pinned }}
     <a href="{{ .RelPermalink }}" aria-label="{{.Title}}"
         class="p-5 bg-stone-100 border border-stone-400 rounded dark:bg-stone-900 dark:text-white w-full flex flex-col gap-2">
-        <time class="text-xs text-muted" datetime="{{ .Date.Format " 2006-01-02T15:04:05Z07:00" }}">
-            {{ .Date.Format "January 2, 2006" }}
+        <time class="text-xs text-muted" datetime="{{ .Date.Format site.Params.dateFormat.machine }}">
+            {{ .Date.Format site.Params.dateFormat.display }}
         </time>
         <h2 class="font-bold text-xl md:text-2xl">{{ .Title }}</h2>
         <p class="text-sm text-muted">{{ .Description }}</p>

@@ -126,6 +126,8 @@ window.addEventListener('load', function () {
   setTimeout(scheduleRevealLayout, 400);
 });
 
+// --- 全屏与激光笔 ---
+
 var revealElement = document.querySelector('.reveal');
 var fullscreenBtn = document.getElementById('fullscreen-btn');
 var laserBtn = document.getElementById('laser-btn');

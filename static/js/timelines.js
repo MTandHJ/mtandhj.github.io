@@ -1,7 +1,17 @@
-document.addEventListener('DOMContentLoaded', function() {
-  const todoLinks = document.querySelectorAll('.todo-link[data-image-url]');
+/**
+ * 通用时间线悬浮图片提示工具.
+ * 用于 trends (paper-link) 和 todo (todo-link) 页面.
+ *
+ * Parameters
+ * ----------
+ * selector : string
+ *     CSS 选择器, 例如 '.paper-link[data-image-url]'.
+ */
+function initTooltip(selector) {
+  const links = document.querySelectorAll(selector);
+  if (!links.length) return;
 
-  todoLinks.forEach(link => {
+  links.forEach(link => {
     const imageUrl = link.getAttribute('data-image-url');
     if (!imageUrl) return;
 
@@ -9,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const preloadImg = new Image();
     let preloadedSize = null;
 
-    preloadImg.onload = function() {
+    preloadImg.onload = function () {
       preloadedSize = {
         width: this.naturalWidth,
         height: this.naturalHeight
@@ -28,13 +38,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 图片加载完成后重新计算位置
     const img = tooltip.querySelector('img');
-    img.addEventListener('load', function() {
+    img.addEventListener('load', () => {
       if (currentEvent) {
         positionTooltip(tooltip, currentEvent, preloadedSize);
       }
     });
 
-    link.addEventListener('mouseenter', function(e) {
+    link.addEventListener('mouseenter', e => {
       clearTimeout(hideTimeout);
       currentEvent = e;
       tooltip.style.display = 'block';
@@ -42,12 +52,12 @@ document.addEventListener('DOMContentLoaded', function() {
       positionTooltip(tooltip, e, preloadedSize);
     });
 
-    link.addEventListener('mousemove', function(e) {
+    link.addEventListener('mousemove', e => {
       currentEvent = e;
       positionTooltip(tooltip, e, preloadedSize);
     });
 
-    link.addEventListener('mouseleave', function() {
+    link.addEventListener('mouseleave', () => {
       currentEvent = null;
       tooltip.classList.remove('show');
       hideTimeout = setTimeout(() => { tooltip.style.display = 'none'; }, 200);
@@ -62,8 +72,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (img) {
       const availableWidth = windowWidth - event.clientX - 30;
       const maxWidth = Math.min(availableWidth, windowWidth * 0.4);
-      let originalWidth = img.naturalWidth || (preloadedSize && preloadedSize.width) || 400;
-      let originalHeight = img.naturalHeight || (preloadedSize && preloadedSize.height) || 300;
+      const originalWidth = img.naturalWidth || (preloadedSize && preloadedSize.width) || 400;
+      const originalHeight = img.naturalHeight || (preloadedSize && preloadedSize.height) || 300;
 
       if (originalWidth > maxWidth) {
         const scale = maxWidth / originalWidth;
@@ -91,4 +101,9 @@ document.addEventListener('DOMContentLoaded', function() {
     tooltip.style.left = left + 'px';
     tooltip.style.top = top + 'px';
   }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initTooltip('.paper-link[data-image-url]');
+  initTooltip('.todo-link[data-image-url]');
 });

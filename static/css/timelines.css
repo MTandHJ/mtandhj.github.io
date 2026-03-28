@@ -1,4 +1,8 @@
-/* TODO 时间线整体样式 */
+/* ============================================================
+   共享基础样式 (trends + todo)
+   ============================================================ */
+
+/* 时间线整体样式 */
 #timeline {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   max-width: 800px;
@@ -8,13 +12,6 @@
 
 .timeline-wrapper {
   position: relative;
-}
-
-/* 时间分组区域样式 */
-.time-section {
-  position: relative;
-  display: flex;
-  margin-bottom: 30px;
 }
 
 /* 年份区域样式 */
@@ -73,6 +70,245 @@
   color: #333;
   margin: 0;
   line-height: 1.2;
+}
+
+/* 工具提示样式 */
+.timeline-tooltip {
+  position: fixed;
+  display: none;
+  z-index: 1000;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 8px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  max-width: 40vw;
+  min-width: 200px;
+  overflow: hidden;
+}
+
+.timeline-tooltip.show {
+  opacity: 1;
+}
+
+.timeline-tooltip img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  border-radius: 4px;
+  display: block;
+}
+
+/* 暗色模式 - 共享 */
+.dark .timeline-center {
+  background: #444;
+}
+
+.dark .year-point {
+  background: #ddd;
+  border: 2px solid #333;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+}
+
+.dark .year-label {
+  color: #eee;
+}
+
+.dark .timeline-tooltip {
+  background: #333;
+  border-color: #555;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 响应式 - 共享 */
+@media (max-width: 700px) {
+  .timeline-left {
+    width: 100px;
+  }
+
+  .timeline-right {
+    padding-left: 20px;
+  }
+
+  .year-label {
+    font-size: 1.5em;
+  }
+}
+
+@media (max-width: 500px) {
+  .timeline-left {
+    width: 80px;
+  }
+
+  .timeline-right {
+    padding-left: 15px;
+  }
+
+  .year-label {
+    font-size: 1.3em;
+  }
+}
+
+/* ============================================================
+   Trends (paper) 特有样式
+   ============================================================ */
+
+/* 论文项目容器 */
+.paper-items {
+  position: relative;
+}
+
+/* 论文项目样式 */
+.paper-item {
+  padding: 0 0 18px 0;
+  margin-bottom: 18px;
+  border-bottom: 1px dashed #eaeaea;
+}
+
+.paper-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+/* 论文标题样式 */
+.paper-title {
+  margin-bottom: 0;
+}
+
+.paper-link {
+  font-size: 1.1em;
+  color: #1a73e8;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.paper-link:hover {
+  color: #174ea6;
+  text-decoration: underline;
+}
+
+/* 论文重要性级别样式 */
+.seminal-paper {
+  color: #d23669;
+  font-weight: 700;
+  font-size: 1.25em;
+}
+
+.seminal-paper:hover {
+  color: #b32057;
+}
+
+.novel-paper {
+  color: #3498db;
+  font-weight: 600;
+  font-size: 1.05em;
+}
+
+.novel-paper:hover {
+  color: #2980b9;
+}
+
+.emmm-paper {
+  color: #777;
+  font-weight: 500;
+  font-size: 0.95em;
+}
+
+.emmm-paper:hover {
+  color: #555;
+}
+
+/* 论文描述样式 */
+.paper-description {
+  color: #666;
+  font-size: 0.8em;
+  line-height: 1.5;
+}
+
+/* 暗色模式 - Trends */
+.dark .paper-item {
+  border-bottom: 1px dashed #444;
+}
+
+.dark .paper-link {
+  color: #8ab4f8;
+}
+
+.dark .paper-link:hover {
+  color: #aecbfa;
+}
+
+.dark .seminal-paper {
+  color: #ff7eb6;
+}
+
+.dark .seminal-paper:hover {
+  color: #ff9ec9;
+}
+
+.dark .novel-paper {
+  color: #6fc6ff;
+}
+
+.dark .novel-paper:hover {
+  color: #8bd3ff;
+}
+
+.dark .emmm-paper {
+  color: #aaa;
+}
+
+.dark .emmm-paper:hover {
+  color: #ccc;
+}
+
+.dark .paper-description {
+  color: #aaa;
+}
+
+/* 响应式 - Trends */
+@media (max-width: 700px) {
+  .seminal-paper {
+    font-size: 1.2em;
+  }
+
+  .novel-paper {
+    font-size: 1.1em;
+  }
+
+  .emmm-paper {
+    font-size: 1.03em;
+  }
+}
+
+@media (max-width: 500px) {
+  .seminal-paper {
+    font-size: 1.15em;
+  }
+
+  .novel-paper {
+    font-size: 1.08em;
+  }
+
+  .emmm-paper {
+    font-size: 1.02em;
+  }
+}
+
+/* ============================================================
+   TODO 特有样式
+   ============================================================ */
+
+/* 时间分组区域样式 */
+.time-section {
+  position: relative;
+  display: flex;
+  margin-bottom: 30px;
 }
 
 /* 时间标记和标签 */
@@ -263,21 +499,7 @@
   color: #721c24;
 }
 
-/* 暗色模式适配 */
-.dark .timeline-center {
-  background: #444;
-}
-
-.dark .year-point {
-  background: #ddd;
-  border: 2px solid #333;
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
-}
-
-.dark .year-label {
-  color: #eee;
-}
-
+/* 暗色模式 - TODO */
 .dark .time-point {
   background: #aaa;
   border: 2px solid #333;
@@ -316,7 +538,6 @@
   color: #aecbfa;
 }
 
-/* 暗色模式下的重要性级别样式 */
 .dark .seminal-todo {
   color: #ff7eb6;
 }
@@ -361,36 +582,28 @@
   color: #ffcdd2;
 }
 
-/* 响应式设计 */
+/* 响应式 - TODO */
 @media (max-width: 700px) {
-  .timeline-left {
-    width: 100px;
-  }
-  
-  .timeline-right {
-    padding-left: 20px;
-  }
-  
-  .year-label, .current-time-label {
+  .current-time-label {
     font-size: 1.5em;
   }
-  
+
   .time-label {
     font-size: 1.1em;
   }
-  
+
   .seminal-todo {
     font-size: 1.2em;
   }
-  
+
   .novel-todo {
     font-size: 1.1em;
   }
-  
+
   .emmm-todo {
     font-size: 1.03em;
   }
-  
+
   .current-time-marker {
     width: 14px;
     height: 14px;
@@ -398,73 +611,28 @@
 }
 
 @media (max-width: 500px) {
-  .timeline-left {
-    width: 80px;
-  }
-  
-  .timeline-right {
-    padding-left: 15px;
-  }
-  
-  .year-label, .current-time-label {
+  .current-time-label {
     font-size: 1.3em;
   }
-  
+
   .time-label {
     font-size: 1.0em;
   }
-  
+
   .seminal-todo {
     font-size: 1.15em;
   }
-  
+
   .novel-todo {
     font-size: 1.08em;
   }
-  
+
   .emmm-todo {
     font-size: 1.02em;
   }
-  
+
   .current-time-marker {
     width: 12px;
     height: 12px;
   }
-}
-
-/* 工具提示样式 */
-.timeline-tooltip {
-  position: fixed;
-  display: none;
-  z-index: 1000;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  padding: 8px;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-  max-width: 40vw;
-  min-width: 200px;
-  overflow: hidden;
-}
-
-.timeline-tooltip.show {
-  opacity: 1;
-}
-
-.timeline-tooltip img {
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  border-radius: 4px;
-  display: block;
-}
-
-/* 暗色模式下的工具提示 */
-.dark .timeline-tooltip {
-  background: #333;
-  border-color: #555;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }

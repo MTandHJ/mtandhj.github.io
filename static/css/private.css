@@ -41,23 +41,79 @@ ol.reference li::before {
     top: calc(5vw + 40px);
     transform: translateX(-50%);
     z-index: 4;
-    width: 650px;
+    width: 810px;
     background-color: #fff;
     box-shadow: 0 1px 2px #3c40434d, 0 2px 6px 2px #3c404326;
     border-radius: 4px;
     overflow: hidden;
- 
+
+    #search-wrapper {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 4px;
+        padding: 4px 4px 4px 0;
+        min-height: 50px;
+        max-height: 120px;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #c0b8b0 transparent;
+    }
+
+    #searchBadge {
+        display: none;
+        flex-shrink: 0;
+        padding: 0 12px;
+        font-size: 18px;
+        line-height: 42px;
+        font-family: inherit;
+        color: #4b3425;
+        border-right: 1.5px solid #ddd;
+        white-space: nowrap;
+    }
+
+    #searchChips {
+        display: contents;
+    }
+
+    .search-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 5px 8px;
+        border-radius: 4px;
+        background-color: #292524;
+        color: #fff;
+        font-size: 13px;
+        line-height: 1.4;
+        white-space: nowrap;
+        box-shadow: 0 1px 2px rgba(0,0,0,.15);
+    }
+
+    .chip-remove {
+        cursor: pointer;
+        opacity: 0.7;
+        font-size: 15px;
+        line-height: 1;
+        margin-left: 2px;
+    }
+
+    .chip-remove:hover {
+        opacity: 1;
+    }
+
     input {
-        padding: 10px;
-        width: 100%;
-        height: 50px;
+        padding: 6px 10px;
+        flex: 1;
+        min-width: 80px;
+        height: 42px;
         font-size: 18px;
         line-height: 30px;
         border: none;
         outline: none;
         font-family: inherit;
     }
- 
+
     #searchResults {
         display: none;
         overflow-y: auto;
@@ -65,16 +121,67 @@ ol.reference li::before {
         padding-left: 0;
         margin: 0;
         border-top: 1px dashed #ddd;
- 
+        scrollbar-width: thin;
+        scrollbar-color: #c0b8b0 transparent;
+
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: #c0b8b0;
+            border-radius: 3px;
+        }
+
         .search-highlight, mark {
             color: red;
             background: none;
         }
- 
+
+        .co-tag-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 8px 10px;
+            border-bottom: 1px dashed #eee;
+            list-style: none;
+            margin: 0;
+        }
+
+        .co-tag-chip {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 4px;
+            background-color: #f0eeec;
+            color: #4b3425;
+            font-size: 13px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background-color .15s;
+        }
+
+        .co-tag-chip:hover {
+            background-color: #e0dbd7;
+        }
+
+        .co-tag-count {
+            color: #999;
+            font-size: 11px;
+            margin-left: 2px;
+        }
+
+        .result-group-label {
+            padding: 6px 10px 2px;
+            font-size: 12px;
+            color: #999;
+            font-weight: 600;
+            letter-spacing: .05em;
+            text-transform: uppercase;
+        }
+
         li {
             list-style: none;
             margin: 0;
- 
+
             a {
                 text-decoration: none;
                 color: inherit;
@@ -83,19 +190,29 @@ ol.reference li::before {
                 font-size: 14px;
                 letter-spacing: .04em;
             }
- 
+
             a:hover,
             a:focus {
                 filter: brightness(93%);
                 outline: 0;
                 background-color: rgb(240, 240, 240);
             }
- 
+
             .title {
                 font-weight: 600;
             }
+
+            .result-icon {
+                margin-right: 6px;
+            }
+
+            .tag-count {
+                color: #888;
+                margin-left: 6px;
+                font-size: 12px;
+            }
         }
- 
+
         li.noSearchResult {
             text-align: center;
             margin: 8px 0;
