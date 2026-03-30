@@ -1,11 +1,20 @@
 [
   {
-    "date": "2026-06-01",
+    "date": "2026-06-15",
     "title": "博士毕业",
     "description": "完成博士学位论文答辩，获得博士学位",
     "paperUrl": "",
     "imageUrl": "",
     "importance": "seminal",
+    "status": "pending"
+  },
+  {
+    "date": "2026-06-01",
+    "title": "蚂蚁实习",
+    "description": "三月下杭州, 见见世面",
+    "paperUrl": "",
+    "imageUrl": "",
+    "importance": "novel",
     "status": "pending"
   },
   {
@@ -15,6 +24,6 @@
     "paperUrl": "",
     "imageUrl": "",
     "importance": "novel",
-    "status": "pending"
+    "status": "complete"
   }
 ]
