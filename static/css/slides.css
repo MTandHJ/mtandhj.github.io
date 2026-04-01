@@ -99,7 +99,7 @@
 .reveal .slides section:not(:first-child) h3 {
   position: absolute;
   top: 0;
-  left: -2rem;
+  left: -0.5rem;
   text-transform: none;
   color: #5F7F8A!important;
   font-weight: bold !important;

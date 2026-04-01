@@ -101,7 +101,7 @@ $$
 
 ## <u>S</u>tateful <u>O</u>ptimizers in Ultra-<u>LO</u>w Bits
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617110019.png"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617110019.png" size="70%"></slide-img>
 
 </slide-section>
 
@@ -224,7 +224,7 @@ $$
 
 <slide-col ratio="6">
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250908140511.png"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250908140511.png" size="70%"></slide-img>
 
 </slide-col>
 
@@ -327,7 +327,7 @@ $$
 
 &nbsp;
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250722101739.png" size="95%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250722101739.png" size="80%"></slide-img>
 
 </slide-col>
 
@@ -380,7 +380,7 @@ $$
 
 ## Experiments
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617111401.png" size="100%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617111401.png" size="90%"></slide-img>
 
 😒 **传统方法:** $\underset{\text{Training from scratch}}{\xrightarrow{\text{Ultra-Low-Bit}}}$ degeneration/collapse 
 
@@ -394,7 +394,7 @@ $$
 
 ## Experiments (Giant Models)
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617112643.png" size="95%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617112643.png" size="80%"></slide-img>
 
 </slide-section>
 
@@ -441,7 +441,7 @@ $$
 
 ## State Changes
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617112843.png"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250617112843.png" size="70%"></slide-img>
 
 </slide-section>
 

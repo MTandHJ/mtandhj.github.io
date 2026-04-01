@@ -23,7 +23,7 @@ tags:
 $\textcircled{\small 1}$ Embedding $\xrightarrow{\text{实体 (User, Item) 的向量表示}}$ 现代推荐系统的基础
 
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619102807.png" size="65%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619102807.png" size="55%"></slide-img>
 
 </slide-section>
 
@@ -36,7 +36,7 @@ $\textcircled{\small 1}$ Embedding $\xrightarrow{\text{实体 (User, Item) 的�
 $\textcircled{\small 2}$ 多元信息 $\xrightarrow{\text{交互信息, 类别相似性}}$ 潜在的结构性约束
 
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619110409.png" size="100%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619110409.png" size="90%"></slide-img>
 
 ❓Embedding 学习如何高效融入这些结构性先验
 
@@ -51,7 +51,7 @@ $\textcircled{\small 2}$ 多元信息 $\xrightarrow{\text{交互信息, 类别�
 
 $\textcircled{\small 3}$ 图结构先验 $\underset{\text{超大规模 Embedding table}}{\xrightarrow{\text{训练随机性: 数据采样, dropout}}}$ 😞低效的信息融合
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619112212.png" size="90%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619112212.png" size="80%"></slide-img>
 
 $\mathbf{E}$: <span style="color:gray">Embedding</span>
 &nbsp; &nbsp; &nbsp;
@@ -70,7 +70,7 @@ $\nabla_{\mathbf{E}} \mathcal{L}$: <span style="color:gray">Gradient</span>
 
 $\textcircled{\small 4}$ 图+序列模型: 过于依赖**特定场景**, 高昂的**训练/推理代价**
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250711202256.png" size="90%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250711202256.png" size="75%"></slide-img>
 
 <u>LightGCN:</u> <span style="color:gray">GNN-only</span>
 &nbsp; &nbsp; &nbsp;
@@ -119,7 +119,7 @@ $$
 
 ## Structure-aware Embedding Evolution
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619151431.png" size="90%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619151431.png" size="80%"></slide-img>
 
 $$
 \Delta \mathbf{E}_{t-1} \xrightarrow{\textcolor{blue}{\psi}(\cdot)} \psi(\mathbf{E}_{t-1}).
@@ -200,12 +200,12 @@ $$
 
 $\textcircled{\small 1}$ $\psi_{iter}$ 的受限平滑性:
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619161557.png" size="100%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619161557.png" size="80%"></slide-img>
 
 
 $\textcircled{\small 2}$ $\psi_{nsa}$ 的次优收敛性:
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619161810.png" size="100%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619161810.png" size="80%"></slide-img>
 
 😄 **SEvo:**
 
@@ -223,7 +223,7 @@ $$
 
 - SEvo 可以直接应用在其它优化器所衍生的更新量
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619163020.png" size="100%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619163020.png" size="90%"></slide-img>
 
 
 </slide-section>
@@ -236,7 +236,7 @@ $$
 ## Adam + SEvo
 
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619163150.png" size="100%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619163150.png" size="90%"></slide-img>
 
 
 </slide-section>
@@ -248,7 +248,7 @@ $$
 
 ## AdamW + SEvo
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619163339.png" size="95%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619163339.png" size="85%"></slide-img>
 
 
 </slide-section>
@@ -259,7 +259,7 @@ $$
 
 ## Overall Comparisons
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619164021.png" size="95%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619164021.png" size="85%"></slide-img>
 
 ✅ **Accuracy:** 平均 10+\% 的提升
 
@@ -273,11 +273,9 @@ $$
 
 ## Empirical Analysis
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619164506.png" size="95%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619164506.png" size="85%"></slide-img>
 
-✅ **收敛性:** $\textcolor{orange}{1 / (1 - \beta^{L+1})}$ 加快收敛
-
-✅ **平滑性:** $\beta \rightarrow 1$ 愈加平滑
+✅ **收敛性:** $\textcolor{orange}{1 / (1 - \beta^{L+1})}$ 加快收敛 &nbsp; &nbsp; ✅ **平滑性:** $\beta \rightarrow 1$ 愈加平滑
 
 </slide-section>
 
@@ -287,7 +285,7 @@ $$
 
 ## Ablation Study
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619164907.png" size="100%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619164907.png" size="90%"></slide-img>
 
 ✅ **泛化性:** 适用于 SGD/Adam/AdamW
 
@@ -303,7 +301,7 @@ $$
 
 ## 类别一致先验
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619165639.png" size="100%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250619165639.png" size="90%"></slide-img>
 
 ✅ **类别一致性:** 类别一致的表示更加接近
 

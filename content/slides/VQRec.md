@@ -18,7 +18,7 @@ tags:
 
 ## VQ-VAE
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250707120708.png" size="100%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250707120708.png" size="90%"></slide-img>
 
 <slide-ref>
   van den Oord A., et al. Neural Discrete Representation Learning. NeurIPS, 2017.
@@ -69,7 +69,7 @@ Note:
 
 - 图片 Token 化 + Next-token prediction $p(s_i | s_{< i}, \textcolor{red}{condition})$
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250311144000.png" size="100%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250311144000.png" size="90%"></slide-img>
 
 <slide-ref>
   Esser P., et al. Taming Transformers for High-Resolution Image Synthesis. CVPR, 2021.
@@ -107,7 +107,7 @@ Note:
 
 - **Undesirable Gradient Estimator:**
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250707152059.png" size="90%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250707152059.png" size="80%"></slide-img>
 
 
 - **Codebook Collapse:** Low codebook usage
@@ -214,7 +214,7 @@ $$
 R = \left(I - 2 \frac{\bm{c}\bm{c}^T}{\|\bm{c}\|^2} \right) \left(I - 2 \frac{\bm{r}\bm{r}^T}{\|\bm{r}\|^2} \right), \quad \bm{r} := \frac{\bm{z}}{\|\bm{z}\|} + \frac{\bm{c}}{\|\bm{c}\|}
 $$
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250612173750.png"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250612173750.png" size="65%"></slide-img>
 
 </slide-section>
 
@@ -382,7 +382,7 @@ $$
 
 - **生成式推荐:**
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250316175859.png"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250316175859.png" size="75%"></slide-img>
 
 
 <slide-ref>
@@ -419,7 +419,7 @@ $$
 <!-- left -->
 <slide-col ratio="6">
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250707105044.png" size="100%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250707105044.png" size="90%"></slide-img>
 
 </slide-col>
 
@@ -457,7 +457,7 @@ $$
 
 <slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250327143851.png"></slide-img>
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250327145319.png" size="65%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250327145319.png" size="60%"></slide-img>
 
 
 
@@ -553,7 +553,7 @@ Note:
 
 ## Decoder-Encoder-XXX Vector Quantization
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250709165402.png" size="100%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250709165402.png" size="90%"></slide-img>
 
 </slide-section>
 

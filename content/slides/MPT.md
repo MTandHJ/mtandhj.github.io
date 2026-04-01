@@ -93,7 +93,7 @@ tags:
 
 - 推荐需要何种能力? 长短兴趣建模?
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260112202832.png" size="100%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260112202832.png" size="90%"></slide-img>
 
 <slide-ref>
   GRU4Rec: RNN; SASRec: Transformer; HSTU: Attention + Time-based positional encoding
@@ -177,7 +177,7 @@ $$
 
 ## RQII: Data for Markovian Reasoner
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217120440.png" size="100%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217120440.png" size="90%"></slide-img>
 
 </slide-section>
 
@@ -237,7 +237,7 @@ $$
 
 ### Markovian Pre-training & Recommendation Fine-tuning
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217143749.png" size="100%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217143749.png" size="85%"></slide-img>
 
 </slide-section>
 
@@ -247,7 +247,7 @@ $$
 
 ## Experiments
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260112203428.png" size="100%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260112203428.png" size="90%"></slide-img>
 
 </slide-section>
 
@@ -261,7 +261,7 @@ $$
 
 <slide-col ratio="4">
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260112203808.png" size="100%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260112203808.png" size="90%"></slide-img>
 
 </slide-col>
 
@@ -301,7 +301,7 @@ $$
 </slide-col>
 
 <slide-col ratio="6">
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260112204030.png" size="100%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260112204030.png" size="90%"></slide-img>
 </slide-col>
 
 </slide-cols>
@@ -316,7 +316,7 @@ $$
 
 - Number of states $|\mathcal{S}|$
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217152317.png" size="100%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217152317.png" size="90%"></slide-img>
 
 </slide-section>
 
@@ -328,7 +328,7 @@ $$
 
 - $\alpha$ of Dirichlet distribution
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217152637.png" size="100%"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251217152637.png" size="90%"></slide-img>
 
 </slide-section>
 
