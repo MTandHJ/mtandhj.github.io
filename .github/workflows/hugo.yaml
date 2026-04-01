@@ -65,7 +65,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .slide-cache
-          key: slide-pdf-${{ runner.os }}
+          key: slide-pdf-${{ runner.os }}-${{ github.sha }}
+          restore-keys: |
+            slide-pdf-${{ runner.os }}-
       - name: Build slide PDFs
         run: bash scripts/build-slide-pdfs.sh
       - name: Build search index

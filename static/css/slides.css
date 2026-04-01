@@ -99,10 +99,19 @@
 .reveal .slides section:not(:first-child) h3 {
   position: absolute;
   top: 0;
-  left: -4rem;
+  left: -2.5rem;
   text-transform: none;
-  color: #1F4E79 !important;
+  color: #5F7F8A!important;
   font-weight: bold !important;
+}
+.reveal .slides section:not(:first-child) h1::after,
+.reveal .slides section:not(:first-child) h2::after,
+.reveal .slides section:not(:first-child) h3::after {
+  content: '';
+  display: block;
+  height: 4px;
+  margin-top: 0.15em;
+  background: linear-gradient(to right, #6B8792, transparent);
 }
 
 /* 为不同级别的标题设置不同的字体大小 */
@@ -216,7 +225,7 @@
 /* 只有一级列表使用自定义箭头 */
 .reveal .slides section ul > li::marker {
   content: "❯" !important;
-  color: #1F4E79 !important;
+  color: #4B545C !important;
 }
 
 /* 二级列表 - 圆点 */
