@@ -1,46 +1,53 @@
 
 ## 背景
 
-该项目使用 GitHub Actions 在每次 push 到 master 时自动构建 Hugo 站点并部署到 GitHub Pages。其中包含一个 slide PDF 生成流程：通过 decktape 将 Reveal.js slide 转为 PDF。为降低构建时间，已实现基于哈希的缓存机制来跳过未变更的 slide。
+`layouts/slides/single.html`（网页版）和 `layouts/slides/single.pdf.html`（PDF 版）共享了大量 CSS 和 JS 逻辑，但 PDF 模板将所有代码内联，导致两处代码逐渐漂移，产生了无意义的差异。需要合并去重，减少维护负担。
 
-## 问题
+## 现状分析
 
-每次提交都会对所有 slide PDF 全量重新生成（日志中全部显示 `[rebuild]`），即使没有对 slide 内容、CSS 等做任何改变。缓存机制未能生效。
+### 重复代码（JS）
 
-## 根因分析
+以下逻辑在 `slides.js` 和 `single.pdf.html` 内联 JS 中各有一份，完全相同：
+- `convertCustomTags()` — 自定义标签转换
+- `slide-section` → `<section data-markdown>` 转换
+- `scheduleRevealLayout()` — 布局刷新
+- `renderSlideMath()` + KaTeX delimiters — 数学公式渲染
+- Reveal.js 初始化及事件绑定
 
-### 根因 1：GitHub Actions Cache 不会更新已有缓存
+### 重复代码（CSS）
 
-- **文件**: `.github/workflows/hugo.yaml:68`
-- cache key 为静态值 `slide-pdf-${{ runner.os }}`
-- `actions/cache@v4` 在精确命中（exact key match）时**不会**在 job 结束后重新保存缓存
-- 导致 `hashes.json` 永远停留在首次创建时的状态，后续运行更新的哈希值无法持久化
+`slides.css` 和 `single.pdf.html` 内联 `<style>` 结构相同，但样式值存在漂移：
+- 标题颜色：`#5F7F8A`（web）vs `#1F4E79`（PDF）
+- Marker 颜色：`#4B545C`（web）vs `#1F4E79`（PDF）
+- 标题位置：`left: -2.5rem`（web）vs `left: -4rem`（PDF）
+- 标题下划线：有（web）vs 无（PDF）
+- Reveal margin：`0.1`（web）vs `0.07`（PDF）
+- Reveal width：`1100`（web）vs `1050`（PDF）
 
-### 根因 2：哈希对象是 Hugo 构建产物而非源文件
-
-- **文件**: `scripts/build-slide-pdfs.sh:20`
-- 当前对 `docs/pdf/slides/*/index.html`（Hugo 输出的 HTML）做 sha256sum
-- Hugo 每次构建的 HTML 可能因内部处理差异而变化，即使源文件未变，hash 也可能不同
-- 叠加根因 1，导致每次运行都用首次保存的旧 hash 与当前构建产物比较 → 全部 mismatch → 全部重建
+**结论**：除 PDF 模板中额外引入的 CJK 字体声明外，所有差异均为历史漂移，应以 `single.html` 为准统一。
 
 ## 需求
 
-### R1：修复 Cache Key 使缓存可更新
+### R1：拆分 `slides.js` 为 core + interactive
 
-- 使用动态 cache key（如包含 commit SHA），配合 `restore-keys` 前缀匹配实现缓存回退
-- 确保每次运行更新后的 `hashes.json` 和 PDF 缓存能被正确保存
+- **`slides-core.js`**（共享）：包含自定义标签转换、slide-section 转换、Reveal.js 初始化、`scheduleRevealLayout()`、数学公式渲染等核心逻辑
+- **`slides-interactive.js`**（仅网页版）：包含全屏切换、激光笔、评论区 reflow、resize 处理等交互功能
+- `single.html` 同时引用两个文件；`single.pdf.html` 仅引用 `slides-core.js`
 
-### R2：改用源文件哈希替代构建产物哈希
+### R2：PDF 模板引用外部 CSS，消除内联样式
 
-- 对每个 slide，hash 其对应的源文件 `content/slides/<slug>.md`（而非 Hugo 输出的 HTML）
-- 对共享文件（影响所有 slide PDF 输出的文件）计算统一哈希，任一共享文件变更则触发所有 slide 重建
-- 共享文件清单：
-  - `layouts/slides/single.pdf.html` — PDF 专用模板（含内联 CSS 和 JS）
-  - `static/css/slides.css` — slide 样式
-  - `hugo.toml` — Hugo 配置（影响输出格式、permalinks 等）
+- PDF 模板改用 `<link rel="stylesheet" href="/css/slides.css">` 引用共享样式
+- 仅保留 PDF 专属的内联 `<style>` 覆盖：
+  - **CJK 字体兼容**：PDF 在 GitHub Actions 的 headless Chrome 中渲染，必须显式声明 CJK 字体回退链（`"Noto Sans CJK SC"`, `"Noto Sans SC"` 等），否则中文将显示为方块。此声明仅 PDF 需要（网页版由浏览器/系统字体兜底），必须保留在 PDF 模板的内联样式中。
+  - 独立渲染所需的 reset（`*, html, body` 重置）
+  - `.reveal` 容器全屏覆盖（`width: 100%; height: 100%;`）
 
-### R3：保持现有行为不变
+### R3：统一漂移的样式值
 
-- slide 发生变更时仍正常触发 decktape 重新生成 PDF
-- 缓存命中时仍从 `.slide-cache/pdf/` 复制到 `docs/slides/`
-- 脚本输出日志格式不变（`[cache hit]` / `[rebuild]`）
+- 所有样式值以 `single.html` / `slides.css` 当前值为准
+- 删除 PDF 模板中与 `slides.css` 重复的规则
+
+### R4：确保 PDF 构建流程不受影响
+
+- decktape 通过 http-server 加载 PDF 模板，外部 CSS/JS 引用路径（`/css/slides.css`、`/js/slides-core.js`）需在 `docs/` 目录下可访问
+- GitHub Actions 构建流程无需修改

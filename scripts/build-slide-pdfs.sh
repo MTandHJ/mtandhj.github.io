@@ -12,6 +12,7 @@ LOAD_PAUSE=3000
 SHARED_FILES=(
   "layouts/slides/single.pdf.html"
   "static/css/slides.css"
+  "static/js/slides-core.js"
   "hugo.toml"
 )
 
