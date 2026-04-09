@@ -48,12 +48,28 @@
     "importance": "novel"
   },
   {
+    "date": "2022-07-01",
+    "title": "TabPFN",
+    "description": "PFN 在 Tabular data 上的 scale 效应",
+    "paperUrl": "http://arxiv.org/abs/2207.01848",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260409152316.png",
+    "importance": "novel"
+  },
+  {
     "date": "2022-06-22",
     "title": "Synthetic Data-Based Simulators for Recommender Systems: A Survey",
     "description": "调研了不同推荐仿真平台设计的目标和范围",
     "paperUrl": "http://arxiv.org/abs/2206.11338",
     "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260102164145.png",
     "importance": "emmm"
+  },
+  {
+    "date": "2021-12-20",
+    "title": "PFN",
+    "description": "Prior Data fitting & In-Context inference",
+    "paperUrl": "/posts/pfn/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260409141333.png",
+    "importance": "seminal"
   },
   {
     "date": "2021-09-14",
