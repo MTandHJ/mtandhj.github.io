@@ -2,6 +2,8 @@
 
 <!-- 添加代码折叠功能的 CSS -->
 <link rel="stylesheet" href="/css/code-collapse.css">
+<!-- Pyodide 可执行代码块样式 -->
+<link rel="stylesheet" href="/css/pyodide-runner.css">
 
 <div dir="{{.Params.Direction}}" class="prose mx-auto break-normal px-5 mt-8 dark:prose-invert" data-pagefind-body>
     {{ partial "pagefind-meta.html" (dict "type" "post" "page" .) }}
@@ -31,5 +33,7 @@
 
 <!-- 添加代码折叠功能的 JavaScript -->
 <script src="/js/code-collapse.js"></script>
+<!-- Pyodide 可执行代码块 -->
+<script src="/js/pyodide-runner.js"></script>
 
 {{ partial "footer.html" . }}

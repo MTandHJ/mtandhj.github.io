@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // 为所有代码块添加滚动功能和复制按钮
-    document.querySelectorAll('pre').forEach(function(pre) {
+    document.querySelectorAll('pre:not(.pyodide-code)').forEach(function(pre) {
         // 创建包装器
         const wrapper = document.createElement('div');
         wrapper.className = 'code-wrapper';

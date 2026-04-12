@@ -1,0 +1,189 @@
+/* ===== Pyodide runnable code block ===== */
+
+.pyodide-block {
+  position: relative;
+  margin: 1em 0;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.dark .pyodide-block {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* --- Toolbar --- */
+
+.pyodide-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.dark .pyodide-toolbar {
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.pyodide-run-btn,
+.pyodide-reset-btn {
+  padding: 3px 12px;
+  font-size: 13px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.05);
+  color: inherit;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.pyodide-run-btn:hover,
+.pyodide-reset-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.dark .pyodide-run-btn,
+.dark .pyodide-reset-btn {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.dark .pyodide-run-btn:hover,
+.dark .pyodide-reset-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.pyodide-run-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* Copy button – pushed to the right */
+.pyodide-copy-btn {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.05);
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pyodide-copy-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.dark .pyodide-copy-btn {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.dark .pyodide-copy-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.pyodide-copy-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+/* --- Code area --- */
+
+.pyodide-block .pyodide-code {
+  margin: 0;
+  padding: 1em;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  font-size: 0.875em;
+  line-height: 1.7;
+  overflow-x: auto;
+  max-height: 700px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
+  background: #f8f8f8;
+  color: #1f2328;
+}
+
+.dark .pyodide-block .pyodide-code {
+  background: #1a1a1a;
+  color: #f8f8f2;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.pyodide-block .pyodide-code code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  white-space: pre;
+  display: block;
+  color: inherit;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0;
+  font-size: inherit;
+  border: none;
+  border-radius: 0;
+}
+
+/* --- Output area --- */
+
+.pyodide-output {
+  display: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 0.75em 1em;
+  background: rgba(0, 0, 0, 0.02);
+  max-height: 500px;
+  overflow: auto;
+  color: inherit;
+}
+
+.dark .pyodide-output {
+  border-top-color: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.pyodide-output .pyodide-stdout,
+.pyodide-output .pyodide-stderr{
+  margin: 0;
+  padding: 0;
+  font-size: 0.85em;
+  line-height: 1.5;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: none;
+  overflow: visible;
+  color: inherit;
+}
+
+.pyodide-stderr {
+  color: #e74c3c;
+}
+
+.pyodide-output.has-error {
+  background: rgba(231, 76, 60, 0.05);
+}
+
+.dark .pyodide-output.has-error {
+  background: rgba(231, 76, 60, 0.1);
+}
+
+.pyodide-plot {
+  display: block;
+  max-width: 100%;
+  margin: 0.5em 0;
+  border-radius: 4px;
+}
