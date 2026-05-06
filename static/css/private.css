@@ -222,6 +222,39 @@ ol.reference li::before {
 }
 
 
+/* Inline code */
+.prose code {
+    background-color: #eff1f3 !important;
+    color: #1f2328 !important;
+    border-radius: 6px !important;
+    padding: 0.2em 0.4em !important;
+    font-weight: 400 !important;
+}
+
+.prose code::before,
+.prose code::after {
+    content: none !important;
+}
+
+/* Reset for code blocks */
+.prose pre code {
+    background-color: transparent !important;
+    color: inherit !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    font-weight: inherit !important;
+}
+
+.dark .prose code {
+    background-color: #2d333b !important;
+    color: #adbac7 !important;
+}
+
+.dark .prose pre code {
+    background-color: transparent !important;
+    color: inherit !important;
+}
+
 :root { /* waline */
   --waline-theme-color: #4b3425 !important;
   --waline-active-color: #9c8877 !important;
