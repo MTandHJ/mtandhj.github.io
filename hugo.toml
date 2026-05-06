@@ -5,6 +5,7 @@ defaultContentLanguage = "en-us"
 publishDir = "docs"
 
 disableKinds = ["taxonomy", "term"]
+ignoreFiles = ["_template\\.md$"]
 
 [taxonomies]
 tag = "tags"
@@ -91,4 +92,5 @@ fastSearch = true
 
 # 添加 slides 内容类型的配置
 [permalinks]
+  posts = "/posts/:contentbasename/"
   slides = "/slides/:contentbasename/"
