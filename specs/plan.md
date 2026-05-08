@@ -1,71 +1,143 @@
-# Inline Code 渲染修复 - 技术规划
+# Slide 字体方案重构 - 技术规划
 
-## 方案
+## 字体方案
 
-在 `private.css` 中添加覆盖规则, 利用 CSS 优先级覆盖 Tailwind Typography 的 inline code 样式.
+| 用途 | 英文 | 中文 | 字重 |
+|------|------|------|------|
+| 标题 | Source Sans 3 | Source Han Sans SC | 700 (Bold) |
+| 正文 | Inter | Source Han Sans SC | 400 (Regular) |
 
-### 修改文件
+- Source Han Sans SC: SIL OFL 1.1, 可自托管, 子集化后 ~1MB woff2
+- Source Sans 3 / Inter: Google Fonts 也可下载 woff2 自托管, 无需 CDN
 
-`static/css/private.css`
+## 文件结构
 
-### 具体规则
+```
+static/fonts/
+├── source-sans-3-bold.woff2       # 标题英文 Bold
+├── source-sans-3-regular.woff2    # 正文英文 Regular (Inter 不够时的回退)
+├── inter-regular.woff2            # 正文英文
+├── inter-medium.woff2             # 正文英文 (列表等)
+├── source-han-sans-sc-bold.woff2  # 标题中文 Bold 子集
+└── source-han-sans-sc-regular.woff2 # 正文中文 Regular 子集
+```
 
-1. **移除反引号伪元素** — 将 `::before`/`::after` 的 `content` 重置为 `none`
-2. **添加背景色 + 内边距 + 圆角** — 浅色/深色模式分别处理
-3. **排除 `<pre><code>`** — 用 `:not(pre code)` 选择器确保代码块不受影响
+预估总大小: ~4-5MB (CJK 子集约 1MB/字重, 拉丁字体 <200KB/字重)
 
-### 配色方案
+## 实施步骤
 
-参考 GitHub 的 inline code 风格, 与博客现有 `code-collapse.css` 中代码块背景色 (`#f8f8f8` / `#1a1a1a`) 协调:
+### 1. 下载原始字体文件
 
-| 属性 | 浅色模式 | 深色模式 |
-|------|----------|----------|
-| 背景色 | `#eff1f3` | `#2d333b` |
-| 文字色 | `#1f2328` | `#adbac7` |
-| 圆角 | `6px` | `6px` |
-| 内边距 | `0.2em 0.4em` | `0.2em 0.4em` |
+- Source Han Sans SC: 从 GitHub releases 下载 OTF (Regular + Bold)
+- Source Sans 3: 从 Google Fonts 下载 woff2
+- Inter: 从 Google Fonts 下载 woff2
 
-### CSS 实现
+### 2. 子集化 Source Han Sans SC
+
+使用 pyftsubset 将 CJK 字体子集化为 GB2312 + ASCII:
+
+```bash
+pip install fonttools brotli
+# 生成 GB2312 unicode 列表
+python scripts/gen-gb2312-unicodes.py
+# 子集化 + 转 woff2
+pyftsubset SourceHanSansSC-Regular.otf \
+  --unicodes-file=gb2312_unicodes.txt \
+  --output-file=static/fonts/source-han-sans-sc-regular.woff2 \
+  --flavor=woff2 \
+  --layout-features=* --name-IDs=* \
+  --glyph-names --legacy-cmap --symbol-cmap
+```
+
+### 3. 编写 @font-face 声明
+
+在 `static/css/slides.css` 顶部添加 @font-face 规则, 替换所有 Google Fonts CDN 引用.
+
+### 4. 更新 HTML 模板
+
+- `layouts/slides/single.html`: 移除 Google Fonts `<link>` 标签
+- `layouts/slides/single.pdf.html`: 移除 Google Fonts `<link>` 标签, 更新 font-family 声明
+
+### 5. 更新 CSS 字体声明
 
 ```css
-/* Inline code style */
-.prose code:not(pre code) {
-    background-color: #eff1f3;
-    color: #1f2328;
-    border-radius: 6px;
-    padding: 0.2em 0.4em;
-    font-weight: 400;
+/* 自托管字体 */
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("/fonts/source-sans-3-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
 }
 
-.prose code:not(pre code)::before,
-.prose code:not(pre code)::after {
-    content: none;
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
 }
 
-.dark .prose code:not(pre code) {
-    background-color: #2d333b;
-    color: #adbac7;
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Source Han Sans SC";
+  src: url("/fonts/source-han-sans-sc-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Source Han Sans SC";
+  src: url("/fonts/source-han-sans-sc-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* 标题 */
+.reveal .slides section:not(:first-child) h1,
+.reveal .slides section:not(:first-child) h2,
+.reveal .slides section:not(:first-child) h3 {
+  font-family: "Source Sans 3", "Source Han Sans SC", sans-serif;
+}
+
+/* 正文 */
+.reveal .slides {
+  font-family: "Inter", "Source Han Sans SC", sans-serif;
 }
 ```
 
-### 优先级分析
+### 6. 更新 PDF 模板字体声明
 
-- `private.css` 在 `output.css` 之后加载 (header.html 中顺序), 同优先级下后者覆盖前者
-- `.prose code:not(pre code)` 与 `.prose :where(code)` 同为单类选择器, 但 `:not(pre code)` 不降权, 且 `private.css` 加载更晚, 可覆盖
-- `font-weight: 400` 覆盖 Typography 默认的 `600`, 避免加粗与背景叠加造成视觉过重
-- `code-collapse.css` 中 `.prose pre code { color: inherit !important }` 不受影响, 因为 `:not(pre code)` 排除了 pre 内的 code
+```css
+.reveal, .reveal .slides {
+  font-family: "Inter", "Source Han Sans SC", sans-serif;
+}
+```
 
-### 不修改的文件
+### 7. 验证
 
-- `output.css` — Tailwind 生成文件, 不手动修改
-- `code-collapse.css` — 仅处理 pre/code 块, 无冲突
-- `chroma.css` — 仅处理语法高亮, 无冲突
+- 本地 `hugo server` 预览, 检查字体加载和渲染
+- 检查 PDF 生成是否正确使用自托管字体
+- 确认无 Google Fonts CDN 请求
 
-## 验证方式
+## PDF 兼容性
 
-1. 启动 Hugo 本地服务器 (`hugo server`)
-2. 检查包含 inline code 的文章页面:
-   - 浅色模式: inline code 有浅灰背景, 深色文字, 圆角, 无反引号
-   - 深色模式: inline code 有深色背景, 浅色文字, 圆角, 无反引号
-3. 确认代码块 (`<pre><code>`) 样式未受影响
-4. 确认标题/链接中的 inline code 也正常显示
+自托管字体后, PDF 生成流程:
+1. Hugo 构建 → `docs/fonts/` 包含所有 woff2 文件
+2. decktape 加载 `http://localhost:8765/pdf/slides/.../`
+3. Chromium 从本地服务器加载 `/fonts/*.woff2` → 无网络延迟
+4. `--load-pause 3000ms` 足够 (本地加载 <100ms)
+
+CI 环境的 `fonts-noto-cjk` 仅作为 CSS font-family 链的最终回退.
+
+## 风险点
+
+| 风险 | 缓解措施 |
+|------|----------|
+| GB2312 子集未覆盖生僻字 | CSS font-family 链回退到系统字体; CI 有 fonts-noto-cjk 兜底 |
+| Source Han Sans SC 子集化体积偏大 | 实测 ~1MB/字重 woff2, 可接受; 如需更小可进一步缩减字符集 |
+| 字体文件增加 repo 体积 | woff2 总计 ~4-5MB, git LFS 可选但非必须 |

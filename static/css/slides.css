@@ -1,3 +1,52 @@
+/* Self-hosted fonts */
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("/fonts/source-sans-3-400.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("/fonts/source-sans-3-700.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/inter-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Han Sans SC";
+  src: url("/fonts/source-han-sans-sc-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Han Sans SC";
+  src: url("/fonts/source-han-sans-sc-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* Body text font */
+.reveal .slides {
+  font-family: "Inter", "Source Han Sans SC", sans-serif;
+}
+
 .reveal.fullscreen {
   position: fixed;
   top: 0;
@@ -93,7 +142,7 @@
   text-transform: capitalize;
 }
 
-/* 其他页面的标题固定在左上角 */
+/* Slide title: left-aligned, no underline */
 .reveal .slides section:not(:first-child) h1,
 .reveal .slides section:not(:first-child) h2,
 .reveal .slides section:not(:first-child) h3 {
@@ -101,17 +150,10 @@
   top: 0;
   left: -2.5rem;
   text-transform: none;
-  color: #5F7F8A!important;
+  /* color: #2c3e50 !important; */
+  color: #1C2430 !important;
   font-weight: bold !important;
-}
-.reveal .slides section:not(:first-child) h1::after,
-.reveal .slides section:not(:first-child) h2::after,
-.reveal .slides section:not(:first-child) h3::after {
-  content: '';
-  display: block;
-  height: 4px;
-  margin-top: 0.15em;
-  background: linear-gradient(to right, #6B8792, transparent);
+  font-family: "Source Sans 3", "Source Han Sans SC", sans-serif;
 }
 
 /* 为不同级别的标题设置不同的字体大小 */
@@ -195,7 +237,6 @@
   font-weight: 700;
   color: #A10F2B;
   letter-spacing: 4px;
-  font-family: "Microsoft YaHei", sans-serif;
 }
 .reveal .slide-number {
   font-size: 1.5rem !important;
@@ -240,7 +281,7 @@
 .reveal .slides section ul ul > li::marker {
   content: "●" !important;
   color: #444 !important;
-  font-size: 1em !important;
+  font-size: 0.6em !important;
 }
 
 /* 三级列表 - 方块 */
@@ -255,7 +296,7 @@
 .reveal .slides section ul ul ul > li::marker {
   content: "■" !important;
   color: #555 !important;
-  font-size: 1.2em !important;
+  font-size: 0.6em !important;
 }
 
 body.is-fullscreen header,
