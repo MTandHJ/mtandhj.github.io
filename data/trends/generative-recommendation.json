@@ -1,5 +1,13 @@
 [
   {
+    "date": "2026-03-31",
+    "title": "DACT",
+    "description": "社区演化过程中 Tokenization 的实时适配",
+    "paperUrl": "https://arxiv.org/abs/2603.29705",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260519100607.png",
+    "importance": "emmm"
+  },
+  {
     "date": "2026-01-27",
     "title": "DIGER",
     "description": "Tokenizer & Recommender 共同训练; Gumbel-Softmax 退火策略",
