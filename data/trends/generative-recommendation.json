@@ -16,6 +16,14 @@
     "importance": "emmm"
   },
   {
+    "date": "2025-08-23",
+    "title": "DECOR",
+    "description": "Tokenizer 中多源信息融合问题",
+    "paperUrl": "https://arxiv.org/abs/2509.10468",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260519165723.png",
+    "importance": "emmm"
+  },
+  {
     "date": "2025-11-17",
     "title": "UniTok",
     "description": "通过 TokenMOE 和 互信息约束 实现一个 multi-domain 的 Tokenizer",
