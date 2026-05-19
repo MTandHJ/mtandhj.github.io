@@ -80,6 +80,14 @@
     "importance": "emmm"
   },
   {
+    "date": "2025-04-06",
+    "title": "UTGRec",
+    "description": "利用 Image/Text 重构任务来训练统一的推荐 Tokenizer",
+    "paperUrl": "https://arxiv.org/abs/2504.04405",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260519174720.png",
+    "importance": "emmm"
+  },
+  {
     "date": "2025-03-15",
     "title": "CCFRec",
     "description": "通过 Q-Former 将 semantic IDs 转换为 textual IDs, 旨在实现协同/文本特征的高效融合",
