@@ -1,6 +1,14 @@
 [
   {
     "date": "2025-11-17",
+    "title": "Principled Synthetic Data Enables the First Scaling Laws for LLMs in Recommendation",
+    "description": "LLM 推荐中合成 (diverse) 数据对于 Scale 的重要性",
+    "paperUrl": "/posts/psd4rec/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260521180354.png",
+    "importance": "novel"
+  },
+  {
+    "date": "2025-11-17",
     "title": "UniTok",
     "description": "通过 TokenMOE 和 互信息约束 实现一个 multi-domain 的 Tokenizer",
     "paperUrl": "https://arxiv.org/abs/2511.12922",
