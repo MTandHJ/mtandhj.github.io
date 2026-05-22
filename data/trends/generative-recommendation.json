@@ -32,6 +32,14 @@
     "importance": "emmm"
   },
   {
+    "date": "2025-11-27",
+    "title": "CoFiRec",
+    "description": "从粗到细的层级化语义 Tokenization",
+    "paperUrl": "/posts/cofirec/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260522185553.png",
+    "importance": "emmm"
+  },
+  {
     "date": "2025-11-17",
     "title": "UniTok",
     "description": "通过 TokenMOE 和 互信息约束 实现一个 multi-domain 的 Tokenizer",
