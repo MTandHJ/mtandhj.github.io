@@ -41,7 +41,7 @@ pinned: false
 
 	$$
 	\tag{3.1}
-	\max_{\theta} \prod_{t=1}^{|y|+1} \mathbb{I}\big( P_{\theta}(y_{<t}|x) \geq P_{\theta}(b^B_{<t}|x) \big),
+	\max_{\theta} \prod_{t=1}^{|y|+1} \mathbb{I}\big( P_{\theta}(y_{ < t}|x) \geq P_{\theta}(b^B_{ < t}|x) \big),
 	$$
 
 	其中 $b^B_{<t}$ 表示第 $t-1$ 步排名第 $B$ 的候选前缀. 该方案需要在训练期间对每个样本模拟完整的 Beam Search, 即使 $B=10$ 也会带来超过 4.45× 的训练开销, 不可行.
@@ -49,15 +49,15 @@ pinned: false
 - (**条件放松**) 观察发现, 绝大多数的错误剪枝源于一个必要条件被违反: 正样本的每个 token $y_t$ 的概率必须进入 top-$B$:
 
 	$$
-	\max_{\theta} \prod_{t=1}^{|y|} \mathbb{I}\big( P_{\theta}(y_t | y_{<t}, x) \geq \beta^B_t \big),
+	\max_{\theta} \prod_{t=1}^{|y|} \mathbb{I}\big( P_{\theta}(y_t | y_{ < t}, x) \geq \beta^B_t \big),
 	$$
 
-	其中 $\beta^B_t = \text{top-}B\{P_{\theta}(\cdot | y_{<t}, x)\}$ 是第 $t$ 步的第 $B$ 大 token 概率. 该目标是 (3.1) 的必要条件, 但计算 $\beta^B_t$ **不需要额外的 LLM 前向传播** (因为 SFT 已计算了所有 logits).
+	其中 $\beta^B_t = \text{top-}B\{P_{\theta}(\cdot | y_{ < t}, x)\}$ 是第 $t$ 步的第 $B$ 大 token 概率. 该目标是 (3.1) 的必要条件, 但计算 $\beta^B_t$ **不需要额外的 LLM 前向传播** (因为 SFT 已计算了所有 logits).
 
-- (**可微化**) 引入 pruning margin $\Delta^B_t = \log \beta^B_t - \log P_{\theta}(y_t | y_{<t}, x)$, 当 $\Delta^B_t > 0$ 时意味着正样本 token 将在第 $t$ 步被剪枝. 用 sigmoid 替代指示函数:
+- (**可微化**) 引入 pruning margin $\Delta^B_t = \log \beta^B_t - \log P_{\theta}(y_t | y_{ < t}, x)$, 当 $\Delta^B_t > 0$ 时意味着正样本 token 将在第 $t$ 步被剪枝. 用 sigmoid 替代指示函数:
 
 	$$
-	\mathcal{L}_{\text{reg}}(x, y; \theta) = \sum_{t=1}^{|y|} \log \sigma_{\xi} \big( \log \beta^B_t - \log P_{\theta}(y_t | y_{<t}, x) \big),
+	\mathcal{L}_{\text{reg}}(x, y; \theta) = \sum_{t=1}^{|y|} \log \sigma_{\xi} \big( \log \beta^B_t - \log P_{\theta}(y_t | y_{ < t}, x) \big),
 	$$
 
 	其中 $\sigma_{\xi}(z) = 1/(1 + \exp(-z / \xi))$, $\xi$ 为温度参数.
