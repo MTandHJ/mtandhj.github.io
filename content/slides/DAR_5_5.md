@@ -1,6 +1,6 @@
 ---
 date: "2025-12-11"
-draft: true
+draft: false
 title: "DAR-5-5"
 author: MTandHJ
 tags:
@@ -47,22 +47,6 @@ tags:
 
 <slide-section>
 
-## 知识回顾
-
-- **高斯混合分布 (Gaussian Mixture Model):**
-
-    $$
-        p(\bm{x}; \theta) = \sum_{k=1}^K \alpha_k \varphi(\bm{x}; \bm{\mu_k}, \bm{\Sigma}_k), \: \sum_{k=1}^K \alpha_k = 1.
-    $$
-
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251211154717.png" size="60%"></slide-img>
-
-</slide-section>
-
-<!-- --------------------------------------------------------- -->
-
-<slide-section>
-
 ## 变分自编码 (VAE, Variational Autoencoder)
 
 <slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251211155312.png" size="100%"></slide-img>
@@ -78,33 +62,6 @@ tags:
 <slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251211155312.png" size="100%"></slide-img>
 
 <slide-highlight>与 EM、VAE 核心思想一脉相承</slide-highlight>
-
-</slide-section>
-
-<!-- --------------------------------------------------------- -->
-
-<slide-section>
-
-## 一般模型下的 EM 算法
-
-- **一般模型:**
-
-    $$
-    \sum_{k=1}^K \alpha_k \varphi(\bm{x}; \bm{\mu_k}, \bm{\Sigma}_k) \rightarrow
-    p(\bm{x}; \theta) = \int_{\bm{z}} p(\bm{x}|\bm{z}; \theta) p(\bm{z}) \mathrm{d} \bm{z}
-    $$
-
-- **对数似然:**
-
-    $$
-    \ell(\bm{x}, \bm{z}; \theta) = \sum_{i=1}^N \log p(\bm{x}_i, \bm{z}_i; \theta)
-    $$
-
-- **期望对数似然:**
-
-    $$
-    Q(\theta, \hat{\theta}) = \mathbb{E}_{\bm{z}} \left[\ell (\bm{x}, \bm{z}; \theta) \right]
-    $$
 
 </slide-section>
 
