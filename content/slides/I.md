@@ -21,21 +21,21 @@ tags:
 
 <slide-col ratio="4">
 
-&nbsp;
 
 <slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251203165507.png"></slide-img>
+&nbsp;
+<slide-highlight>徐聪</slide-highlight>
 
 </slide-col>
 
 <slide-col ratio="6">
 
-<slide-highlight>徐聪</slide-highlight>
-
-
 
 **毕业院校:** 华东师范大学
 
-**专业方向:** 计算机应用技术/机器学习
+**指导老师:** 王骏教授、张伟教授
+
+**研究方向:** 机器学习
 
 **研究领域:** 优化算法/推荐系统
 
