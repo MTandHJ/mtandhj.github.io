@@ -22,7 +22,7 @@ tags:
 <slide-col ratio="4">
 
 
-<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251203165507.png"></slide-img>
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251203165507.png" size="100%"></slide-img>
 &nbsp;
 <slide-highlight>徐聪</slide-highlight>
 
@@ -39,7 +39,7 @@ tags:
 
 **研究领域:** 优化算法/推荐系统
 
-**科研成果:** **4 CCF-A & 2 一区 Top**
+**科研成果:** 4 CCF-A & 2 一区 Top
 
 **所获荣誉:** 国家奖学金、上海市优秀毕业生
 
