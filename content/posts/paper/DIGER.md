@@ -17,8 +17,6 @@ pinned: false
 
 ## 研究背景
 
-<!-- 问题背景, 为什么重要, 解决什么问题 -->
-
 - [生成式推荐 (Generative Recommendation)](/posts/tiger/) 因其紧凑的表示空间、良好的冷启动性质以及与 LLM 等现代范式的兼容性, 成为了社区的研究热点.
 
 - [RQ-VAE](/posts/rq-vae/) 等向量量化方法是生成式推荐的基石, 其将 Item 映射为形如 (c₁, c₂, …, cₘ) 的语义 ID 序列 (Semantic IDs, SIDs), 在高效表示的同时具有良好的可解释性. 然而, 目前主流的量化方法多基于传统的重构损失进行学习, 难以有效捕捉对推荐系统至关重要的协同信号.
@@ -62,7 +60,7 @@ pinned: false
 
 ![20260518145506](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260518145506.png)
 
-- 为了在 tokenizer 训练中引入 $\mathcal{L}_{gen}$ 的监督信号, 最直接的方式是采用 STE (Straight-Through Estimator) 实现梯度传播. 然而这种方式存在明显缺陷: 1. codebook 利用率低下; 2. 训练过程不稳定.
+- 为了联合训练 tokenizer 和 recommender, 最直接的方式是采用 STE (Straight-Through Estimator) 实现梯度传播. 然而这种方式存在明显缺陷: 1. codebook 利用率低下; 2. 训练过程不稳定.
 
 - 为此, 本文作者采用 Gumbel-Softmax Sampling 替代 STE:
 
@@ -119,6 +117,12 @@ pinned: false
 
 ## 关键洞察
 
+
+- 在看了作者提供的代码之后, 我发现我对于 DIGER 有着深深的误解, DIGER 压根就不能算是 "Differentiable Semantic ID", 其实际训练流程为:
+    1. **预训练 RQ-VAE:** 首先和一般方法一样预训练 RQ-VAE;
+    2. 联合训练阶段, Tokenizer 部分并不会受到推荐损失 $\mathcal{L}_{gen}$ 的直接监督, 仅仅是二者一块训练, 然后在每个 epoch 会重新计算 SIDs 而已.
+
+
 ![20260518152127](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260518152127.png)
 
 ![20260518152322](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260518152322.png)
@@ -127,7 +131,7 @@ pinned: false
 
 ## 继往开来
 
-- Tokenizer 与 Recommender 的联合优化是一个有价值的研究方向, 但若像 DIGER 这样完全依赖 $\mathcal{L}_{gen}$ 进行监督训练, Tokenizer 的泛化性如何保证? 未免有些舍本逐末.
+- Tokenizer 与 Recommender 的联合优化是一个有价值的研究方向, 但 DIGER 的设计个人认为有些过于画蛇添足了.
 
 
 ## 参考文献

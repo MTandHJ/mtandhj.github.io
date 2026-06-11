@@ -18,7 +18,7 @@
   {
     "date": "2026-01-27",
     "title": "DIGER",
-    "description": "Tokenizer & Recommender 共同训练; Gumbel-Softmax 退火策略",
+    "description": "Tokenizer & Recommender 伪共同训练; Gumbel-Softmax 退火策略",
     "paperUrl": "/posts/diger/",
     "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260518155641.png",
     "importance": "emmm"
