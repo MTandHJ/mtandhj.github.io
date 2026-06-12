@@ -21,9 +21,15 @@ pinned: false
 
 - (**Data Simulation**) 在其他领域也会遇到高质量数据难以获取的困境, [PFN](/posts/pfn/) 等方法开始尝试在合成数据上进行预训练, 得到预训练模型, 然后通过 fine-tuning 甚至 zero-shot 推广到真实场景. 那么, 推荐场景是否也存在类似的机会?
 
+- (**符号说明**)
+    - **商品 (item):** $v \in \mathcal{V}$;
+    - **状态 (state):** $s \in \mathcal{S}$;
+    - **状态转移概率矩阵:** $\mathbf{P} \in \mathbb{R}^{|\mathcal{S}| \times |\mathcal{S}|}$;
+    - **狄利克雷分布:** $\text{Dir}(\bm{\alpha})$.
+
 ## 核心思想
 
-### 推荐的 "马尔科夫性"
+### 序列推荐的 "马尔科夫性"
 
 ![20260612154628](https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260612154628.png)
 
