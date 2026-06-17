@@ -1,5 +1,13 @@
 [
   {
+    "date": "2026-04-13",
+    "title": "R3-VAE",
+    "description": "更稳定的生成式推荐 Tokenizer: 正交残差分量 & Cosine & 聚类正则",
+    "paperUrl": "/posts/r3-vae/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260617150107.png",
+    "importance": "novel"
+  },
+  {
     "date": "2026-03-31",
     "title": "DACT",
     "description": "社区演化过程中 Tokenization 的实时适配",
