@@ -1,5 +1,13 @@
 [
   {
+    "date": "2026-06-20",
+    "title": "SPRINT",
+    "description": "流行度偏差会导致推荐系统模型的谱坍缩问题并因此难以 Scale",
+    "paperUrl": "/posts/psd4rec/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260624144939.png",
+    "importance": "emmm"
+  },
+  {
     "date": "2025-11-17",
     "title": "Principled Synthetic Data Enables the First Scaling Laws for LLMs in Recommendation",
     "description": "LLM 推荐中合成 (diverse) 数据对于 Scale 的重要性",
