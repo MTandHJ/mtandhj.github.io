@@ -3,6 +3,7 @@ title = "MTandHJ"
 languageCode = "en-us"
 defaultContentLanguage = "en-us"
 publishDir = "docs"
+enableGitInfo = true
 
 disableKinds = ["taxonomy", "term"]
 ignoreFiles = ["_template\\.md$"]

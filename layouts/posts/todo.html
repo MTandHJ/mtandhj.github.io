@@ -7,11 +7,20 @@
     <div class="mt-3">{{ .Content }}</div>
 </div>
 
-{{- $datafile := .Params.datafile -}}
-{{- $entries := index hugo.Data.posts $datafile -}}
+{{- $entries := slice -}}
+{{- $currentPage := . -}}
+{{- $lifeDir := "" -}}
+{{- with .File -}}
+  {{- $lifeDir = .Dir -}}
+{{- end -}}
+{{- range site.RegularPages -}}
+  {{- if and .File (eq .File.Dir $lifeDir) (ne .File.BaseFileName $currentPage.File.BaseFileName) (not .Draft) -}}
+    {{- $entries = $entries | append . -}}
+  {{- end -}}
+{{- end -}}
 
 {{ if $entries }}
-{{- $sorted := sort $entries "date" "desc" -}}
+{{- $sorted := sort $entries "Lastmod" "desc" -}}
 {{- $now := now -}}
 {{- $currentYear := 0 -}}
 {{- $currentMonth := 0 -}}
@@ -19,14 +28,13 @@
 <div id="timeline">
   <div class="timeline-wrapper">
     {{- range $sorted -}}
-      {{- $itemDate := time .date -}}
+      {{- $itemDate := .Lastmod -}}
       {{- $year := $itemDate.Year -}}
       {{- $month := int ($itemDate.Format "1") -}}
       {{- $monthNames := slice "" "Jan" "Feb" "Mar" "Apr" "May" "Jun" "Jul" "Aug" "Sep" "Oct" "Nov" "Dec" -}}
       {{- $monthLabel := index $monthNames $month -}}
       {{- $isCurrentYear := eq $year $now.Year -}}
 
-      {{/* 年份变化：关闭上一个 month section，输出新的 year section */}}
       {{- if ne $year $currentYear -}}
         {{- if ne $currentMonth 0 -}}
           </div></div></div>
@@ -47,7 +55,6 @@
     </div>
       {{- end -}}
 
-      {{/* 月份变化：关闭上一个 month section，开启新的 */}}
       {{- if ne $month $currentMonth -}}
         {{- if ne $currentMonth 0 -}}
           </div></div></div>
@@ -68,35 +75,25 @@
         <div class="todo-items">
       {{- end -}}
 
-      {{/* 单个 TODO 项目 */}}
-      {{- $status := .status | default "pending" -}}
-      {{- $isOverdue := and (gt $now $itemDate) (ne $status "completed") -}}
-      {{- $importanceClass := "" -}}
-      {{- if eq .importance "seminal" }}{{ $importanceClass = "seminal-todo" }}
-      {{- else if eq .importance "novel" }}{{ $importanceClass = "novel-todo" }}
-      {{- else if eq .importance "emmm" }}{{ $importanceClass = "emmm-todo" }}
+      {{- $imageUrl := "" -}}
+      {{- $images := findRE `<img[^>]+src=["'][^"']+["'][^>]*>` .Content 1 -}}
+      {{- if gt (len $images) 0 -}}
+        {{- $imageUrl = replaceRE `(?s).*src=["']([^"']+)["'].*` "$1" (index $images 0) -}}
       {{- end -}}
-      {{- $paperUrl := .paperUrl | default "#" -}}
-          <div class="todo-item{{ if $isOverdue }} overdue{{ end }}">
+          <div class="todo-item">
             <div class="todo-title">
-              <a href="{{ $paperUrl }}" target="_blank" rel="noopener"
-                 class="todo-link {{ $importanceClass }}"
-                 {{ with .imageUrl }}data-image-url="{{ . }}"{{ end }}>
-                {{- .title -}}
+              <a href="{{ .RelPermalink }}"
+                 class="todo-link"
+                 {{ with $imageUrl }}data-image-url="{{ . }}"{{ end }}>
+                {{- .Title -}}
               </a>
-              {{- if $isOverdue -}}
-                <span class="todo-status overdue">已延期</span>
-              {{- else if eq $status "completed" -}}
-                <span class="todo-status completed">已完成</span>
-              {{- else -}}
-                <span class="todo-status pending">进行中</span>
-              {{- end -}}
             </div>
-            <div class="todo-description">{{ .description }}</div>
+            {{- with .Description -}}
+            <div class="todo-description">{{ . }}</div>
+            {{- end -}}
           </div>
     {{- end -}}
 
-    {{/* 关闭最后一个 month section */}}
     {{- if ne $currentMonth 0 -}}
         </div></div></div>
     {{- end -}}

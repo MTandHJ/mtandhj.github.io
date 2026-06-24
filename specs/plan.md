@@ -1,143 +1,82 @@
-# Slide 字体方案重构 - 技术规划
+# Plan
 
-## 字体方案
+## Overview
 
-| 用途 | 英文 | 中文 | 字重 |
-|------|------|------|------|
-| 标题 | Source Sans 3 | Source Han Sans SC | 700 (Bold) |
-| 正文 | Inter | Source Han Sans SC | 400 (Regular) |
+将 `layouts/posts/todo.html` 从 JSON 数据驱动改为 Hugo 页面集合驱动。`content/posts/life/TODO.md` 继续作为入口页, 模板自动读取 `content/posts/life/` 根目录下的 life Markdown, 排除入口页自身和 draft 内容, 按 `.Lastmod` 降序展示时间轴。
 
-- Source Han Sans SC: SIL OFL 1.1, 可自托管, 子集化后 ~1MB woff2
-- Source Sans 3 / Inter: Google Fonts 也可下载 woff2 自托管, 无需 CDN
+页面继续保留当前 TODO 时间轴结构和紧凑条目密度, 但移除旧 TODO 数据模型中的状态、重要性、延期等展示语义。条目标题保留超链接, 指向对应 Markdown 生成的文章页面。
 
-## 文件结构
+## Implementation
 
-```
-static/fonts/
-├── source-sans-3-bold.woff2       # 标题英文 Bold
-├── source-sans-3-regular.woff2    # 正文英文 Regular (Inter 不够时的回退)
-├── inter-regular.woff2            # 正文英文
-├── inter-medium.woff2             # 正文英文 (列表等)
-├── source-han-sans-sc-bold.woff2  # 标题中文 Bold 子集
-└── source-han-sans-sc-regular.woff2 # 正文中文 Regular 子集
-```
+- 更新 `hugo.toml`
+  - 开启 Hugo Git 信息能力, 让 `.Lastmod` 可以使用 GitInfo。
+  - 保持现有 permalink 规则不变。
 
-预估总大小: ~4-5MB (CJK 子集约 1MB/字重, 拉丁字体 <200KB/字重)
+- 更新 `layouts/posts/todo.html`
+  - 移除 `datafile` / `hugo.Data.posts` 读取逻辑。
+  - 从 `content/posts/life/` 根目录对应的页面集合读取 life Markdown。
+  - 过滤规则:
+    - 只包含 `content/posts/life/` 根目录下的 Markdown。
+    - 排除当前入口页 `TODO.md`。
+    - 排除 draft 页面。
+  - 排序规则:
+    - 按 `.Lastmod` 降序。
+    - `.Lastmod` 允许使用 Hugo GitInfo; front matter `lastmod` 可显式覆盖。
+    - 没有有效 `lastmod` 时使用 Hugo 默认回退, 最终可回到 `.Date`。
+  - 条目字段:
+    - title: `.Title`
+    - description: `.Description`
+    - url: `.RelPermalink`
+    - time: `.Lastmod`
+    - image preview: 从正文首图提取。
+  - 条目标题必须保留超链接, 使用 Hugo `.RelPermalink` 生成, 当前 permalink 效果为 `/posts/<contentbasename>/`。
+  - 移除 TODO 状态、重要性、延期和旧 `imageUrl` 字段逻辑。
 
-## 实施步骤
+- 更新 `static/js/timelines.js`
+  - 保留现有悬浮图片能力。
+  - TODO 时间轴继续通过 `data-image-url` 驱动悬浮预览。
+  - 图片 URL 由模板从正文首图提取后写入 `data-image-url`。
 
-### 1. 下载原始字体文件
+- 更新 `static/css/timelines.css`
+  - 保留当前 TODO 时间轴主体风格。
+  - 清理或停止使用状态、重要性、延期相关样式。
+  - 保持紧凑条目布局: 标题、描述。
 
-- Source Han Sans SC: 从 GitHub releases 下载 OTF (Regular + Bold)
-- Source Sans 3: 从 Google Fonts 下载 woff2
-- Inter: 从 Google Fonts 下载 woff2
+- 更新 `content/posts/life/TODO.md`
+  - 保持 `layout: todo`。
+  - 保持 `pinned: true`。
+  - 删除不再需要的 `datafile: todo`。
 
-### 2. 子集化 Source Han Sans SC
+- 迁移 `data/posts/todo.json`
+  - 将三条 JSON 记录迁移为 `content/posts/life/` 根目录下的独立 Markdown。
+  - 文件名使用英文 slug。
+  - front matter 使用中文标题、原日期、原描述、`draft: false`, `pinned: false`, Life tag。
+  - 正文可先放置原 description, 后续可继续扩写。
 
-使用 pyftsubset 将 CJK 字体子集化为 GB2312 + ASCII:
+- 删除 `data/posts/todo.json`
+  - 避免后续误维护双数据源。
 
-```bash
-pip install fonttools brotli
-# 生成 GB2312 unicode 列表
-python scripts/gen-gb2312-unicodes.py
-# 子集化 + 转 woff2
-pyftsubset SourceHanSansSC-Regular.otf \
-  --unicodes-file=gb2312_unicodes.txt \
-  --output-file=static/fonts/source-han-sans-sc-regular.woff2 \
-  --flavor=woff2 \
-  --layout-features=* --name-IDs=* \
-  --glyph-names --legacy-cmap --symbol-cmap
-```
+## Behavior
 
-### 3. 编写 @font-face 声明
+- 新增 `content/posts/life/*.md` 后, 只要 `draft: false`, 就会自动进入 TODO 时间轴。
+- 修改 front matter `lastmod` 后, 时间轴顺序和显示时间随之变化。
+- 不设置 `lastmod` 时, Hugo `.Lastmod` 会按配置和默认规则回退, 最终可使用 `date`。
+- `TODO.md` 只作为入口页, 不展示为时间轴条目。
+- 时间轴条目展示标题和描述; 时间只体现在年月分组上。
+- 时间轴条目标题链接到对应文章页面。
+- 如果正文存在首图, 标题 hover 时显示图片预览; 没有首图时不显示预览。
 
-在 `static/css/slides.css` 顶部添加 @font-face 规则, 替换所有 Google Fonts CDN 引用.
+## Compatibility
 
-### 4. 更新 HTML 模板
+- `trends` 时间轴继续使用现有 JSON 数据, 不受影响。
+- 普通 post 单页模板不需要改变。
+- `data/posts/todo.json` 删除后, 只有旧 `todo.html` 的 JSON 读取逻辑会被替换, 不影响其他数据文件。
+- GitInfo 参与 `.Lastmod` 时, 本地和部署环境需要 Git 历史可用; front matter `lastmod` 仍可显式覆盖。
+- 使用 `.RelPermalink` 生成链接, 后续 permalink 规则变化时模板无需硬编码调整。
+- 悬浮图片依赖 hover 交互; 移动端没有 hover 时只显示文本条目, 不影响访问文章链接。
 
-- `layouts/slides/single.html`: 移除 Google Fonts `<link>` 标签
-- `layouts/slides/single.pdf.html`: 移除 Google Fonts `<link>` 标签, 更新 font-family 声明
+## Notes
 
-### 5. 更新 CSS 字体声明
-
-```css
-/* 自托管字体 */
-@font-face {
-  font-family: "Source Sans 3";
-  src: url("/fonts/source-sans-3-bold.woff2") format("woff2");
-  font-weight: 700;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/inter-regular.woff2") format("woff2");
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/inter-medium.woff2") format("woff2");
-  font-weight: 500;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Source Han Sans SC";
-  src: url("/fonts/source-han-sans-sc-regular.woff2") format("woff2");
-  font-weight: 400;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Source Han Sans SC";
-  src: url("/fonts/source-han-sans-sc-bold.woff2") format("woff2");
-  font-weight: 700;
-  font-display: swap;
-}
-
-/* 标题 */
-.reveal .slides section:not(:first-child) h1,
-.reveal .slides section:not(:first-child) h2,
-.reveal .slides section:not(:first-child) h3 {
-  font-family: "Source Sans 3", "Source Han Sans SC", sans-serif;
-}
-
-/* 正文 */
-.reveal .slides {
-  font-family: "Inter", "Source Han Sans SC", sans-serif;
-}
-```
-
-### 6. 更新 PDF 模板字体声明
-
-```css
-.reveal, .reveal .slides {
-  font-family: "Inter", "Source Han Sans SC", sans-serif;
-}
-```
-
-### 7. 验证
-
-- 本地 `hugo server` 预览, 检查字体加载和渲染
-- 检查 PDF 生成是否正确使用自托管字体
-- 确认无 Google Fonts CDN 请求
-
-## PDF 兼容性
-
-自托管字体后, PDF 生成流程:
-1. Hugo 构建 → `docs/fonts/` 包含所有 woff2 文件
-2. decktape 加载 `http://localhost:8765/pdf/slides/.../`
-3. Chromium 从本地服务器加载 `/fonts/*.woff2` → 无网络延迟
-4. `--load-pause 3000ms` 足够 (本地加载 <100ms)
-
-CI 环境的 `fonts-noto-cjk` 仅作为 CSS font-family 链的最终回退.
-
-## 风险点
-
-| 风险 | 缓解措施 |
-|------|----------|
-| GB2312 子集未覆盖生僻字 | CSS font-family 链回退到系统字体; CI 有 fonts-noto-cjk 兜底 |
-| Source Han Sans SC 子集化体积偏大 | 实测 ~1MB/字重 woff2, 可接受; 如需更小可进一步缩减字符集 |
-| 字体文件增加 repo 体积 | woff2 总计 ~4-5MB, git LFS 可选但非必须 |
+- 时间轴排序和年月分组使用同一个 `.Lastmod` 值。
+- 正文首图提取只用于时间轴预览, 不改变文章单页展示。
+- 后续如果需要区分“事件发生时间”和“更新时间”, 可以再增加展示策略, 但当前计划以更新时间时间轴为准。

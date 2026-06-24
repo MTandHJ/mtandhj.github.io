@@ -1,69 +1,79 @@
-# Slide 字体方案重构 (自托管)
+# Spec
 
-## 目标
+## Goal
 
-将 slide 的字体加载从 Google Fonts CDN 切换为自托管方案, 同时重新选择中文/英文标题/正文字体, 使整体风格简洁、正式、舒适.
+将 `life` 内容的时间轴展示从手动维护 `data/posts/todo.json` 改为自动整理 `content/posts/life/` 下的 Markdown 文件, 让新增或更新 life Markdown 后可以自动反映到时间轴中。
 
-## 当前状态
+## Scope
 
-### 字体使用现状
+- 继续使用 `content/posts/life/TODO.md` 作为 life 时间轴入口页。
+- 时间轴数据来源改为 `content/posts/life/` 下的 Markdown 文件。
+- `data/posts/todo.json` 中现有三条记录迁移为独立 Markdown。
+- 迁移出来的三条记录放在 `content/posts/life/` 根目录。
+- 迁移后的三条记录设置为 `pinned: false`。
+- `TODO.md` 保持 `pinned: true`。
+- 时间轴条目展示文章标题和描述, 并链接到对应文章页面; 具体时间只展示到时间轴的年月分组。
+- 时间排序使用 `lastmod` 优先, 没有 `lastmod` 时回退到 `date`。
+- 时间轴只纳入 `draft: false` 的 life Markdown。
+- `TODO.md` 作为入口页, 不作为普通时间轴条目展示。
+- 不保留原 TODO 的 `status`, `importance`, `imageUrl` 展示能力。
 
-| 位置 | 当前字体 | 来源 |
-|------|---------|------|
-| 标题 (h1/h2/h3) | Source Sans 3 + Noto Sans SC | Google Fonts CDN |
-| 正文 | Inter + Noto Sans SC | Google Fonts CDN |
-| highlight | 继承正文 | - |
-| PDF 模板全局 | Inter + Noto Sans SC | Google Fonts CDN |
+## Non-goals
 
-### 问题
+- 不调整 `trends` 时间轴的数据来源。
+- 不重构整站文章系统。
+- 不引入额外构建依赖。
+- 不保留 JSON 与 Markdown 的双数据源维护。
+- 不在本阶段确定具体模板实现细节、验证方案或任务拆解。
 
-1. Google Fonts 上 CJK 无衬线字体选择有限 (基本只有 Noto Sans SC), 风格板正
-2. 多个字体族通过 CDN 加载, 请求数多, 依赖外部服务
-3. 标题与正文使用不同字体族, 增加了加载量和视觉复杂度
-4. PDF 生成依赖 CDN 字体在 3s 内加载完成, 稳定性有风险
+## User Scenarios
 
-## 需求
+- 我在 `content/posts/life/` 下新建一个 `draft: false` 的 Markdown, 它会自动出现在 life 时间轴中。
+- 我修改某篇 life Markdown 的 `lastmod`, 它在时间轴中的顺序会随之变化。
+- 如果某篇 life Markdown 没有 `lastmod`, 时间轴使用它的 `date` 排序。
+- 读者可以从 life 时间轴点击进入对应的完整 Markdown 页面。
+- 我不再需要为了 life 时间轴额外维护 `data/posts/todo.json`。
 
-1. **自托管字体**: 字体文件存放于 `static/fonts/`, 通过 `@font-face` 加载, 不依赖外部 CDN
-2. **字体选择**: 重新选择英文/中文标题/正文字体, 满足:
-   - 简洁正式, 适合学术演示
-   - 正文不拥挤, 可读性好
-   - 中英文风格协调
-3. **子集化**: CJK 字体需子集化, 控制文件体积 (完整 CJK 字体 10MB+)
-4. **PDF 兼容**: 自托管字体确保 PDF 生成无需网络请求, 100% 可靠
-5. **一致保留**: 之前已确认的样式决策保持不变:
-   - 标题颜色: `#1C2430`
-   - 标题对齐: 左对齐
-   - 无下划线
+## Inputs / Outputs
 
-## 约束
+输入:
 
-- 字体许可证必须允许自托管 (SIL OFL, Apache 2.0, 或免费商用)
-- CJK 子集化后 woff2 文件建议 < 2MB
-- 需兼容 Reveal.js 4.5.0 和 decktape (Chromium) PDF 生成
-- GitHub Actions CI 环境: ubuntu-latest, 已安装 `fonts-noto-cjk`
-- `--load-pause 3000ms`, 自托管字体无网络延迟, 更可靠
+- `content/posts/life/` 下的 Markdown 文件。
+- Markdown front matter 中的 `title`, `date`, `lastmod`, `description`, `draft` 等元信息。
 
-## 验收标准
+输出:
 
-- [ ] 所有字体文件自托管于 `static/fonts/`
-- [ ] 无 Google Fonts CDN 请求
-- [ ] 英文标题/正文、中文标题/正文字体确定且协调
-- [ ] CJK 字体子集化, woff2 体积合理
-- [ ] 网页版字体正确加载渲染
-- [ ] PDF 版字体正确渲染, 与网页版一致
-- [ ] 首页标题样式不受影响
+- life 时间轴页面。
+- 每个时间轴条目链接到对应文章页面。
+- 原 `data/posts/todo.json` 中的三条记录对应为 Markdown 内容。
 
-## 已决方案
+## Constraints
 
-- **字体架构**: 标题统一 + 正文统一 (2 字体方案)
-  - 标题字体: 英文 + 中文共用一个字体族
-  - 正文字体: 英文 + 中文共用一个字体族
-- **子集化**: 预置 GB2312 常用 6763 字 + ASCII
-- **Emoji 回退**: CJK 子集不含 emoji, 回退到系统字体, 不影响显示
-- **保底机制**: CSS font-family 链 + CI 环境 fonts-noto-cjk 兜底
+- 继续使用 Hugo 静态站点能力。
+- 尽量复用当前时间轴视觉风格。
+- 数据维护以 Markdown front matter 为主。
+- `TODO.md` 保持入口页身份。
+- 不要求作者同时维护 Markdown 和 JSON 两份数据。
 
-## 未决问题
+## Acceptance Criteria
 
-- 标题字体最终选择 (英文 + CJK)
-- 正文字体最终选择 (英文 + CJK)
+- 新增一个 `draft: false` 且带必要 front matter 的 life Markdown 后, life 时间轴自动包含该条目。
+- 修改某个 life Markdown 的 `lastmod` 后, 时间轴排序按新 `lastmod` 更新。
+- 未设置 `lastmod` 的 life Markdown 使用 `date` 参与排序。
+- `TODO.md` 不出现在自己的时间轴条目中。
+- 已有 `Car.md` 能作为 life 时间轴条目展示并链接到文章页。
+- `data/posts/todo.json` 中现有三条记录被迁移为独立 Markdown。
+- 迁移后的三条记录位于 `content/posts/life/` 根目录, 且 `pinned: false`。
+- `TODO.md` 保持 `pinned: true`。
+- 不再需要编辑 `data/posts/todo.json` 来维护 life 时间轴。
+
+## Assumptions
+
+- life Markdown 至少应包含 `title`, `date`, `draft`。
+- `description` 用于时间轴摘要; 若缺失, 可以为空。
+- `lastmod` 主要通过 front matter 手动维护。
+- 迁移后的 TODO 记录可以作为普通 life Markdown, 内容可先使用原 JSON 的标题和描述。
+
+## Open Questions
+
+- 无。

@@ -321,7 +321,7 @@
 .time-point {
   position: absolute;
   top: 8px;
-  right: -7px;
+  right: -6px;
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -343,7 +343,7 @@
 .current-time-marker {
   position: absolute;
   top: 8px;
-  right: -7px;
+  right: -9px;
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -380,7 +380,6 @@
   position: relative;
 }
 
-/* TODO 项目样式 */
 .todo-item {
   padding: 0 0 18px 0;
   margin-bottom: 18px;
@@ -394,109 +393,31 @@
   border-bottom: none;
 }
 
-/* 延期标识 */
-.todo-item.overdue {
-  background: linear-gradient(90deg, rgba(255, 68, 68, 0.1) 0%, transparent 100%);
-  border-left: 4px solid #ff4444;
-  padding-left: 10px;
-  margin-left: -10px;
-}
-
-.todo-item.overdue::before {
-  content: "⚠️ 已延期";
-  position: absolute;
-  top: -5px;
-  right: 0;
-  background: #ff4444;
-  color: white;
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 0.7em;
-  font-weight: 600;
-}
-
-/* TODO 标题样式 */
 .todo-title {
-  margin-bottom: 0;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.45em;
+  margin-bottom: 2px;
 }
 
 .todo-link {
   font-size: 1.1em;
-  color: #1a73e8;
+  color: #2f766f;
   font-weight: 500;
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .todo-link:hover {
-  color: #174ea6;
+  color: #245f59;
   text-decoration: underline;
 }
 
-/* TODO 重要性级别样式 */
-.seminal-todo {
-  color: #d23669;
-  font-weight: 700;
-  font-size: 1.25em;
-}
-
-.seminal-todo:hover {
-  color: #b32057;
-}
-
-.novel-todo {
-  color: #3498db;
-  font-weight: 600;
-  font-size: 1.05em;
-}
-
-.novel-todo:hover {
-  color: #2980b9;
-}
-
-.emmm-todo {
-  color: #777;
-  font-weight: 500;
-  font-size: 0.95em;
-}
-
-.emmm-todo:hover {
-  color: #555;
-}
-
-/* TODO 描述样式 */
 .todo-description {
   color: #666;
   font-size: 0.8em;
   line-height: 1.5;
-}
-
-/* 状态指示器 */
-.todo-status {
-  display: inline-block;
-  margin-left: 0.3em;
-  padding: 3px 6px;
-  border-radius: 8px;
-  font-size: 0.6em;
-  font-weight: 600;
-  vertical-align: middle;
-  margin-top: -0.5em;
-  line-height: 1;
-}
-
-.todo-status.pending {
-  background: #fff3cd;
-  color: #856404;
-}
-
-.todo-status.completed {
-  background: #d4edda;
-  color: #155724;
-}
-
-.todo-status.overdue {
-  background: #f8d7da;
-  color: #721c24;
 }
 
 /* 暗色模式 - TODO */
@@ -525,61 +446,16 @@
   border-bottom: 1px dashed #444;
 }
 
-.dark .todo-item.overdue {
-  background: linear-gradient(90deg, rgba(255, 107, 107, 0.1) 0%, transparent 100%);
-  border-left: 4px solid #ff6b6b;
-}
-
 .dark .todo-link {
-  color: #8ab4f8;
+  color: #67c7bb;
 }
 
 .dark .todo-link:hover {
-  color: #aecbfa;
-}
-
-.dark .seminal-todo {
-  color: #ff7eb6;
-}
-
-.dark .seminal-todo:hover {
-  color: #ff9ec9;
-}
-
-.dark .novel-todo {
-  color: #6fc6ff;
-}
-
-.dark .novel-todo:hover {
-  color: #8bd3ff;
-}
-
-.dark .emmm-todo {
-  color: #aaa;
-}
-
-.dark .emmm-todo:hover {
-  color: #ccc;
+  color: #8edbd2;
 }
 
 .dark .todo-description {
   color: #aaa;
-}
-
-/* 暗色模式下的状态指示器 */
-.dark .todo-status.pending {
-  background: #3d2f00;
-  color: #ffd700;
-}
-
-.dark .todo-status.completed {
-  background: #1b5e20;
-  color: #81c784;
-}
-
-.dark .todo-status.overdue {
-  background: #4a1a1a;
-  color: #ffcdd2;
 }
 
 /* 响应式 - TODO */
@@ -590,18 +466,6 @@
 
   .time-label {
     font-size: 1.1em;
-  }
-
-  .seminal-todo {
-    font-size: 1.2em;
-  }
-
-  .novel-todo {
-    font-size: 1.1em;
-  }
-
-  .emmm-todo {
-    font-size: 1.03em;
   }
 
   .current-time-marker {
@@ -617,18 +481,6 @@
 
   .time-label {
     font-size: 1.0em;
-  }
-
-  .seminal-todo {
-    font-size: 1.15em;
-  }
-
-  .novel-todo {
-    font-size: 1.08em;
-  }
-
-  .emmm-todo {
-    font-size: 1.02em;
   }
 
   .current-time-marker {
