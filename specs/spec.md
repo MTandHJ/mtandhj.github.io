@@ -2,77 +2,110 @@
 
 ## Goal
 
-将 `life` 内容的时间轴展示从手动维护 `data/posts/todo.json` 改为自动整理 `content/posts/life/` 下的 Markdown 文件, 让新增或更新 life Markdown 后可以自动反映到时间轴中。
+重写 `content/slides/AI-Tool.md`, 保持标题为 `AI 工具入门`, 做成一份客观介绍 Codex / Claude 这类 Agent 工具的 slides。内容应像文档说明一样解释这些工具的组成模块、交互关系和在界面中的体现, 而不是讲使用建议、经验方法或案例教程。
 
 ## Scope
 
-- 继续使用 `content/posts/life/TODO.md` 作为 life 时间轴入口页。
-- 时间轴数据来源改为 `content/posts/life/` 下的 Markdown 文件。
-- `data/posts/todo.json` 中现有三条记录迁移为独立 Markdown。
-- 迁移出来的三条记录放在 `content/posts/life/` 根目录。
-- 迁移后的三条记录设置为 `pinned: false`。
-- `TODO.md` 保持 `pinned: true`。
-- 时间轴条目展示文章标题和描述, 并链接到对应文章页面; 具体时间只展示到时间轴的年月分组。
-- 时间排序使用 `lastmod` 优先, 没有 `lastmod` 时回退到 `date`。
-- 时间轴只纳入 `draft: false` 的 life Markdown。
-- `TODO.md` 作为入口页, 不作为普通时间轴条目展示。
-- 不保留原 TODO 的 `status`, `importance`, `imageUrl` 展示能力。
+- 从零重写 `content/slides/AI-Tool.md`。
+- 保持 slides 标题为 `AI 工具入门`。
+- 保持 slides 为 `draft: false`。
+- 页数目标为 25-35 页。
+- 面向已经知道 LLM、ChatGPT、prompt、token、context 等基本概念的听众。
+- 以“机制 + Codex/Claude 界面对照”为主线。
+- 客观介绍 Codex / Claude 这类 Agent 工具中的核心概念:
+  - LLM 交互结构。
+  - prompt 层级, 包括 system / developer / user / project instructions。
+  - context, memory, files, conversation history。
+  - Agent loop。
+  - tool use。
+  - MCP。
+  - Skill。
+  - mode, planning, execution。
+  - sandbox, approval, permission。
+  - terminal, browser, diff, Git 等工具结果在界面中的位置。
+- 每页围绕一个核心概念或界面对照点展开。
+- 每页应包含一张图和一段简短客观描述。
+- 图像优先使用模型生成的位图信息图或界面示意图, 不以 SVG 为默认方案。
+- 图中可以直接包含中文或英文文字标签。
+- 内容写作时应参考 OpenAI / Anthropic 官方文档核对概念准确性, 但 slides 不需要强制显式列出来源。
 
 ## Non-goals
 
-- 不调整 `trends` 时间轴的数据来源。
-- 不重构整站文章系统。
-- 不引入额外构建依赖。
-- 不保留 JSON 与 Markdown 的双数据源维护。
-- 不在本阶段确定具体模板实现细节、验证方案或任务拆解。
+- 不做完整 LLM 原理课程。
+- 不做 prompt engineering 教程。
+- 不讲“应该怎么设计 prompt”。
+- 不讲“应该怎么使用 AI 工具更高效”。
+- 不以读论文、写代码或其他任务案例作为主线。
+- 不加入主观看法、经验判断或协作建议。
+- 不做 Codex 和 Claude 的详尽产品手册。
+- 不追求覆盖所有最新功能或发布动态。
+- 不使用 Mermaid 作为图示方案。
+- 不加入独立讲稿备注。
+- 不加入课后练习页。
+- 不在本阶段确定具体实现方案、验证方案或任务拆解。
 
 ## User Scenarios
 
-- 我在 `content/posts/life/` 下新建一个 `draft: false` 的 Markdown, 它会自动出现在 life 时间轴中。
-- 我修改某篇 life Markdown 的 `lastmod`, 它在时间轴中的顺序会随之变化。
-- 如果某篇 life Markdown 没有 `lastmod`, 时间轴使用它的 `date` 排序。
-- 读者可以从 life 时间轴点击进入对应的完整 Markdown 页面。
-- 我不再需要为了 life 时间轴额外维护 `data/posts/todo.json`。
+- 作为已有 LLM/ChatGPT 基本使用经验的听众, 我希望知道 Codex / Claude 这类 Agent 工具由哪些模块组成。
+- 作为第一次接触 Codex/Claude 的听众, 我希望能在图中看到 prompt、context、tools、agent loop 等概念分别对应到界面的什么位置。
+- 作为分享听众, 我希望每页都通过图先建立直观印象, 再阅读简短说明。
+- 作为教程作者, 我希望 slides 保持客观文档风格, 不把内容写成操作建议或工作流经验。
+- 作为后续维护者, 我希望图片资源可以替换为 PicGo 外链或更新后的生成图, 但不改变 slides 的核心结构。
 
 ## Inputs / Outputs
 
 输入:
 
-- `content/posts/life/` 下的 Markdown 文件。
-- Markdown front matter 中的 `title`, `date`, `lastmod`, `description`, `draft` 等元信息。
+- 当前 `content/slides/AI-Tool.md` 文件。
+- 仓库现有 `content/slides` Markdown slides 格式和组件约定。
+- OpenAI / Anthropic 官方文档中关于 Codex / Claude / Claude Code / Agent 工具的公开概念说明。
+- 需要生成的位图信息图或界面示意图。
 
 输出:
 
-- life 时间轴页面。
-- 每个时间轴条目链接到对应文章页面。
-- 原 `data/posts/todo.json` 中的三条记录对应为 Markdown 内容。
+- 一份重写后的 `content/slides/AI-Tool.md` Markdown slides。
+- slides 标题为 `AI 工具入门`。
+- slides front matter 保持 `draft: false`。
+- slides 页数为 25-35 页。
+- slides 以客观机制介绍和 Codex/Claude 界面对照为主线。
+- 每页包含一张图和一段简短描述。
+- 配套生成的本地图像资产, 用于支撑 slides 展示。
 
 ## Constraints
 
-- 继续使用 Hugo 静态站点能力。
-- 尽量复用当前时间轴视觉风格。
-- 数据维护以 Markdown front matter 为主。
-- `TODO.md` 保持入口页身份。
-- 不要求作者同时维护 Markdown 和 JSON 两份数据。
+- 语言以中文为主, 可保留必要英文术语。
+- 内容必须客观, 避免“应该”“最好”“建议”“更稳定”等主观或指导性表达。
+- 不使用读论文/写代码等案例主线。
+- 不使用 Mermaid。
+- 不默认使用 SVG; 优先使用模型生成的位图信息图或界面示意图。
+- 图片应清楚表达概念结构或界面对照关系。
+- 图片中的文字允许直接由模型生成, 但应尽量保持短标签、低文字密度。
+- 每页文字说明应简短, 只解释图片中呈现的客观概念。
+- 不依赖最新功能细节来构成教程主线。
+- 新 slides 应遵循当前 `content/slides` 中已有的 Markdown slide 结构。
 
 ## Acceptance Criteria
 
-- 新增一个 `draft: false` 且带必要 front matter 的 life Markdown 后, life 时间轴自动包含该条目。
-- 修改某个 life Markdown 的 `lastmod` 后, 时间轴排序按新 `lastmod` 更新。
-- 未设置 `lastmod` 的 life Markdown 使用 `date` 参与排序。
-- `TODO.md` 不出现在自己的时间轴条目中。
-- 已有 `Car.md` 能作为 life 时间轴条目展示并链接到文章页。
-- `data/posts/todo.json` 中现有三条记录被迁移为独立 Markdown。
-- 迁移后的三条记录位于 `content/posts/life/` 根目录, 且 `pinned: false`。
-- `TODO.md` 保持 `pinned: true`。
-- 不再需要编辑 `data/posts/todo.json` 来维护 life 时间轴。
+- `content/slides/AI-Tool.md` 被重写为 25-35 页。
+- slides 标题为 `AI 工具入门`。
+- slides 使用 `draft: false`。
+- slides 不再包含读论文/写代码案例主线。
+- slides 不再包含 prompt 设计建议、工具使用建议或主观经验判断。
+- slides 覆盖 LLM 交互、prompt 层级、context、Agent loop、tool use、MCP、Skill、mode、sandbox/approval、diff/Git/terminal/browser 等核心概念。
+- 每个核心概念都能在图片中找到对应结构或界面位置。
+- 每页都有图和简短客观描述。
+- 图像以模型生成的位图信息图或界面示意图为主。
+- slides 中包含 Codex/Claude 界面对照内容。
+- 内容写作已按官方文档核对核心概念, 但 slides 不强制显示来源。
+- slides 不使用 Mermaid。
+- slides 不包含独立讲稿备注或课后练习页。
 
 ## Assumptions
 
-- life Markdown 至少应包含 `title`, `date`, `draft`。
-- `description` 用于时间轴摘要; 若缺失, 可以为空。
-- `lastmod` 主要通过 front matter 手动维护。
-- 迁移后的 TODO 记录可以作为普通 life Markdown, 内容可先使用原 JSON 的标题和描述。
+- 受众知道 LLM/ChatGPT/prompt/token/context 等基础概念, 不需要从零解释。
+- 初版图片可以使用模型生成的位图信息图或界面示意图, 后续可由作者替换为 PicGo 外链。
+- 对 Codex / Claude 的界面对照可以使用抽象化界面示意图, 不要求完全复刻真实产品 UI。
+- 官方文档核对放在后续实现阶段完成, 本 spec 只定义内容边界和接受标准。
 
 ## Open Questions
 

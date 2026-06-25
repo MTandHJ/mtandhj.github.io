@@ -2,81 +2,91 @@
 
 ## Overview
 
-将 `layouts/posts/todo.html` 从 JSON 数据驱动改为 Hugo 页面集合驱动。`content/posts/life/TODO.md` 继续作为入口页, 模板自动读取 `content/posts/life/` 根目录下的 life Markdown, 排除入口页自身和 draft 内容, 按 `.Lastmod` 降序展示时间轴。
+重写 `content/slides/AI-Tool.md`, 保持标题 `AI 工具入门` 和 `draft: false`。新版 slides 采用客观文档式介绍, 不再使用读论文/写代码案例主线, 不写 prompt 设计建议或工具使用建议。
 
-页面继续保留当前 TODO 时间轴结构和紧凑条目密度, 但移除旧 TODO 数据模型中的状态、重要性、延期等展示语义。条目标题保留超链接, 指向对应 Markdown 生成的文章页面。
+整体控制在 25-35 页。主线为“机制介绍 + Codex/Claude 界面对照”: 先解释 Agent 工具的通用组成模块, 再展示这些模块在 Codex / Claude 相关界面中的位置。
+
+视觉上采用统一的产品文档风: 浅色背景、清晰 UI 面板、箭头、少量高亮色。图片优先承担概念解释, 每页配一张图和一段简短客观描述。
 
 ## Implementation
 
-- 更新 `hugo.toml`
-  - 开启 Hugo Git 信息能力, 让 `.Lastmod` 可以使用 GitInfo。
-  - 保持现有 permalink 规则不变。
+- 重写 `content/slides/AI-Tool.md`
+  - 保留 front matter:
+    - `title: "AI 工具入门"`
+    - `author: MTandHJ`
+    - `draft: false`
+    - 相关 tags。
+  - 删除当前读论文/写代码案例页和主观建议页。
+  - 沿用现有 slides 结构: `<slide-section>`, `<slide-img>`, `<slide-cols>`, `<slide-highlight>` 等。
+  - 每页以一张主图为中心, 下方或旁边放 1-3 句客观说明。
+  - 不加入独立讲稿备注。
+  - 不加入课后练习页。
 
-- 更新 `layouts/posts/todo.html`
-  - 移除 `datafile` / `hugo.Data.posts` 读取逻辑。
-  - 从 `content/posts/life/` 根目录对应的页面集合读取 life Markdown。
-  - 过滤规则:
-    - 只包含 `content/posts/life/` 根目录下的 Markdown。
-    - 排除当前入口页 `TODO.md`。
-    - 排除 draft 页面。
-  - 排序规则:
-    - 按 `.Lastmod` 降序。
-    - `.Lastmod` 允许使用 Hugo GitInfo; front matter `lastmod` 可显式覆盖。
-    - 没有有效 `lastmod` 时使用 Hugo 默认回退, 最终可回到 `.Date`。
-  - 条目字段:
-    - title: `.Title`
-    - description: `.Description`
-    - url: `.RelPermalink`
-    - time: `.Lastmod`
-    - image preview: 从正文首图提取。
-  - 条目标题必须保留超链接, 使用 Hugo `.RelPermalink` 生成, 当前 permalink 效果为 `/posts/<contentbasename>/`。
-  - 移除 TODO 状态、重要性、延期和旧 `imageUrl` 字段逻辑。
+- 内容结构
+  - 标题页。
+  - 概览页: Codex / Claude Agent 工具由 LLM、instructions、context、tools、permissions、workspace、history 等模块组成。
+  - LLM interaction: user message, prompt stack, context, model output。
+  - Prompt hierarchy: system / developer / user / project instructions。
+  - Project instructions: `AGENTS.md`, `CLAUDE.md`, repository-level rules。
+  - Context: files, selected text, conversation history, memory, retrieved materials。
+  - Agent loop: model step, tool call, observation, next step。
+  - Tool use: terminal, file edit, browser, search, Git/diff。
+  - Permission model: sandbox, approval, blocked action, allowed action。
+  - MCP: external tool/data source integration layer。
+  - Skill: reusable task instruction package。
+  - Modes: planning, editing, reviewing, execution-oriented modes where applicable。
+  - Codex interface mapping: prompt area, workspace/files, tool trace, approvals, diff, result summary。
+  - Claude / Claude Code interface mapping: chat, project context, tool use, permissions, files, memory/instructions。
+  - Comparison pages: shared concepts across Codex / Claude, without subjective recommendation.
+  - Closing summary: module map of Agent tools.
 
-- 更新 `static/js/timelines.js`
-  - 保留现有悬浮图片能力。
-  - TODO 时间轴继续通过 `data-image-url` 驱动悬浮预览。
-  - 图片 URL 由模板从正文首图提取后写入 `data-image-url`。
+- 图像策略
+  - 关键概念页使用 `imagegen` 生成位图信息图。
+  - Codex / Claude 界面对照页尽量使用真实截图。
+  - 如果真实截图不可取得、不可复用或界面信息不适合公开, 使用产品文档风 UI mock 代替。
+  - 图内文字以英文短标签为主, 例如 `System`, `User`, `Context`, `Tool Call`, `Observation`, `Approval`, `Diff`。
+  - Slide 正文使用中文解释图中元素。
+  - 避免图内大段文字, 降低模型生成文字错误的概率。
 
-- 更新 `static/css/timelines.css`
-  - 保留当前 TODO 时间轴主体风格。
-  - 清理或停止使用状态、重要性、延期相关样式。
-  - 保持紧凑条目布局: 标题、描述。
+- 图片资产位置
+  - 新图像资产放在 `content/images/slides/ai-tool/`。
+  - 命名使用稳定英文 slug, 例如:
+    - `prompt-hierarchy.png`
+    - `agent-loop.png`
+    - `tool-use.png`
+    - `mcp-overview.png`
+    - `skill-package.png`
+    - `codex-interface-map.png`
+    - `claude-interface-map.png`
+  - 新版 `AI-Tool.md` 只引用新 PNG/JPG 资产或真实截图资产。
+  - 删除旧版不再引用的 SVG 资产, 保持目录只包含新版需要的图片。
 
-- 更新 `content/posts/life/TODO.md`
-  - 保持 `layout: todo`。
-  - 保持 `pinned: true`。
-  - 删除不再需要的 `datafile: todo`。
-
-- 迁移 `data/posts/todo.json`
-  - 将三条 JSON 记录迁移为 `content/posts/life/` 根目录下的独立 Markdown。
-  - 文件名使用英文 slug。
-  - front matter 使用中文标题、原日期、原描述、`draft: false`, `pinned: false`, Life tag。
-  - 正文可先放置原 description, 后续可继续扩写。
-
-- 删除 `data/posts/todo.json`
-  - 避免后续误维护双数据源。
+- 官方概念核对
+  - 实现时按 OpenAI / Anthropic 官方文档核对核心概念。
+  - Slides 不强制展示来源链接。
+  - 只采用稳定概念和通用界面结构, 不把最新功能细节作为教程主线。
 
 ## Behavior
 
-- 新增 `content/posts/life/*.md` 后, 只要 `draft: false`, 就会自动进入 TODO 时间轴。
-- 修改 front matter `lastmod` 后, 时间轴顺序和显示时间随之变化。
-- 不设置 `lastmod` 时, Hugo `.Lastmod` 会按配置和默认规则回退, 最终可使用 `date`。
-- `TODO.md` 只作为入口页, 不展示为时间轴条目。
-- 时间轴条目展示标题和描述; 时间只体现在年月分组上。
-- 时间轴条目标题链接到对应文章页面。
-- 如果正文存在首图, 标题 hover 时显示图片预览; 没有首图时不显示预览。
+- `AI-Tool.md` 作为正式 slides 页面发布, 保持 `draft: false`。
+- 听众看到的是客观机制说明, 不是操作建议或案例教程。
+- 每页先通过图建立结构印象, 再用简短中文说明解释图中概念。
+- 图内标签以英文为主, 便于对应工具界面和官方术语。
+- Codex / Claude 页面展示真实截图或接近真实的界面对照图, 用于定位 prompt、context、tools、approval、diff、terminal、browser、Git 等模块。
+- 旧的读论文/写代码示例、prompt 设计建议、主观判断句不再出现在新版 slides 中。
 
 ## Compatibility
 
-- `trends` 时间轴继续使用现有 JSON 数据, 不受影响。
-- 普通 post 单页模板不需要改变。
-- `data/posts/todo.json` 删除后, 只有旧 `todo.html` 的 JSON 读取逻辑会被替换, 不影响其他数据文件。
-- GitInfo 参与 `.Lastmod` 时, 本地和部署环境需要 Git 历史可用; front matter `lastmod` 仍可显式覆盖。
-- 使用 `.RelPermalink` 生成链接, 后续 permalink 规则变化时模板无需硬编码调整。
-- 悬浮图片依赖 hover 交互; 移动端没有 hover 时只显示文本条目, 不影响访问文章链接。
+- 不引入 Mermaid。
+- 不新增全局 tool-specific CSS 或 JS。
+- 继续使用现有 Reveal.js slides 和自定义 slide 标签能力。
+- 新图片资源限定在 `content/images/slides/ai-tool/`, 不影响其他 slides。
+- 删除旧 SVG 资产时仅删除本次 `AI-Tool.md` 专用且新版不再引用的文件。
+- 真实截图如果来自本地界面或官方页面, 应作为静态图片纳入项目资源, 避免运行时依赖外部页面状态。
 
 ## Notes
 
-- 时间轴排序和年月分组使用同一个 `.Lastmod` 值。
-- 正文首图提取只用于时间轴预览, 不改变文章单页展示。
-- 后续如果需要区分“事件发生时间”和“更新时间”, 可以再增加展示策略, 但当前计划以更新时间时间轴为准。
+- 本计划不包含验证设计和任务拆解。
+- 图像生成阶段应优先生成低文字密度的信息图, 再根据可读性迭代。
+- 若真实截图和官方文档界面不一致, 以“概念位置对照”而非“版本精确复刻”为目标。
+- 若某个概念无法用清晰图片表达, 应合并到相邻概念页, 避免产生纯文字页。
