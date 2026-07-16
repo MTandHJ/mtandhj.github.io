@@ -195,7 +195,7 @@
     "date": "2024-09-09",
     "title": "ETEGRec",
     "description": "端到端联合训练 Tokenizer & Recommender: 提出 Tokenizer 侧向量表征和 Recommender 侧序列表征的对齐损失",
-    "paperUrl": "https://arxiv.org/abs/2406.14017",
+    "paperUrl": "https://arxiv.org/abs/2409.05546",
     "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260520171706.png",
     "importance": "emmm"
   },
