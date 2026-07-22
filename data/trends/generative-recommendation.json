@@ -16,6 +16,14 @@
     "importance": "emmm"
   },
   {
+    "date": "2026-02-02",
+    "title": "ReSID",
+    "description": "从信息论角度剖析 SID 的设计理念: 协同信息 & 层次性",
+    "paperUrl": "/posts/resid/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260722113223.png",
+    "importance": "novel"
+  },
+  {
     "date": "2026-01-30",
     "title": "BEAR",
     "description": "Beam Search 的训推一致约束学习",
