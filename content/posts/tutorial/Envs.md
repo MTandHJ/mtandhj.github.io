@@ -461,50 +461,99 @@ ssh-keygen -R [服务器IP地址]
 
 ```
 
-
 ## uv
 
-[Ahaknow-从 Conda 到 uv：现代化 Python 开发迁移指南](https://blog.ahaknow.com/posts/aiknow/conda-uv-python/)
+uv 将 Python 解释器、全局工具和项目依赖分开管理：
 
-### 安装
+- 全局 Python：任意目录执行 `python`。
+- 全局工具：任意目录执行 `ruff`、`ipython` 等命令。
+- 项目环境：每个项目独立的 `.venv`、`pyproject.toml` 与 `uv.lock`。
 
-#### Windows 手动安装
+### 全局环境设置 (类似于 conda 的 base 环境)
 
-1. 在 [uv-github](https://github.com/astral-sh/uv) 的 release 中下载相应的压缩文件;
-2. 解压至某个地方, 例如 `C:\uv` (uv 下应该有 `uv.exe`);
-3. 将 `path\to\uv` (`C:\uv`) 加入到环境变量 `Path` 中
+```powershell
+uv python install 3.11 --default
+uv python update-shell
 
-### 指令
+# 重新打开 PowerShell 后
+python --version
 
-- (**基础操作**)
+uv pip install --python python numpy pandas
+python -c "import numpy; print(numpy.__version__)"
 
-|动作|Conda 命令|uv 命令|备注|
-|:-:|:-:|:-:|:-:|
-|创建环境|`conda create -n myenv`| uv venv| 默认在当前目录下创建 .venv|
-|安装 Python|conda install python=3.11|uv python install 3.11|uv 全局管理 Python 版本|
-|指定版本创建|conda create -n myenv python=3.10|uv venv --python 3.10||
-|激活环境|conda activate myenv|source .venv/bin/activate| Windows: .venv\Scripts\activate|
-|退出环境| conda deactivate |deactivate||
-|删除环境|conda env remove -n myenv|rm -rf .venv| 直接删文件夹即可|
+uv tool install ruff
+ruff --version
+```
 
-- (**项目内包管理**)
 
-|动作|Conda 命令|uv 命令|备注|
-|:-:|:-:|:-:|:-:|
-|初始化项目||uv init|生成 pyproject.toml|
-|安装包|conda install numpy|uv add numpy|自动更新 lock 文件|
-|安装特定版本|conda install numpy=1.24|uv add "numpy==1.24"||
-|卸载包|conda remove numpy|uv remove numpy||
-|安装开发依赖||uv add --dev pytest|测试/格式化工具专用|
-|列出已安装包|conda list|uv tree|树状显式更清晰|
+| 命令 | 介绍 | 备注 |
+| --- | --- | --- |
+| `uv python install 3.11 --default` | 安装 Python 3.11，并提供全局 `python` 命令 | 执行后重启终端或 VS Code. `--default` 会创建无版本号的 `python` |
+| `uv python list` | 查看本机可用和已安装的 Python 版本 | 用于确认 uv 管理的解释器 |
+| `uv python find 3.11` | 查找 Python 3.11 的实际路径 | 排查解释器或 VS Code 配置时有用 |
+| `uv python update-shell` | 将 uv 的 Python/工具目录加入 Shell 的 Path | 执行后需要重新打开终端 |
+| `uv pip install --python python numpy pandas` | 将包安装到全局 `python` | 适合临时脚本；不建议安装正式项目依赖 |
+| `uv pip list --python python` | 查看全局 Python 已安装的包 | `--python python` 明确指定全局解释器 |
+| `uv pip install --python python --upgrade numpy` | 升级全局 Python 中的包 | 升级可能影响依赖该包的临时脚本 |
+| `uv tool install ruff` | 全局安装命令行工具 | 适合 `ruff`、`black`、`ipython`、`jupyterlab` 等 CLI |
+| `uv tool list` | 查看已安装的全局工具 | 每个工具使用独立环境，不污染全局 Python |
+| `uv tool upgrade --all` | 升级全部全局工具 | 等价于集中更新常用 CLI |
+| `uv tool uninstall ruff` | 卸载一个全局工具 | 只删除该工具，不影响其他环境 |
+| `uvx ruff check .` | 临时运行一个工具 | 不需要预先安装；适合偶尔使用的 CLI |
 
-- (**环境复现与同步**)
 
-|动作|Conda 命令|uv 命令|备注|
-|:-:|:-:|:-:|:-:|
-|导出依赖|conda env export > env.yml|(自动维护)|uv 自动维护 uv.lock 无需手动导出|
-|复现环境|conda env create -f env.yml|uv sync|一键同步|
-|更新所有包|conda update --all|uv lock --upgrade|更新 lock 文件中的版本|
+### 2. 项目管理
+
+项目环境应由 uv 自动维护，不依赖全局包。每个项目通常包含：
+
+```text
+project/
+├── pyproject.toml  # 项目依赖与配置
+├── uv.lock         # 精确锁定的依赖版本
+└── .venv/          # 项目独立虚拟环境
+```
+
+- (**从零创建新项目**)
+
+```powershell
+mkdir E:\Desktop\demo
+cd E:\Desktop\demo
+
+uv init
+uv add requests
+uv add --dev pytest ruff
+
+uv run python -c "import requests; print(requests.__version__)"
+uv run ruff check .
+uv tree
+```
+
+- (**接管旧项目**)
+
+```powershell
+cd E:\Desktop\some-project
+
+uv sync
+uv run python main.py
+uv run pytest
+```
+
+| 命令 | 介绍 | 备注 |
+| --- | --- | --- |
+| `uv init` | 初始化一个新的 Python 项目 | 创建 `pyproject.toml`、README 与基础目录. 已有 `pyproject.toml` 的项目不需要执行 |
+| `uv init --bare` | 初始化最简项目 | 只创建必要的项目配置, 适合脚本项目 |
+| `uv add requests` | 添加项目依赖 | 自动更新 `pyproject.toml` 和 `uv.lock` |
+| `uv add "numpy==2.2.0"` | 添加指定版本依赖 | 可使用 `==`、`>=` 等版本约束 |
+| `uv add --dev pytest ruff` | 添加开发依赖 | 适合测试、格式化、Lint 工具 |
+| `uv remove requests` | 删除项目依赖 | 同时更新锁文件 |
+| `uv sync` | 创建或同步项目 `.venv` | 克隆项目后首先执行; 按 `uv.lock` 安装依赖 |
+| `uv run python main.py` | 在项目环境中运行脚本 | 推荐方式; 无需手动激活 `.venv` |
+| `uv run pytest` | 在项目环境中运行命令 | 自动使用项目安装的测试工具 |
+| `uv tree` | 查看项目依赖树 | 排查间接依赖和版本来源 |
+| `uv lock` | 更新锁文件 | 通常 `uv add` 后会自动处理 |
+| `uv lock --upgrade` | 升级锁文件中的依赖版本 | 之后执行 `uv sync` 安装新版本 |
+| `uv run --with rich python demo.py` | 临时为一次运行添加依赖 | 不修改 `pyproject.toml` 和 `uv.lock` |
+
 
 ## Conda
 
