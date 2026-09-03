@@ -1,0 +1,10 @@
+[
+  {
+    "date": "2022-11-30",
+    "title": "Speculative Decoding",
+    "description": "开山之作: Speculative Sampling 理论和分析",
+    "paperUrl": "/posts/speculative-decoding",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260903173336.png",
+    "importance": "seminal"
+  }
+]
