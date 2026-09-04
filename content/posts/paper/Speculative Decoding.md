@@ -6,9 +6,9 @@ description: "用小模型猜测, 大模型并行验证, 且保持精确采样"
 author: MTandHJ
 tags:
   - Paper
+  - Speculative Decoding
   - LLM
   - Autoregressive
-  - Optimization
   - Empirical
   - Seminal
   - ICML
