@@ -59,6 +59,7 @@ pinned: false
 
 - 对于 $X \in \Omega$, 可以分成这样两种情况进行分析:
   1. $X \in \Omega_- := \{x: q(x) > p(x)\}$, 则
+
     $$
     \begin{align*}
     \mathbb{P}(X)
@@ -124,15 +125,15 @@ $$
 于是最终输出为 $x$ 的概率是两条路径之和:
 
 $$
-\begin{aligned}
+\begin{align*}
 \mathbb{P}(\mathrm{output} = x)
 &= \mathbb{P}(\mathrm{accept}, y = x)
-+ \mathbb{P}(\mathrm{reject}) p'(x) \\
++\mathbb{P}(\mathrm{reject}) p'(x) \\
 &= \min(p(x), q(x))
-+ Z \cdot \frac{\max(0, p(x) - q(x))}{Z} \\
++Z \cdot \frac{\max(0, p(x) - q(x))}{Z} \\
 &= \min(p(x), q(x)) + p(x) - \min(p(x), q(x)) \\
 &= p(x).
-\end{aligned}
+\end{align*}
 $$
 
 ---
