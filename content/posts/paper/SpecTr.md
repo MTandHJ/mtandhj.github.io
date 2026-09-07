@@ -282,19 +282,16 @@ pinned: false
 
     $$
     q_{\mathrm{res}}(x)
-    =
-    \frac{q(x)-A_\rho(x)}{1-P_{A}}.
+    =\frac{q(x)-A_\rho(x)}{1-P_{A}}.
     $$
 
     分子是每个 token 尚未被分配的 mass, 分母是总缺额, 也正是进入 residual 分支的概率. 因此
 
     $$
     \Pr(Y=x)
-    =
-    A_\rho(x)
+    =A_\rho(x)
     +(1-P_{A})q_{\mathrm{res}}(x)
-    =
-    q(x).
+    =q(x).
     $$
 
     若 $\beta=0$, 候选与目标分布没有重叠, 直接令 $A_\rho(x)=0$ 并从 $q$ 采样. 若 $P_A=1$, 则无需进入残差分支. 这两种情形均不应直接计算上述含零分母的表达式.
