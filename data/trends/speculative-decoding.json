@@ -1,5 +1,21 @@
 [
   {
+    "date": "2024-02-19",
+    "title": "SEQUOIA",
+    "description": "用动态规划优化 token tree, 以无放回采样提高验证鲁棒性",
+    "paperUrl": "/posts/sequoia/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260907181639.png",
+    "importance": "novel"
+  },
+  {
+    "date": "2023-10-23",
+    "title": "SpecTr",
+    "description": "从最优传输理解投机解码及其多候选扩展",
+    "paperUrl": "/posts/spectr/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260907135146.png",
+    "importance": "seminal"
+  },
+  {
     "date": "2023-05-16",
     "title": "SpecInfer",
     "description": "将单序列投机解码推广到 tree-based 场景, 提高接受率且能同时利用多个小模型",
