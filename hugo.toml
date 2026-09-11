@@ -8,6 +8,10 @@ enableGitInfo = true
 disableKinds = ["taxonomy", "term"]
 ignoreFiles = ["_template\\.md$"]
 
+[frontmatter]
+date = [":default", ":git", ":fileModTime"]
+lastmod = [":default", ":fileModTime"]
+
 [taxonomies]
 tag = "tags"
 

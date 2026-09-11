@@ -44,6 +44,8 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+      - name: Preserve Unicode paths for Hugo Git dates
+        run: git config --local core.quotepath false
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
