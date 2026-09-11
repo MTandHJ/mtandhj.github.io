@@ -8,6 +8,14 @@
     "importance": "novel"
   },
   {
+    "date": "2024-01-19",
+    "title": "Medusa",
+    "description": "用多个轻量预测头并行提出未来 token, 通过树状验证减少解码轮数",
+    "paperUrl": "/posts/medusa/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260911104750.png",
+    "importance": "emmm"
+  },
+  {
     "date": "2023-10-23",
     "title": "SpecTr",
     "description": "从最优传输理解投机解码及其多候选扩展",
