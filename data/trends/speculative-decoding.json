@@ -1,5 +1,13 @@
 [
   {
+    "date": "2026-01-12",
+    "title": "TALON",
+    "description": "根据置信度在固定节点预算下自适应分配草稿树的宽度与深度",
+    "paperUrl": "https://arxiv.org/abs/2601.07353",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260913211404.png",
+    "importance": "emmm"
+  },
+  {
     "date": "2024-06-24",
     "title": "EAGLE-2",
     "description": "路径累计置信度动态扩展和重排 draft tree & target LM Head",
