@@ -1,5 +1,13 @@
 [
   {
+    "date": "2024-06-24",
+    "title": "EAGLE-2",
+    "description": "路径累计置信度动态扩展和重排 draft tree & target LM Head",
+    "paperUrl": "https://arxiv.org/abs/2406.16858",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260913203409.png",
+    "importance": "emmm"
+  },
+  {
     "date": "2024-02-19",
     "title": "SEQUOIA",
     "description": "用动态规划优化 token tree, 以无放回采样提高验证鲁棒性",
@@ -8,12 +16,20 @@
     "importance": "novel"
   },
   {
+    "date": "2024-01-26",
+    "title": "EAGLE",
+    "description": "特征空间自回归",
+    "paperUrl": "https://arxiv.org/abs/2401.15077",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260913084951.png",
+    "importance": "emmm"
+  },
+  {
     "date": "2024-01-19",
     "title": "Medusa",
     "description": "用多个轻量预测头并行提出未来 token, 通过树状验证减少解码轮数",
     "paperUrl": "/posts/medusa/",
     "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260911104750.png",
-    "importance": "emmm"
+    "importance": "novel"
   },
   {
     "date": "2023-10-23",
