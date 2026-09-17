@@ -8,6 +8,14 @@
     "importance": "emmm"
   },
   {
+    "date": "2025-05-21",
+    "title": "POST",
+    "description": "POST, 用客户端公开模型起草与安全批量验证摊薄私有 GPT 的密码学推理成本",
+    "paperUrl": "https://arxiv.org/abs/2505.15252",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260917101400.png",
+    "importance": "emmm"
+  },
+  {
     "date": "2024-06-24",
     "title": "EAGLE-2",
     "description": "路径累计置信度动态扩展和重排 draft tree & target LM Head",
