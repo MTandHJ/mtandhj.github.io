@@ -53,8 +53,7 @@ pinned: false
 
     $$
     \mathcal{L}_{\text{FAMAE}}(\theta)
-    =
-    \mathbb{E}_{M \sim \pi}
+    =\mathbb{E}_{M \sim \pi}
     \left[
         \sum_{k \in M}
         \alpha_k
