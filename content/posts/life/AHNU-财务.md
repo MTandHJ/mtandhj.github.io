@@ -256,7 +256,7 @@ flowchart LR
 附件入口可能要求验证码. 采购及询比价模板见[资产处下载中心](https://zcc.ahnu.edu.cn/xzzx/ztbcgzlxz.htm); 合同正文按具体采购或出版事项采用适用文本.
 
 <script type="module">
-  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.0/dist/mermaid.esm.min.mjs";
+  import mermaid from "/vendor/mermaid/11.12.0/dist/mermaid.esm.min.mjs";
   const diagrams = [...document.querySelectorAll('pre code.language-mermaid, pre code[data-lang="mermaid"]')].map((code) => {
     const diagram = document.createElement("div");
     diagram.className = "mermaid";

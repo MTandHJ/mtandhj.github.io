@@ -1,14 +1,15 @@
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.css"
+    href="/vendor/waline/3.15.2/dist/waline.css"
 />
 <div id="waline"></div>
 <script type="module">
-import { init } from 'https://cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js';
+import { init } from '/vendor/waline/3.15.2/dist/waline.js';
 
 setTimeout(() => {
     init({
         el: '#waline',
+        emoji: ['/vendor/waline-emojis/1.1.0/weibo'],
         reaction: {{ .Site.Params.comment.reaction | default false }},
         serverURL: '{{ .Site.Params.comment.serverURL }}',
     });

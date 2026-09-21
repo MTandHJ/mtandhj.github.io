@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', function () {
       hljsPromise = new Promise(function (resolve, reject) {
         var isDark = document.documentElement.classList.contains('dark');
         var theme = isDark
-          ? 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/monokai.min.css'
-          : 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/styles/github.min.css';
+          ? '/vendor/highlightjs/11.11.1/styles/monokai.min.css'
+          : '/vendor/highlightjs/11.11.1/styles/github.min.css';
 
         var link = document.createElement('link');
         link.rel = 'stylesheet';
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.head.appendChild(link);
 
         var script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.11.1/build/highlight.min.js';
+        script.src = '/vendor/highlightjs/11.11.1/highlight.min.js';
         script.onload = function () { resolve(window.hljs); };
         script.onerror = reject;
         document.head.appendChild(script);
@@ -69,12 +69,12 @@ document.addEventListener('DOMContentLoaded', function () {
       pyodidePromise = (async function () {
         await new Promise(function (resolve, reject) {
           var script = document.createElement('script');
-          script.src = 'https://cdn.jsdelivr.net/pyodide/v0.27.5/full/pyodide.js';
+          script.src = '/vendor/pyodide/0.27.5/pyodide.js';
           script.onload = resolve;
           script.onerror = reject;
           document.head.appendChild(script);
         });
-        return await loadPyodide();
+        return await loadPyodide({ indexURL: '/vendor/pyodide/0.27.5/' });
       })();
     }
     return pyodidePromise;

@@ -12,6 +12,10 @@ LOAD_PAUSE=3000
 SHARED_FILES=(
   "layouts/slides/single.pdf.html"
   "static/css/slides.css"
+  "static/css/han-sc-v1.css"
+  "static/fonts/han-sc-v1/checksums.json"
+  "static/vendor/checksums.json"
+  "layouts/partials/math.html"
   "static/js/slides-core.js"
   "hugo.toml"
 )

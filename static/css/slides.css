@@ -29,22 +29,9 @@
   font-weight: 700;
   font-display: swap;
 }
-@font-face {
-  font-family: "Source Han Sans SC";
-  src: url("/fonts/source-han-sans-sc-regular.woff2") format("woff2");
-  font-weight: 400;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Source Han Sans SC";
-  src: url("/fonts/source-han-sans-sc-bold.woff2") format("woff2");
-  font-weight: 700;
-  font-display: swap;
-}
-
 /* Body text font */
 .reveal .slides {
-  font-family: "Inter", "Source Han Sans SC", sans-serif;
+  font-family: "Inter", "Blog Han Sans SC", sans-serif;
 }
 
 .reveal.fullscreen {
@@ -153,7 +140,7 @@
   /* color: #2c3e50 !important; */
   color: #1C2430 !important;
   font-weight: bold !important;
-  font-family: "Source Sans 3", "Source Han Sans SC", sans-serif;
+  font-family: "Source Sans 3", "Blog Han Sans SC", sans-serif;
 }
 
 /* 为不同级别的标题设置不同的字体大小 */

@@ -1,0 +1,7 @@
+static/vendor/** -text
+static/fonts/** -text
+assets/fonts/** -text
+static/css/han-sc-v1.css text eol=lf
+static/css/rubik.css text eol=lf
+scripts/*.py text eol=lf
+scripts/*.json text eol=lf

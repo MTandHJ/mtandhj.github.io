@@ -37,6 +37,7 @@
 
 
 
+	<link rel="stylesheet" href="/css/rubik.css" />
 	<link rel="stylesheet" href="/css/output.css" type="text/css" media="all" />
 	<link rel="stylesheet" href="/css/chroma.css" type="text/css" media="all" />
 	<link rel="stylesheet" href="/css/private.css" type="text/css" media="all" />
@@ -47,7 +48,9 @@
 	{{ end -}}
 
 	<!-- LaTeX-->
+	{{ if .IsPage }}
 	{{ partial "math.html" . }}
+	{{ end }}
 </head>
 
 <body class="bg-stone-50 font-custom flex flex-col justify-between min-h-screen dark:bg-stone-800 dark:text-white">

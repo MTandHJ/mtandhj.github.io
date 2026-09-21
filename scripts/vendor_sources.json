@@ -1,0 +1,130 @@
+[
+  {
+    "package": "katex",
+    "version": "0.16.10",
+    "archive": "katex-0.16.10.tgz",
+    "url": "https://registry.npmjs.org/katex/-/katex-0.16.10.tgz",
+    "integrity": "sha512-ZiqaC04tp2O5utMsl2TEZTXxa6WSC4yo0fv5ML++D3QZv/vx2Mct0mTlRx3O+uUkjfuAgOkzsCmq5MiUEsDDdA==",
+    "directory": "katex/0.16.10",
+    "include": [
+      "LICENSE",
+      "dist/katex.min.css",
+      "dist/katex.min.js",
+      "dist/contrib/auto-render.min.js",
+      "dist/fonts/*"
+    ]
+  },
+  {
+    "package": "reveal.js",
+    "version": "4.5.0",
+    "archive": "reveal.js-4.5.0.tgz",
+    "url": "https://registry.npmjs.org/reveal.js/-/reveal.js-4.5.0.tgz",
+    "integrity": "sha512-Lx1hUWhJR7Y7ScQNyGt7TFzxeviDAswK2B0cn9RwbPZogTMRgS8+FTr+/12KNHOegjvWKH0H0EGwBARNDPTgWQ==",
+    "directory": "reveal/4.5.0",
+    "include": [
+      "LICENSE",
+      "dist/reveal.css",
+      "dist/reveal.js",
+      "dist/theme/white.css",
+      "dist/theme/fonts/source-sans-pro/*",
+      "plugin/markdown/markdown.js",
+      "plugin/highlight/highlight.js",
+      "plugin/highlight/monokai.css",
+      "plugin/notes/notes.js",
+      "plugin/notes/speaker-view.html"
+    ]
+  },
+  {
+    "package": "@waline/client",
+    "version": "3.15.2",
+    "archive": "waline-client-3.15.2.tgz",
+    "url": "https://registry.npmjs.org/@waline/client/-/client-3.15.2.tgz",
+    "integrity": "sha512-QBAVbruefDR+IKyQdM/Ao9fd07Xxpx1WEJ7xI8lBVNDjMQBr1PpdwrTpLC8RrYbgUR9ymNBvtLDJi0xK3pbORQ==",
+    "directory": "waline/3.15.2",
+    "include": [
+      "LICENSE",
+      "dist/waline.js",
+      "dist/waline.css"
+    ]
+  },
+  {
+    "package": "@fontsource-variable/rubik",
+    "version": "5.2.8",
+    "archive": "fontsource-variable-rubik-5.2.8.tgz",
+    "url": "https://registry.npmjs.org/@fontsource-variable/rubik/-/rubik-5.2.8.tgz",
+    "integrity": "sha512-vGDExLzB4a2Fj9mca5LqNoA2ZKcU9o+x5FEBLte/nxYkCB9hOQwZS6ZlItUv+Ssn7YMzKauGuI/Po+YueFuZbg==",
+    "directory": "rubik/5.2.8",
+    "include": [
+      "LICENSE",
+      "index.css",
+      "wght-italic.css",
+      "files/*.woff2"
+    ]
+  },
+  {
+    "package": "@highlightjs/cdn-assets",
+    "version": "11.11.1",
+    "archive": "highlightjs-cdn-assets-11.11.1.tgz",
+    "url": "https://registry.npmjs.org/@highlightjs/cdn-assets/-/cdn-assets-11.11.1.tgz",
+    "integrity": "sha512-VEPdHzwelZ12hEX18BHduqxMZGolcUsrbeokHYxOUIm8X2+M7nx5QPtPeQgRxR9XjhdLv4/7DD5BWOlSrJ3k7Q==",
+    "directory": "highlightjs/11.11.1",
+    "include": [
+      "LICENSE",
+      "highlight.min.js",
+      "styles/github.min.css",
+      "styles/monokai.min.css"
+    ]
+  },
+  {
+    "package": "mermaid",
+    "version": "11.12.0",
+    "archive": "mermaid-11.12.0.tgz",
+    "url": "https://registry.npmjs.org/mermaid/-/mermaid-11.12.0.tgz",
+    "integrity": "sha512-ZudVx73BwrMJfCFmSSJT84y6u5brEoV8DOItdHomNLz32uBjNrelm7mg95X7g+C6UoQH/W6mBLGDEDv73JdxBg==",
+    "directory": "mermaid/11.12.0",
+    "include": [
+      "LICENSE",
+      "LICENSE*",
+      "dist/mermaid.esm.min.mjs",
+      "dist/chunks/mermaid.esm.min/*.mjs"
+    ]
+  },
+  {
+    "package": "@waline/emojis",
+    "version": "1.1.0",
+    "archive": "waline-emojis-1.1.0.tgz",
+    "url": "https://registry.npmjs.org/@waline/emojis/-/emojis-1.1.0.tgz",
+    "integrity": "sha512-X8D7nAVOtzQ+kfht+MRP5tTjjk/CLzGT889bKHRPhMjBgLF07F7d2dNbgVDISdQSE5y7YNPOhi9zBa1unA8q8A==",
+    "directory": "waline-emojis/1.1.0",
+    "include": [
+      "LICENSE",
+      "weibo/*"
+    ]
+  },
+  {
+    "package": "pyodide",
+    "version": "0.27.5",
+    "archive": "pyodide-0.27.5.tgz",
+    "url": "https://registry.npmjs.org/pyodide/-/pyodide-0.27.5.tgz",
+    "integrity": "sha512-nXErpLzEdtQolt+sNQ/5mKuN9XTUwhxR2MRhRhZ6oDRGpYLXrOp5+kkTPGEwK+wn1ZA8+poNmoxKTj2sq/p9og==",
+    "directory": "pyodide/0.27.5",
+    "include": [
+      "pyodide.js",
+      "pyodide.asm.js",
+      "pyodide.asm.wasm",
+      "python_stdlib.zip",
+      "pyodide-lock.json"
+    ],
+    "local_packages": [
+      "tree-sitter",
+      "tree-sitter-python"
+    ],
+    "extra_files": [
+      {
+        "url": "https://cdn.jsdelivr.net/gh/pyodide/pyodide@0.27.5/LICENSE",
+        "path": "LICENSE",
+        "sha256": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5"
+      }
+    ]
+  }
+]
