@@ -2,7 +2,9 @@ class SearchManager {
   constructor() {
     this.pagefind = null;
     this.visible = false;
-    this.firstRun = true;
+    this.loadPromise = null;
+    this.filterPromise = null;
+    this.loadAttempt = 0;
     this.resultsAvailable = false;
     this.tagFilters = null;
     this.activeMode = null;
@@ -11,6 +13,8 @@ class SearchManager {
 
     const cfg = window.__searchConfig || {};
     this.MAX_RESULTS = cfg.maxResults || 15;
+    this.cacheTag = cfg.cacheTag || '';
+    this.isLocalServer = cfg.isLocalServer || false;
     this.PREFIXES = ['tag', 'post', 'slide'];
     this.DEFAULT_PLACEHOLDER = cfg.defaultPlaceholder || '搜索... (tag / post / slide + 空格)';
     this.NO_RESULTS = cfg.noResults || '无结果';
@@ -28,10 +32,26 @@ class SearchManager {
       wrapper: document.getElementById('search-wrapper'),
       chips: document.getElementById('searchChips'),
       results: document.getElementById('searchResults'),
-      trigger: document.getElementById('search-click')
+      trigger: document.getElementById('search-click'),
+      status: document.getElementById('searchStatus'),
+      retry: document.getElementById('searchRetry')
     };
 
     this._bindEvents();
+    const warmup = () => {
+      if (navigator.connection?.saveData) return;
+      const load = () => this._loadSearch().catch(() => {});
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(load, { timeout: 3000 });
+      } else {
+        window.setTimeout(load, 1500);
+      }
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', warmup, { once: true });
+    } else {
+      warmup();
+    }
   }
 
   // ======================
@@ -101,24 +121,18 @@ class SearchManager {
   // ======================
 
   show() {
-    if (this.firstRun) {
-      this._loadSearch();
-      this.firstRun = false;
-    }
-
     if (!this.visible) {
       this.els.search.style.display = 'block';
       this.els.input.focus();
       this.visible = true;
-      if (!this.els.input.value.trim() && !this.activeMode) {
-        this._showHints();
-      }
+      this._triggerSearch();
     } else {
       this.close();
     }
   }
 
   close() {
+    this.generation++;
     this.els.search.style.display = 'none';
     document.activeElement.blur();
     this.visible = false;
@@ -136,30 +150,48 @@ class SearchManager {
   // Search dispatch
   // ======================
 
-  _triggerSearch() {
+  async _triggerSearch() {
     const query = this.els.input.value;
-    this.generation++;
+    const gen = ++this.generation;
+    this._hideResults();
+    this._showStatus(this.pagefind ? '正在搜索...' : '正在加载搜索索引...');
 
-    if (!query.trim() && !this.activeMode) {
-      this._hideResults();
-      return;
-    }
-    if (!this.pagefind) return;
-
-    const gen = this.generation;
-
-    switch (this.activeMode) {
-      case 'tag':
-        this._searchByTag(query, gen);
-        break;
-      case 'post':
-        this._searchByType(query, 'post', gen);
-        break;
-      case 'slide':
-        this._searchByType(query, 'slide', gen);
-        break;
-      default:
-        this._searchGlobal(query, gen);
+    try {
+      await this._loadSearch();
+      if (gen !== this.generation) return;
+      if (!query.trim() && !this.activeMode) {
+        this._showStatus('');
+        return;
+      }
+      let search;
+      switch (this.activeMode) {
+        case 'tag':
+          search = this._searchByTag(query, gen);
+          break;
+        case 'post':
+          search = this._searchByType(query, 'post', gen);
+          break;
+        case 'slide':
+          search = this._searchByType(query, 'slide', gen);
+          break;
+        default:
+          search = this._searchGlobal(query, gen);
+      }
+      await this._withTimeout(search);
+      if (gen === this.generation) this._showStatus('');
+    } catch (error) {
+      if (gen !== this.generation) return;
+      this.generation++;
+      const message = this.isLocalServer && !this.pagefind
+        ? '本地搜索索引不可用, 请生成索引后重试.'
+        : '搜索加载失败或网络超时, 请重试.';
+      this.pagefind?.destroy().catch(() => {});
+      this.pagefind = null;
+      this.loadPromise = null;
+      this.filterPromise = null;
+      this.tagFilters = null;
+      this._showStatus(message, true);
+      console.warn('Search failed:', error);
     }
   }
 
@@ -168,12 +200,53 @@ class SearchManager {
   // ======================
 
   _loadSearch() {
-    import('/pagefind/pagefind.js').then(pf => {
-      this.pagefind = pf;
-      pf.filters().then(filters => {
-        this.tagFilters = filters.tag || {};
+    if (!this.loadPromise) {
+      const attempt = this.loadAttempt++;
+      const suffix = attempt ? `?retry=${attempt}` : '';
+      let pf;
+      let expired = false;
+      this.loadPromise = this._withTimeout((async () => {
+        const module = await import(`/pagefind/pagefind.js${suffix}`);
+        if (expired) throw new Error('Search initialization expired');
+        pf = module.createInstance({
+          language: document.documentElement.lang,
+          metaCacheTag: this.cacheTag,
+          primary: true
+        });
+        await pf.init();
+        if (expired) throw new Error('Search initialization expired');
+        await pf.preload('');
+        return pf;
+      })()).then(pf => {
+        this.pagefind = pf;
+        return pf;
+      }).catch(error => {
+        expired = true;
+        if (pf) pf.init().then(() => pf.destroy()).catch(() => {});
+        this.loadPromise = null;
+        throw error;
       });
-    });
+    }
+    return this.loadPromise;
+  }
+
+  async _withTimeout(promise) {
+    let timer;
+    try {
+      return await Promise.race([
+        promise,
+        new Promise((_, reject) => {
+          timer = window.setTimeout(() => reject(new Error('Search timed out')), 15000);
+        })
+      ]);
+    } finally {
+      window.clearTimeout(timer);
+    }
+  }
+
+  _showStatus(message, retry = false) {
+    this.els.status.textContent = message;
+    this.els.retry.hidden = !retry;
   }
 
   // ======================
@@ -181,19 +254,21 @@ class SearchManager {
   // ======================
 
   _showResults(html) {
+    const active = this.els.results.contains(document.activeElement)
+      ? document.activeElement.getAttribute('href') : null;
     this.els.results.style.display = 'block';
     this.els.results.innerHTML = html;
     this.resultsAvailable = true;
+    if (active) {
+      Array.from(this.els.results.querySelectorAll('a')).find(
+        link => link.getAttribute('href') === active
+      )?.focus();
+    }
   }
 
   _hideResults() {
     this.els.results.style.display = 'none';
     this.resultsAvailable = false;
-  }
-
-  _showHints() {
-    // Empty state: just hide results (hints handled by CSS/HTML if needed)
-    this._hideResults();
   }
 
   _showNoResults() {
@@ -205,7 +280,19 @@ class SearchManager {
   // Tag mode search
   // ======================
 
-  _searchByTag(query, gen) {
+  async _searchByTag(query, gen) {
+    if (!this.tagFilters) {
+      if (!this.filterPromise) {
+        this.filterPromise = this.pagefind.filters().then(filters => {
+          this.tagFilters = filters.tag || {};
+        }).catch(error => {
+          this.filterPromise = null;
+          throw error;
+        });
+      }
+      await this.filterPromise;
+      if (gen !== this.generation) return;
+    }
     const allTags = this.selectedTags.slice();
     const typing = query.trim();
 
@@ -246,33 +333,18 @@ class SearchManager {
       return;
     }
 
-    // Search with all selected chips (AND filter)
-    this.pagefind.search(null, { filters: { tag: allTags } }).then(search => {
-      if (gen !== this.generation) return;
-
-      const coTags = search.filters && search.filters.tag ? search.filters.tag : {};
-
-      if (search.results.length > 0) {
-        Promise.all(
-          search.results.slice(0, this.MAX_RESULTS).map(r => r.data())
-        ).then(dataList => {
-          if (gen !== this.generation) return;
-
-          const tagBarHtml = this._renderCoTagBar(coTags, typing);
-          if (tagBarHtml) {
-            html += `<li class="co-tag-bar">${tagBarHtml}</li>`;
-          }
-
-          html += `<li class="result-group-label">文章 (${search.results.length})</li>`;
-          html += this._renderResultItems(dataList);
-          this._showResults(html);
-        });
-      } else if (html) {
-        this._showResults(html);
-      } else {
-        this._showNoResults();
-      }
-    });
+    const search = await this.pagefind.search(null, { filters: { tag: allTags } });
+    if (gen !== this.generation || !search) return;
+    const tagBar = this._renderCoTagBar(search.filters?.tag || {}, typing);
+    if (tagBar) html += `<li class="co-tag-bar">${tagBar}</li>`;
+    if (search.results.length) {
+      html += `<li class="result-group-label">文章 (${search.results.length})</li>`;
+      await this._loadResultData(search.results, gen, html);
+    } else if (html) {
+      this._showResults(html);
+    } else {
+      this._showNoResults();
+    }
   }
 
   _renderCoTagBar(coTags, typing) {
@@ -320,43 +392,35 @@ class SearchManager {
   // Type mode search
   // ======================
 
-  _searchByType(query, type, gen) {
-    const searchTerm = query.trim() || null;
-    this.pagefind.search(searchTerm, { filters: { type: [type] } }).then(search => {
-      if (gen !== this.generation) return;
-      if (search === null) return;
-      if (search.results.length === 0) {
-        this._showNoResults();
-        return;
-      }
-      Promise.all(
-        search.results.slice(0, this.MAX_RESULTS).map(r => r.data())
-      ).then(dataList => {
-        if (gen !== this.generation) return;
-        this._showResults(this._renderResultItems(dataList));
-      });
-    });
+  async _searchByType(query, type, gen) {
+    const search = await this.pagefind.debouncedSearch(
+      query.trim() || null, { filters: { type: [type] } }, 150
+    );
+    if (gen !== this.generation || !search) return;
+    await this._loadResultData(search.results, gen);
   }
 
-  // ======================
-  // Global search
-  // ======================
+  async _searchGlobal(query, gen) {
+    const search = await this.pagefind.debouncedSearch(query, {}, 150);
+    if (gen !== this.generation || !search) return;
+    await this._loadResultData(search.results, gen);
+  }
 
-  _searchGlobal(query, gen) {
-    this.pagefind.debouncedSearch(query).then(search => {
+  async _loadResultData(results, gen, prefix = '') {
+    if (!results.length) {
+      this._showNoResults();
+      return;
+    }
+    const items = results.slice(0, this.MAX_RESULTS);
+    const loaded = new Array(items.length);
+    const outcomes = await Promise.allSettled(items.map(async (result, index) => {
+      const data = await result.data();
       if (gen !== this.generation) return;
-      if (search === null) return;
-      if (search.results.length === 0) {
-        this._showNoResults();
-        return;
-      }
-      Promise.all(
-        search.results.slice(0, this.MAX_RESULTS).map(r => r.data())
-      ).then(dataList => {
-        if (gen !== this.generation) return;
-        this._showResults(this._renderResultItems(dataList));
-      });
-    });
+      loaded[index] = data;
+      this._showResults(prefix + this._renderResultItems(loaded.filter(Boolean)));
+    }));
+    const failure = outcomes.find(result => result.status === 'rejected');
+    if (failure) throw failure.reason;
   }
 
   // ======================
@@ -407,6 +471,7 @@ class SearchManager {
 
   _bindEvents() {
     const self = this;
+    self.els.retry.addEventListener('click', () => self._triggerSearch());
 
     // Click handler (delegation on document)
     document.addEventListener('click', e => {

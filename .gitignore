@@ -2,6 +2,7 @@
 .claude/
 docs/
 node_modules/
+static/pagefind/
 .slide-cache/
 .hugo_build.lock
 .DS_Store

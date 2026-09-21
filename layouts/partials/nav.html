@@ -16,7 +16,7 @@
         {{ end }}
       </ul>
     </div>
-    {{ partial "search.html" . }}
+    {{ partialCached "search.html" . .Site.Language.Lang }}
     <button aria-label="theme-toggle" id="toggle-theme">
       {{ partial "icons/moon.html" .}}
       {{ partial "icons/sun.html" .}}

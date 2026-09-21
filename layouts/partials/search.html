@@ -21,11 +21,17 @@
         <span id="searchChips"></span>
         <input id="searchInput" autocomplete="off" placeholder="{{ .Site.Params.search.defaultPlaceholder }}">
     </div>
+    <div class="search-status-bar">
+        <span id="searchStatus" role="status" aria-live="polite"></span>
+        <button id="searchRetry" type="button" hidden>重试</button>
+    </div>
     <ul id="searchResults"></ul>
 </div>
 
 <script>
   window.__searchConfig = {
+    cacheTag: {{ now.Format "20060102T150405" }},
+    isLocalServer: {{ hugo.IsServer }},
     defaultPlaceholder: {{ .Site.Params.search.defaultPlaceholder }},
     tagPlaceholder: {{ .Site.Params.search.tagPlaceholder }},
     postPlaceholder: {{ .Site.Params.search.postPlaceholder }},

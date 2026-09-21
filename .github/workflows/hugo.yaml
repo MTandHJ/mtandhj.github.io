@@ -72,7 +72,7 @@ jobs:
       - name: Build slide PDFs
         run: bash scripts/build-slide-pdfs.sh
       - name: Build search index
-        run: npx -y pagefind --site docs
+        run: npx -y pagefind@1.5.2 --site docs
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
