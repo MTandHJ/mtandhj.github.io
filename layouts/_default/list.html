@@ -6,6 +6,9 @@
 </div>
 
 {{- $pages := union .RegularPages .Sections }}
+{{- if eq .Path "/posts" }}
+  {{- $pages = where .RegularPagesRecursive "File.Dir" "like" `^posts[/\\]paper[/\\]` }}
+{{- end }}
 {{- $paginator := .Paginate $pages }}
 
 {{ .Content }}
