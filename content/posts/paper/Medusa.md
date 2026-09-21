@@ -35,8 +35,7 @@ Medusa 的关键不是让多个头直接替代自回归生成, 而是将它们�
   $$
   \tag{1}
   p_t^{(k)}
-  =
-  \operatorname{softmax}\left(
+  =\operatorname{softmax}\left(
   W_2^{(k)}
   \left[h_t+\operatorname{SiLU}(W_1^{(k)}h_t)\right]
   \right).
@@ -71,8 +70,7 @@ Medusa 的关键不是让多个头直接替代自回归生成, 而是将它们�
   $$
   \tag{2}
   p(y\mid c)
-  >
-  \min\left(
+  >\min\left(
   \epsilon,\,
   \delta\exp[-H(p(\cdot\mid c))]
   \right).
@@ -96,8 +94,7 @@ Medusa 的关键不是让多个头直接替代自回归生成, 而是将它们�
   $$
   \tag{3}
   \mathcal{L}_{\mathrm{Medusa\text{-}1}}
-  =
-  -\sum_{k=1}^{K}\lambda_k
+  =-\sum_{k=1}^{K}\lambda_k
   \log p_t^{(k)}(x_{t+k+1}).
   $$
 
@@ -108,10 +105,8 @@ Medusa 的关键不是让多个头直接替代自回归生成, 而是将它们�
   $$
   \tag{4}
   \mathcal{L}_{\mathrm{Medusa\text{-}2}}
-  =
-  \underbrace{-\log p_t^{(0)}(x_{t+1})}_{\mathcal{L}_{\mathrm{LM}}}
-  +
-  \lambda_0\mathcal{L}_{\mathrm{Medusa\text{-}1}}.
+  =\underbrace{-\log p_t^{(0)}(x_{t+1})}_{\mathcal{L}_{\mathrm{LM}}}
+  +\lambda_0\mathcal{L}_{\mathrm{Medusa\text{-}1}}.
   $$
 
   为避免新增 heads 初期的大梯度破坏已有能力, 使用 heads warmup、较小的 backbone 学习率, 并控制辅助损失的权重. Vicuna-7B/13B 实验先训练 Medusa-1, 再以其为初始化进行联合训练; 附录中 heads 的学习率为 backbone 的 4 倍.
@@ -147,8 +142,7 @@ Medusa 的关键不是让多个头直接替代自回归生成, 而是将它们�
 
   $$
   \mathrm{Speedup}
-  =
-  \frac{\mathrm{Acceleration\ rate}}{\mathrm{Overhead}}.
+  =\frac{\mathrm{Acceleration\ rate}}{\mathrm{Overhead}}.
   $$
 
   例如 Medusa-2 Vicuna-7B 的每轮产出为 $3.47$, overhead 为 $1.22$, 实际加速约 $2.83\times$. 树继续增大时, 更多矩阵计算可能抵消接受长度的收益; 大 batch 或长上下文下也不能直接外推同样的加速倍数.
