@@ -1,5 +1,21 @@
 [
   {
+    "date": "2026-09-03",
+    "title": "SID Reproducibility Study",
+    "description": "从推荐效果、码本利用率、扩展行为和局部语义保留评估 Semantic ID",
+    "paperUrl": "/posts/sid-repro/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260923110806.png",
+    "importance": "novel"
+  },
+  {
+    "date": "2026-09-03",
+    "title": "Guided SID",
+    "description": "将任务相关属性直接指定为粗(首)层编码, 让残差量化在属性划分后学习细节",
+    "paperUrl": "/posts/guided-sid/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260923102004.png",
+    "importance": "emmm"
+  },
+  {
     "date": "2026-04-13",
     "title": "R3-VAE",
     "description": "更稳定的生成式推荐 Tokenizer: 正交残差分量 & Cosine & 聚类正则",
