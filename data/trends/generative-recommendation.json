@@ -56,6 +56,14 @@
     "importance": "emmm"
   },
   {
+    "date": "2026-01-26",
+    "title": "S2GR",
+    "description": "Graph-smoothed semantic embedding & SID、思考向量交替推理",
+    "paperUrl": "/posts/s2gr/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260930142514.png",
+    "importance": "emmm"
+  },
+  {
     "date": "2025-08-23",
     "title": "DECOR",
     "description": "Tokenizer 中多源信息融合问题",
@@ -74,10 +82,10 @@
   {
     "date": "2025-11-17",
     "title": "UniTok",
-    "description": "通过 TokenMOE 和 互信息约束 实现一个 multi-domain 的 Tokenizer",
-    "paperUrl": "https://arxiv.org/abs/2511.12922",
+    "description": "通过 TokenMOE 和 互信息约束 实现一个通用的 Tokenizer",
+    "paperUrl": "/posts/unitok/",
     "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20251119153629.png",
-    "importance": "emmm"
+    "importance": "novel"
   },
   {
     "date": "2025-10-31",
@@ -190,6 +198,14 @@
     "paperUrl": "/posts/grid/",
     "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250803135947.png",
     "importance": "novel"
+  },
+  {
+    "date": "2025-04-06",
+    "title": "UTGRec",
+    "description": "UTGRec, 联合学习多模态内容编码与离散化, 通过共享码本迁移生成式推荐",
+    "paperUrl": "/posts/utgrec/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20260924154017.png",
+    "importance": "emmm"
   },
   {
     "date": "2025-02-26",
