@@ -11,7 +11,7 @@ tags:
 <!-- --------------------------------------------------------- -->
 
 <slide-section>
-## 支持向量机原理: 最优线性分隔
+## 支持向量机<br>(Support Vector Machine, SVM)
 
 Note:
 1. 说明课题: SVM, 本节聚焦线性可分的硬间隔场景.
@@ -20,11 +20,28 @@ Note:
 
 </slide-section>
 
+
+<!-- --------------------------------------------------------- -->
+
+<slide-section>
+## 支持向量机
+
+<slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20261009112425.png" size="100%"></slide-img>
+
+<slide-ref>
+Vladimir Vapnik: 统计学习理论与 SVM 的主要奠基人
+Larry Jackel: 贝尔实验室自适应系统研究部门的负责人
+Yann LeCun: 深度学习三巨头之一
+</slide-ref>
+
+</slide-section>
+
+
 <!-- --------------------------------------------------------- -->
 
 <slide-section>
 
-## 线性可分问题
+## 分类问题
 
 - 根据属性特征区分 ($\textcolor{green}{\bullet}$, $\textcolor{purple}{\times}$):
     - **垃圾邮件分类:** 正常邮件 ($\textcolor{green}{\bullet}$) & 垃圾邮件 ($\textcolor{purple}{\times}$)
@@ -43,10 +60,10 @@ Note:
 
 <slide-section>
 
-## 线性可分问题: 如何刻画最优解?
+## 分类问题: 线性可分
 
 <slide-highlight>
-方案 ① ② ③ 孰优孰劣?
+分隔 ① ② ③ 孰优孰劣?
 </slide-highlight>
 
 <slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/SVM_123.png" size="100%"></slide-img>
@@ -197,8 +214,8 @@ Note:
 
 <slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20261008165524.png" size="100%"></slide-img>
 
-- **观察二:** 逐步增加活动范围, 可设置<span style="color:blue">栅栏区域</span>逐步缩减
-- **观察三:** 逐步增加活动范围, 真正决定最优分隔的"🦊、🐰" 逐步减少
+- **观察二:** 逐步增加活动半径, 可设置<span style="color:blue">栅栏区域</span>逐步缩减
+- **观察三:** 逐步增加活动半径, 真正决定最优分隔的"🦊、🐰" 逐步减少
 
 Note:
 1. 回顾三个阶段: 共同活动半径增大, 满足要求的候选分隔方案减少.
@@ -213,7 +230,7 @@ Note:
 
 <slide-section>
 
-## 支持向量机: 最优线性间隔
+## 支持向量机: 最优分隔
 
 <slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20261008171625.png" size="80%"></slide-img>
 
@@ -236,7 +253,7 @@ Note:
 相等间隔 -> 支持向量 -> 最优分隔
 </slide-highlight>
 
-- **课后思考:** 新增 "🦊、🐰" 最优间隔是否改变. 请给出 "发生改变" 和 "保持不变的例子".
+- **课后思考:** 新增 "🦊、🐰" 最优分隔是否改变. 请给出 "发生改变" 和 "保持不变的例子".
 
 - **课后练习:** 🐰巢穴的位置为: $(1,1), (1,3),(3,1),(0,2)$; 🦊巢穴的位置为: $(4,4),(3,5),(5,5),(6,4)$;
     1. 在坐标系中标出所有巢穴, 画出使最小活动半径最大的栅栏;
