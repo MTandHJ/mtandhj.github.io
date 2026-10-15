@@ -1,5 +1,13 @@
 [
   {
+    "date": "2026-10-15",
+    "title": "HASTE",
+    "description": "结合层级加权、置信度门控与属性回归监督, 改善 SID 生成和长尾推荐. 其中的几个验证实验比较有意思.",
+    "paperUrl": "/posts/haste/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20261015153107.png",
+    "importance": "novel"
+  },
+  {
     "date": "2026-09-03",
     "title": "SID Reproducibility Study",
     "description": "从推荐效果、码本利用率、扩展行为和局部语义保留评估 Semantic ID",
