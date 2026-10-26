@@ -8,6 +8,14 @@
     "importance": "novel"
   },
   {
+    "date": "2026-10-01",
+    "title": "GrIS",
+    "description": "提出采用 Graph Pooling/Clustering 的方式逐级构建 SID",
+    "paperUrl": "/posts/gris/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20261026155716.png",
+    "importance": "novel"
+  },
+  {
     "date": "2026-09-03",
     "title": "SID Reproducibility Study",
     "description": "从推荐效果、码本利用率、扩展行为和局部语义保留评估 Semantic ID",
