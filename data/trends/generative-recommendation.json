@@ -1,5 +1,13 @@
 [
   {
+    "date": "2026-10-23",
+    "title": "TCBSA",
+    "description": "将判别式推荐的商品分数转为共享 SID 边上的协同加分, 在 beam 剪枝前调整生成路径",
+    "paperUrl": "http://arxiv.org/abs/2610.32098",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20261027141325.png",
+    "importance": "emmm"
+  },
+  {
     "date": "2026-10-15",
     "title": "HASTE",
     "description": "结合层级加权、置信度门控与属性回归监督, 改善 SID 生成和长尾推荐. 其中的几个验证实验比较有意思.",
