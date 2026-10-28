@@ -1,6 +1,14 @@
 [
   {
     "date": "2026-10-23",
+    "title": "Deco",
+    "description": "将繁重的 Encoder-Decoder 架构缩减: 大 Encoder 将历史概括为少量 concept 向量 & 小 Decoder 负责完整的自回归 SID 搜索",
+    "paperUrl": "http://arxiv.org/abs/2610.32980",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20261028205020.png",
+    "importance": "emmm"
+  },
+  {
+    "date": "2026-10-23",
     "title": "TCBSA",
     "description": "将判别式推荐的商品分数转为共享 SID 边上的协同加分, 在 beam 剪枝前调整生成路径",
     "paperUrl": "http://arxiv.org/abs/2610.32098",
