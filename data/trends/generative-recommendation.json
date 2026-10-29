@@ -1,6 +1,14 @@
 [
   {
     "date": "2026-10-23",
+    "title": "REGER",
+    "description": "生成式推荐模型如何引入各种关系, 尤其给出判别式模型 -> 树模型的概率转换公式",
+    "paperUrl": "/posts/reger/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20261029160728.png",
+    "importance": "novel"
+  },
+  {
+    "date": "2026-10-23",
     "title": "Deco",
     "description": "将繁重的 Encoder-Decoder 架构缩减: 大 Encoder 将历史概括为少量 concept 向量 & 小 Decoder 负责完整的自回归 SID 搜索",
     "paperUrl": "http://arxiv.org/abs/2610.32980",
