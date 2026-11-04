@@ -1,0 +1,138 @@
+[
+  {
+    "date": "2026-05-14",
+    "title": "GOOD",
+    "description": "将扩散模型应用在知识追踪",
+    "paperUrl": "https://ojs.aaai.org/index.php/AAAI/article/view/38872",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20261104160628.png",
+    "importance": "emmm"
+  },
+  {
+    "date": "2025-07-27",
+    "title": "EducationQ",
+    "description": "评估多智能体在教学上应用潜力",
+    "paperUrl": "https://aclanthology.org/2025.acl-long.1576/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20261104161959.png",
+    "importance": "emmm"
+  },
+  {
+    "date": "2025-07-27",
+    "title": "GPT-4 as a Homework Tutor",
+    "description": "在四个高中班级开展随机对照实验, 研究 (GPT-4) 交互式英语作业辅导",
+    "paperUrl": "https://aclanthology.org/2025.acl-long.1502/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20261104161728.png",
+    "importance": "emmm"
+  },
+  {
+    "date": "2025-07-27",
+    "title": "DDxTutor",
+    "description": "将 LLM 临床诊断推理分解成可教学步骤, 通过交互引导学生推理",
+    "paperUrl": "https://aclanthology.org/2025.acl-long.1495/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20261104161431.png",
+    "importance": "emmm"
+  },
+  {
+    "date": "2025-07-13",
+    "title": "LIGHT",
+    "description": "(基于图和对比学习) 学习路径推荐",
+    "paperUrl": "https://dl.acm.org/doi/10.1145/3726302.3730022",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20261104160816.png",
+    "importance": "emmm"
+  },
+  {
+    "date": "2025-02-08",
+    "title": "Harnessing Large Language Models  for Enhanced Cognitive Diagnosis",
+    "description": "如何用 LLM 生成数据并对齐认知诊断模型",
+    "paperUrl": "http://arxiv.org/abs/2502.05556",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20261104160221.png",
+    "importance": "emmm"
+  },
+  {
+    "date": "2023-12-30",
+    "title": "Symbolic Cognitive Diagnosis",
+    "description": "如何设计符号认知诊断网络",
+    "paperUrl": "https://arxiv.org/abs/2401.10840",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20261104160047.png",
+    "importance": "emmm"
+  },
+  {
+    "date": "2023-02-14",
+    "title": "QIKT",
+    "description": "提出 question 不能由知识点全权表示",
+    "paperUrl": "https://arxiv.org/abs/2302.06885",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20261104155724.png",
+    "importance": "emmm"
+  },
+  {
+    "date": "2022-04-25",
+    "title": "CL4KT",
+    "description": "将对比学习应用在知识追踪中",
+    "paperUrl": "https://dl.acm.org/doi/10.1145/3485447.3512105",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20261104154734.png",
+    "importance": "emmm"
+  },
+  {
+    "date": "2022-01-23",
+    "title": "pyKT",
+    "description": "知识追踪的开源框架, 集成了丰富基线",
+    "paperUrl": "http://arxiv.org/abs/2206.11460",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20261104154941.png",
+    "importance": "novel"
+  },
+  {
+    "date": "2021-08-04",
+    "title": "LPKT",
+    "description": "Learning & Forgetting",
+    "paperUrl": "https://dl.acm.org/doi/10.1145/3447548.3467237",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250704150308.png",
+    "importance": "emmm"
+  },
+  {
+    "date": "2021-03-08",
+    "title": "HawkesKT",
+    "description": "借鉴 Hawkes Process 思想建模知识掌握的交叉影响和衰减",
+    "paperUrl": "/posts/hawkeskt/",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250704132814.png",
+    "importance": "novel"
+  },
+  {
+    "date": "2020-02-14",
+    "title": "SAINT",
+    "description": "Encoder-decoder transformer 在 DKT 上的应用, 设计颇为奇怪",
+    "paperUrl": "https://arxiv.org/abs/2002.07033",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250703162056.png",
+    "importance": "emmm"
+  },
+  {
+    "date": "2019-10-29",
+    "title": "SKVMN",
+    "description": "DKVMN 的基础上用 LSTM 处理子系列",
+    "paperUrl": "https://arxiv.org/abs/1910.13197",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250703162220.png",
+    "importance": "emmm"
+  },
+  {
+    "date": "2019-07-16",
+    "title": "SAKT",
+    "description": "将 decoder-only transformer 应用于 DKT 上, 并提出习题/作答的 cross attention",
+    "paperUrl": "/posts/sakt",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250401140515.png",
+    "importance": "novel"
+  },
+  {
+    "date": "2016-11-24",
+    "title": "DKVMN",
+    "description": "改进记忆网络 MANN 来实现对习题的概念和学生的掌握情况的一个动态建模",
+    "paperUrl": "/posts/dkvmn",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250330174039.png",
+    "importance": "novel"
+  },
+  {
+    "date": "2015-06-19",
+    "title": "DKT",
+    "description": "将 RNN/LSTM 模型应用于 KT",
+    "paperUrl": "/posts/dkt",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20250327212027.png",
+    "importance": "seminal"
+  }
+]
