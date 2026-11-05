@@ -1,5 +1,13 @@
 [
   {
+    "date": "2026-11-02",
+    "title": "CaRe-KT",
+    "description": "从相关题目的历史作答中检索学习轨迹, 将检索分数带入知识追踪的预测过程",
+    "paperUrl": "http://arxiv.org/abs/2611.03744",
+    "imageUrl": "https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20261105163515.png",
+    "importance": "emmm"
+  },
+  {
     "date": "2026-05-14",
     "title": "GOOD",
     "description": "将扩散模型应用在知识追踪",
