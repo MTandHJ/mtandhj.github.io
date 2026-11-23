@@ -170,7 +170,7 @@ Giovanni F. D., et al. Understanding Convolution on Graphs via Energies. TMLR, 2
 
 <slide-section>
 
-## SDQ: Dirichlet energy
+## SDQ: Dirichlet Energy
 
 <slide-img src="https://raw.githubusercontent.com/MTandHJ/blog_source/master/images/20261116201427.png" size="75%"></slide-img>
 
